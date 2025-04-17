@@ -12,79 +12,149 @@ class HomeController extends GetxController {
     'Firebase',
     'GetX',
     'BLoC',
+    'Provider',
     'REST API',
+    'Firestore',
+    'Authentication',
+    'Realtime Database',
+    'Material Design',
+    'Responsive Layouts',
+    'MVC',
+    'MVVM',
+    'Hive',
     'Git',
+    'GitHub',
+    'BitBucket',
+    'Android Studio',
+    'VS Code',
+    'Unit Testing',
+    'Widget Testing',
   ];
 
   // Projects list for carousel
   final projects = [
     {
-      'title': 'E-Commerce App',
+      'title': 'John Hancock Vitality App',
       'description':
-          'A mobile application for online shopping with user authentication and payment integration.',
+          'A wellness app for tracking fitness activities, logging workouts via GPS, and managing Vitality Points™ with personalized health insights and rewards.',
       'image': 'assets/images/project1.jpg',
-      'url': 'https://play.google.com/store',
+      'url': 'https://apps.apple.com/us/app/john-hancock-vitality/id1192577836',
     },
     {
-      'title': 'Task Manager',
+      'title': 'Manulife Vitality App',
       'description':
-          'A productivity app for managing tasks and projects with reminders.',
+          'A bilingual (English and French) health-focused app with accessibility features, enabling activity tracking, Apple Health integration, and rewards through personalized goals.',
       'image': 'assets/images/project2.jpg',
-      'url': 'https://play.google.com/store',
+      'url': 'https://apps.apple.com/ca/app/manulife-vitality/id1198760352',
     },
     {
-      'title': 'Weather App',
+      'title': 'Pro Ranked App',
       'description':
-          'Real-time weather forecasts with beautiful visualizations.',
+          'Developed app and business portal using Flutter, Firebase, and FlutterFlow with bilingual support, enabling real-time EV charger management and personalized settings.',
       'image': 'assets/images/project3.jpg',
-      'url': 'https://play.google.com/store',
+      'url': 'https://proranked.com',
     },
     {
-      'title': 'Social Media App',
-      'description': 'Connect with friends and share your moments.',
+      'title': 'OnSite Construction App',
+      'description':
+          'A Flutter-based app for construction professionals, featuring project management, invoicing, expense tracking, offline access, and multilingual support.',
       'image': 'assets/images/project4.jpg',
-      'url': 'https://play.google.com/store',
+      'url':
+          'https://play.google.com/store/apps/details?id=com.abeyaantrix.onsite',
+    },
+    {
+      'title': 'eZHealth',
+      'description':
+          'A cross-platform healthcare app for Zuellig Pharma using Flutter, enabling online consultations, vaccination bookings, lab scheduling, and personal health record management.',
+      'image': 'assets/images/project5.jpg',
+      'url':
+          'https://play.google.com/store/apps/details?id=com.zuelligpharma.ezhealth',
+    },
+    {
+      'title': 'eZTrade App',
+      'description':
+          'A cross-platform app for medical representatives using Flutter, GoLang, and C++, featuring real-time product status, activity management, and progress tracking tools.',
+      'image': 'assets/images/project6.jpg',
+      'url':
+          'https://play.google.com/store/apps/details?id=com.zuelligpharma.eztrade',
+    },
+    {
+      'title': 'Covid-19 App',
+      'description':
+          'A Flutter-based app providing real-time updates, health guidance, and emergency resources with global and local statistics, news from health organizations, and symptom checkers.',
+      'image': 'assets/images/project7.jpg',
+      'url': 'https://github.com/sakshamsri4/Covid-19-App',
     },
   ];
 
   // Career timeline data
   final careerTimeline = [
     {
-      'company': 'mPhatek',
+      'company': 'mPhatek Systems',
       'role': 'Senior Flutter Developer',
-      'period': '2022 - Present',
+      'period': 'March 2024 - Present',
       'description':
-          'Leading the mobile app development team, implementing new features, and optimizing app performance.',
+          'Developing wellness apps including John Hancock Vitality and Manulife Vitality with features for tracking fitness activities, health integration, and rewards systems.',
     },
     {
-      'company': 'SpaceVox',
+      'company': 'SpaceVox Ltd.',
       'role': 'Flutter Developer',
-      'period': '2020 - 2022',
+      'period': 'Aug 2023 - Dec 2023',
       'description':
-          'Developed and maintained multiple Flutter applications for clients.',
+          'Developed Pro Ranked app and business portal using Flutter, Firebase, and FlutterFlow with bilingual support for EV charger management.',
+    },
+    {
+      'company': 'ABEYAANTRIX Tech',
+      'role': 'Flutter Developer',
+      'period': 'Jan 2023 - July 2023',
+      'description':
+          'Built the OnSite Flutter-based app for construction professionals with project management, invoicing, and offline capabilities.',
     },
     {
       'company': 'CBNITS',
-      'role': 'Mobile Developer',
-      'period': '2018 - 2020',
+      'role': 'Flutter Developer',
+      'period': 'Jan 2021 - Dec 2022',
       'description':
-          'Worked on cross-platform mobile applications using Flutter and React Native.',
+          'Developed healthcare apps for Zuellig Pharma including eZHealth and eZTrade using Flutter with various backend integrations.',
     },
     {
       'company': 'Wipro Tech',
-      'role': 'Junior Developer',
-      'period': '2016 - 2018',
+      'role': 'Flutter Developer',
+      'period': 'June 2019 - March 2020',
       'description':
-          'Started career as a junior developer working on web and mobile applications.',
+          'Developed a Flutter-based Covid-19 App providing real-time updates, health guidance, and emergency resources during the pandemic.',
     },
   ];
 
   // Contact information
   final contactInfo = {
-    'email': 's.saksham@mufin.co.kr',
-    'phone': '+91 1234567890',
-    'location': 'India',
+    'email': 'sakshamsri4@gmail.com',
+    'phone': '+91 8795304811',
+    'location': 'Bangalore, India',
   };
+
+  // Education information
+  final educationInfo = [
+    {
+      'institution': 'Amity University, Noida',
+      'degree': 'B.Tech in Information Technology',
+      'period': '2015 - 2019',
+    },
+    {
+      'institution': 'Saint Ann College',
+      'degree': 'ISC (12th)',
+      'period': '2013 - 2014',
+    },
+    {
+      'institution': 'Saint Ann College',
+      'degree': 'ICSE (10th)',
+      'period': '2010 - 2011',
+    },
+  ];
+
+  // Professional summary
+  final professionalSummary =
+      'Experienced Mobile Application Developer with 6+ years in designing and deploying scalable, user-focused applications. Proficient in Flutter SDK for cross-platform development, Firebase (Firestore, Authentication, Realtime Database), and advanced UI/UX principles including Material Design and responsive layouts. Adept at integrating REST APIs, implementing BLoC architecture for state management, and delivering high-performance solutions with CI/CD pipelines. Enthusiastic about leveraging innovative technologies to drive efficiency and enhance user experiences.';
 
   // Observable for carousel auto-play
   final isCarouselPlaying = true.obs;

@@ -99,7 +99,7 @@ class HomeView extends GetView<HomeController> {
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                   Text(
-                    'Flutter Developer',
+                    'Senior Flutter Developer',
                     style: TextStyle(color: Colors.white70, fontSize: 14),
                   ),
                 ],
@@ -195,6 +195,27 @@ class HomeView extends GetView<HomeController> {
                           ),
                         ],
                       ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.link),
+                            tooltip: 'LinkedIn',
+                            onPressed: () => controller.launchProjectUrl(
+                              'https://linkedin.com/in/sakshamsri/',
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          IconButton(
+                            icon: const Icon(Icons.code),
+                            tooltip: 'GitHub',
+                            onPressed: () => controller.launchProjectUrl(
+                              'https://github.com/sakshamsri4',
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -206,11 +227,46 @@ class HomeView extends GetView<HomeController> {
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
                 const SizedBox(height: 16),
-                const Text(
-                  'I am a passionate Flutter developer with experience in building '
-                  'cross-platform mobile applications. I specialize in creating '
-                  'beautiful, responsive, and user-friendly interfaces.',
-                  style: TextStyle(fontSize: 16),
+                Text(
+                  controller.professionalSummary,
+                  style: const TextStyle(fontSize: 16),
+                ),
+                const SizedBox(height: 32),
+
+                // Education section
+                Text(
+                  'Education',
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
+                const SizedBox(height: 16),
+                Column(
+                  children: controller.educationInfo.map((education) {
+                    return Card(
+                      margin: const EdgeInsets.only(bottom: 16),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              education['institution']!,
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              education['degree']!,
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              education['period']!,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }).toList(),
                 ),
                 const SizedBox(height: 32),
 

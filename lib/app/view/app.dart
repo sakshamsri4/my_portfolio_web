@@ -15,6 +15,7 @@ class App extends StatelessWidget {
 
     return Obx(
       () => GetMaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'My Portfolio',
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
