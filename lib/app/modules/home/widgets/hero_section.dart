@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_portfolio_web/app/modules/home/controllers/home_controller.dart';
@@ -51,8 +52,7 @@ class HeroSection extends StatelessWidget {
           const SizedBox(height: 40),
 
           // Tagline that shows personality
-          Text(
-            '"Turning ideas into exceptional mobile experiences"',
+          DefaultTextStyle(
             style: TextStyle(
               fontSize: 20,
               fontStyle: FontStyle.italic,
@@ -60,6 +60,26 @@ class HeroSection extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
             textAlign: TextAlign.center,
+            child: AnimatedTextKit(
+              animatedTexts: [
+                ColorizeAnimatedText(
+                  '"Turning ideas into exceptional mobile experiences"',
+                  textStyle: const TextStyle(
+                    fontSize: 20,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.center,
+                  colors: [
+                    Theme.of(context).colorScheme.primary,
+                    Theme.of(context).colorScheme.secondary,
+                    Theme.of(context).colorScheme.primary.withAlpha(150),
+                    Theme.of(context).colorScheme.primary,
+                  ],
+                ),
+              ],
+              repeatForever: true,
+            ),
           ),
 
           const SizedBox(height: 40),
@@ -96,6 +116,32 @@ class HeroSection extends StatelessWidget {
                 letterSpacing: 0.5,
               ),
           textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 16),
+        DefaultTextStyle(
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          child: AnimatedTextKit(
+            animatedTexts: [
+              TypewriterAnimatedText(
+                'Flutter Developer',
+                speed: const Duration(milliseconds: 100),
+              ),
+              TypewriterAnimatedText(
+                'Mobile App Specialist',
+                speed: const Duration(milliseconds: 100),
+              ),
+              TypewriterAnimatedText(
+                'UI/UX Enthusiast',
+                speed: const Duration(milliseconds: 100),
+              ),
+            ],
+            repeatForever: true,
+            displayFullTextOnTap: true,
+          ),
         ),
       ],
     );
@@ -179,12 +225,35 @@ class HeroSection extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         // Brief introduction that shows personality
-        Text(
-          'I create beautiful, high-performance mobile apps that users love. With 6+ years of Flutter expertise, I transform complex ideas into elegant, intuitive experiences that work flawlessly across platforms.',
-          style: TextStyle(
-            fontSize: 16,
-            height: 1.6,
-            color: Theme.of(context).colorScheme.onSurface.withAlpha(204),
+        SizedBox(
+          height: 80, // Fixed height to prevent layout shifts
+          child: DefaultTextStyle(
+            style: TextStyle(
+              fontSize: 16,
+              height: 1.6,
+              color: Theme.of(context).colorScheme.onSurface.withAlpha(204),
+            ),
+            child: AnimatedTextKit(
+              animatedTexts: [
+                FadeAnimatedText(
+                  'I create beautiful, high-performance mobile apps that users love.',
+                  duration: const Duration(milliseconds: 3000),
+                  fadeInEnd: 0.2,
+                ),
+                FadeAnimatedText(
+                  'With 6+ years of Flutter expertise, I transform complex ideas into elegant experiences.',
+                  duration: const Duration(milliseconds: 3000),
+                  fadeInEnd: 0.2,
+                ),
+                FadeAnimatedText(
+                  'Let me help bring your app idea to life with flawless execution across platforms.',
+                  duration: const Duration(milliseconds: 3000),
+                  fadeInEnd: 0.2,
+                ),
+              ],
+              repeatForever: true,
+              pause: const Duration(milliseconds: 500),
+            ),
           ),
         ),
         const SizedBox(height: 24),
