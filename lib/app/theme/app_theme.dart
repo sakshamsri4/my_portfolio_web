@@ -40,7 +40,6 @@ class AppTheme {
     colorScheme: ColorScheme.dark(
       primary: primarySwatch,
       secondary: primarySwatch.shade300,
-      background: const Color(0xFF1A1A2E),
       surface: const Color(0xFF2C2C44),
     ),
     appBarTheme: AppBarTheme(
@@ -113,7 +112,7 @@ class AppTheme {
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         foregroundColor: primarySwatch,
-        side: BorderSide(color: primarySwatch),
+        side: const BorderSide(color: primarySwatch),
         textStyle: GoogleFonts.montserrat(
           fontWeight: FontWeight.bold,
         ),
@@ -135,7 +134,7 @@ class AppTheme {
       labelStyle: GoogleFonts.montserrat(
         color: Colors.white,
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
@@ -156,17 +155,20 @@ class AppTheme {
     colorScheme: ColorScheme.light(
       primary: primarySwatch,
       secondary: primarySwatch.shade300,
-      background: backgroundColor,
+      onSurface: textPrimary,
+      onSecondary: Colors.white,
     ),
     appBarTheme: AppBarTheme(
-      backgroundColor: primarySwatch,
-      foregroundColor: Colors.white,
+      backgroundColor: Colors.white,
+      foregroundColor: textPrimary,
       elevation: 0,
+      centerTitle: true,
       titleTextStyle: GoogleFonts.montserrat(
         fontWeight: FontWeight.bold,
         fontSize: 20,
-        color: Colors.white,
+        color: textPrimary,
       ),
+      iconTheme: const IconThemeData(color: primarySwatch),
     ),
     textTheme: TextTheme(
       displayLarge: GoogleFonts.montserrat(
@@ -216,33 +218,51 @@ class AppTheme {
       style: ElevatedButton.styleFrom(
         backgroundColor: primarySwatch,
         foregroundColor: Colors.white,
+        elevation: 4,
+        shadowColor: primarySwatch.withAlpha(51),
         textStyle: GoogleFonts.montserrat(
           fontWeight: FontWeight.bold,
+          fontSize: 14,
+          letterSpacing: 0.5,
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
         ),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         foregroundColor: primarySwatch,
-        side: BorderSide(color: primarySwatch),
+        side: const BorderSide(color: primarySwatch, width: 2),
         textStyle: GoogleFonts.montserrat(
           fontWeight: FontWeight.bold,
+          fontSize: 14,
+          letterSpacing: 0.5,
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+    ),
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        foregroundColor: primarySwatch,
+        backgroundColor: primarySwatch.shade50,
+        padding: const EdgeInsets.all(12),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
         ),
       ),
     ),
     cardTheme: CardTheme(
       color: Colors.white,
-      elevation: 2,
+      elevation: 4,
+      shadowColor: primarySwatch.withAlpha(51), // 20% opacity (51/255)
+      margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
       ),
     ),
     chipTheme: ChipThemeData(
@@ -250,7 +270,7 @@ class AppTheme {
       labelStyle: GoogleFonts.montserrat(
         color: primarySwatch.shade800,
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),

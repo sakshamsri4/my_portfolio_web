@@ -9,7 +9,6 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(),
-      drawer: const CustomDrawer(),
       body: LayoutBuilder(
         builder: (context, constraints) {
           // Determine number of items to show in carousels based on screen width
@@ -20,6 +19,7 @@ class HomeView extends GetView<HomeController> {
                   : 1;
 
           return SingleChildScrollView(
+            controller: controller.scrollController,
             padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,30 +29,48 @@ class HomeView extends GetView<HomeController> {
                 const SizedBox(height: 32),
 
                 // About Me section
-                AboutSection(controller: controller),
+                Container(
+                  key: controller.aboutKey,
+                  child: AboutSection(controller: controller),
+                ),
                 const SizedBox(height: 32),
 
                 // Education section
-                EducationSection(controller: controller),
+                Container(
+                  key: controller.educationKey,
+                  child: EducationSection(controller: controller),
+                ),
                 const SizedBox(height: 32),
 
                 // Skills section
-                SkillsSection(controller: controller),
+                Container(
+                  key: controller.skillsKey,
+                  child: SkillsSection(controller: controller),
+                ),
                 const SizedBox(height: 32),
 
                 // Projects section
-                ProjectsSection(
-                  controller: controller,
-                  carouselItemCount: carouselItemCount,
+                Container(
+                  key: controller.projectsKey,
+                  child: ProjectsSection(
+                    controller: controller,
+                    carouselItemCount: carouselItemCount,
+                  ),
                 ),
                 const SizedBox(height: 32),
 
                 // Career Timeline section
-                CareerTimelineSection(controller: controller),
+                Container(
+                  key: controller.careerKey,
+                  child: CareerTimelineSection(controller: controller),
+                ),
                 const SizedBox(height: 32),
 
                 // Contact section
-                ContactSection(controller: controller),
+                Container(
+                  key: controller.contactKey,
+                  child: ContactSection(controller: controller),
+                ),
               ],
             ),
           );

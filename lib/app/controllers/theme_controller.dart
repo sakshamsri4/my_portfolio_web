@@ -7,19 +7,8 @@ class ThemeController extends GetxController {
 
   // Toggle theme mode
   void toggleTheme() {
-    themeMode.value = themeMode.value == ThemeMode.light
-        ? ThemeMode.dark
-        : ThemeMode.light;
-    
-    // Show a snackbar to indicate theme change
-    Get.snackbar(
-      'Theme Changed',
-      'App theme is now ${themeMode.value == ThemeMode.light ? 'Light' : 'Dark'}',
-      snackPosition: SnackPosition.BOTTOM,
-      duration: const Duration(seconds: 2),
-      backgroundColor: Get.theme.colorScheme.surface,
-      colorText: Get.theme.colorScheme.onSurface,
-    );
+    themeMode.value =
+        themeMode.value == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
   }
 
   // Get current theme mode

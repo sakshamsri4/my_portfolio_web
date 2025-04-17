@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_portfolio_web/app/controllers/theme_controller.dart';
-import 'package:my_portfolio_web/app/routes/app_pages.dart';
+import 'package:my_portfolio_web/app/modules/home/controllers/home_controller.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final HomeController homeController = Get.find<HomeController>();
+    final screenWidth = MediaQuery.of(context).size.width;
+    final bool isWideScreen = screenWidth > 800;
+
     return AppBar(
-      title: const Text('My Portfolio'),
+      title: GestureDetector(
+        onTap: () => homeController.scrollToSection('home'),
+        child: const Text('My Portfolio'),
+      ),
       centerTitle: true,
+      elevation: 0,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       actions: [
+        // Navigation links for wide screens
+        if (isWideScreen) ..._buildNavigationLinks(homeController),
+
         // Theme toggle button
         IconButton(
           icon: Obx(
@@ -24,55 +36,157 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           tooltip: 'Toggle theme',
           onPressed: () => Get.find<ThemeController>().toggleTheme(),
         ),
-        IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {
-            // Show a simple menu
-            Get.dialog(
-              AlertDialog(
-                title: const Text('Navigation'),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ListTile(
-                      leading: const Icon(Icons.home),
-                      title: const Text('Home'),
-                      onTap: () {
-                        Get.back(); // Close dialog
-                        Get.toNamed(Routes.HOME);
-                      },
-                    ),
-                    ListTile(
-                      leading: const Icon(Icons.person),
-                      title: const Text('About'),
-                      onTap: () {
-                        Get.back(); // Close dialog
-                        Get.toNamed(Routes.ABOUT);
-                      },
-                    ),
-                    ListTile(
-                      leading: const Icon(Icons.work),
-                      title: const Text('Projects'),
-                      onTap: () {
-                        Get.back(); // Close dialog
-                        Get.toNamed(Routes.PROJECTS);
-                      },
-                    ),
-                    ListTile(
-                      leading: const Icon(Icons.email),
-                      title: const Text('Contact'),
-                      onTap: () {
-                        Get.back(); // Close dialog
-                        Get.toNamed(Routes.CONTACT);
-                      },
-                    ),
-                  ],
+
+        // Menu button for narrow screens
+        if (!isWideScreen)
+          IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () {
+              // Show a simple menu
+              Get.dialog(
+                AlertDialog(
+                  title: const Text('Navigation'),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _buildNavItem(
+                        icon: Icons.home,
+                        title: 'Home',
+                        onTap: () {
+                          Get.back(); // Close dialog
+                          homeController.scrollToSection('home');
+                        },
+                      ),
+                      _buildNavItem(
+                        icon: Icons.person,
+                        title: 'About',
+                        onTap: () {
+                          Get.back(); // Close dialog
+                          homeController.scrollToSection('about');
+                        },
+                      ),
+                      _buildNavItem(
+                        icon: Icons.school,
+                        title: 'Education',
+                        onTap: () {
+                          Get.back(); // Close dialog
+                          homeController.scrollToSection('education');
+                        },
+                      ),
+                      _buildNavItem(
+                        icon: Icons.code,
+                        title: 'Skills',
+                        onTap: () {
+                          Get.back(); // Close dialog
+                          homeController.scrollToSection('skills');
+                        },
+                      ),
+                      _buildNavItem(
+                        icon: Icons.work,
+                        title: 'Projects',
+                        onTap: () {
+                          Get.back(); // Close dialog
+                          homeController.scrollToSection('projects');
+                        },
+                      ),
+                      _buildNavItem(
+                        icon: Icons.timeline,
+                        title: 'Career',
+                        onTap: () {
+                          Get.back(); // Close dialog
+                          homeController.scrollToSection('career');
+                        },
+                      ),
+                      _buildNavItem(
+                        icon: Icons.email,
+                        title: 'Contact',
+                        onTap: () {
+                          Get.back(); // Close dialog
+                          homeController.scrollToSection('contact');
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          },
-        ),
+              );
+            },
+          ),
       ],
+    );
+  }
+
+  // Helper method to build navigation links for wide screens
+  List<Widget> _buildNavigationLinks(HomeController controller) {
+    return [
+      Obx(() => _buildNavLink(
+            title: 'About',
+            isActive: controller.activeSection.value == 'about',
+            onTap: () => controller.scrollToSection('about'),
+          )),
+      Obx(() => _buildNavLink(
+            title: 'Skills',
+            isActive: controller.activeSection.value == 'skills',
+            onTap: () => controller.scrollToSection('skills'),
+          )),
+      Obx(() => _buildNavLink(
+            title: 'Projects',
+            isActive: controller.activeSection.value == 'projects',
+            onTap: () => controller.scrollToSection('projects'),
+          )),
+      Obx(() => _buildNavLink(
+            title: 'Career',
+            isActive: controller.activeSection.value == 'career',
+            onTap: () => controller.scrollToSection('career'),
+          )),
+      Obx(() => _buildNavLink(
+            title: 'Contact',
+            isActive: controller.activeSection.value == 'contact',
+            onTap: () => controller.scrollToSection('contact'),
+          )),
+    ];
+  }
+
+  // Helper method to build a navigation link
+  Widget _buildNavLink({
+    required String title,
+    required bool isActive,
+    required VoidCallback onTap,
+  }) {
+    return TextButton(
+      onPressed: onTap,
+      style: TextButton.styleFrom(
+        foregroundColor: isActive ? null : Colors.grey,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(title),
+          if (isActive)
+            Container(
+              margin: const EdgeInsets.only(top: 4),
+              height: 2,
+              width: 20,
+              decoration: BoxDecoration(
+                color: Get.theme.colorScheme.primary,
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  // Helper method to build a navigation item for the dialog
+  Widget _buildNavItem({
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return ListTile(
+      leading: Icon(icon),
+      title: Text(title),
+      onTap: onTap,
     );
   }
 

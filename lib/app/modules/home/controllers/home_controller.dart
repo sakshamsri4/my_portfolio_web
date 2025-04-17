@@ -1,10 +1,27 @@
 import 'dart:html' as html;
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeController extends GetxController {
+  // Scroll controllers for each section
+  final ScrollController scrollController = ScrollController();
+
+  // Section keys for scrolling
+  final aboutKey = GlobalKey();
+  final educationKey = GlobalKey();
+  final skillsKey = GlobalKey();
+  final projectsKey = GlobalKey();
+  final careerKey = GlobalKey();
+  final contactKey = GlobalKey();
+
+  // Active section
+  final RxString activeSection = 'home'.obs;
+
+  // Observable for carousel auto-play
+  final isCarouselPlaying = true.obs;
   // Skills list for carousel
   final skills = [
     'Flutter',
@@ -156,8 +173,51 @@ class HomeController extends GetxController {
   final professionalSummary =
       'Experienced Mobile Application Developer with 6+ years in designing and deploying scalable, user-focused applications. Proficient in Flutter SDK for cross-platform development, Firebase (Firestore, Authentication, Realtime Database), and advanced UI/UX principles including Material Design and responsive layouts. Adept at integrating REST APIs, implementing BLoC architecture for state management, and delivering high-performance solutions with CI/CD pipelines. Enthusiastic about leveraging innovative technologies to drive efficiency and enhance user experiences.';
 
-  // Observable for carousel auto-play
-  final isCarouselPlaying = true.obs;
+  // Scroll to section
+  void scrollToSection(String section) {
+    GlobalKey? key;
+
+    switch (section) {
+      case 'about':
+        key = aboutKey;
+      case 'education':
+        key = educationKey;
+      case 'skills':
+        key = skillsKey;
+      case 'projects':
+        key = projectsKey;
+      case 'career':
+        key = careerKey;
+      case 'contact':
+        key = contactKey;
+      default:
+        // Scroll to top for home
+        scrollController.animateTo(
+          0,
+          duration: const Duration(milliseconds: 800),
+          curve: Curves.easeInOut,
+        );
+        activeSection.value = 'home';
+        return;
+    }
+
+    if (key.currentContext != null) {
+      activeSection.value = section;
+      Scrollable.ensureVisible(
+        key.currentContext!,
+        duration: const Duration(milliseconds: 800),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  @override
+  void onClose() {
+    scrollController.dispose();
+    super.onClose();
+  }
+
+  // Observable for carousel auto-play is defined at the top
 
   // Fallback image URL if project image is not found
   final String fallbackImageUrl = 'assets/images/placeholder.jpg';
