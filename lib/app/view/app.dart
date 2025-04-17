@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_portfolio_web/counter/counter.dart';
+import 'package:get/get.dart';
+import 'package:my_portfolio_web/app/routes/app_pages.dart';
 import 'package:my_portfolio_web/l10n/l10n.dart';
 
 class App extends StatelessWidget {
@@ -7,7 +8,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      title: 'My Portfolio',
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -16,7 +18,8 @@ class App extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      initialRoute: AppPages.initial,
+      getPages: AppPages.routes,
     );
   }
 }
