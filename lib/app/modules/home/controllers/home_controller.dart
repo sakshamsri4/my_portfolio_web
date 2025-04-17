@@ -22,31 +22,66 @@ class HomeController extends GetxController {
 
   // Observable for carousel auto-play
   final isCarouselPlaying = true.obs;
-  // Skills list for carousel
-  final skills = [
-    'Flutter',
-    'Dart',
-    'Firebase',
-    'GetX',
-    'BLoC',
-    'Provider',
-    'REST API',
-    'Firestore',
-    'Authentication',
-    'Realtime Database',
-    'Material Design',
-    'Responsive Layouts',
-    'MVC',
-    'MVVM',
-    'Hive',
-    'Git',
-    'GitHub',
-    'BitBucket',
-    'Android Studio',
-    'VS Code',
-    'Unit Testing',
-    'Widget Testing',
+  // Skills organized by category
+  final skillCategories = [
+    {
+      'category': 'Mobile Development',
+      'iconType': 'svg',
+      'skills': [
+        'Flutter',
+        'Dart',
+        'Android',
+        'iOS',
+        'Responsive Layouts',
+        'Material Design',
+      ],
+    },
+    {
+      'category': 'State Management',
+      'iconType': 'svg',
+      'skills': [
+        'GetX',
+        'BLoC',
+        'Provider',
+        'MVC',
+        'MVVM',
+      ],
+    },
+    {
+      'category': 'Backend & Database',
+      'iconType': 'svg',
+      'skills': [
+        'Firebase',
+        'Firestore',
+        'Authentication',
+        'Realtime Database',
+        'REST API',
+        'Hive',
+      ],
+    },
+    {
+      'category': 'Tools & Workflow',
+      'iconType': 'svg',
+      'skills': [
+        'Git',
+        'GitHub',
+        'BitBucket',
+        'Android Studio',
+        'VS Code',
+        'Unit Testing',
+        'Widget Testing',
+      ],
+    },
   ];
+
+  // Flat skills list for backward compatibility
+  List<String> get skills {
+    final allSkills = <String>[];
+    for (final category in skillCategories) {
+      allSkills.addAll(category['skills']! as List<String>);
+    }
+    return allSkills;
+  }
 
   // Projects list for carousel
   final projects = [

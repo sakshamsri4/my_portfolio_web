@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="317px" viewBox="0 0 256 317" version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
+    <defs>
+        <linearGradient x1="3.9517088%" y1="26.9930287%" x2="75.8970734%" y2="52.9192657%" id="linearGradient-1">
+            <stop stop-color="#000000" offset="0%"></stop>
+            <stop stop-color="#000000" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g>
+        <path d="M157.665,0.071 L0.012,157.725 L48.809,206.522 L254.579,0.752 L157.665,0.071 Z" fill="#675AF2"></path>
+        <path d="M156.813,145.516 L72.1,230.229 L121.601,279.731 L156.813,279.731 L206.016,230.528 L156.813,145.516 Z" fill="#675AF2"></path>
+        <path d="M121.601,279.731 L158.431,316.561 L255.329,316.561 L206.016,230.528 L121.601,279.731 Z" fill="#675AF2"></path>
+        <path d="M71.8,230.528 L120.603,181.726 L158.431,316.561 L121.601,279.731 L71.8,230.528 Z" fill="#675AF2"></path>
+        <path d="M121.601,279.731 L158.431,316.561 L121.601,316.561 L121.601,279.731 Z" fill="url(#linearGradient-1)" fill-opacity="0.2"></path>
+    </g>
+</svg>
