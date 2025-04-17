@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio_web/app/modules/home/controllers/home_controller.dart';
 
 class ContactSection extends StatelessWidget {
@@ -13,11 +14,38 @@ class ContactSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Contact',
-          style: Theme.of(context).textTheme.displaySmall,
+        // Section header with divider
+        Row(
+          children: [
+            Text(
+              'Let\'s Connect',
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Divider(
+                color: Theme.of(context).colorScheme.primary.withAlpha(100),
+                thickness: 1,
+              ),
+            ),
+          ],
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 24),
+
+        // Introduction text
+        Padding(
+          padding: const EdgeInsets.only(bottom: 24),
+          child: Text(
+            "Have a project in mind or just want to say hello? I'd love to hear from you! Let's discuss how we can work together to bring your ideas to life.",
+            style: TextStyle(
+              fontSize: 16,
+              height: 1.5,
+              color: Theme.of(context).colorScheme.onSurface.withAlpha(230),
+            ),
+          ),
+        ),
+
+        // Contact cards
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
@@ -32,6 +60,13 @@ class ContactSection extends StatelessWidget {
             border: Border.all(
               color: Theme.of(context).colorScheme.primary.withAlpha(30),
             ),
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(context).colorScheme.primary.withAlpha(10),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+            ],
           ),
           child: Column(
             children: [
@@ -44,6 +79,7 @@ class ContactSection extends StatelessWidget {
                 onCopy: () => controller.copyToClipboard(
                   controller.contactInfo['email']!,
                 ),
+                onTap: controller.launchEmail,
                 isFirst: true,
               ),
 
@@ -56,6 +92,7 @@ class ContactSection extends StatelessWidget {
                 onCopy: () => controller.copyToClipboard(
                   controller.contactInfo['phone']!,
                 ),
+                onTap: controller.launchWhatsApp,
               ),
 
               // Location contact card
@@ -70,6 +107,37 @@ class ContactSection extends StatelessWidget {
             ],
           ),
         ),
+
+        // Final call to action
+        Padding(
+          padding: const EdgeInsets.only(top: 32, bottom: 16),
+          child: Center(
+            child: Column(
+              children: [
+                Text(
+                  "Ready to start a project?",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton.icon(
+                  onPressed: controller.launchEmail,
+                  icon: const Icon(Icons.send),
+                  label: const Text('Send Me a Message'),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 16),
+                    textStyle: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -80,6 +148,7 @@ class ContactSection extends StatelessWidget {
     required String title,
     required String content,
     VoidCallback? onCopy,
+    VoidCallback? onTap,
     bool showCopy = true,
     bool isFirst = false,
     bool isLast = false,
@@ -126,28 +195,81 @@ class ContactSection extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 4),
-                Text(
-                  content,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Theme.of(context).colorScheme.primary,
+                InkWell(
+                  onTap: onTap,
+                  borderRadius: BorderRadius.circular(4),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 2),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          content,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Theme.of(context).colorScheme.primary,
+                            decoration:
+                                onTap != null ? TextDecoration.underline : null,
+                            decorationColor: Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withAlpha(150),
+                            decorationThickness: 1.2,
+                          ),
+                        ),
+                        if (onTap != null) ...[
+                          const SizedBox(width: 4),
+                          if (title == 'Phone')
+                            const FaIcon(
+                              FontAwesomeIcons.whatsapp,
+                              size: 14,
+                              color: Color(0xFF25D366),
+                            )
+                          else
+                            Icon(
+                              title == 'Email'
+                                  ? Icons.email_outlined
+                                  : Icons.open_in_new,
+                              size: 14,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                        ],
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          // Copy button
-          if (showCopy && onCopy != null)
-            IconButton(
-              icon: const Icon(Icons.copy, size: 20),
-              tooltip: 'Copy to clipboard',
-              onPressed: onCopy,
-              style: IconButton.styleFrom(
-                backgroundColor:
-                    Theme.of(context).colorScheme.primary.withAlpha(10),
-              ),
-            ),
+          // Action buttons
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // WhatsApp button for phone
+              if (title == 'Phone')
+                IconButton(
+                  icon: const FaIcon(FontAwesomeIcons.whatsapp, size: 18),
+                  tooltip: 'Open in WhatsApp',
+                  onPressed: onTap,
+                  style: IconButton.styleFrom(
+                    backgroundColor: const Color(0xFF25D366).withAlpha(30),
+                    foregroundColor: const Color(0xFF25D366),
+                  ),
+                ),
+              // Copy button
+              if (showCopy && onCopy != null)
+                IconButton(
+                  icon: const Icon(Icons.copy, size: 20),
+                  tooltip: 'Copy to clipboard',
+                  onPressed: onCopy,
+                  style: IconButton.styleFrom(
+                    backgroundColor:
+                        Theme.of(context).colorScheme.primary.withAlpha(10),
+                  ),
+                ),
+            ],
+          ),
         ],
       ),
     );

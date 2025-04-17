@@ -8,9 +8,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final HomeController homeController = Get.find<HomeController>();
+    final homeController = Get.find<HomeController>();
     final screenWidth = MediaQuery.of(context).size.width;
-    final bool isWideScreen = screenWidth > 800;
+    final isWideScreen = screenWidth > 800;
 
     return AppBar(
       title: GestureDetector(
@@ -29,8 +29,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: Obx(
             () => Icon(
               Get.find<ThemeController>().isDarkMode
-                  ? Icons.light_mode
-                  : Icons.dark_mode,
+                  ? Icons.dark_mode
+                  : Icons.light_mode,
             ),
           ),
           tooltip: 'Toggle theme',
@@ -118,31 +118,41 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   // Helper method to build navigation links for wide screens
   List<Widget> _buildNavigationLinks(HomeController controller) {
     return [
-      Obx(() => _buildNavLink(
-            title: 'About',
-            isActive: controller.activeSection.value == 'about',
-            onTap: () => controller.scrollToSection('about'),
-          )),
-      Obx(() => _buildNavLink(
-            title: 'Skills',
-            isActive: controller.activeSection.value == 'skills',
-            onTap: () => controller.scrollToSection('skills'),
-          )),
-      Obx(() => _buildNavLink(
-            title: 'Projects',
-            isActive: controller.activeSection.value == 'projects',
-            onTap: () => controller.scrollToSection('projects'),
-          )),
-      Obx(() => _buildNavLink(
-            title: 'Career',
-            isActive: controller.activeSection.value == 'career',
-            onTap: () => controller.scrollToSection('career'),
-          )),
-      Obx(() => _buildNavLink(
-            title: 'Contact',
-            isActive: controller.activeSection.value == 'contact',
-            onTap: () => controller.scrollToSection('contact'),
-          )),
+      Obx(
+        () => _buildNavLink(
+          title: 'About',
+          isActive: controller.activeSection.value == 'about',
+          onTap: () => controller.scrollToSection('about'),
+        ),
+      ),
+      Obx(
+        () => _buildNavLink(
+          title: 'Skills',
+          isActive: controller.activeSection.value == 'skills',
+          onTap: () => controller.scrollToSection('skills'),
+        ),
+      ),
+      Obx(
+        () => _buildNavLink(
+          title: 'Projects',
+          isActive: controller.activeSection.value == 'projects',
+          onTap: () => controller.scrollToSection('projects'),
+        ),
+      ),
+      Obx(
+        () => _buildNavLink(
+          title: 'Career',
+          isActive: controller.activeSection.value == 'career',
+          onTap: () => controller.scrollToSection('career'),
+        ),
+      ),
+      Obx(
+        () => _buildNavLink(
+          title: 'Contact',
+          isActive: controller.activeSection.value == 'contact',
+          onTap: () => controller.scrollToSection('contact'),
+        ),
+      ),
     ];
   }
 

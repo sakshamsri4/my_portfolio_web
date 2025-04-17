@@ -222,6 +222,15 @@ class HomeController extends GetxController {
   // Fallback image URL if project image is not found
   final String fallbackImageUrl = 'assets/images/placeholder.jpg';
 
+  // Get image with fallback
+  String getImageWithFallback(String imagePath) {
+    // For empty project images, use the fallback
+    if (imagePath.contains('project')) {
+      return fallbackImageUrl;
+    }
+    return imagePath;
+  }
+
   // No need for empty onInit
 
   // Launch email client
@@ -240,6 +249,25 @@ class HomeController extends GetxController {
       Get.snackbar(
         'Error',
         'Could not launch email client',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+  }
+
+  // Launch WhatsApp chat
+  Future<void> launchWhatsApp() async {
+    // Format phone number (remove any non-digit characters)
+    final phoneNumber = contactInfo['phone']!.replaceAll(RegExp(r'\D'), '');
+
+    // Create WhatsApp URL
+    final whatsappUrl = Uri.parse('https://wa.me/$phoneNumber');
+
+    if (await canLaunchUrl(whatsappUrl)) {
+      await launchUrl(whatsappUrl, mode: LaunchMode.externalApplication);
+    } else {
+      Get.snackbar(
+        'Error',
+        'Could not launch WhatsApp',
         snackPosition: SnackPosition.BOTTOM,
       );
     }

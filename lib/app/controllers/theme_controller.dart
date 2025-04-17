@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class ThemeController extends GetxController {
   // Observable for theme mode
-  final Rx<ThemeMode> themeMode = ThemeMode.light.obs;
+  final Rx<ThemeMode> themeMode = ThemeMode.dark.obs;
 
   // Toggle theme mode
   void toggleTheme() {

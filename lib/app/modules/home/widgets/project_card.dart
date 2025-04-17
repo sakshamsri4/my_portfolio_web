@@ -3,18 +3,17 @@ import 'package:get/get.dart';
 import 'package:my_portfolio_web/app/modules/home/controllers/home_controller.dart';
 
 class ProjectCard extends StatelessWidget {
-  final String title;
-  final String description;
-  final String imageUrl;
-  final String externalUrl;
-
   const ProjectCard({
-    super.key,
     required this.title,
     required this.description,
     required this.imageUrl,
     required this.externalUrl,
+    super.key,
   });
+  final String title;
+  final String description;
+  final String imageUrl;
+  final String externalUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +23,7 @@ class ProjectCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           // Project image with gradient overlay
           Stack(
@@ -105,15 +105,20 @@ class ProjectCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Description
-                Text(
-                  description,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color:
-                        Theme.of(context).colorScheme.onSurface.withAlpha(220),
-                    height: 1.4,
+                SizedBox(
+                  height: 60, // Fixed height for description
+                  child: Text(
+                    description,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withAlpha(220),
+                      height: 1.4,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
