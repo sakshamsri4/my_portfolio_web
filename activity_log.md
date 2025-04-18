@@ -420,3 +420,4 @@ RULE: Every action taken must be recorded in this file with a timestamp for futu
   - Fixed parameter ordering in InfiniteScrollRow widget
   - Updated analysis_options.yaml to ignore remaining warnings
   - Verified all analyzer issues are resolved
+  - Updated Dart SDK constraint in pubspec.yaml to be compatible with CI environment (>=3.3.0 <4.0.0)
