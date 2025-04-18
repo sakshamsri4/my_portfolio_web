@@ -241,23 +241,7 @@ class HeroSection extends StatelessWidget {
           ),
         ),
 
-        // Accent element - small circle at bottom right
-        Positioned(
-          bottom: 0,
-          right: 0,
-          child: Container(
-            width: radius * 0.4,
-            height: radius * 0.4,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: primaryColor,
-                width: 2,
-              ),
-            ),
-          ),
-        ),
+        // Accent element removed
       ],
     );
   }

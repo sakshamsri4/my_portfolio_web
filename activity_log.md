@@ -333,3 +333,16 @@ RULE: Every action taken must be recorded in this file with a timestamp for futu
 - Fixed UI alignment issues:
   - Centered the down arrow icon in the scroll indicator using Center widget
   - Improved visual alignment of NeoPOP elements
+
+## [2024-08-07]
+- Removed unwanted white circle from profile image:
+  - Identified and removed the accent element (white circle) positioned at the bottom right of the profile image
+  - Simplified the profile image styling for a cleaner look
+
+- Implemented glassmorphism project tiles for featured projects:
+  - Added two tile background images (John_hancock.webp and manulife.webp) to assets/tile_images/ directory
+  - Created a new GlassmorphicProjectCard widget with frosted glass effect
+  - Updated HomeController to include tileImage property for the first two projects
+  - Modified ProjectsSection to use the new glassmorphism cards for projects with tile images
+  - Added hover animations with dynamic blur effect for better interactivity
+  - Fixed deprecated withOpacity calls using withAlpha for better performance

@@ -118,6 +118,7 @@ class HomeController extends GetxController {
       'description':
           'A wellness app for tracking fitness activities, logging workouts via GPS, and managing Vitality Points™ with personalized health insights and rewards.',
       'image': 'assets/images/project1.jpg',
+      'tileImage': 'assets/tile_images/John_hancock.webp',
       'url': 'https://apps.apple.com/us/app/john-hancock-vitality/id1192577836',
     },
     {
@@ -125,6 +126,7 @@ class HomeController extends GetxController {
       'description':
           'A bilingual (English and French) health-focused app with accessibility features, enabling activity tracking, Apple Health integration, and rewards through personalized goals.',
       'image': 'assets/images/project2.jpg',
+      'tileImage': 'assets/tile_images/manulife.webp',
       'url': 'https://apps.apple.com/ca/app/manulife-vitality/id1198760352',
     },
     {

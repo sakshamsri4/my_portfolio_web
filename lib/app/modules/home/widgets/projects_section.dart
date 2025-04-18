@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_portfolio_web/app/modules/home/controllers/home_controller.dart';
+import 'package:my_portfolio_web/app/modules/home/widgets/glassmorphic_project_card.dart';
 import 'package:my_portfolio_web/app/modules/home/widgets/project_card.dart';
 
 class ProjectsSection extends StatefulWidget {
@@ -66,23 +67,26 @@ class _ProjectsSectionState extends State<ProjectsSection> {
           Padding(
             padding: const EdgeInsets.only(bottom: 40),
             child: Text(
-              "Here are some of my favorite projects that showcase my skills "
-              "and passion for creating exceptional mobile experiences. Each "
+              'Here are some of my favorite projects that showcase my skills '
+              'and passion for creating exceptional mobile experiences. Each '
               "project represents a unique challenge that I've tackled with "
-              "creativity and technical expertise.",
+              'creativity and technical expertise.',
               style: TextStyle(
                 fontSize: 16,
                 height: 1.5,
-                color:
-                    Theme.of(context).colorScheme.onSurface.withOpacity(0.87),
+                color: Theme.of(context)
+                    .colorScheme
+                    .onSurface
+                    .withAlpha(222), // 0.87 opacity
               ),
             ),
           ),
 
           // Projects display - different layouts for mobile and desktop
-          isMobile
-              ? _buildMobileSnapScrollProjects()
-              : _buildDesktopGridProjects(),
+          if (isMobile)
+            _buildMobileSnapScrollProjects()
+          else
+            _buildDesktopGridProjects(),
 
           // Carousel dots for mobile
           if (isMobile)
@@ -92,7 +96,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
                   math.min(6, widget.controller.projects.length),
-                  (index) => _buildCarouselDot(index),
+                  _buildCarouselDot,
                 ),
               ),
             ),
@@ -140,13 +144,22 @@ class _ProjectsSectionState extends State<ProjectsSection> {
             return Container(
               width: MediaQuery.of(context).size.width * 0.85,
               padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: ProjectCard(
-                title: project['title']!,
-                description: project['description']!,
-                imageUrl:
-                    widget.controller.getImageWithFallback(project['image']!),
-                externalUrl: project['url']!,
-              ),
+              child: index < 2 && project.containsKey('tileImage')
+                  ? GlassmorphicProjectCard(
+                      title: project['title']!,
+                      description: project['description']!,
+                      imageUrl: widget.controller
+                          .getImageWithFallback(project['image']!),
+                      tileImageUrl: project['tileImage']!,
+                      externalUrl: project['url']!,
+                    )
+                  : ProjectCard(
+                      title: project['title']!,
+                      description: project['description']!,
+                      imageUrl: widget.controller
+                          .getImageWithFallback(project['image']!),
+                      externalUrl: project['url']!,
+                    ),
             );
           },
         ),
@@ -156,7 +169,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
 
   // Desktop 3-column grid of projects
   Widget _buildDesktopGridProjects() {
-    final projectsPerPage = 3; // 3 columns per row
+    const projectsPerPage = 3; // 3 columns per row
     final totalPages =
         (widget.controller.projects.length / projectsPerPage).ceil();
 
@@ -174,8 +187,10 @@ class _ProjectsSectionState extends State<ProjectsSection> {
             itemCount: totalPages,
             itemBuilder: (context, pageIndex) {
               final startIndex = pageIndex * projectsPerPage;
-              final endIndex = math.min(startIndex + projectsPerPage,
-                  widget.controller.projects.length);
+              final endIndex = math.min(
+                startIndex + projectsPerPage,
+                widget.controller.projects.length,
+              );
 
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -184,14 +199,33 @@ class _ProjectsSectionState extends State<ProjectsSection> {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: ProjectCard(
-                          title: widget.controller.projects[i]['title']!,
-                          description: widget.controller.projects[i]
-                              ['description']!,
-                          imageUrl: widget.controller.getImageWithFallback(
-                              widget.controller.projects[i]['image']!),
-                          externalUrl: widget.controller.projects[i]['url']!,
-                        ),
+                        child: i < 2 &&
+                                widget.controller.projects[i]
+                                    .containsKey('tileImage')
+                            ? GlassmorphicProjectCard(
+                                title: widget.controller.projects[i]['title']!,
+                                description: widget.controller.projects[i]
+                                    ['description']!,
+                                imageUrl:
+                                    widget.controller.getImageWithFallback(
+                                  widget.controller.projects[i]['image']!,
+                                ),
+                                tileImageUrl: widget.controller.projects[i]
+                                    ['tileImage']!,
+                                externalUrl: widget.controller.projects[i]
+                                    ['url']!,
+                              )
+                            : ProjectCard(
+                                title: widget.controller.projects[i]['title']!,
+                                description: widget.controller.projects[i]
+                                    ['description']!,
+                                imageUrl:
+                                    widget.controller.getImageWithFallback(
+                                  widget.controller.projects[i]['image']!,
+                                ),
+                                externalUrl: widget.controller.projects[i]
+                                    ['url']!,
+                              ),
                       ),
                     ),
 
@@ -220,7 +254,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
                 totalPages,
-                (index) => _buildCarouselDot(index),
+                _buildCarouselDot,
               ),
             ),
           ),
@@ -239,7 +273,8 @@ class _ProjectsSectionState extends State<ProjectsSection> {
       height: 6, // 6px minimalist dots as requested
       width: isActive ? 18 : 6,
       decoration: BoxDecoration(
-        color: isActive ? primaryColor : Colors.grey.withOpacity(0.3),
+        color:
+            isActive ? primaryColor : Colors.grey.withAlpha(76), // 0.3 opacity
         borderRadius: BorderRadius.circular(3),
       ),
     );

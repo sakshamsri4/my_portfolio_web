@@ -130,15 +130,16 @@ class _ProjectCardState extends State<ProjectCard>
                 boxShadow: [
                   // Dark shadow
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.3),
+                    color: Colors.black.withAlpha(77), // 0.3 opacity
                     blurRadius: 8 + (_elevationAnimation.value * 2),
                     spreadRadius: 2 + _elevationAnimation.value,
                     offset: Offset(0, 4 + _elevationAnimation.value),
                   ),
                   // Purple glow
                   BoxShadow(
-                    color: accentColor
-                        .withOpacity(0.2 + (_brightnessAnimation.value * 0.1)),
+                    color: accentColor.withAlpha(
+                      51 + (_brightnessAnimation.value * 25).toInt(),
+                    ), // 0.2-0.3 opacity
                     blurRadius: 12 + (_elevationAnimation.value * 3),
                     spreadRadius: -2,
                     offset: const Offset(0, 2),
@@ -165,8 +166,8 @@ class _ProjectCardState extends State<ProjectCard>
                   ),
                 ),
                 border: Border.all(
-                  color:
-                      Colors.white.withOpacity(0.1), // 10% white inset stroke
+                  color: Colors.white
+                      .withAlpha(26), // 0.1 opacity - 10% white inset stroke
                 ),
               ),
               child: ClipRRect(
@@ -189,7 +190,7 @@ class _ProjectCardState extends State<ProjectCard>
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
-                          color: Colors.white.withOpacity(0.87),
+                          color: Colors.white.withAlpha(222), // 0.87 opacity
                           letterSpacing: -0.2,
                         ),
                         overflow: TextOverflow.ellipsis,
@@ -287,7 +288,7 @@ class _ProjectCardState extends State<ProjectCard>
         color: Colors.white10,
         boxShadow: [
           BoxShadow(
-            color: accentColor.withOpacity(0.2),
+            color: accentColor.withAlpha(51), // 0.2 opacity
             blurRadius: 8,
           ),
         ],
@@ -324,7 +325,7 @@ class _ProjectCardState extends State<ProjectCard>
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.1),
+          color: Colors.white.withAlpha(26), // 0.1 opacity
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text(
