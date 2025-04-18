@@ -428,3 +428,9 @@ RULE: Every action taken must be recorded in this file with a timestamp for futu
   - Refactored ProjectCard to use shared AppShadows and AppTextStyles
   - Reduced code duplication between skills section and project cards
   - Improved maintainability by centralizing styling logic
+
+## [2024-04-19]
+- Fixed duplicate mapping key error in pubspec.yaml:
+  - Identified and removed duplicate entries for flutter_bloc and flutter_carousel_widget
+  - Kept the newer versions of the packages (^9.1.0 for flutter_bloc and ^3.1.0 for flutter_carousel_widget)
+  - Successfully ran flutter pub get to verify the fix
