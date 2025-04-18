@@ -282,3 +282,22 @@ RULE: Every action taken must be recorded in this file with a timestamp for futu
   - Reverted changes to maintain original design and layout
   - Preserved original tech stack position above call-to-action buttons
   - Maintained original social media icon styling
+
+## [2024-08-06]
+- Fixed social media icons display issue:
+  - Restored proper NeoPOP styling for social media icons
+  - Fixed white circle appearance by adding proper container and shadow
+  - Ensured consistent styling with the rest of the UI elements
+  - Improved visibility of social media icons against the background
+
+- Added fixed social media sidebar following CRED design principles:
+  - Created a new SocialSidebar widget that stays fixed on the left side while scrolling
+  - Implemented LinkedIn, GitHub, Twitter, and WhatsApp icons with NeoPOP styling
+  - Removed social media icons from the hero section to avoid duplication
+  - Added vertical line with gradient below icons for visual separation following CRED design
+
+- Refined social sidebar design to better blend with background:
+  - Removed container background for a cleaner, more minimal look
+  - Added subtle hover animation with transform effect
+  - Reduced icon size and adjusted shadow opacity for better visual integration
+  - Added responsive padding to main content to accommodate the sidebar

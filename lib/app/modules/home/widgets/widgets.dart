@@ -8,3 +8,4 @@ export 'hero_section.dart';
 export 'project_card.dart';
 export 'projects_section.dart';
 export 'skills_section.dart';
+export 'social_sidebar.dart';

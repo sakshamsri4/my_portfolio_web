@@ -376,66 +376,7 @@ class HeroSection extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 32),
-        // Social links with NeoPOP style
-        Row(
-          children: [
-            // LinkedIn button with NeoPOP effect
-            _buildNeoPOPButton(
-              context: context,
-              icon: FontAwesomeIcons.linkedin,
-              color: const Color(0xFF0A66C2),
-              onPressed: () => controller.launchProjectUrl(
-                'https://linkedin.com/in/sakshamsri/',
-              ),
-            ),
-            const SizedBox(width: 20),
-            // GitHub button with NeoPOP effect
-            _buildNeoPOPButton(
-              context: context,
-              icon: FontAwesomeIcons.github,
-              color: Colors.black,
-              onPressed: () => controller.launchProjectUrl(
-                'https://github.com/sakshamsri4',
-              ),
-            ),
-            const SizedBox(width: 20),
-            // Twitter/X button with NeoPOP effect
-            _buildNeoPOPButton(
-              context: context,
-              icon: FontAwesomeIcons.xTwitter,
-              color: Colors.black,
-              onPressed: () => controller.launchProjectUrl(
-                'https://twitter.com/sakshamsri4',
-              ),
-            ),
-          ],
-        ),
       ],
-    );
-  }
-
-  // Helper method to create NeoPOP style buttons
-  Widget _buildNeoPOPButton({
-    required BuildContext context,
-    required IconData icon,
-    required Color color,
-    required VoidCallback onPressed,
-  }) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          // Shadow container with offset
-          // Main container
-          FaIcon(
-            icon,
-            color: Colors.white,
-            size: 44,
-          ),
-        ],
-      ),
     );
   }
 
