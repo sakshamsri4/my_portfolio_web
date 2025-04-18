@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:my_portfolio_web/app/common/ui/tech_chip.dart';
 import 'package:my_portfolio_web/app/data/models/tech_stack_item.dart';
 import 'package:my_portfolio_web/app/modules/home/controllers/home_controller.dart';
 import 'package:my_portfolio_web/app/modules/home/widgets/infinite_scroll_row.dart';
@@ -243,27 +244,9 @@ class SkillsSection extends StatelessWidget {
   // Build a skill chip
   Widget _buildSkillChip(BuildContext context, String skill) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final primaryColor = Theme.of(context).colorScheme.primary;
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: primaryColor.withAlpha(isDarkMode ? 40 : 20),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: primaryColor.withAlpha(isDarkMode ? 70 : 50),
-        ),
-      ),
-      child: Text(
-        skill,
-        style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-          color: isDarkMode ? Colors.white : primaryColor,
-        ),
-        overflow: TextOverflow.ellipsis,
-        maxLines: 1,
-      ),
+    return TechChip(
+      label: skill,
+      isDarkMode: isDarkMode,
     );
   }
 

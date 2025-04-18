@@ -3,3 +3,4 @@ export 'neo_pop_button.dart';
 export 'neo_pop_social_button.dart';
 export 'neo_pop_tech_icon.dart';
 export 'section_container.dart';
+export 'tech_chip.dart';
