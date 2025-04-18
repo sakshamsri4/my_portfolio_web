@@ -221,3 +221,23 @@ RULE: Every action taken must be recorded in this file with a timestamp for futu
   - Improved text handling in introduction sections by removing newline characters
   - Added overflow: TextOverflow.ellipsis and maxLines constraints to prevent layout shifts
   - Enhanced responsive layout handling in skill cards and project descriptions
+
+## [2024-07-31]
+- Improved career timeline section for better responsiveness:
+  - Redesigned timeline to have equal sides on desktop view
+  - Created separate mobile and desktop layouts for optimal viewing
+  - Added responsive sizing based on screen dimensions
+  - Enhanced timeline indicators with borders and shadows
+  - Implemented ConstrainedBox to control card widths consistently
+  - Added adaptive font sizes and padding for different screen sizes
+  - Improved visual hierarchy with section divider
+
+## [2024-08-01]
+- Enhanced career timeline with criss-cross pattern for mobile view:
+  - Implemented alternating left/right layout for mobile screens
+  - Created specialized mobile content builder for better text visibility
+  - Optimized card sizes and content for smaller screens
+  - Added dynamic width calculation based on screen size
+  - Improved text overflow handling with multi-line support
+  - Enhanced visual appearance with subtle shadows and gradients
+  - Ensured consistent spacing and alignment across all screen sizes
