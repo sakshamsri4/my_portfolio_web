@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_portfolio_web/app/modules/home/controllers/home_controller.dart';
@@ -33,11 +31,6 @@ class _GlassmorphicProjectCardState extends State<GlassmorphicProjectCard>
   late AnimationController _controller;
   late Animation<double> _elevationAnimation;
   late Animation<double> _brightnessAnimation;
-  late Animation<double> _arrowSlideAnimation;
-  late Animation<double> _blurAnimation;
-
-  // Parallax effect values
-  double _parallaxOffset = 0;
 
   // Get cached image or create a new one
   Widget _getCachedImage(
@@ -86,36 +79,13 @@ class _GlassmorphicProjectCardState extends State<GlassmorphicProjectCard>
 
     _brightnessAnimation = Tween<double>(
       begin: 0,
-      end: 0.2, // 20% brighter on hover for better image visibility
+      end: 0.5, // 30% brighter on hover for maximum image visibility
     ).animate(
       CurvedAnimation(
         parent: _controller,
         curve: Curves.easeOutCubic,
       ),
     );
-
-    _arrowSlideAnimation = Tween<double>(
-      begin: 0,
-      end: 8,
-    ).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeOutCubic,
-      ),
-    );
-
-    _blurAnimation = Tween<double>(
-      begin: 3, // Reduced blur for better image visibility
-      end: 1.5,
-    ).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeOutCubic,
-      ),
-    );
-
-    // Generate a random offset for parallax effect
-    _parallaxOffset = (math.Random().nextDouble() * 0.1) - 0.05;
   }
 
   @override
@@ -166,140 +136,128 @@ class _GlassmorphicProjectCardState extends State<GlassmorphicProjectCard>
                     // Background image
                     _buildBackgroundImage(),
 
-                    // Glassmorphic overlay
-                    BackdropFilter(
-                      filter: ImageFilter.blur(
-                        sigmaX: _blurAnimation.value,
-                        sigmaY: _blurAnimation.value,
-                      ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            stops: const [0.0, 1.0],
-                            colors: [
-                              Colors.indigo.shade900.withAlpha(
-                                100 - (_brightnessAnimation.value * 60).toInt(),
-                                // Further reduced opacity
-                                //for better image visibility
-                              ),
-                              Colors.indigo.shade800.withAlpha(
-                                120 - (_brightnessAnimation.value * 60).toInt(),
-                                // Further reduced opacity
-                                //for better image visibility
-                              ),
-                            ],
+                    // Clickable container for the entire card
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () => Get.find<HomeController>()
+                            .launchProjectUrl(widget.externalUrl),
+                        splashColor: Colors.white.withAlpha(30),
+                        highlightColor: Colors.white.withAlpha(20),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.white.withAlpha(51), // 0.2 opacity
+                              width: 1.5,
+                            ),
                           ),
-                          border: Border.all(
-                            color: Colors.white.withAlpha(51), // 0.2 opacity
-                            width: 1.5,
-                          ),
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            // Logo/Icon centered at the top
-                            Padding(
-                              padding: const EdgeInsets.only(top: 32),
-                              child: _buildProjectLogo(widget.imageUrl),
-                            ),
-
-                            // Project title
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(24, 24, 24, 8),
-                              child: Text(
-                                widget.title,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white
-                                      .withAlpha(242), // 0.95 opacity
-                                  letterSpacing: -0.2,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                              ),
-                            ),
-
-                            // Description
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 24),
-                              child: Text(
-                                widget.description,
-                                textAlign: TextAlign.center,
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white
-                                      .withAlpha(204), // 0.8 opacity
-                                  height: 1.4,
-                                  letterSpacing: 0.1,
-                                ),
-                              ),
-                            ),
-
-                            // Technology chips
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
-                              child: Wrap(
-                                alignment: WrapAlignment.center,
-                                spacing: 8,
-                                runSpacing: 8,
-                                children: _buildTechChips(),
-                              ),
-                            ),
-
-                            const Spacer(),
-
-                            // Ghost CTA button
-                            Padding(
-                              padding: const EdgeInsets.all(24),
-                              child: InkWell(
-                                onTap: () => Get.find<HomeController>()
-                                    .launchProjectUrl(widget.externalUrl),
-                                child: Container(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 12),
-                                  decoration: BoxDecoration(
-                                    border: Border(
-                                      bottom: BorderSide(
-                                        color: Colors.white
-                                            .withAlpha(102), // 0.4 opacity
-                                      ),
-                                    ),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        'View Project',
-                                        style: TextStyle(
-                                          color: Colors.white
-                                              .withAlpha(230), // 0.9 opacity
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          letterSpacing: 0.5,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 8 + _arrowSlideAnimation.value,
-                                      ),
-                                      Icon(
-                                        Icons.arrow_forward,
-                                        color: Colors.white
-                                            .withAlpha(230), // 0.9 opacity
-                                        size: 16,
-                                      ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              const Spacer(),
+                              // Semi-transparent background for text
+                              Container(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16),
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Colors.black.withAlpha(0),
+                                      Colors.black.withAlpha(150),
                                     ],
                                   ),
                                 ),
+                                child: Column(
+                                  children: [
+                                    // Project title
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                        16,
+                                        0,
+                                        16,
+                                        8,
+                                      ),
+                                      child: Text(
+                                        widget.title,
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white,
+                                          letterSpacing: -0.2,
+                                          shadows: [
+                                            Shadow(
+                                              color:
+                                                  Color.fromARGB(200, 0, 0, 0),
+                                              offset: Offset(0, 1),
+                                              blurRadius: 4,
+                                            ),
+                                          ],
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                      ),
+                                    ),
+
+                                    // View Project button
+                                    Center(
+                                      child: Container(
+                                        margin: const EdgeInsets.symmetric(
+                                          horizontal: 16,
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 8,
+                                          horizontal: 16,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withAlpha(30),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          border: Border.all(
+                                            color: Colors.white.withAlpha(100),
+                                          ),
+                                        ),
+                                        child: const Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              'View Project',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w500,
+                                                letterSpacing: 0.5,
+                                                shadows: [
+                                                  Shadow(
+                                                    color: Color.fromARGB(
+                                                      200,
+                                                      0,
+                                                      0,
+                                                      0,
+                                                    ),
+                                                    offset: Offset(0, 1),
+                                                    blurRadius: 3,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(width: 8),
+                                            Icon(
+                                              Icons.arrow_forward,
+                                              color: Colors.white,
+                                              size: 16,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -342,70 +300,5 @@ class _GlassmorphicProjectCardState extends State<GlassmorphicProjectCard>
         },
       ),
     );
-  }
-
-  // Build project logo/icon
-  Widget _buildProjectLogo(String imageUrl) {
-    final accentColor = Theme.of(context).colorScheme.primary;
-
-    return Container(
-      width: 56,
-      height: 56,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.white.withAlpha(38), // 0.15 opacity
-        boxShadow: [
-          BoxShadow(
-            color: accentColor.withAlpha(77), // 0.3 opacity
-            blurRadius: 8,
-          ),
-        ],
-      ),
-      child: ClipOval(
-        child: _getCachedImage(
-          imageUrl,
-          fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) {
-            // Extract first letter of project title for fallback
-            final firstLetter = widget.title.isNotEmpty ? widget.title[0] : 'P';
-            return Center(
-              child: Text(
-                firstLetter,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-
-  // Build technology chips
-  List<Widget> _buildTechChips() {
-    // Extract tech keywords from description
-    final keywords = ['Flutter', 'Firebase', 'GetX', 'Mobile', 'Web'];
-
-    return keywords.take(3).map((tech) {
-      return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        decoration: BoxDecoration(
-          color: Colors.white.withAlpha(38), // 0.15 opacity
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Text(
-          tech,
-          style: TextStyle(
-            color: Colors.white.withAlpha(230), // 0.9 opacity
-            fontSize: 10,
-            fontWeight: FontWeight.w500,
-            letterSpacing: 0.5,
-          ),
-        ),
-      );
-    }).toList();
   }
 }

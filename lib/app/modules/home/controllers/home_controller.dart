@@ -134,6 +134,7 @@ class HomeController extends GetxController {
       'description':
           'Developed app and business portal using Flutter, Firebase, and FlutterFlow with bilingual support, enabling real-time EV charger management and personalized settings.',
       'image': 'assets/images/project3.jpg',
+      'tileImage': 'assets/tile_images/pro_ranked.webp',
       'url': 'https://proranked.com',
     },
     {
@@ -141,6 +142,7 @@ class HomeController extends GetxController {
       'description':
           'A Flutter-based app for construction professionals, featuring project management, invoicing, expense tracking, offline access, and multilingual support.',
       'image': 'assets/images/project4.jpg',
+      'tileImage': 'assets/tile_images/onsite.webp',
       'url':
           'https://play.google.com/store/apps/details?id=com.abeyaantrix.onsite',
     },
@@ -149,6 +151,7 @@ class HomeController extends GetxController {
       'description':
           'A cross-platform healthcare app for Zuellig Pharma using Flutter, enabling online consultations, vaccination bookings, lab scheduling, and personal health record management.',
       'image': 'assets/images/project5.jpg',
+      'tileImage': 'assets/tile_images/ezHealth.webp',
       'url':
           'https://play.google.com/store/apps/details?id=com.zuelligpharma.ezhealth',
     },
@@ -157,6 +160,7 @@ class HomeController extends GetxController {
       'description':
           'A cross-platform app for medical representatives using Flutter, GoLang, and C++, featuring real-time product status, activity management, and progress tracking tools.',
       'image': 'assets/images/project6.jpg',
+      'tileImage': 'assets/tile_images/ezTrade.webp',
       'url':
           'https://play.google.com/store/apps/details?id=com.zuelligpharma.eztrade',
     },
@@ -165,6 +169,7 @@ class HomeController extends GetxController {
       'description':
           'A Flutter-based app providing real-time updates, health guidance, and emergency resources with global and local statistics, news from health organizations, and symptom checkers.',
       'image': 'assets/images/project7.jpg',
+      'tileImage': 'assets/tile_images/covid.webp',
       'url': 'https://github.com/sakshamsri4/Covid-19-App',
     },
   ];
