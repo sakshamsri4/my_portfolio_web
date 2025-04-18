@@ -421,3 +421,4 @@ RULE: Every action taken must be recorded in this file with a timestamp for futu
   - Updated analysis_options.yaml to ignore remaining warnings
   - Verified all analyzer issues are resolved
   - Updated Dart SDK constraint in pubspec.yaml to be compatible with CI environment (>=3.3.0 <4.0.0)
+  - Downgraded very_good_analysis from ^6.0.0 to ^5.1.0 to be compatible with Dart SDK 3.3.1
