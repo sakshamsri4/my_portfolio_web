@@ -7,13 +7,12 @@ import 'dart:html'
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 import 'package:my_portfolio_web/app/common/constants/app_constants.dart';
 import 'package:my_portfolio_web/app/common/constants/string_constants.dart';
 import 'package:my_portfolio_web/app/common/utils/error_utils.dart';
 import 'package:my_portfolio_web/app/controllers/base_controller.dart';
 import 'package:my_portfolio_web/app/data/repositories/portfolio_repository_interface.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 /// Controller responsible for managing contact information and actions
 class ContactController extends BaseController {
