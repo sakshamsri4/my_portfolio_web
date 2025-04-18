@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:my_portfolio_web/app/data/models/tech_stack_item.dart';
 import 'package:my_portfolio_web/app/modules/home/controllers/home_controller.dart';
 import 'package:my_portfolio_web/app/utils/skill_icons.dart';
+import 'package:my_portfolio_web/app/utils/svg_icon_helper.dart';
 
 class SkillsSection extends StatelessWidget {
   const SkillsSection({
@@ -223,50 +225,7 @@ class SkillsSection extends StatelessWidget {
   // Technology icons with CRED-inspired design
   Widget _buildTechIcons(BuildContext context) {
     final primaryColor = Theme.of(context).colorScheme.primary;
-
-    // Define the tech stack with their respective icons
-    final techStack = [
-      {
-        'name': 'Flutter',
-        'icon': FontAwesomeIcons.flutter,
-        'color': const Color(0xFF02569B),
-      },
-      {
-        'name': 'Firebase',
-        'icon': FontAwesomeIcons.fire,
-        'color': const Color(0xFFFFA000),
-      },
-      {
-        'name': 'GitHub',
-        'icon': FontAwesomeIcons.github,
-        'color': const Color(0xFF333333),
-      },
-      {
-        'name': 'Android',
-        'icon': FontAwesomeIcons.android,
-        'color': const Color(0xFF3DDC84),
-      },
-      {
-        'name': 'iOS',
-        'icon': FontAwesomeIcons.apple,
-        'color': const Color(0xFF999999),
-      },
-      {
-        'name': 'React',
-        'icon': FontAwesomeIcons.react,
-        'color': const Color(0xFF61DAFB),
-      },
-      {
-        'name': 'Node.js',
-        'icon': FontAwesomeIcons.nodeJs,
-        'color': const Color(0xFF339933),
-      },
-      {
-        'name': 'Database',
-        'icon': FontAwesomeIcons.database,
-        'color': const Color(0xFF336791),
-      },
-    ];
+    final techStack = controller.techStack;
 
     return Column(
       children: [
@@ -282,12 +241,19 @@ class SkillsSection extends StatelessWidget {
                   .map(
                     (tech) => Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: _buildTechIcon(
-                        context: context,
-                        icon: tech['icon']! as IconData,
-                        name: tech['name']! as String,
-                        color: tech['color']! as Color,
-                      ),
+                      child: tech.iconType == IconType.fontAwesome
+                          ? _buildTechIcon(
+                              context: context,
+                              icon: tech.icon!,
+                              name: tech.name,
+                              color: tech.color,
+                            )
+                          : _buildSvgTechIcon(
+                              context: context,
+                              svgName: tech.svgName!,
+                              name: tech.name,
+                              color: tech.color,
+                            ),
                     ),
                   )
                   .toList(),
@@ -327,7 +293,7 @@ class SkillsSection extends StatelessWidget {
     );
   }
 
-  // Helper method to create CRED-style tech icons
+  // Helper method to create CRED-style tech icons with FontAwesome icons
   Widget _buildTechIcon({
     required BuildContext context,
     required IconData icon,
@@ -381,6 +347,79 @@ class SkillsSection extends StatelessWidget {
                   icon,
                   color: color,
                   size: size * 0.5,
+                ),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        // Tech name with CRED-style typography
+        Text(
+          name,
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: Theme.of(context).colorScheme.onSurface.withAlpha(180),
+          ),
+        ),
+      ],
+    );
+  }
+
+  // Helper method to create CRED-style tech icons with SVG icons
+  Widget _buildSvgTechIcon({
+    required BuildContext context,
+    required String svgName,
+    required String name,
+    required Color color,
+  }) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
+    final size = isMobile ? 50.0 : 60.0;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Icon with NeoPOP effect
+        Stack(
+          clipBehavior: Clip.none,
+          children: [
+            // Shadow container with offset
+            Positioned(
+              left: 3,
+              top: 3,
+              child: Container(
+                width: size,
+                height: size,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
+            // Main container
+            Container(
+              width: size,
+              height: size,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: color.withAlpha(40),
+                    blurRadius: 8,
+                    spreadRadius: 1,
+                  ),
+                ],
+                border: Border.all(
+                  color: color.withAlpha(50),
+                ),
+              ),
+              child: Center(
+                child: SvgIconHelper.getSvgIcon(
+                  svgName,
+                  size: size * 0.5,
+                  color: color,
                 ),
               ),
             ),

@@ -371,3 +371,12 @@ RULE: Every action taken must be recorded in this file with a timestamp for futu
   - Configured workflow to build Flutter web app and deploy to Firebase Hosting on push to main branch
   - Added Firebase token as GitHub secret for secure authentication
   - Ready to commit and push workflow file to activate continuous deployment
+
+- Enhanced tech stack section with SVG icons:
+  - Added flutter_svg package for SVG rendering
+  - Created SvgIconHelper utility class for loading and displaying SVG icons
+  - Updated TechStackItem model to support both FontAwesome and SVG icons
+  - Added 20+ tech stack items with SVG icons for Flutter, Dart, Python, AI/ML tools, and more
+  - Modified skills section to display SVG icons with the same CRED-inspired design
+  - Added tech_icon_svg directory to assets in pubspec.yaml
+  - Optimized app size by removing unused SVG icons (reduced from 6MB to 80KB)

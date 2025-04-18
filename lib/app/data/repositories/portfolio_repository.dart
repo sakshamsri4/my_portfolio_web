@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio_web/app/common/constants/app_constants.dart';
 import 'package:my_portfolio_web/app/data/models/tech_stack_item.dart';
@@ -20,41 +21,133 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
   /// Get the list of tech stack items
   List<TechStackItem> getTechStack() {
     return [
+      // Mobile Development
       const TechStackItem(
         name: 'Flutter',
-        icon: FontAwesomeIcons.flutter,
+        svgName: 'Flutter',
         color: AppColors.flutter,
+        iconType: IconType.svg,
       ),
       const TechStackItem(
-        name: 'Firebase',
-        icon: FontAwesomeIcons.fire,
-        color: AppColors.firebase,
-      ),
-      const TechStackItem(
-        name: 'GitHub',
-        icon: FontAwesomeIcons.github,
-        color: AppColors.github,
+        name: 'Dart',
+        svgName: 'Dart',
+        color: Color(0xFF0175C2),
+        iconType: IconType.svg,
       ),
       const TechStackItem(
         name: 'Android',
-        icon: FontAwesomeIcons.android,
+        svgName: 'Android',
         color: AppColors.android,
+        iconType: IconType.svg,
       ),
       const TechStackItem(
         name: 'iOS',
-        icon: FontAwesomeIcons.apple,
+        svgName: 'Apple',
         color: AppColors.ios,
+        iconType: IconType.svg,
       ),
       const TechStackItem(
-        name: 'React',
-        icon: FontAwesomeIcons.react,
-        color: AppColors.react,
+        name: 'Xamarin',
+        svgName: 'Xamarin',
+        color: Color(0xFF3498DB),
+        iconType: IconType.svg,
+      ),
+
+      // Backend & Cloud
+      const TechStackItem(
+        name: 'Firebase',
+        svgName: 'Firebase',
+        color: AppColors.firebase,
+        iconType: IconType.svg,
       ),
       const TechStackItem(
         name: 'Node.js',
-        icon: FontAwesomeIcons.nodeJs,
+        svgName: 'Node.js',
         color: AppColors.nodejs,
+        iconType: IconType.svg,
       ),
+      const TechStackItem(
+        name: 'Python',
+        svgName: 'Python',
+        color: Color(0xFF3776AB),
+        iconType: IconType.svg,
+      ),
+
+      // AI & ML
+      const TechStackItem(
+        name: 'TensorFlow',
+        svgName: 'TensorFlow',
+        color: Color(0xFFFF6F00),
+        iconType: IconType.svg,
+      ),
+      const TechStackItem(
+        name: 'PyTorch',
+        svgName: 'PyTorch',
+        color: Color(0xFFEE4C2C),
+        iconType: IconType.svg,
+      ),
+      const TechStackItem(
+        name: 'Keras',
+        svgName: 'Keras',
+        color: Color(0xFFD00000),
+        iconType: IconType.svg,
+      ),
+
+      // Web Development
+      const TechStackItem(
+        name: 'React',
+        svgName: 'React',
+        color: AppColors.react,
+        iconType: IconType.svg,
+      ),
+      const TechStackItem(
+        name: 'Next.js',
+        svgName: 'Next.js',
+        color: Color(0xFF000000),
+        iconType: IconType.svg,
+      ),
+      const TechStackItem(
+        name: 'Django',
+        svgName: 'Django',
+        color: Color(0xFF092E20),
+        iconType: IconType.svg,
+      ),
+
+      // DevOps & Tools
+      const TechStackItem(
+        name: 'GitHub',
+        svgName: 'GitHub',
+        color: AppColors.github,
+        iconType: IconType.svg,
+      ),
+      const TechStackItem(
+        name: 'Docker',
+        svgName: 'Docker',
+        color: Color(0xFF2496ED),
+        iconType: IconType.svg,
+      ),
+      const TechStackItem(
+        name: 'CircleCI',
+        svgName: 'CircleCI',
+        color: Color(0xFF343434),
+        iconType: IconType.svg,
+      ),
+
+      // Design
+      const TechStackItem(
+        name: 'Figma',
+        svgName: 'Figma',
+        color: Color(0xFFF24E1E),
+        iconType: IconType.svg,
+      ),
+      const TechStackItem(
+        name: 'Material UI',
+        svgName: 'Material-UI',
+        color: Color(0xFF0081CB),
+        iconType: IconType.svg,
+      ),
+
+      // Database
       const TechStackItem(
         name: 'Database',
         icon: FontAwesomeIcons.database,
