@@ -8,20 +8,30 @@ class SkillIcons {
     IconData iconData;
 
     switch (category.toLowerCase()) {
+      case 'flutter':
+        iconData = FontAwesomeIcons.f;
       case 'mobile development':
         iconData = FontAwesomeIcons.mobileScreen;
       case 'state management':
         iconData = FontAwesomeIcons.cubes;
-      case 'backend & database':
+      case 'backend':
+        iconData = FontAwesomeIcons.server;
+      case 'database':
         iconData = FontAwesomeIcons.database;
-      case 'tools & workflow':
-        iconData = FontAwesomeIcons.screwdriverWrench;
-      case 'ai & machine learning':
+      case 'ui/ux design':
+        iconData = FontAwesomeIcons.penRuler;
+      case 'ai integration':
         iconData = FontAwesomeIcons.brain;
-      case 'ai tools & agents':
+      case 'ai tools':
         iconData = FontAwesomeIcons.robot;
-      case 'automation & devops':
+      case 'devops':
         iconData = FontAwesomeIcons.gears;
+      case 'testing':
+        iconData = FontAwesomeIcons.vial;
+      case 'performance':
+        iconData = FontAwesomeIcons.gauge;
+      case 'automation':
+        iconData = FontAwesomeIcons.wandMagicSparkles;
       default:
         iconData = FontAwesomeIcons.code;
     }

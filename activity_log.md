@@ -399,7 +399,13 @@ RULE: Every action taken must be recorded in this file with a timestamp for futu
   - Made skill category cards horizontally scrollable for better mobile experience
   - Kept chips in their original non-scrollable format within each card
   - Added scroll indicators for the skill categories
-  - Added new skill categories: AI & Machine Learning, AI Tools & Agents, Automation & DevOps
+  - Expanded to 12 focused skill categories following CRED design principles
+  - Limited each category to 5 key skills for a cleaner, more elegant look
+  - Added dedicated categories for Flutter, AI Tools, AI Integration, Testing, and Automation
+  - Split Backend & Database into separate categories for better organization
   - Updated professional summary to highlight AI integration and automation expertise
-  - Added FontAwesome icons for new skill categories
-  - Included skills like TensorFlow, PyTorch, OpenAI API, GitHub Copilot, Cursor, Relay, and more
+  - Added FontAwesome icons for all skill categories
+  - Fixed home controller to use repository data instead of hardcoded values
+  - Improved dark mode support with white text for skill chips and category titles
+  - Implemented infinite scrolling for skill categories and tech stack icons
+  - Created a reusable InfiniteScrollRow widget for continuous scrolling experience

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio_web/app/data/models/tech_stack_item.dart';
 import 'package:my_portfolio_web/app/modules/home/controllers/home_controller.dart';
+import 'package:my_portfolio_web/app/modules/home/widgets/infinite_scroll_row.dart';
 import 'package:my_portfolio_web/app/utils/skill_icons.dart';
 import 'package:my_portfolio_web/app/utils/svg_icon_helper.dart';
 
@@ -61,24 +62,19 @@ class SkillsSection extends StatelessWidget {
                 Column(
                   children: [
                     SizedBox(
-                      height: 300, // Fixed height for the scrolling area
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
+                      height: 350, // Fixed height for the scrolling area
+                      child: InfiniteScrollRow(
+                        itemCount: controller.skillCategories.length,
                         physics: const BouncingScrollPhysics(),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: controller.skillCategories.map((category) {
-                            return Padding(
-                              padding: const EdgeInsets.only(right: 16),
-                              child: _buildSkillCategory(
-                                context,
-                                category: category['category']! as String,
-                                skills: category['skills']! as List<String>,
-                                width: 300, // Fixed width for each card
-                              ),
-                            );
-                          }).toList(),
-                        ),
+                        itemBuilder: (context, index) {
+                          final category = controller.skillCategories[index];
+                          return _buildSkillCategory(
+                            context,
+                            category: category['category']! as String,
+                            skills: category['skills']! as List<String>,
+                            width: 300, // Fixed width for each card
+                          );
+                        },
                       ),
                     ),
                     // Scroll indicator
@@ -204,7 +200,9 @@ class SkillsSection extends StatelessWidget {
                   ),
                   child: SkillIcons.getSvgIcon(
                     category,
-                    color: Theme.of(context).colorScheme.primary,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Theme.of(context).colorScheme.primary,
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -214,7 +212,9 @@ class SkillsSection extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.primary,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Theme.of(context).colorScheme.primary,
                     ),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
@@ -242,13 +242,16 @@ class SkillsSection extends StatelessWidget {
 
   // Build a skill chip
   Widget _buildSkillChip(BuildContext context, String skill) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final primaryColor = Theme.of(context).colorScheme.primary;
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary.withAlpha(20),
+        color: primaryColor.withAlpha(isDarkMode ? 40 : 20),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: Theme.of(context).colorScheme.primary.withAlpha(50),
+          color: primaryColor.withAlpha(isDarkMode ? 70 : 50),
         ),
       ),
       child: Text(
@@ -256,7 +259,7 @@ class SkillsSection extends StatelessWidget {
         style: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w500,
-          color: Theme.of(context).colorScheme.primary,
+          color: isDarkMode ? Colors.white : primaryColor,
         ),
         overflow: TextOverflow.ellipsis,
         maxLines: 1,
@@ -274,32 +277,26 @@ class SkillsSection extends StatelessWidget {
         // Tech icons in a responsive grid with scroll animation
         SizedBox(
           height: 120, // Fixed height for the scrolling area
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
+          child: InfiniteScrollRow(
+            itemCount: techStack.length,
+            itemSpacing: 24,
             physics: const BouncingScrollPhysics(),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: techStack
-                  .map(
-                    (tech) => Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: tech.iconType == IconType.fontAwesome
-                          ? _buildTechIcon(
-                              context: context,
-                              icon: tech.icon!,
-                              name: tech.name,
-                              color: tech.color,
-                            )
-                          : _buildSvgTechIcon(
-                              context: context,
-                              svgName: tech.svgName!,
-                              name: tech.name,
-                              color: tech.color,
-                            ),
-                    ),
-                  )
-                  .toList(),
-            ),
+            itemBuilder: (context, index) {
+              final tech = techStack[index];
+              return tech.iconType == IconType.fontAwesome
+                  ? _buildTechIcon(
+                      context: context,
+                      icon: tech.icon!,
+                      name: tech.name,
+                      color: tech.color,
+                    )
+                  : _buildSvgTechIcon(
+                      context: context,
+                      svgName: tech.svgName!,
+                      name: tech.name,
+                      color: tech.color,
+                    );
+            },
           ),
         ),
         // Scroll indicator
