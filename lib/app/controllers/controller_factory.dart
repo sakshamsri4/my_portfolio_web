@@ -12,11 +12,11 @@ import 'package:my_portfolio_web/app/data/repositories/portfolio_repository_inte
 class ControllerFactory {
   /// Private constructor to prevent instantiation
   ControllerFactory._();
-  
+
   /// Initialize all controllers
   static void initializeControllers() {
     final repository = Get.find<PortfolioRepositoryInterface>();
-    
+
     // Register all controllers with GetX dependency injection
     // Using cascade notation for cleaner code
     Get
@@ -38,11 +38,11 @@ class ControllerFactory {
         permanent: true,
       )
       ..put<ThemeController>(ThemeController(), permanent: true);
-    
+
     // Initialize all controllers
     _initializeAllControllers();
   }
-  
+
   /// Initialize all registered controllers
   static void _initializeAllControllers() {
     // Initialize each controller individually
@@ -57,7 +57,7 @@ class ControllerFactory {
       debugPrint('Error initializing controllers: $e');
     }
   }
-  
+
   /// Clean up all controllers
   static void cleanupControllers() {
     // Clean up each controller individually
