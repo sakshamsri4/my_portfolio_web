@@ -241,3 +241,37 @@ RULE: Every action taken must be recorded in this file with a timestamp for futu
   - Improved text overflow handling with multi-line support
   - Enhanced visual appearance with subtle shadows and gradients
   - Ensured consistent spacing and alignment across all screen sizes
+
+## [2024-08-02]
+- Fixed profile picture display issues across different screen sizes:
+  - Replaced CircleAvatar with ClipOval and Image.asset for better control
+  - Added responsive sizing based on screen width
+  - Implemented BoxFit.cover to ensure the image is properly centered
+  - Created consistent circular framing with proper aspect ratio
+  - Maintained the same visual appearance with border and shadow effects
+  - Added custom alignment to center the face in both mobile and desktop views
+  - Fixed the issue where only part of the face was visible in desktop view
+
+## [2024-08-03]
+- Redesigned hero section with CRED-inspired NeoPOP design:
+  - Implemented NeoPOP design principles with offset shadows and 3D effects
+  - Created custom profile image container with layered elements and accent details
+  - Redesigned role badge with bold typography and shadow effects
+  - Added name with CRED-style bold typography and reduced letter spacing
+  - Created custom social media buttons with NeoPOP shadow effects
+  - Redesigned CTA buttons with offset shadows and improved visual hierarchy
+  - Updated scroll indicator with NeoPOP styling and uppercase typography
+  - Enhanced overall visual appeal with consistent design language
+
+## [2024-08-04]
+- Redesigned Featured Projects section with CRED-inspired card style:
+  - Created responsive layouts with 3-column grid for desktop and snap-scroll for mobile
+  - Implemented deep-navy gradient cards with 20px radius and inset white stroke
+  - Added hover effects that lift cards and brighten background
+  - Designed centered logo chips for each project
+  - Updated typography following CRED style guidelines
+  - Added ghost CTA buttons with sliding arrow animation on hover
+  - Implemented 6px minimalist carousel dots for navigation
+  - Added parallax gradient shift effect on cards
+  - Increased section top padding to 128px with thin purple underline under heading
+  - Enhanced visual hierarchy and readability across all screen sizes

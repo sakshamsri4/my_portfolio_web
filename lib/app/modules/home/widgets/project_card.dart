@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_portfolio_web/app/modules/home/controllers/home_controller.dart';
@@ -5,7 +6,7 @@ import 'package:my_portfolio_web/app/modules/home/controllers/home_controller.da
 // A cache for project images to avoid rebuilding them
 final Map<String, Image> _imageCache = <String, Image>{};
 
-class ProjectCard extends StatelessWidget {
+class ProjectCard extends StatefulWidget {
   const ProjectCard({
     required this.title,
     required this.description,
@@ -17,6 +18,21 @@ class ProjectCard extends StatelessWidget {
   final String description;
   final String imageUrl;
   final String externalUrl;
+
+  @override
+  State<ProjectCard> createState() => _ProjectCardState();
+}
+
+class _ProjectCardState extends State<ProjectCard>
+    with SingleTickerProviderStateMixin {
+  // Animation controller for hover effects
+  late AnimationController _controller;
+  late Animation<double> _elevationAnimation;
+  late Animation<double> _brightnessAnimation;
+  late Animation<double> _arrowSlideAnimation;
+
+  // Parallax effect values
+  double _parallaxOffset = 0;
 
   // Get cached image or create a new one
   Widget _getCachedImage(
@@ -46,129 +62,281 @@ class ProjectCard extends StatelessWidget {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
+
+    _elevationAnimation = Tween<double>(
+      begin: 0,
+      end: 4,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeOutCubic,
+      ),
+    );
+
+    _brightnessAnimation = Tween<double>(
+      begin: 0,
+      end: 0.04, // 4% brighter on hover
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeOutCubic,
+      ),
+    );
+
+    _arrowSlideAnimation = Tween<double>(
+      begin: 0,
+      end: 8,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeOutCubic,
+      ),
+    );
+
+    // Generate a random offset for parallax effect
+    _parallaxOffset = (math.Random().nextDouble() * 0.1) - 0.05;
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      shadowColor: Theme.of(context).colorScheme.primary.withAlpha(40),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Project image with gradient overlay
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
+    // CRED-inspired deep navy gradient colors
+    const gradientStart = Color(0xFF1A1F35);
+    const gradientEnd = Color(0xFF101528);
+    final accentColor = Theme.of(context).colorScheme.primary;
+
+    return MouseRegion(
+      onEnter: (_) => _controller.forward(),
+      onExit: (_) => _controller.reverse(),
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) {
+          return Transform.translate(
+            offset: Offset(0, -_elevationAnimation.value),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  // Dark shadow
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.3),
+                    blurRadius: 8 + (_elevationAnimation.value * 2),
+                    spreadRadius: 2 + _elevationAnimation.value,
+                    offset: Offset(0, 4 + _elevationAnimation.value),
+                  ),
+                  // Purple glow
+                  BoxShadow(
+                    color: accentColor
+                        .withOpacity(0.2 + (_brightnessAnimation.value * 0.1)),
+                    blurRadius: 12 + (_elevationAnimation.value * 3),
+                    spreadRadius: -2,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  stops: const [0.0, 1.0],
+                  colors: [
+                    Color.lerp(
+                      gradientStart,
+                      Colors.white,
+                      _brightnessAnimation.value,
+                    )!,
+                    Color.lerp(
+                      gradientEnd,
+                      Colors.white,
+                      _brightnessAnimation.value,
+                    )!,
+                  ],
+                  transform: GradientRotation(
+                    _parallaxOffset + (_brightnessAnimation.value * 0.1),
+                  ),
                 ),
-                child: _getCachedImage(
-                  imageUrl,
-                  height: 160,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  // Handle missing images
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      height: 160,
-                      color:
-                          Theme.of(context).colorScheme.primary.withAlpha(25),
-                      child: Center(
-                        child: Icon(
-                          Icons.image,
-                          size: 50,
-                          color: Theme.of(context).colorScheme.primary,
+                border: Border.all(
+                  color:
+                      Colors.white.withOpacity(0.1), // 10% white inset stroke
+                ),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Logo/Icon centered at the top
+                    Padding(
+                      padding: const EdgeInsets.only(top: 32),
+                      child: _buildProjectLogo(widget.imageUrl),
+                    ),
+
+                    // Project title
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(24, 24, 24, 8),
+                      child: Text(
+                        widget.title,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white.withOpacity(0.87),
+                          letterSpacing: -0.2,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                    ),
+
+                    // Description
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: Text(
+                        widget.description,
+                        textAlign: TextAlign.center,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.white60,
+                          height: 1.4,
+                          letterSpacing: 0.1,
                         ),
                       ),
-                    );
-                  },
-                ),
-              ),
-              // Gradient overlay for better text visibility
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.transparent,
-                        Colors.black.withAlpha(150),
-                      ],
                     ),
-                  ),
-                ),
-              ),
-              // Project title on the image
-              Positioned(
-                bottom: 12,
-                left: 16,
-                right: 16,
-                child: Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    shadows: [
-                      Shadow(
-                        offset: Offset(0, 1),
-                        blurRadius: 3,
-                        color: Color(0x99000000),
+
+                    // Technology chips
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
+                      child: Wrap(
+                        alignment: WrapAlignment.center,
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: _buildTechChips(),
                       ),
-                    ],
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
-          // Project details
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Description
-                SizedBox(
-                  height: 60, // Fixed height for description
-                  child: Text(
-                    description,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurface
-                          .withAlpha(220),
-                      height: 1.4,
                     ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                // Action button
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    OutlinedButton.icon(
-                      icon: const Icon(Icons.open_in_new, size: 16),
-                      label: const Text('View Project'),
-                      onPressed: () => Get.find<HomeController>()
-                          .launchProjectUrl(externalUrl),
+
+                    const Spacer(),
+
+                    // Ghost CTA button
+                    Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: InkWell(
+                        onTap: () => Get.find<HomeController>()
+                            .launchProjectUrl(widget.externalUrl),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: const BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Colors.white30,
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Text(
+                                'View Project',
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                              SizedBox(width: 8 + _arrowSlideAnimation.value),
+                              const Icon(
+                                Icons.arrow_forward,
+                                color: Colors.white70,
+                                size: 16,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
-              ],
+              ),
             ),
+          );
+        },
+      ),
+    );
+  }
+
+  // Build project logo/icon
+  Widget _buildProjectLogo(String imageUrl) {
+    final accentColor = Theme.of(context).colorScheme.primary;
+
+    return Container(
+      width: 56,
+      height: 56,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.white10,
+        boxShadow: [
+          BoxShadow(
+            color: accentColor.withOpacity(0.2),
+            blurRadius: 8,
           ),
         ],
       ),
+      child: ClipOval(
+        child: _getCachedImage(
+          imageUrl,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) {
+            // Extract first letter of project title for fallback
+            final firstLetter = widget.title.isNotEmpty ? widget.title[0] : 'P';
+            return Center(
+              child: Text(
+                firstLetter,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
     );
+  }
+
+  // Build technology chips
+  List<Widget> _buildTechChips() {
+    // Extract tech keywords from description
+    final keywords = ['Flutter', 'Firebase', 'GetX', 'Mobile', 'Web'];
+
+    return keywords.take(3).map((tech) {
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text(
+          tech,
+          style: const TextStyle(
+            color: Colors.white70,
+            fontSize: 10,
+            fontWeight: FontWeight.w500,
+            letterSpacing: 0.5,
+          ),
+        ),
+      );
+    }).toList();
   }
 }

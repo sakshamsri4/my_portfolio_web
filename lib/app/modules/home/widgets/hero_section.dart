@@ -176,61 +176,173 @@ class HeroSection extends StatelessWidget {
     );
   }
 
-  // Profile image with animated border
+  // Profile image with CRED-inspired NeoPOP design
   Widget _buildProfileImage(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(
-          color: Theme.of(context).colorScheme.primary,
-          width: 2,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Theme.of(context).colorScheme.primary.withAlpha(60),
-            blurRadius: 20,
-            spreadRadius: 2,
+    // Determine if we're in mobile or desktop view
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
+
+    // Adjust radius based on screen size
+    final radius = isMobile ? 80.0 : 100.0;
+    final primaryColor = Theme.of(context).colorScheme.primary;
+
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        // Background shape with offset for NeoPOP effect
+        Container(
+          width: radius * 2 + 16,
+          height: radius * 2 + 16,
+          decoration: const BoxDecoration(
+            color: Colors.black,
+            shape: BoxShape.circle,
           ),
-        ],
-      ),
-      child: const CircleAvatar(
-        radius: 80,
-        backgroundColor: Color(0xFF675AF2),
-        backgroundImage: AssetImage('assets/images/myself.jpeg'),
-      ),
+          margin: const EdgeInsets.only(left: 8, top: 8),
+        ),
+
+        // Main container with shadow
+        Container(
+          width: radius * 2 + 12,
+          height: radius * 2 + 12,
+          decoration: BoxDecoration(
+            color: primaryColor,
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: primaryColor.withAlpha(60),
+                blurRadius: 20,
+                spreadRadius: 2,
+              ),
+            ],
+          ),
+        ),
+
+        // Image container
+        ClipOval(
+          child: Container(
+            width: radius * 2,
+            height: radius * 2,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/myself.jpeg'),
+                fit: BoxFit.cover,
+                alignment: Alignment(0, -0.5), // Center on face
+              ),
+            ),
+            // Add subtle inner border
+            foregroundDecoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Colors.white.withOpacity(0.3),
+                width: 2,
+              ),
+            ),
+          ),
+        ),
+
+        // Accent element - small circle at bottom right
+        Positioned(
+          bottom: 0,
+          right: 0,
+          child: Container(
+            width: radius * 0.4,
+            height: radius * 0.4,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: primaryColor,
+                width: 2,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
-  // Introduction text with role and brief description
+  // Introduction text with CRED-inspired NeoPOP design
   Widget _buildIntroduction(BuildContext context) {
+    final primaryColor = Theme.of(context).colorScheme.primary;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Role with accent color
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primary.withAlpha(20),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Text(
-            'Senior Flutter Developer',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.w600,
+        // Role with NeoPOP style
+        Stack(
+          clipBehavior: Clip.none,
+          children: [
+            // Shadow container with offset
+            Positioned(
+              left: 4,
+              top: 4,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(4),
                 ),
+                child: Text(
+                  'Senior Flutter Developer',
+                  style: TextStyle(
+                    color: Colors.transparent,
+                    fontSize: isMobile ? 18 : 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            // Main container
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              decoration: BoxDecoration(
+                color: primaryColor,
+                borderRadius: BorderRadius.circular(4),
+                boxShadow: [
+                  BoxShadow(
+                    color: primaryColor.withAlpha(40),
+                    blurRadius: 10,
+                    spreadRadius: 1,
+                  ),
+                ],
+              ),
+              child: Text(
+                'Senior Flutter Developer',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: isMobile ? 18 : 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 32),
+        // Name with bold typography
+        Text(
+          'Saksham Srivastava',
+          style: TextStyle(
+            fontSize: isMobile ? 32 : 48,
+            fontWeight: FontWeight.w800,
+            letterSpacing: -1,
+            height: 0.9,
+            color: Colors.black87,
           ),
         ),
-        const SizedBox(height: 24),
-        // Brief introduction that shows personality
+        const SizedBox(height: 16),
+        // Brief introduction with CRED-style typography
         SizedBox(
-          height: 80, // Fixed height to prevent layout shifts
+          height: 100, // Increased height for better readability
           child: DefaultTextStyle(
             style: TextStyle(
-              fontSize: 16,
-              height: 1.6,
-              color: Theme.of(context).colorScheme.onSurface.withAlpha(204),
+              fontSize: isMobile ? 16 : 18,
+              height: 1.4,
+              letterSpacing: 0.2,
+              fontWeight: FontWeight.w500,
+              color: Colors.black54,
             ),
             child: AnimatedTextKit(
               animatedTexts: [
@@ -258,31 +370,27 @@ class HeroSection extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 24),
-        // Social links with improved visual appearance
+        const SizedBox(height: 32),
+        // Social links with NeoPOP style
         Row(
           children: [
-            IconButton(
-              icon: const Icon(Icons.link),
-              tooltip: 'LinkedIn',
+            // LinkedIn button with NeoPOP effect
+            _buildNeoPOPButton(
+              context: context,
+              icon: Icons.link,
+              color: Colors.blue.shade700,
               onPressed: () => controller.launchProjectUrl(
                 'https://linkedin.com/in/sakshamsri/',
               ),
-              style: IconButton.styleFrom(
-                backgroundColor: Colors.blue.withAlpha(25),
-                foregroundColor: Colors.blue,
-              ),
             ),
-            const SizedBox(width: 16),
-            IconButton(
-              icon: const Icon(Icons.code),
-              tooltip: 'GitHub',
+            const SizedBox(width: 20),
+            // GitHub button with NeoPOP effect
+            _buildNeoPOPButton(
+              context: context,
+              icon: Icons.code,
+              color: Colors.black,
               onPressed: () => controller.launchProjectUrl(
                 'https://github.com/sakshamsri4',
-              ),
-              style: IconButton.styleFrom(
-                backgroundColor: Colors.black.withAlpha(25),
-                foregroundColor: Colors.black87,
               ),
             ),
           ],
@@ -291,53 +399,225 @@ class HeroSection extends StatelessWidget {
     );
   }
 
-  // Call to action buttons with improved design
+  // Helper method to create NeoPOP style buttons
+  Widget _buildNeoPOPButton({
+    required BuildContext context,
+    required IconData icon,
+    required Color color,
+    required VoidCallback onPressed,
+  }) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          // Shadow container with offset
+          Positioned(
+            left: 3,
+            top: 3,
+            child: Container(
+              width: 44,
+              height: 44,
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(4),
+              ),
+            ),
+          ),
+          // Main container
+          Container(
+            width: 44,
+            height: 44,
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Icon(
+              icon,
+              color: Colors.white,
+              size: 22,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Call to action buttons with CRED-inspired NeoPOP design
   Widget _buildCallToAction(BuildContext context) {
     return Wrap(
       spacing: 20,
       runSpacing: 20,
       alignment: WrapAlignment.center,
       children: [
-        ElevatedButton.icon(
+        // Primary CTA with NeoPOP effect
+        _buildNeoPOPCTA(
+          context: context,
+          label: "Let's Work Together",
+          icon: Icons.email,
+          isPrimary: true,
           onPressed: controller.launchEmail,
-          icon: const Icon(Icons.email),
-          label: const Text("Let's Work Together"),
-          style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-            textStyle:
-                const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
         ),
-        OutlinedButton.icon(
+        // Secondary CTA with NeoPOP effect
+        _buildNeoPOPCTA(
+          context: context,
+          label: 'Download CV',
+          icon: Icons.download,
+          isPrimary: false,
           onPressed: controller.downloadCV,
-          icon: const Icon(Icons.download),
-          label: const Text('Download CV'),
-          style: OutlinedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-            textStyle:
-                const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
         ),
       ],
     );
   }
 
-  // Scroll indicator that suggests there's more content below
+  // Helper method to create NeoPOP style CTA buttons
+  Widget _buildNeoPOPCTA({
+    required BuildContext context,
+    required String label,
+    required IconData icon,
+    required bool isPrimary,
+    required VoidCallback onPressed,
+  }) {
+    final primaryColor = Theme.of(context).colorScheme.primary;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
+
+    return GestureDetector(
+      onTap: onPressed,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          // Shadow container with offset
+          Positioned(
+            left: 4,
+            top: 4,
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: isMobile ? 20 : 28,
+                vertical: isMobile ? 12 : 16,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    icon,
+                    color: Colors.transparent,
+                    size: isMobile ? 18 : 20,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    label,
+                    style: TextStyle(
+                      color: Colors.transparent,
+                      fontSize: isMobile ? 14 : 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // Main container
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: isMobile ? 20 : 28,
+              vertical: isMobile ? 12 : 16,
+            ),
+            decoration: BoxDecoration(
+              color: isPrimary ? primaryColor : Colors.white,
+              borderRadius: BorderRadius.circular(4),
+              border:
+                  isPrimary ? null : Border.all(color: primaryColor, width: 2),
+              boxShadow: isPrimary
+                  ? [
+                      BoxShadow(
+                        color: primaryColor.withAlpha(40),
+                        blurRadius: 8,
+                        spreadRadius: 1,
+                      ),
+                    ]
+                  : null,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  icon,
+                  color: isPrimary ? Colors.white : primaryColor,
+                  size: isMobile ? 18 : 20,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  label,
+                  style: TextStyle(
+                    color: isPrimary ? Colors.white : primaryColor,
+                    fontSize: isMobile ? 14 : 16,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Scroll indicator with CRED-inspired NeoPOP design
   Widget _buildScrollIndicator(BuildContext context) {
+    final primaryColor = Theme.of(context).colorScheme.primary;
+
     return Column(
       children: [
-        Text(
-          'Scroll to explore',
+        // Text with CRED-style typography
+        const Text(
+          'SCROLL TO EXPLORE',
           style: TextStyle(
-            fontSize: 14,
-            color: Theme.of(context).colorScheme.onSurface.withAlpha(153),
+            fontSize: 12,
+            letterSpacing: 1.5,
+            fontWeight: FontWeight.w600,
+            color: Colors.black54,
           ),
         ),
-        const SizedBox(height: 8),
-        Icon(
-          Icons.keyboard_arrow_down,
-          color: Theme.of(context).colorScheme.primary,
-          size: 28,
+        const SizedBox(height: 12),
+        // Arrow with NeoPOP effect
+        Stack(
+          clipBehavior: Clip.none,
+          alignment: Alignment.center,
+          children: [
+            // Shadow container with offset
+            Positioned(
+              left: 3,
+              top: 3,
+              child: Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+            ),
+            // Main container
+            Container(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                color: primaryColor,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: const Icon(
+                Icons.keyboard_arrow_down,
+                color: Colors.white,
+                size: 24,
+              ),
+            ),
+          ],
         ),
       ],
     );

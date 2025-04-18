@@ -12,23 +12,20 @@ class ContactSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      // Column is centered by default
       children: [
-        // Section header with divider
-        Row(
-          children: [
-            Text(
-              "Let's Connect",
-              style: Theme.of(context).textTheme.displaySmall,
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Divider(
-                color: Theme.of(context).colorScheme.primary.withAlpha(100),
-                thickness: 1,
-              ),
-            ),
-          ],
+        // Centered section header
+        Text(
+          "Let's Connect",
+          style: Theme.of(context).textTheme.displaySmall,
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 8),
+        // Centered divider
+        Container(
+          width: 80,
+          height: 2,
+          color: Theme.of(context).colorScheme.primary,
         ),
         const SizedBox(height: 24),
 
@@ -36,14 +33,14 @@ class ContactSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 24),
           child: Text(
-            "Have a project in mind or just want to say hello? I'd love\n"
-            "to hear from you! Let's discuss how we can work together to\n"
-            'bring your ideas to life.',
+            "Have a project in mind or just want to say hello? I'd love to hear from you! "
+            "Let's discuss how we can work together to bring your ideas to life.",
             style: TextStyle(
               fontSize: 16,
               height: 1.5,
-              color: Theme.of(context).colorScheme.onSurface.withAlpha(230),
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.9),
             ),
+            textAlign: TextAlign.center,
           ),
         ),
 
