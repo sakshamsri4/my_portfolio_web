@@ -351,5 +351,23 @@ RULE: Every action taken must be recorded in this file with a timestamp for futu
 - Fixed linting issues throughout the app:
   - Fixed type inference issues in Get.back() and Get.toNamed() calls in contact_view.dart
   - Added explicit type arguments (<void>) to navigation methods
-  - Removed unnecessary overrides in ContactControllerC
+  - Removed unnecessary overrides in ContactController
   - Updated TODO comment format to follow Flutter style guidelines
+
+## [2024-08-09]
+- Deployed portfolio website to Firebase Hosting:
+  - Fixed index.html bootstrap script issue
+  - Installed Firebase CLI tools
+  - Initialized Firebase project with Hosting configuration
+  - Built Flutter web app for production using the production target
+  - Deployed to Firebase hosting
+  - Website now live at https://saksham-portfolio-ba828.web.app
+
+## [2024-08-10]
+- Set up continuous deployment with GitHub Actions:
+  - Checked local Git repository status and confirmed GitHub repository connection
+  - Generated Firebase CI token for GitHub Actions authentication
+  - Created GitHub Actions workflow file (.github/workflows/firebase-hosting-deploy.yml)
+  - Configured workflow to build Flutter web app and deploy to Firebase Hosting on push to main branch
+  - Added Firebase token as GitHub secret for secure authentication
+  - Ready to commit and push workflow file to activate continuous deployment
