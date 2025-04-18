@@ -44,66 +44,37 @@ class ContactSection extends StatelessWidget {
           ),
         ),
 
-        // Contact cards
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Theme.of(context).colorScheme.primary.withAlpha(15),
-                Theme.of(context).scaffoldBackgroundColor,
+        // Modern contact buttons
+        Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: Column(
+              children: [
+                // Contact buttons row
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Say Hello (Email) button
+                    _buildContactButton(
+                      context,
+                      icon: Icons.email_outlined,
+                      label: 'Say Hello',
+                      onTap: controller.launchEmail,
+                      isPrimary: true,
+                    ),
+                    const SizedBox(width: 16),
+                    // WhatsApp button
+                    _buildContactButton(
+                      context,
+                      icon: FontAwesomeIcons.whatsapp,
+                      label: 'WhatsApp',
+                      onTap: controller.launchWhatsApp,
+                      color: const Color(0xFF25D366),
+                    ),
+                  ],
+                ),
               ],
             ),
-            border: Border.all(
-              color: Theme.of(context).colorScheme.primary.withAlpha(30),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Theme.of(context).colorScheme.primary.withAlpha(10),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Column(
-            children: [
-              // Email contact card
-              _buildContactCard(
-                context,
-                icon: Icons.email,
-                title: 'Email',
-                content: controller.contactInfo['email']!,
-                onCopy: () => controller.copyToClipboard(
-                  controller.contactInfo['email']!,
-                ),
-                onTap: controller.launchEmail,
-                isFirst: true,
-              ),
-
-              // Phone contact card
-              _buildContactCard(
-                context,
-                icon: Icons.phone,
-                title: 'Phone',
-                content: controller.contactInfo['phone']!,
-                onCopy: () => controller.copyToClipboard(
-                  controller.contactInfo['phone']!,
-                ),
-                onTap: controller.launchWhatsApp,
-              ),
-
-              // Location contact card
-              _buildContactCard(
-                context,
-                icon: Icons.location_on,
-                title: 'Location',
-                content: controller.contactInfo['location']!,
-                showCopy: false,
-                isLast: true,
-              ),
-            ],
           ),
         ),
 
@@ -145,135 +116,57 @@ class ContactSection extends StatelessWidget {
     );
   }
 
-  Widget _buildContactCard(
+  Widget _buildContactButton(
     BuildContext context, {
     required IconData icon,
-    required String title,
-    required String content,
-    VoidCallback? onCopy,
-    VoidCallback? onTap,
-    bool showCopy = true,
-    bool isFirst = false,
-    bool isLast = false,
+    required String label,
+    required VoidCallback onTap,
+    Color? color,
+    bool isPrimary = false,
   }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.vertical(
-          top: isFirst ? const Radius.circular(16) : Radius.zero,
-          bottom: isLast ? const Radius.circular(16) : Radius.zero,
-        ),
-        color: isFirst
-            ? Theme.of(context).colorScheme.primary.withAlpha(10)
-            : null,
-      ),
-      child: Row(
-        children: [
-          // Icon with background
-          Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary.withAlpha(20),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              icon,
-              color: Theme.of(context).colorScheme.primary,
-              size: 24,
-            ),
-          ),
-          const SizedBox(width: 16),
-          // Content
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color:
-                        Theme.of(context).colorScheme.onSurface.withAlpha(180),
-                  ),
-                ),
-                const SizedBox(height: 4),
-                InkWell(
-                  onTap: onTap,
-                  borderRadius: BorderRadius.circular(4),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 2),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          content,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Theme.of(context).colorScheme.primary,
-                            decoration:
-                                onTap != null ? TextDecoration.underline : null,
-                            decorationColor: Theme.of(context)
-                                .colorScheme
-                                .primary
-                                .withAlpha(150),
-                            decorationThickness: 1.2,
-                          ),
-                        ),
-                        if (onTap != null) ...[
-                          const SizedBox(width: 4),
-                          if (title == 'Phone')
-                            const FaIcon(
-                              FontAwesomeIcons.whatsapp,
-                              size: 14,
-                              color: Color(0xFF25D366),
-                            )
-                          else
-                            Icon(
-                              title == 'Email'
-                                  ? Icons.email_outlined
-                                  : Icons.open_in_new,
-                              size: 14,
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
-                        ],
-                      ],
+    final theme = Theme.of(context);
+    final buttonColor = color ?? theme.colorScheme.primary;
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: isPrimary ? buttonColor : buttonColor.withAlpha(25),
+            boxShadow: isPrimary
+                ? [
+                    BoxShadow(
+                      color: buttonColor.withAlpha(75),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
                     ),
-                  ),
-                ),
-              ],
-            ),
+                  ]
+                : null,
           ),
-          // Action buttons
-          Row(
+          child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // WhatsApp button for phone
-              if (title == 'Phone')
-                IconButton(
-                  icon: const FaIcon(FontAwesomeIcons.whatsapp, size: 18),
-                  tooltip: 'Open in WhatsApp',
-                  onPressed: onTap,
-                  style: IconButton.styleFrom(
-                    backgroundColor: const Color(0xFF25D366).withAlpha(30),
-                    foregroundColor: const Color(0xFF25D366),
-                  ),
+              FaIcon(
+                icon,
+                size: 18,
+                color: isPrimary ? Colors.white : buttonColor,
+              ),
+              const SizedBox(width: 12),
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: isPrimary ? Colors.white : buttonColor,
                 ),
-              // Copy button
-              if (showCopy && onCopy != null)
-                IconButton(
-                  icon: const Icon(Icons.copy, size: 20),
-                  tooltip: 'Copy to clipboard',
-                  onPressed: onCopy,
-                  style: IconButton.styleFrom(
-                    backgroundColor:
-                        Theme.of(context).colorScheme.primary.withAlpha(10),
-                  ),
-                ),
+              ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
