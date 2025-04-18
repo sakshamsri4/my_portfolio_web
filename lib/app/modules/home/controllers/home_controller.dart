@@ -152,8 +152,8 @@ class HomeController extends GetxController {
           'A cross-platform healthcare app for Zuellig Pharma using Flutter, enabling online consultations, vaccination bookings, lab scheduling, and personal health record management.',
       'image': 'assets/images/project5.jpg',
       'tileImage': 'assets/tile_images/ezHealth.webp',
-      'url':
-          'https://play.google.com/store/apps/details?id=com.zuelligpharma.ezhealth',
+      'url': 'https://play.google.com/store/apps/details?id='
+          'com.zuelligpharma.ezhealth',
     },
     {
       'title': 'eZTrade App',
@@ -161,8 +161,8 @@ class HomeController extends GetxController {
           'A cross-platform app for medical representatives using Flutter, GoLang, and C++, featuring real-time product status, activity management, and progress tracking tools.',
       'image': 'assets/images/project6.jpg',
       'tileImage': 'assets/tile_images/ezTrade.webp',
-      'url':
-          'https://play.google.com/store/apps/details?id=com.zuelligpharma.eztrade',
+      'url': 'https://play.google.com/store/apps/details?id='
+          'com.zuelligpharma.eztrade',
     },
     {
       'title': 'Covid-19 App',
@@ -241,7 +241,15 @@ class HomeController extends GetxController {
 
   // Professional summary
   final professionalSummary =
-      'Experienced Mobile Application Developer with 6+ years in designing and deploying scalable, user-focused applications. Proficient in Flutter SDK for cross-platform development, Firebase (Firestore, Authentication, Realtime Database), and advanced UI/UX principles including Material Design and responsive layouts. Adept at integrating REST APIs, implementing BLoC architecture for state management, and delivering high-performance solutions with CI/CD pipelines. Enthusiastic about leveraging innovative technologies to drive efficiency and enhance user experiences.';
+      'Experienced Mobile Application Developer with 6+ years in designing '
+      'and deploying scalable, user-focused applications. Proficient in '
+      'Flutter SDK for cross-platform development, Firebase (Firestore, '
+      'Authentication, Realtime Database), and advanced UI/UX principles '
+      'including Material Design and responsive layouts. Adept at integrating '
+      'REST APIs, implementing BLoC architecture for state management, and '
+      'delivering high-performance solutions with CI/CD pipelines. '
+      'Enthusiastic about leveraging innovative technologies to drive '
+      'efficiency and enhance user experiences.';
 
   // Scroll to section
   void scrollToSection(String section) {

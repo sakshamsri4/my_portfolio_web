@@ -5,7 +5,7 @@ import 'package:my_portfolio_web/app/common/styles/app_animations.dart';
 class AnimationService {
   /// Private constructor to prevent instantiation
   AnimationService._();
-  
+
   /// Create a standard hover animation controller
   static AnimationController createHoverController(TickerProvider vsync) {
     return AnimationController(
@@ -13,7 +13,7 @@ class AnimationService {
       vsync: vsync,
     );
   }
-  
+
   /// Create a standard animation controller with custom duration
   static AnimationController createController(
     TickerProvider vsync, {
@@ -24,7 +24,7 @@ class AnimationService {
       vsync: vsync,
     );
   }
-  
+
   /// Create a hover animation set for cards
   static HoverAnimationSet createCardHoverAnimations(
     AnimationController controller, {
@@ -40,12 +40,11 @@ class AnimationService {
       brightness: AppAnimations.createBrightnessAnimation(controller),
       scale: AppAnimations.createScaleAnimation(
         controller,
-        begin: 1.0,
         end: 1.03,
       ),
     );
   }
-  
+
   /// Create a hover animation set for buttons
   static HoverAnimationSet createButtonHoverAnimations(
     AnimationController controller,
@@ -53,22 +52,19 @@ class AnimationService {
     return HoverAnimationSet(
       elevation: AppAnimations.createElevationAnimation(
         controller,
-        begin: 0,
         end: 4,
       ),
       brightness: AppAnimations.createBrightnessAnimation(
         controller,
-        begin: 0,
         end: 0.2,
       ),
       scale: AppAnimations.createScaleAnimation(
         controller,
-        begin: 1.0,
         end: 1.05,
       ),
     );
   }
-  
+
   /// Create a hover animation set for icons
   static HoverAnimationSet createIconHoverAnimations(
     AnimationController controller,
@@ -76,29 +72,26 @@ class AnimationService {
     return HoverAnimationSet(
       elevation: AppAnimations.createElevationAnimation(
         controller,
-        begin: 0,
         end: 2,
       ),
       brightness: AppAnimations.createBrightnessAnimation(
         controller,
-        begin: 0,
         end: 0.3,
       ),
       scale: AppAnimations.createScaleAnimation(
         controller,
-        begin: 1.0,
         end: 1.2,
       ),
     );
   }
-  
+
   /// Create a staggered animation group
   static StaggeredAnimationGroup createStaggeredAnimations(
     AnimationController controller,
     List<StaggeredAnimationConfig> configs,
   ) {
     final animations = <Animation<double>>[];
-    
+
     for (final config in configs) {
       animations.add(
         Tween<double>(
@@ -116,10 +109,10 @@ class AnimationService {
         ),
       );
     }
-    
+
     return StaggeredAnimationGroup(animations);
   }
-  
+
   /// Create a scroll-triggered animation
   static ScrollTriggeredAnimation createScrollTriggeredAnimation(
     AnimationController controller, {
@@ -145,10 +138,10 @@ class HoverAnimationSet {
 
   /// Animation for elevation change
   final Animation<double> elevation;
-  
+
   /// Animation for brightness change
   final Animation<double> brightness;
-  
+
   /// Animation for scale change
   final Animation<double> scale;
 }
@@ -166,16 +159,16 @@ class StaggeredAnimationConfig {
 
   /// Starting value of the animation
   final double begin;
-  
+
   /// Ending value of the animation
   final double end;
-  
+
   /// Start interval (0.0 to 1.0)
   final double startInterval;
-  
+
   /// End interval (0.0 to 1.0)
   final double endInterval;
-  
+
   /// Optional curve for the animation
   final Curve? curve;
 }
@@ -187,10 +180,10 @@ class StaggeredAnimationGroup {
 
   /// List of animations in the group
   final List<Animation<double>> animations;
-  
+
   /// Get an animation by index
   Animation<double> operator [](int index) => animations[index];
-  
+
   /// Number of animations in the group
   int get length => animations.length;
 }
@@ -206,31 +199,30 @@ class ScrollTriggeredAnimation {
 
   /// The animation controller
   final AnimationController controller;
-  
+
   /// Offset at which the animation is triggered (0.0 to 1.0)
   final double triggerOffset;
-  
+
   /// Duration of the animation
   final Duration duration;
-  
+
   /// Check if the animation should be triggered based on scroll position
   bool shouldTrigger(ScrollNotification notification) {
     final scrollPosition = notification.metrics.pixels;
-    final viewportDimension = notification.metrics.viewportDimension;
     final maxScrollExtent = notification.metrics.maxScrollExtent;
-    
+
     // Calculate the scroll percentage (0.0 to 1.0)
     final scrollPercentage = scrollPosition / maxScrollExtent;
-    
+
     // Check if we've scrolled past the trigger point
     return scrollPercentage >= triggerOffset;
   }
-  
+
   /// Start the animation
   void start() {
     controller.forward();
   }
-  
+
   /// Reset the animation
   void reset() {
     controller.reset();

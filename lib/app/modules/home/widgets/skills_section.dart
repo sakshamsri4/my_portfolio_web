@@ -223,7 +223,6 @@ class SkillsSection extends StatelessWidget {
   // Technology icons with CRED-inspired design
   Widget _buildTechIcons(BuildContext context) {
     final primaryColor = Theme.of(context).colorScheme.primary;
-    final screenWidth = MediaQuery.of(context).size.width;
 
     // Define the tech stack with their respective icons
     final techStack = [

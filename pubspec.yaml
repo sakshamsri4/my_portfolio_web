@@ -7,14 +7,14 @@ environment:
   sdk: ^3.5.0
 
 dependencies:
+  animated_text_kit: ^4.2.2
   bloc: ^8.1.4
-  flutter_carousel_widget: ^2.2.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
+  flutter_carousel_widget: ^2.2.0
   flutter_localizations:
     sdk: flutter
-  animated_text_kit: ^4.2.2
   font_awesome_flutter: ^10.7.0
   get: ^4.6.6
   google_fonts: ^6.1.0

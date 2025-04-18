@@ -33,8 +33,9 @@ class ContactSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 24),
           child: Text(
-            "Have a project in mind or just want to say hello? I'd love to hear from you! "
-            "Let's discuss how we can work together to bring your ideas to life.",
+            "Have a project in mind or just want to say hello? I'd love to "
+            "hear from you! Let's discuss how we can work together to bring "
+            'your ideas to life.',
             style: TextStyle(
               fontSize: 16,
               height: 1.5,

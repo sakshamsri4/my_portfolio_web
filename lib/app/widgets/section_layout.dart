@@ -18,6 +18,61 @@ class SectionLayout extends StatelessWidget {
     super.key,
   });
 
+  /// Creates an about section
+  const SectionLayout.about({
+    required this.content,
+    this.sectionKey,
+    super.key,
+  })  : title = AppStrings.aboutMeTitle,
+        subtitle = AppStrings.aboutMeSubtitle,
+        backgroundColor = null,
+        headerAlignment = CrossAxisAlignment.start,
+        contentPadding = null;
+
+  /// Creates a skills section
+  const SectionLayout.skills({
+    required this.content,
+    this.sectionKey,
+    super.key,
+  })  : title = AppStrings.skillsTitle,
+        subtitle = AppStrings.skillsSubtitle,
+        backgroundColor = null,
+        headerAlignment = CrossAxisAlignment.start,
+        contentPadding = null;
+
+  /// Creates a projects section
+  const SectionLayout.projects({
+    required this.content,
+    this.sectionKey,
+    super.key,
+  })  : title = AppStrings.projectsTitle,
+        subtitle = AppStrings.projectsSubtitle,
+        backgroundColor = null,
+        headerAlignment = CrossAxisAlignment.start,
+        contentPadding = null;
+
+  /// Creates a career section
+  const SectionLayout.career({
+    required this.content,
+    this.sectionKey,
+    super.key,
+  })  : title = AppStrings.careerTitle,
+        subtitle = AppStrings.careerSubtitle,
+        backgroundColor = null,
+        headerAlignment = CrossAxisAlignment.start,
+        contentPadding = null;
+
+  /// Creates a contact section
+  const SectionLayout.contact({
+    required this.content,
+    this.sectionKey,
+    super.key,
+  })  : title = AppStrings.contactTitle,
+        subtitle = AppStrings.contactSubtitle,
+        backgroundColor = null,
+        headerAlignment = CrossAxisAlignment.center,
+        contentPadding = null;
+
   /// The title of the section
   final String title;
 
@@ -69,72 +124,6 @@ class SectionLayout extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  /// Create an about section
-  static SectionLayout about({
-    required Widget content,
-    Key? sectionKey,
-  }) {
-    return SectionLayout(
-      title: AppStrings.aboutMeTitle,
-      subtitle: AppStrings.aboutMeSubtitle,
-      content: content,
-      sectionKey: sectionKey,
-    );
-  }
-
-  /// Create a skills section
-  static SectionLayout skills({
-    required Widget content,
-    Key? sectionKey,
-  }) {
-    return SectionLayout(
-      title: AppStrings.skillsTitle,
-      subtitle: AppStrings.skillsSubtitle,
-      content: content,
-      sectionKey: sectionKey,
-    );
-  }
-
-  /// Create a projects section
-  static SectionLayout projects({
-    required Widget content,
-    Key? sectionKey,
-  }) {
-    return SectionLayout(
-      title: AppStrings.projectsTitle,
-      subtitle: AppStrings.projectsSubtitle,
-      content: content,
-      sectionKey: sectionKey,
-    );
-  }
-
-  /// Create a career section
-  static SectionLayout career({
-    required Widget content,
-    Key? sectionKey,
-  }) {
-    return SectionLayout(
-      title: AppStrings.careerTitle,
-      subtitle: AppStrings.careerSubtitle,
-      content: content,
-      sectionKey: sectionKey,
-    );
-  }
-
-  /// Create a contact section
-  static SectionLayout contact({
-    required Widget content,
-    Key? sectionKey,
-  }) {
-    return SectionLayout(
-      title: AppStrings.contactTitle,
-      subtitle: AppStrings.contactSubtitle,
-      content: content,
-      headerAlignment: CrossAxisAlignment.center,
-      sectionKey: sectionKey,
     );
   }
 }

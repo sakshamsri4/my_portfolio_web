@@ -22,7 +22,7 @@ RULE: Every action taken must be recorded in this file with a timestamp for futu
   - Projects module (controller, view, binding, route)
   - Contact module (controller, view, binding, route)
 - Routes automatically added to app_pages.dart and app_routes.dart
-- Implemented navigation between pages using Get.toNamed() method
+- Implemented navigation between pages using Get.toNamed<dynamic>() method
 - Added drawer and menu navigation in home view
 - Customized About page with education and experience sections
 - Customized Projects page with project cards
@@ -346,3 +346,10 @@ RULE: Every action taken must be recorded in this file with a timestamp for futu
   - Modified ProjectsSection to use the new glassmorphism cards for projects with tile images
   - Added hover animations with dynamic blur effect for better interactivity
   - Fixed deprecated withOpacity calls using withAlpha for better performance
+
+## [2024-08-08]
+- Fixed linting issues throughout the app:
+  - Fixed type inference issues in Get.back() and Get.toNamed() calls in contact_view.dart
+  - Added explicit type arguments (<void>) to navigation methods
+  - Removed unnecessary overrides in ContactControllerC
+  - Updated TODO comment format to follow Flutter style guidelines

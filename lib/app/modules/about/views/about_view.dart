@@ -80,17 +80,17 @@ class _NavigationButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         ElevatedButton.icon(
-          onPressed: () => Get.toNamed<void>(Routes.HOME),
+          onPressed: () => Get.toNamed<void>(Routes.home),
           icon: const Icon(Icons.home),
           label: const Text('Home'),
         ),
         ElevatedButton.icon(
-          onPressed: () => Get.toNamed<void>(Routes.PROJECTS),
+          onPressed: () => Get.toNamed<void>(Routes.projects),
           icon: const Icon(Icons.work),
           label: const Text('Projects'),
         ),
         ElevatedButton.icon(
-          onPressed: () => Get.toNamed<void>(Routes.CONTACT),
+          onPressed: () => Get.toNamed<void>(Routes.contact),
           icon: const Icon(Icons.email),
           label: const Text('Contact'),
         ),

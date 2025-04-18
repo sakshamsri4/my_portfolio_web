@@ -16,19 +16,19 @@ class AnimatedButton extends StatefulWidget {
 
   /// The label text for the button
   final String label;
-  
+
   /// Callback when button is pressed
   final VoidCallback onPressed;
-  
+
   /// Optional icon to display before the label
   final IconData? icon;
-  
+
   /// Style of the button
   final AnimatedButtonStyle style;
-  
+
   /// Optional fixed width for the button
   final double? width;
-  
+
   /// Height of the button
   final double height;
 
@@ -48,12 +48,10 @@ class _AnimatedButtonState extends State<AnimatedButton>
     _controller = AppAnimations.createHoverController(this);
     _scaleAnimation = AppAnimations.createScaleAnimation(
       _controller,
-      begin: 1.0,
       end: 1.03,
     );
     _elevationAnimation = AppAnimations.createElevationAnimation(
       _controller,
-      begin: 0,
       end: 4,
     );
   }
@@ -67,7 +65,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).colorScheme.primary;
-    
+
     return MouseRegion(
       onEnter: (_) => _controller.forward(),
       onExit: (_) => _controller.reverse(),
@@ -82,7 +80,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
       ),
     );
   }
-  
+
   Widget _buildButtonByStyle(Color primaryColor) {
     switch (widget.style) {
       case AnimatedButtonStyle.primary:
@@ -93,7 +91,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
         return _buildNeoPOPButton(primaryColor);
     }
   }
-  
+
   Widget _buildPrimaryButton(Color primaryColor) {
     return Material(
       color: Colors.transparent,
@@ -131,7 +129,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
       ),
     );
   }
-  
+
   Widget _buildGhostButton(Color primaryColor) {
     return Material(
       color: Colors.transparent,
@@ -174,7 +172,7 @@ class _AnimatedButtonState extends State<AnimatedButton>
       ),
     );
   }
-  
+
   Widget _buildNeoPOPButton(Color primaryColor) {
     return GestureDetector(
       onTap: widget.onPressed,
@@ -254,10 +252,10 @@ class _AnimatedButtonState extends State<AnimatedButton>
 enum AnimatedButtonStyle {
   /// Filled button with primary color
   primary,
-  
+
   /// Outlined button with transparent background
   ghost,
-  
+
   /// NeoPOP style button with shadow offset
   neoPOP,
 }

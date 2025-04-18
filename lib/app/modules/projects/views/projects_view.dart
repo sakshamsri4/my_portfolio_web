@@ -13,7 +13,7 @@ class ProjectsView extends GetView<ProjectsController> {
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: Get.back,
+          onPressed: () => Get.back<void>(),
         ),
       ),
       body: Padding(
@@ -51,17 +51,17 @@ class ProjectsView extends GetView<ProjectsController> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton.icon(
-                  onPressed: () => Get.toNamed(Routes.HOME),
+                  onPressed: () => Get.toNamed<void>(Routes.home),
                   icon: const Icon(Icons.home),
                   label: const Text('Home'),
                 ),
                 ElevatedButton.icon(
-                  onPressed: () => Get.toNamed(Routes.ABOUT),
+                  onPressed: () => Get.toNamed<void>(Routes.about),
                   icon: const Icon(Icons.person),
                   label: const Text('About'),
                 ),
                 ElevatedButton.icon(
-                  onPressed: () => Get.toNamed(Routes.CONTACT),
+                  onPressed: () => Get.toNamed<void>(Routes.contact),
                   icon: const Icon(Icons.email),
                   label: const Text('Contact'),
                 ),

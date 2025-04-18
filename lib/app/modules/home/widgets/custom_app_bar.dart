@@ -43,7 +43,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             icon: const Icon(Icons.menu),
             onPressed: () {
               // Show a simple menu
-              Get.dialog(
+              Get.dialog<void>(
                 AlertDialog(
                   title: const Text('Navigation'),
                   content: Column(
@@ -53,7 +53,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         icon: Icons.home,
                         title: 'Home',
                         onTap: () {
-                          Get.back(); // Close dialog
+                          Get.back<void>(); // Close dialog
                           homeController.scrollToSection('home');
                         },
                       ),
@@ -61,7 +61,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         icon: Icons.person,
                         title: 'About',
                         onTap: () {
-                          Get.back(); // Close dialog
+                          Get.back<void>(); // Close dialog
                           homeController.scrollToSection('about');
                         },
                       ),
@@ -69,7 +69,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         icon: Icons.school,
                         title: 'Education',
                         onTap: () {
-                          Get.back(); // Close dialog
+                          Get.back<void>(); // Close dialog
                           homeController.scrollToSection('education');
                         },
                       ),
@@ -77,7 +77,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         icon: Icons.code,
                         title: 'Skills',
                         onTap: () {
-                          Get.back(); // Close dialog
+                          Get.back<void>(); // Close dialog
                           homeController.scrollToSection('skills');
                         },
                       ),
@@ -85,7 +85,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         icon: Icons.work,
                         title: 'Projects',
                         onTap: () {
-                          Get.back(); // Close dialog
+                          Get.back<void>(); // Close dialog
                           homeController.scrollToSection('projects');
                         },
                       ),
@@ -93,7 +93,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         icon: Icons.timeline,
                         title: 'Career',
                         onTap: () {
-                          Get.back(); // Close dialog
+                          Get.back<void>(); // Close dialog
                           homeController.scrollToSection('career');
                         },
                       ),
@@ -101,7 +101,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         icon: Icons.email,
                         title: 'Contact',
                         onTap: () {
-                          Get.back(); // Close dialog
+                          Get.back<void>(); // Close dialog
                           homeController.scrollToSection('contact');
                         },
                       ),

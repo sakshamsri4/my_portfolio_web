@@ -17,22 +17,22 @@ class AnimatedCard extends StatefulWidget {
 
   /// The content of the card
   final Widget child;
-  
+
   /// Optional callback when card is tapped
   final VoidCallback? onTap;
-  
+
   /// Border radius of the card
   final double borderRadius;
-  
+
   /// Base elevation of the card
   final double elevation;
-  
+
   /// Background color of the card
   final Color color;
-  
+
   /// Padding inside the card
   final EdgeInsetsGeometry padding;
-  
+
   /// Optional accent color for glow effect
   final Color? accentColor;
 
@@ -57,7 +57,6 @@ class _AnimatedCardState extends State<AnimatedCard>
     );
     _brightnessAnimation = AppAnimations.createBrightnessAnimation(
       _controller,
-      begin: 0,
       end: 0.3,
     );
   }
@@ -70,8 +69,9 @@ class _AnimatedCardState extends State<AnimatedCard>
 
   @override
   Widget build(BuildContext context) {
-    final accentColor = widget.accentColor ?? Theme.of(context).colorScheme.primary;
-    
+    final accentColor =
+        widget.accentColor ?? Theme.of(context).colorScheme.primary;
+
     return MouseRegion(
       onEnter: (_) => _controller.forward(),
       onExit: (_) => _controller.reverse(),

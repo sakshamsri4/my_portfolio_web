@@ -14,26 +14,26 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const initial = Routes.HOME;
+  static const initial = Routes.home;
 
   static final routes = [
     GetPage<dynamic>(
-      name: _Paths.HOME,
+      name: _Paths.home,
       page: () => const HomeView(),
       binding: HomeBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.ABOUT,
+      name: _Paths.about,
       page: () => const AboutView(),
       binding: AboutBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.PROJECTS,
+      name: _Paths.projects,
       page: () => const ProjectsView(),
       binding: ProjectsBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.CONTACT,
+      name: _Paths.contact,
       page: () => const ContactView(),
       binding: ContactBinding(),
     ),

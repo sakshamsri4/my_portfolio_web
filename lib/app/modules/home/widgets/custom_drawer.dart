@@ -39,32 +39,33 @@ class CustomDrawer extends StatelessWidget {
             leading: const Icon(Icons.home),
             title: const Text('Home'),
             onTap: () {
-              Get.back(); // Close drawer
-              Get.toNamed(Routes.HOME);
+              // Close drawer first, then navigate
+              Navigator.pop(context);
+              Get.toNamed<void>(Routes.home);
             },
           ),
           ListTile(
             leading: const Icon(Icons.person),
             title: const Text('About'),
             onTap: () {
-              Get.back(); // Close drawer
-              Get.toNamed(Routes.ABOUT);
+              Navigator.pop(context);
+              Get.toNamed<void>(Routes.about);
             },
           ),
           ListTile(
             leading: const Icon(Icons.work),
             title: const Text('Projects'),
             onTap: () {
-              Get.back(); // Close drawer
-              Get.toNamed(Routes.PROJECTS);
+              Navigator.pop(context);
+              Get.toNamed<void>(Routes.projects);
             },
           ),
           ListTile(
             leading: const Icon(Icons.email),
             title: const Text('Contact'),
             onTap: () {
-              Get.back(); // Close drawer
-              Get.toNamed(Routes.CONTACT);
+              Navigator.pop(context);
+              Get.toNamed<void>(Routes.contact);
             },
           ),
         ],

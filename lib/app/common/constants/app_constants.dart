@@ -6,18 +6,18 @@ class AppConstants {
   AppConstants._();
 
   /// Standard spacing values
-  static const double spacingXS = 4.0;
-  static const double spacingS = 8.0;
-  static const double spacingM = 16.0;
-  static const double spacingL = 24.0;
-  static const double spacingXL = 32.0;
-  static const double spacingXXL = 40.0;
+  static const double spacingXS = 4;
+  static const double spacingS = 8;
+  static const double spacingM = 16;
+  static const double spacingL = 24;
+  static const double spacingXL = 32;
+  static const double spacingXXL = 40;
 
   /// Standard border radius values
-  static const double borderRadiusS = 4.0;
-  static const double borderRadiusM = 8.0;
-  static const double borderRadiusL = 16.0;
-  static const double borderRadiusXL = 24.0;
+  static const double borderRadiusS = 4;
+  static const double borderRadiusM = 8;
+  static const double borderRadiusL = 16;
+  static const double borderRadiusXL = 24;
 
   /// Standard animation durations
   static const Duration animationDurationFast = Duration(milliseconds: 200);

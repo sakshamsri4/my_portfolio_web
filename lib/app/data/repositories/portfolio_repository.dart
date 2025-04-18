@@ -172,7 +172,9 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
       {
         'title': 'John Hancock Vitality App',
         'description':
-            'A wellness app for tracking fitness activities, logging workouts via GPS, and managing Vitality Points™ with personalized health insights and rewards.',
+            'A wellness app for tracking fitness activities, logging workouts '
+                'via GPS, and managing Vitality Points™ with personalized health '
+                'insights and rewards.',
         'image': 'assets/images/project1.jpg',
         'tileImage': 'assets/tile_images/John_hancock.webp',
         'url':
@@ -180,8 +182,9 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
       },
       {
         'title': 'Manulife Vitality App',
-        'description':
-            'A bilingual (English and French) health-focused app with accessibility features, enabling activity tracking, Apple Health integration, and rewards through personalized goals.',
+        'description': 'A bilingual (English and French) health-focused app with '
+            'accessibility features, enabling activity tracking, Apple Health '
+            'integration, and rewards through personalized goals.',
         'image': 'assets/images/project2.jpg',
         'tileImage': 'assets/tile_images/manulife.webp',
         'url': 'https://apps.apple.com/ca/app/manulife-vitality/id1198760352',
@@ -189,7 +192,9 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
       {
         'title': 'Pro Ranked App',
         'description':
-            'Developed app and business portal using Flutter, Firebase, and FlutterFlow with bilingual support, enabling real-time EV charger management and personalized settings.',
+            'Developed app and business portal using Flutter, Firebase, and '
+                'FlutterFlow with bilingual support, enabling real-time EV charger '
+                'management and personalized settings.',
         'image': 'assets/images/project3.jpg',
         'tileImage': 'assets/tile_images/pro_ranked.webp',
         'url': 'https://proranked.com',
@@ -197,7 +202,9 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
       {
         'title': 'OnSite Construction App',
         'description':
-            'A Flutter-based app for construction professionals, featuring project management, invoicing, expense tracking, offline access, and multilingual support.',
+            'A Flutter-based app for construction professionals, featuring '
+                'project management, invoicing, expense tracking, offline access, '
+                'and multilingual support.',
         'image': 'assets/images/project4.jpg',
         'tileImage': 'assets/tile_images/onsite.webp',
         'url':
@@ -206,25 +213,31 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
       {
         'title': 'eZHealth',
         'description':
-            'A cross-platform healthcare app for Zuellig Pharma using Flutter, enabling online consultations, vaccination bookings, lab scheduling, and personal health record management.',
+            'A cross-platform healthcare app for Zuellig Pharma using Flutter, '
+                'enabling online consultations, vaccination bookings, lab scheduling, '
+                'and personal health record management.',
         'image': 'assets/images/project5.jpg',
         'tileImage': 'assets/tile_images/ezHealth.webp',
-        'url':
-            'https://play.google.com/store/apps/details?id=com.zuelligpharma.ezhealth',
+        'url': 'https://play.google.com/store/apps/details?id='
+            'com.zuelligpharma.ezhealth',
       },
       {
         'title': 'eZTrade App',
         'description':
-            'A cross-platform app for medical representatives using Flutter, GoLang, and C++, featuring real-time product status, activity management, and progress tracking tools.',
+            'A cross-platform app for medical representatives using Flutter, '
+                'GoLang, and C++, featuring real-time product status, activity '
+                'management, and progress tracking tools.',
         'image': 'assets/images/project6.jpg',
         'tileImage': 'assets/tile_images/ezTrade.webp',
-        'url':
-            'https://play.google.com/store/apps/details?id=com.zuelligpharma.eztrade',
+        'url': 'https://play.google.com/store/apps/details?id='
+            'com.zuelligpharma.eztrade',
       },
       {
         'title': 'Covid-19 App',
         'description':
-            'A Flutter-based app providing real-time updates, health guidance, and emergency resources with global and local statistics, news from health organizations, and symptom checkers.',
+            'A Flutter-based app providing real-time updates, health guidance, '
+                'and emergency resources with global and local statistics, news '
+                'from health organizations, and symptom checkers.',
         'image': 'assets/images/project7.jpg',
         'tileImage': 'assets/tile_images/covid.webp',
         'url': 'https://github.com/sakshamsri4/Covid-19-App',
@@ -240,35 +253,42 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
         'role': 'Senior Flutter Developer',
         'period': 'March 2024 - Present',
         'description':
-            'Developing wellness apps including John Hancock Vitality and Manulife Vitality with features for tracking fitness activities, health integration, and rewards systems.',
+            'Developing wellness apps including John Hancock Vitality and '
+                'Manulife Vitality with features for tracking fitness activities, '
+                'health integration, and rewards systems.',
       },
       {
         'company': 'SpaceVox Ltd.',
         'role': 'Flutter Developer',
         'period': 'Aug 2023 - Dec 2023',
         'description':
-            'Developed Pro Ranked app and business portal using Flutter, Firebase, and FlutterFlow with bilingual support for EV charger management.',
+            'Developed Pro Ranked app and business portal using Flutter, '
+                'Firebase, and FlutterFlow with bilingual support for EV charger '
+                'management.',
       },
       {
         'company': 'ABEYAANTRIX Tech',
         'role': 'Flutter Developer',
         'period': 'Jan 2023 - July 2023',
         'description':
-            'Built the OnSite Flutter-based app for construction professionals with project management, invoicing, and offline capabilities.',
+            'Built the OnSite Flutter-based app for construction professionals '
+                'with project management, invoicing, and offline capabilities.',
       },
       {
         'company': 'CBNITS',
         'role': 'Flutter Developer',
         'period': 'Jan 2021 - Dec 2022',
         'description':
-            'Developed healthcare apps for Zuellig Pharma including eZHealth and eZTrade using Flutter with various backend integrations.',
+            'Developed healthcare apps for Zuellig Pharma including eZHealth '
+                'and eZTrade using Flutter with various backend integrations.',
       },
       {
         'company': 'Wipro Tech',
         'role': 'Flutter Developer',
         'period': 'June 2019 - March 2020',
         'description':
-            'Developed a Flutter-based Covid-19 App providing real-time updates, health guidance, and emergency resources during the pandemic.',
+            'Developed a Flutter-based Covid-19 App providing real-time updates, '
+                'health guidance, and emergency resources during the pandemic.',
       },
     ];
   }
@@ -305,6 +325,14 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
 
   @override
   String getProfessionalSummary() {
-    return 'Experienced Mobile Application Developer with 6+ years in designing and deploying scalable, user-focused applications. Proficient in Flutter SDK for cross-platform development, Firebase (Firestore, Authentication, Realtime Database), and advanced UI/UX principles including Material Design and responsive layouts. Adept at integrating REST APIs, implementing BLoC architecture for state management, and delivering high-performance solutions with CI/CD pipelines. Enthusiastic about leveraging innovative technologies to drive efficiency and enhance user experiences.';
+    return 'Experienced Mobile Application Developer with 6+ years in designing '
+        'and deploying scalable, user-focused applications. Proficient in '
+        'Flutter SDK for cross-platform development, Firebase (Firestore, '
+        'Authentication, Realtime Database), and advanced UI/UX principles '
+        'including Material Design and responsive layouts. Adept at integrating '
+        'REST APIs, implementing BLoC architecture for state management, and '
+        'delivering high-performance solutions with CI/CD pipelines. '
+        'Enthusiastic about leveraging innovative technologies to drive '
+        'efficiency and enhance user experiences.';
   }
 }

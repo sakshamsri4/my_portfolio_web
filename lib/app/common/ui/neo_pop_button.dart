@@ -15,16 +15,16 @@ class NeoPOPButton extends StatelessWidget {
 
   /// The text label to display on the button
   final String label;
-  
+
   /// The icon to display on the button
   final IconData icon;
-  
+
   /// Callback when button is pressed
   final VoidCallback onPressed;
-  
+
   /// Whether this is a primary (colored) or secondary (outlined) button
   final bool isPrimary;
-  
+
   /// Size variant of the button
   final NeoPOPButtonSize size;
 
@@ -88,7 +88,8 @@ class NeoPOPButton extends StatelessWidget {
             decoration: BoxDecoration(
               color: isPrimary ? primaryColor : Colors.white,
               borderRadius: BorderRadius.circular(4),
-              border: isPrimary ? null : Border.all(color: primaryColor, width: 2),
+              border:
+                  isPrimary ? null : Border.all(color: primaryColor, width: 2),
               boxShadow: isPrimary
                   ? [
                       BoxShadow(
@@ -175,10 +176,10 @@ class NeoPOPButton extends StatelessWidget {
 enum NeoPOPButtonSize {
   /// Small button for compact spaces
   small,
-  
+
   /// Medium button for standard usage
   medium,
-  
+
   /// Large button for primary actions
   large,
 }

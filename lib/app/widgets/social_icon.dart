@@ -15,16 +15,16 @@ class SocialIcon extends StatefulWidget {
 
   /// The icon to display
   final IconData icon;
-  
+
   /// Callback when icon is tapped
   final VoidCallback onTap;
-  
+
   /// Color of the icon
   final Color? color;
-  
+
   /// Size of the icon
   final double size;
-  
+
   /// Optional background color
   final Color? backgroundColor;
 
@@ -43,7 +43,6 @@ class _SocialIconState extends State<SocialIcon>
     _controller = AppAnimations.createHoverController(this);
     _scaleAnimation = AppAnimations.createScaleAnimation(
       _controller,
-      begin: 1.0,
       end: 1.2,
     );
   }
@@ -57,7 +56,7 @@ class _SocialIconState extends State<SocialIcon>
   @override
   Widget build(BuildContext context) {
     final iconColor = widget.color ?? Theme.of(context).colorScheme.primary;
-    
+
     return MouseRegion(
       onEnter: (_) => _controller.forward(),
       onExit: (_) => _controller.reverse(),
