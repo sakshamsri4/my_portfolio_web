@@ -1,14 +1,19 @@
 // Import dart:html conditionally only for web
 // ignore: avoid_web_libraries_in_flutter
+import 'dart:html'
+    if (dart.library.io) 'package:my_portfolio_web/app/utils/html_stub.dart'
+    as html;
 
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:my_portfolio_web/app/common/constants/app_constants.dart';
+import 'package:my_portfolio_web/app/common/constants/string_constants.dart';
+import 'package:my_portfolio_web/app/common/utils/error_utils.dart';
 import 'package:my_portfolio_web/app/controllers/base_controller.dart';
 import 'package:my_portfolio_web/app/data/repositories/portfolio_repository_interface.dart';
-import 'package:my_portfolio_web/app/utils/html_stub.dart' as html;
-import 'package:url_launcher/url_launcher.dart';
 
 /// Controller responsible for managing contact information and actions
 class ContactController extends BaseController {
@@ -48,10 +53,9 @@ class ContactController extends BaseController {
     if (await canLaunchUrl(emailUri)) {
       await launchUrl(emailUri);
     } else {
-      Get.snackbar(
+      ErrorUtils.showErrorSnackbar(
         'Error',
-        'Could not launch email client',
-        snackPosition: SnackPosition.BOTTOM,
+        AppStrings.errorLaunchingEmail,
       );
     }
   }
@@ -67,10 +71,9 @@ class ContactController extends BaseController {
     if (await canLaunchUrl(whatsappUrl)) {
       await launchUrl(whatsappUrl, mode: LaunchMode.externalApplication);
     } else {
-      Get.snackbar(
+      ErrorUtils.showErrorSnackbar(
         'Error',
-        'Could not launch WhatsApp',
-        snackPosition: SnackPosition.BOTTOM,
+        AppStrings.errorLaunchingWhatsApp,
       );
     }
   }
@@ -82,15 +85,14 @@ class ContactController extends BaseController {
       html.AnchorElement(
         href: AppConstants.cvPath,
       )
-        ..setAttribute('download', 'Saksham_Srivastava_CV.pdf')
+        ..setAttribute('download', AppStrings.cvFileName)
         ..click();
     } else {
       // For mobile platforms, use a different approach
       // This is a placeholder - implement mobile download if needed
-      Get.snackbar(
+      ErrorUtils.showInfoSnackbar(
         'Download',
-        'CV download is only available on web platform',
-        snackPosition: SnackPosition.BOTTOM,
+        AppStrings.cvDownloadWebOnly,
       );
     }
   }
@@ -98,11 +100,9 @@ class ContactController extends BaseController {
   /// Copy to clipboard
   void copyToClipboard(String text) {
     Clipboard.setData(ClipboardData(text: text));
-    Get.snackbar(
+    ErrorUtils.showSuccessSnackbar(
       'Copied',
-      'Text copied to clipboard',
-      snackPosition: SnackPosition.BOTTOM,
-      duration: const Duration(seconds: 2),
+      AppStrings.copiedToClipboard,
     );
   }
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'package:my_portfolio_web/app/common/constants/string_constants.dart';
+import 'package:my_portfolio_web/app/common/utils/error_utils.dart';
 import 'package:my_portfolio_web/app/controllers/base_controller.dart';
 import 'package:my_portfolio_web/app/data/repositories/portfolio_repository_interface.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 /// Controller responsible for managing projects data and interactions
 class ProjectsController extends BaseController {
@@ -46,10 +49,9 @@ class ProjectsController extends BaseController {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
-      Get.snackbar(
+      ErrorUtils.showErrorSnackbar(
         'Error',
-        'Could not launch URL',
-        snackPosition: SnackPosition.BOTTOM,
+        AppStrings.errorLaunchingUrl,
       );
     }
   }
