@@ -188,3 +188,36 @@ RULE: Every action taken must be recorded in this file with a timestamp for futu
   - Created smooth transitions between different text elements
   - Improved visual appeal with professional animations
   - Enhanced user engagement with dynamic content
+
+## [2024-07-27]
+- Fixed linting issues across the codebase:
+  - Resolved line length issues by breaking long strings into multiple lines
+  - Added proper trailing commas for better code formatting
+  - Fixed string quote consistency issues
+  - Improved code readability with proper line breaks
+  - Enhanced maintainability with better formatted text content
+
+## [2024-07-28]
+- Implemented performance optimizations across the portfolio:
+  - Added image caching system for project cards to reduce memory usage
+  - Memoized computed values in HomeController to avoid redundant calculations
+  - Replaced Container with KeyedSubtree for better widget tree optimization
+  - Extracted widgets in AboutView for better component reusability
+  - Added explicit type arguments to GetX navigation methods
+  - Improved widget tree structure for better rendering performance
+  - Optimized const usage for widgets that don't change
+
+## [2024-07-29]
+- Updated profile picture in hero section:
+  - Added personal photo (myself.jpeg) to assets/images directory
+  - Updated CircleAvatar in hero_section.dart to use the actual profile image
+  - Replaced placeholder icon with real profile picture for better personalization
+
+## [2024-07-30]
+- Fixed RenderFlex overflow issues across the portfolio:
+  - Added preloading of Google Fonts in web/index.html to fix font parsing errors
+  - Fixed horizontal overflow in skills section by adding text overflow handling
+  - Fixed vertical overflow in career timeline by constraining text and adding mainAxisSize.min
+  - Improved text handling in introduction sections by removing newline characters
+  - Added overflow: TextOverflow.ellipsis and maxLines constraints to prevent layout shifts
+  - Enhanced responsive layout handling in skill cards and project descriptions
