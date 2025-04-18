@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio_web/app/common/constants/app_constants.dart';
 import 'package:my_portfolio_web/app/data/models/tech_stack_item.dart';
@@ -89,11 +88,11 @@ class PortfolioRepository {
   List<String> getAnimatedIntroductions() {
     return [
       'I create beautiful, high-performance mobile apps\n'
-      'that users love.',
+          'that users love.',
       'With 6+ years of Flutter expertise, I transform\n'
-      'complex ideas into elegant experiences.',
+          'complex ideas into elegant experiences.',
       'Let me help bring your app idea to life with\n'
-      'flawless execution across platforms.',
+          'flawless execution across platforms.',
     ];
   }
 }

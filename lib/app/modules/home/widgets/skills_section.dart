@@ -269,76 +269,62 @@ class SkillsSection extends StatelessWidget {
       },
     ];
 
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: primaryColor.withAlpha(15),
-            blurRadius: 15,
-            spreadRadius: 1,
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          // Tech icons in a responsive grid with scroll animation
-          SizedBox(
-            height: 120, // Fixed height for the scrolling area
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              physics: const BouncingScrollPhysics(),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: techStack
-                    .map(
-                      (tech) => Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: _buildTechIcon(
-                          context: context,
-                          icon: tech['icon']! as IconData,
-                          name: tech['name']! as String,
-                          color: tech['color']! as Color,
-                        ),
-                      ),
-                    )
-                    .toList(),
-              ),
-            ),
-          ),
-          // Scroll indicator
-          Padding(
-            padding: const EdgeInsets.only(top: 8),
+    return Column(
+      children: [
+        // Tech icons in a responsive grid with scroll animation
+        SizedBox(
+          height: 120, // Fixed height for the scrolling area
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.keyboard_arrow_left,
-                  color: primaryColor.withAlpha(150),
-                  size: 16,
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  'Scroll to see more',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: primaryColor.withAlpha(150),
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
-                const SizedBox(width: 4),
-                Icon(
-                  Icons.keyboard_arrow_right,
-                  color: primaryColor.withAlpha(150),
-                  size: 16,
-                ),
-              ],
+              children: techStack
+                  .map(
+                    (tech) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: _buildTechIcon(
+                        context: context,
+                        icon: tech['icon']! as IconData,
+                        name: tech['name']! as String,
+                        color: tech['color']! as Color,
+                      ),
+                    ),
+                  )
+                  .toList(),
             ),
           ),
-        ],
-      ),
+        ),
+        // Scroll indicator
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.keyboard_arrow_left,
+                color: primaryColor.withAlpha(150),
+                size: 16,
+              ),
+              const SizedBox(width: 4),
+              Text(
+                'Scroll to see more',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: primaryColor.withAlpha(150),
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+              const SizedBox(width: 4),
+              Icon(
+                Icons.keyboard_arrow_right,
+                color: primaryColor.withAlpha(150),
+                size: 16,
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 

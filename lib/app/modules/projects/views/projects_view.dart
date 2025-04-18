@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_portfolio_web/app/routes/app_pages.dart';
 import 'package:my_portfolio_web/app/modules/projects/controllers/projects_controller.dart';
+import 'package:my_portfolio_web/app/routes/app_pages.dart';
 
 class ProjectsView extends GetView<ProjectsController> {
   const ProjectsView({super.key});

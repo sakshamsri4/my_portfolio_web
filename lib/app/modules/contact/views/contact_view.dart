@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_portfolio_web/app/routes/app_pages.dart';
 import 'package:my_portfolio_web/app/modules/contact/controllers/contact_controller.dart';
+import 'package:my_portfolio_web/app/routes/app_pages.dart';
 
 class ContactView extends GetView<ContactController> {
   const ContactView({super.key});
