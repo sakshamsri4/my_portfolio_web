@@ -10,8 +10,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize theme controller
-    final themeController = Get.put(ThemeController());
+    // Get the theme controller from GetX
+    final themeController = Get.find<ThemeController>();
 
     return Obx(
       () => GetMaterialApp(
