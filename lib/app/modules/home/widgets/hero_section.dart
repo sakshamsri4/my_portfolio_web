@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio_web/app/modules/home/controllers/home_controller.dart';
 
 class HeroSection extends StatelessWidget {
@@ -80,6 +81,11 @@ class HeroSection extends StatelessWidget {
               repeatForever: true,
             ),
           ),
+
+          const SizedBox(height: 40),
+
+          // Technology icons with CRED-inspired design
+          _buildTechIcons(context),
 
           const SizedBox(height: 40),
 
@@ -233,7 +239,7 @@ class HeroSection extends StatelessWidget {
             foregroundDecoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: Colors.white.withOpacity(0.3),
+                color: Colors.white.withAlpha(75),
                 width: 2,
               ),
             ),
@@ -377,8 +383,8 @@ class HeroSection extends StatelessWidget {
             // LinkedIn button with NeoPOP effect
             _buildNeoPOPButton(
               context: context,
-              icon: Icons.link,
-              color: Colors.blue.shade700,
+              icon: FontAwesomeIcons.linkedin,
+              color: const Color(0xFF0A66C2),
               onPressed: () => controller.launchProjectUrl(
                 'https://linkedin.com/in/sakshamsri/',
               ),
@@ -387,10 +393,20 @@ class HeroSection extends StatelessWidget {
             // GitHub button with NeoPOP effect
             _buildNeoPOPButton(
               context: context,
-              icon: Icons.code,
+              icon: FontAwesomeIcons.github,
               color: Colors.black,
               onPressed: () => controller.launchProjectUrl(
                 'https://github.com/sakshamsri4',
+              ),
+            ),
+            const SizedBox(width: 20),
+            // Twitter/X button with NeoPOP effect
+            _buildNeoPOPButton(
+              context: context,
+              icon: FontAwesomeIcons.xTwitter,
+              color: Colors.black,
+              onPressed: () => controller.launchProjectUrl(
+                'https://twitter.com/sakshamsri4',
               ),
             ),
           ],
@@ -412,31 +428,11 @@ class HeroSection extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           // Shadow container with offset
-          Positioned(
-            left: 3,
-            top: 3,
-            child: Container(
-              width: 44,
-              height: 44,
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(4),
-              ),
-            ),
-          ),
           // Main container
-          Container(
-            width: 44,
-            height: 44,
-            decoration: BoxDecoration(
-              color: color,
-              borderRadius: BorderRadius.circular(4),
-            ),
-            child: Icon(
-              icon,
-              color: Colors.white,
-              size: 22,
-            ),
+          FaIcon(
+            icon,
+            color: Colors.white,
+            size: 44,
           ),
         ],
       ),
@@ -454,7 +450,7 @@ class HeroSection extends StatelessWidget {
         _buildNeoPOPCTA(
           context: context,
           label: "Let's Work Together",
-          icon: Icons.email,
+          icon: FontAwesomeIcons.envelope,
           isPrimary: true,
           onPressed: controller.launchEmail,
         ),
@@ -462,7 +458,7 @@ class HeroSection extends StatelessWidget {
         _buildNeoPOPCTA(
           context: context,
           label: 'Download CV',
-          icon: Icons.download,
+          icon: FontAwesomeIcons.fileArrowDown,
           isPrimary: false,
           onPressed: controller.downloadCV,
         ),
@@ -503,7 +499,7 @@ class HeroSection extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
+                  FaIcon(
                     icon,
                     color: Colors.transparent,
                     size: isMobile ? 18 : 20,
@@ -545,7 +541,7 @@ class HeroSection extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
+                FaIcon(
                   icon,
                   color: isPrimary ? Colors.white : primaryColor,
                   size: isMobile ? 18 : 20,
@@ -565,6 +561,162 @@ class HeroSection extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  // Technology icons with CRED-inspired design
+  Widget _buildTechIcons(BuildContext context) {
+    final primaryColor = Theme.of(context).colorScheme.primary;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
+
+    // Define the tech stack with their respective icons
+    final techStack = [
+      {
+        'name': 'Flutter',
+        'icon': FontAwesomeIcons.flutter,
+        'color': const Color(0xFF02569B),
+      },
+      {
+        'name': 'Firebase',
+        'icon': FontAwesomeIcons.fire,
+        'color': const Color(0xFFFFA000),
+      },
+      {
+        'name': 'GitHub',
+        'icon': FontAwesomeIcons.github,
+        'color': const Color(0xFF333333),
+      },
+      {
+        'name': 'Android',
+        'icon': FontAwesomeIcons.android,
+        'color': const Color(0xFF3DDC84),
+      },
+      {
+        'name': 'iOS',
+        'icon': FontAwesomeIcons.apple,
+        'color': const Color(0xFF999999),
+      },
+      {
+        'name': 'React',
+        'icon': FontAwesomeIcons.react,
+        'color': const Color(0xFF61DAFB),
+      },
+      {
+        'name': 'Node.js',
+        'icon': FontAwesomeIcons.nodeJs,
+        'color': const Color(0xFF339933),
+      },
+      {
+        'name': 'Database',
+        'icon': FontAwesomeIcons.database,
+        'color': const Color(0xFF336791),
+      },
+    ];
+
+    return Column(
+      children: [
+        // Section title with CRED-style typography
+        Text(
+          'TECH STACK',
+          style: TextStyle(
+            fontSize: 14,
+            letterSpacing: 2,
+            fontWeight: FontWeight.w600,
+            color: primaryColor,
+          ),
+        ),
+        const SizedBox(height: 20),
+        // Tech icons in a responsive grid
+        Wrap(
+          spacing: isMobile ? 16 : 24,
+          runSpacing: isMobile ? 16 : 24,
+          alignment: WrapAlignment.center,
+          children: techStack
+              .map(
+                (tech) => _buildTechIcon(
+                  context: context,
+                  icon: tech['icon']! as IconData,
+                  name: tech['name']! as String,
+                  color: tech['color']! as Color,
+                ),
+              )
+              .toList(),
+        ),
+      ],
+    );
+  }
+
+  // Helper method to create CRED-style tech icons
+  Widget _buildTechIcon({
+    required BuildContext context,
+    required IconData icon,
+    required String name,
+    required Color color,
+  }) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
+    final size = isMobile ? 50.0 : 60.0;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Icon with NeoPOP effect
+        Stack(
+          clipBehavior: Clip.none,
+          children: [
+            // Shadow container with offset
+            Positioned(
+              left: 3,
+              top: 3,
+              child: Container(
+                width: size,
+                height: size,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
+            // Main container
+            Container(
+              width: size,
+              height: size,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: color.withAlpha(40),
+                    blurRadius: 8,
+                    spreadRadius: 1,
+                  ),
+                ],
+                border: Border.all(
+                  color: color.withAlpha(50),
+                ),
+              ),
+              child: Center(
+                child: FaIcon(
+                  icon,
+                  color: color,
+                  size: size * 0.5,
+                ),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        // Tech name with CRED-style typography
+        Text(
+          name,
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: Theme.of(context).colorScheme.onSurface.withAlpha(180),
+          ),
+        ),
+      ],
     );
   }
 
@@ -611,10 +763,10 @@ class HeroSection extends StatelessWidget {
                 color: primaryColor,
                 borderRadius: BorderRadius.circular(4),
               ),
-              child: const Icon(
-                Icons.keyboard_arrow_down,
+              child: const FaIcon(
+                FontAwesomeIcons.angleDown,
                 color: Colors.white,
-                size: 24,
+                size: 20,
               ),
             ),
           ],
