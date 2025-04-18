@@ -1,4 +1,10 @@
 include: package:very_good_analysis/analysis_options.6.0.0.yaml
+
+analyzer:
+  errors:
+    deprecated_member_use: ignore
+    lines_longer_than_80_chars: ignore
+
 linter:
   rules:
     public_member_api_docs: false

@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class InfiniteScrollRow extends StatefulWidget {
   /// Creates an infinitely scrollable row
   const InfiniteScrollRow({
-    super.key,
     required this.itemCount,
     required this.itemBuilder,
+    super.key,
     this.itemSpacing = 16.0,
     this.scrollController,
     this.physics,
@@ -47,10 +47,10 @@ class _InfiniteScrollRowState extends State<InfiniteScrollRow> {
   void initState() {
     super.initState();
     _scrollController = widget.scrollController ?? ScrollController();
-    
+
     // Add listener to create infinite scroll effect
     _scrollController.addListener(_scrollListener);
-    
+
     // Initial scroll position in the middle to allow scrolling both ways
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scrollController.hasClients) {
@@ -71,15 +71,17 @@ class _InfiniteScrollRowState extends State<InfiniteScrollRow> {
   void _scrollListener() {
     if (_scrollController.hasClients) {
       // If we reach near the end, jump back to 1/3 of the way
-      if (_scrollController.position.pixels > 
+      if (_scrollController.position.pixels >
           _scrollController.position.maxScrollExtent * 0.8) {
-        _scrollController.jumpTo(_scrollController.position.maxScrollExtent * 0.3);
+        _scrollController
+            .jumpTo(_scrollController.position.maxScrollExtent * 0.3);
       }
-      
+
       // If we reach near the start, jump to 2/3 of the way
-      if (_scrollController.position.pixels < 
+      if (_scrollController.position.pixels <
           _scrollController.position.maxScrollExtent * 0.2) {
-        _scrollController.jumpTo(_scrollController.position.maxScrollExtent * 0.7);
+        _scrollController
+            .jumpTo(_scrollController.position.maxScrollExtent * 0.7);
       }
     }
   }

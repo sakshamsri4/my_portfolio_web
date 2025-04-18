@@ -11,8 +11,10 @@ class ServiceLocator {
   /// Initialize all services and dependencies
   static Future<void> init() async {
     // Register repositories
-    Get.put<PortfolioRepositoryInterface>(PortfolioRepository(),
-        permanent: true);
+    Get.put<PortfolioRepositoryInterface>(
+      PortfolioRepository(),
+      permanent: true,
+    );
 
     // Initialize repositories
     await Get.find<PortfolioRepositoryInterface>().initialize();

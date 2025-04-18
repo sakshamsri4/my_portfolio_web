@@ -1,4 +1,10 @@
-import 'dart:html' as html;
+// Import dart:html conditionally only for web
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html'
+    if (dart.library.io) 'package:my_portfolio_web/app/utils/html_stub.dart'
+    as html;
+
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -183,11 +189,21 @@ class HomeController extends GetxController {
   /// Download CV
   void downloadCV() {
     // For web platform
-    html.AnchorElement(
-      href: AppConstants.cvPath,
-    )
-      ..setAttribute('download', 'Saksham_Srivastava_CV.pdf')
-      ..click();
+    if (kIsWeb) {
+      html.AnchorElement(
+        href: AppConstants.cvPath,
+      )
+        ..setAttribute('download', 'Saksham_Srivastava_CV.pdf')
+        ..click();
+    } else {
+      // For mobile platforms, use a different approach
+      // This is a placeholder - implement mobile download if needed
+      Get.snackbar(
+        'Download',
+        'CV download is available on web only',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
   }
 
   // Launch URL

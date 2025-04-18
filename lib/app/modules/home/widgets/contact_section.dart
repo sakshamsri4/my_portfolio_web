@@ -39,7 +39,7 @@ class ContactSection extends StatelessWidget {
             style: TextStyle(
               fontSize: 16,
               height: 1.5,
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.9),
+              color: Theme.of(context).colorScheme.onSurface.withAlpha(230),
             ),
             textAlign: TextAlign.center,
           ),
