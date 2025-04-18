@@ -329,3 +329,7 @@ RULE: Every action taken must be recorded in this file with a timestamp for futu
   - Displayed key technologies with their respective brand colors and icons
   - Added scroll indicator with directional arrows
   - Fixed height for consistent layout across devices
+
+- Fixed UI alignment issues:
+  - Centered the down arrow icon in the scroll indicator using Center widget
+  - Improved visual alignment of NeoPOP elements

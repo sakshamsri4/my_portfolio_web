@@ -543,10 +543,12 @@ class HeroSection extends StatelessWidget {
                 color: primaryColor,
                 borderRadius: BorderRadius.circular(4),
               ),
-              child: const FaIcon(
-                FontAwesomeIcons.angleDown,
-                color: Colors.white,
-                size: 20,
+              child: const Center(
+                child: FaIcon(
+                  FontAwesomeIcons.angleDown,
+                  color: Colors.white,
+                  size: 20,
+                ),
               ),
             ),
           ],
