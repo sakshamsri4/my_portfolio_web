@@ -3,13 +3,22 @@ import 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:my_portfolio_web/app/common/constants/app_constants.dart';
+import 'package:my_portfolio_web/app/data/models/tech_stack_item.dart';
+import 'package:my_portfolio_web/app/data/repositories/portfolio_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeController extends GetxController {
-  // Scroll controllers for each section
+  /// Creates a home controller with the portfolio repository
+  HomeController({PortfolioRepository? repository})
+      : _repository = repository ?? PortfolioRepository();
+
+  final PortfolioRepository _repository;
+
+  /// Scroll controller for the main page
   final ScrollController scrollController = ScrollController();
 
-  // Section keys for scrolling
+  /// Section keys for scrolling
   final aboutKey = GlobalKey();
   final educationKey = GlobalKey();
   final skillsKey = GlobalKey();
@@ -17,11 +26,26 @@ class HomeController extends GetxController {
   final careerKey = GlobalKey();
   final contactKey = GlobalKey();
 
-  // Active section
+  /// Active section
   final RxString activeSection = 'home'.obs;
 
-  // Observable for carousel auto-play
+  /// Observable for carousel auto-play
   final isCarouselPlaying = true.obs;
+
+  /// Tech stack items
+  late final List<TechStackItem> techStack = _repository.getTechStack();
+
+  /// Social media links
+  late final Map<String, Map<String, dynamic>> socialLinks =
+      _repository.getSocialLinks();
+
+  /// Animated greeting texts
+  late final List<String> animatedGreetings =
+      _repository.getAnimatedGreetings();
+
+  /// Animated introduction texts
+  late final List<String> animatedIntroductions =
+      _repository.getAnimatedIntroductions();
   // Skills organized by category
   final skillCategories = [
     {
@@ -182,10 +206,10 @@ class HomeController extends GetxController {
     },
   ];
 
-  // Contact information
+  /// Contact information
   final contactInfo = {
-    'email': 'sakshamsri4@gmail.com',
-    'phone': '+91 8795304811',
+    'email': AppConstants.emailAddress,
+    'phone': AppConstants.phoneNumber,
     'location': 'Bangalore, India',
   };
 
@@ -312,11 +336,11 @@ class HomeController extends GetxController {
     }
   }
 
-  // Download CV
+  /// Download CV
   void downloadCV() {
     // For web platform
     html.AnchorElement(
-      href: 'assets/cv/CV_3April.pdf',
+      href: AppConstants.cvPath,
     )
       ..setAttribute('download', 'Saksham_Srivastava_CV.pdf')
       ..click();

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:my_portfolio_web/app/common/constants/app_constants.dart';
+import 'package:my_portfolio_web/app/common/ui/neo_pop_social_button.dart';
+import 'package:my_portfolio_web/app/common/utils/responsive_helper.dart';
 import 'package:my_portfolio_web/app/modules/home/controllers/home_controller.dart';
 
 class SocialSidebar extends StatelessWidget {
@@ -13,8 +16,7 @@ class SocialSidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).colorScheme.primary;
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isMobile = screenWidth < 600;
+    final isMobile = ResponsiveHelper.isMobile(context);
 
     // Don't show the sidebar on very small screens
     if (isMobile) return const SizedBox.shrink();
@@ -27,37 +29,30 @@ class SocialSidebar extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _buildSocialButton(
-              context: context,
+            NeoPOPSocialButton(
               icon: FontAwesomeIcons.linkedin,
-              color: const Color(0xFF0A66C2),
-              onPressed: () => controller.launchProjectUrl(
-                'https://linkedin.com/in/sakshamsri/',
-              ),
+              color: AppColors.linkedin,
+              onPressed: () =>
+                  controller.launchProjectUrl(AppConstants.linkedInUrl),
             ),
             const SizedBox(height: 24),
-            _buildSocialButton(
-              context: context,
+            NeoPOPSocialButton(
               icon: FontAwesomeIcons.github,
-              color: Colors.black,
-              onPressed: () => controller.launchProjectUrl(
-                'https://github.com/sakshamsri4',
-              ),
+              color: AppColors.github,
+              onPressed: () =>
+                  controller.launchProjectUrl(AppConstants.githubUrl),
             ),
             const SizedBox(height: 24),
-            _buildSocialButton(
-              context: context,
+            NeoPOPSocialButton(
               icon: FontAwesomeIcons.xTwitter,
-              color: Colors.black,
-              onPressed: () => controller.launchProjectUrl(
-                'https://twitter.com/sakshamsri4',
-              ),
+              color: AppColors.twitter,
+              onPressed: () =>
+                  controller.launchProjectUrl(AppConstants.twitterUrl),
             ),
             const SizedBox(height: 24),
-            _buildSocialButton(
-              context: context,
+            NeoPOPSocialButton(
               icon: FontAwesomeIcons.whatsapp,
-              color: const Color(0xFF25D366),
+              color: AppColors.whatsapp,
               onPressed: controller.launchWhatsApp,
             ),
             const SizedBox(height: 24),
@@ -78,71 +73,6 @@ class SocialSidebar extends StatelessWidget {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  // Helper method to create CRED-style social buttons
-  Widget _buildSocialButton({
-    required BuildContext context,
-    required IconData icon,
-    required Color color,
-    required VoidCallback onPressed,
-  }) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: onPressed,
-        child: TweenAnimationBuilder<double>(
-          tween: Tween(begin: 0, end: 1),
-          duration: const Duration(milliseconds: 300),
-          builder: (context, value, child) {
-            return Transform.translate(
-              offset: Offset(0, -2 * value),
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  // Shadow container with offset
-                  Positioned(
-                    left: 3,
-                    top: 3,
-                    child: Container(
-                      width: 36,
-                      height: 36,
-                      decoration: BoxDecoration(
-                        color: Colors.black.withAlpha(179),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                    ),
-                  ),
-                  // Main container
-                  Container(
-                    width: 36,
-                    height: 36,
-                    decoration: BoxDecoration(
-                      color: color,
-                      borderRadius: BorderRadius.circular(6),
-                      boxShadow: [
-                        BoxShadow(
-                          color: color.withAlpha(40),
-                          blurRadius: 8,
-                          spreadRadius: 1,
-                        ),
-                      ],
-                    ),
-                    child: Center(
-                      child: FaIcon(
-                        icon,
-                        color: Colors.white,
-                        size: 18,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
         ),
       ),
     );
