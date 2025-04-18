@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 /// A utility class to manage skill category icons
 class SkillIcons {
@@ -8,18 +9,24 @@ class SkillIcons {
 
     switch (category.toLowerCase()) {
       case 'mobile development':
-        iconData = Icons.phone_android;
+        iconData = FontAwesomeIcons.mobileScreen;
       case 'state management':
-        iconData = Icons.data_usage;
+        iconData = FontAwesomeIcons.cubes;
       case 'backend & database':
-        iconData = Icons.storage;
+        iconData = FontAwesomeIcons.database;
       case 'tools & workflow':
-        iconData = Icons.build;
+        iconData = FontAwesomeIcons.screwdriverWrench;
+      case 'ai & machine learning':
+        iconData = FontAwesomeIcons.brain;
+      case 'ai tools & agents':
+        iconData = FontAwesomeIcons.robot;
+      case 'automation & devops':
+        iconData = FontAwesomeIcons.gears;
       default:
-        iconData = Icons.code;
+        iconData = FontAwesomeIcons.code;
     }
 
-    return Icon(
+    return FaIcon(
       iconData,
       size: size,
       color: color,

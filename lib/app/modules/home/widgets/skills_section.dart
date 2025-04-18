@@ -55,29 +55,71 @@ class SkillsSection extends StatelessWidget {
         // Skills categories grid
         LayoutBuilder(
           builder: (context, constraints) {
-            // Determine number of columns based on screen width
-            final columns = constraints.maxWidth > 900
-                ? 4
-                : constraints.maxWidth > 600
-                    ? 2
-                    : 1;
-
             return Column(
               children: [
-                Wrap(
-                  spacing: 24,
-                  runSpacing: 24,
-                  children: controller.skillCategories.map((category) {
-                    return _buildSkillCategory(
-                      context,
-                      category: category['category']! as String,
-                      skills: category['skills']! as List<String>,
-                      width: columns == 1
-                          ? constraints.maxWidth
-                          : (constraints.maxWidth - (24 * (columns - 1))) /
-                              columns,
-                    );
-                  }).toList(),
+                // Scrollable skill categories
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 300, // Fixed height for the scrolling area
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: controller.skillCategories.map((category) {
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 16),
+                              child: _buildSkillCategory(
+                                context,
+                                category: category['category']! as String,
+                                skills: category['skills']! as List<String>,
+                                width: 300, // Fixed width for each card
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
+                    // Scroll indicator
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.keyboard_arrow_left,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withAlpha(150),
+                            size: 16,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            'Scroll to see more skills',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withAlpha(150),
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          Icon(
+                            Icons.keyboard_arrow_right,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .primary
+                                .withAlpha(150),
+                            size: 16,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 40),
                 // Tech Stack section title

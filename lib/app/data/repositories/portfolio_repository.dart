@@ -218,6 +218,8 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
           'iOS',
           'Responsive Layouts',
           'Material Design',
+          'Custom Animations',
+          'Adaptive UI',
         ],
       },
       {
@@ -229,6 +231,8 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
           'Provider',
           'MVC',
           'MVVM',
+          'Redux',
+          'Riverpod',
         ],
       },
       {
@@ -240,7 +244,51 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
           'Authentication',
           'Realtime Database',
           'REST API',
+          'GraphQL',
           'Hive',
+          'SQLite',
+        ],
+      },
+      {
+        'category': 'AI & Machine Learning',
+        'iconType': 'svg',
+        'skills': [
+          'TensorFlow',
+          'PyTorch',
+          'Keras',
+          'OpenAI API',
+          'Hugging Face',
+          'LangChain',
+          'Scikit-learn',
+          'Computer Vision',
+        ],
+      },
+      {
+        'category': 'AI Tools & Agents',
+        'iconType': 'svg',
+        'skills': [
+          'GitHub Copilot',
+          'Cursor',
+          'Relay',
+          'Claude',
+          'ChatGPT',
+          'Gemini',
+          'AI Agents',
+          'Prompt Engineering',
+        ],
+      },
+      {
+        'category': 'Automation & DevOps',
+        'iconType': 'svg',
+        'skills': [
+          'Python',
+          'GitHub Actions',
+          'CI/CD',
+          'Docker',
+          'Bash Scripting',
+          'Codemagic',
+          'Firebase App Distribution',
+          'Fastlane',
         ],
       },
       {
@@ -254,6 +302,7 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
           'VS Code',
           'Unit Testing',
           'Widget Testing',
+          'Integration Testing',
         ],
       },
     ];
@@ -422,10 +471,14 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
         'and deploying scalable, user-focused applications. Proficient in '
         'Flutter SDK for cross-platform development, Firebase (Firestore, '
         'Authentication, Realtime Database), and advanced UI/UX principles '
-        'including Material Design and responsive layouts. Adept at integrating '
-        'REST APIs, implementing BLoC architecture for state management, and '
-        'delivering high-performance solutions with CI/CD pipelines. '
-        'Enthusiastic about leveraging innovative technologies to drive '
-        'efficiency and enhance user experiences.';
+        'including Material Design and responsive layouts. '
+        '\n\nAdept at integrating REST APIs, implementing BLoC architecture for '
+        'state management, and delivering high-performance solutions with CI/CD '
+        'pipelines. Recently expanded expertise to include AI integration and '
+        'automation, working with TensorFlow, OpenAI API, and Python for '
+        'creating intelligent features and streamlining development workflows. '
+        '\n\nEnthusiastic about leveraging innovative technologies like AI agents, '
+        'machine learning models, and automation tools to drive efficiency and '
+        'enhance user experiences with cutting-edge capabilities.';
   }
 }
