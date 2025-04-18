@@ -37,12 +37,15 @@ class SkillsSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 32),
           child: Text(
-            "I've developed expertise in various technologies and methodologies throughout my career. Here are the key skills that enable me to deliver exceptional mobile applications:",
+            "I've developed expertise in various technologies and "
+            'methodologies throughout my career. Here are the key skills '
+            'that enable me to deliver exceptional mobile applications:',
             style: TextStyle(
               fontSize: 16,
               height: 1.5,
               color: Theme.of(context).colorScheme.onSurface.withAlpha(230),
             ),
+            softWrap: true,
           ),
         ),
 
@@ -101,6 +104,7 @@ class SkillsSection extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           // Category header
           Container(
@@ -134,6 +138,8 @@ class SkillsSection extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.primary,
                     ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                 ),
               ],
@@ -174,6 +180,8 @@ class SkillsSection extends StatelessWidget {
           fontWeight: FontWeight.w500,
           color: Theme.of(context).colorScheme.primary,
         ),
+        overflow: TextOverflow.ellipsis,
+        maxLines: 1,
       ),
     );
   }

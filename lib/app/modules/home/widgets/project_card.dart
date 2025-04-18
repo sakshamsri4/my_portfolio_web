@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_portfolio_web/app/modules/home/controllers/home_controller.dart';
 
+// A cache for project images to avoid rebuilding them
+final Map<String, Image> _imageCache = <String, Image>{};
+
 class ProjectCard extends StatelessWidget {
   const ProjectCard({
     required this.title,
@@ -14,6 +17,33 @@ class ProjectCard extends StatelessWidget {
   final String description;
   final String imageUrl;
   final String externalUrl;
+
+  // Get cached image or create a new one
+  Widget _getCachedImage(
+    String imageUrl, {
+    required Widget Function(BuildContext, Object, StackTrace?) errorBuilder,
+    double? height,
+    double? width,
+    BoxFit? fit,
+  }) {
+    // Return from cache if exists
+    if (_imageCache.containsKey(imageUrl)) {
+      return _imageCache[imageUrl]!;
+    }
+
+    // Create and cache new image
+    final image = Image.asset(
+      imageUrl,
+      height: height,
+      width: width,
+      fit: fit,
+      errorBuilder: errorBuilder,
+    );
+
+    // Add to cache
+    _imageCache[imageUrl] = image;
+    return image;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +63,7 @@ class ProjectCard extends StatelessWidget {
                   topLeft: Radius.circular(16),
                   topRight: Radius.circular(16),
                 ),
-                child: Image.asset(
+                child: _getCachedImage(
                   imageUrl,
                   height: 160,
                   width: double.infinity,

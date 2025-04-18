@@ -40,7 +40,10 @@ class ProjectsSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 24),
           child: Text(
-            "Here are some of my favorite projects that showcase my skills and passion for creating exceptional mobile experiences. Each project represents a unique challenge that I've tackled with creativity and technical expertise.",
+            "Here are some of my favorite projects that showcase my skills\n"
+            "and passion for creating exceptional mobile experiences. Each\n"
+            "project represents a unique challenge that I've tackled with\n"
+            "creativity and technical expertise.",
             style: TextStyle(
               fontSize: 16,
               height: 1.5,

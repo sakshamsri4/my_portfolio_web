@@ -18,7 +18,7 @@ class ContactSection extends StatelessWidget {
         Row(
           children: [
             Text(
-              'Let\'s Connect',
+              "Let's Connect",
               style: Theme.of(context).textTheme.displaySmall,
             ),
             const SizedBox(width: 16),
@@ -36,7 +36,9 @@ class ContactSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 24),
           child: Text(
-            "Have a project in mind or just want to say hello? I'd love to hear from you! Let's discuss how we can work together to bring your ideas to life.",
+            "Have a project in mind or just want to say hello? I'd love\n"
+            "to hear from you! Let's discuss how we can work together to\n"
+            'bring your ideas to life.',
             style: TextStyle(
               fontSize: 16,
               height: 1.5,
@@ -115,7 +117,7 @@ class ContactSection extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  "Ready to start a project?",
+                  'Ready to start a project?',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -129,9 +131,13 @@ class ContactSection extends StatelessWidget {
                   label: const Text('Send Me a Message'),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 16),
+                      horizontal: 24,
+                      vertical: 16,
+                    ),
                     textStyle: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],

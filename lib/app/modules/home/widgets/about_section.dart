@@ -151,7 +151,8 @@ class AboutSection extends StatelessWidget {
                 const SizedBox(width: 16),
                 Expanded(
                   child: Text(
-                    "I'm passionate about creating apps that not only look beautiful but also solve real problems and deliver exceptional user experiences.",
+                    "I'm passionate about creating apps that not only look beautiful\n"
+                    'but also solve real problems and deliver exceptional user experiences.',
                     style: TextStyle(
                       fontSize: 15,
                       fontStyle: FontStyle.italic,
@@ -200,23 +201,24 @@ class AboutSection extends StatelessWidget {
             icon: Icons.phone_android,
             title: 'Mobile App Development',
             description:
-                'Cross-platform apps with Flutter that work seamlessly on iOS and Android.',
+                'Cross-platform apps with Flutter that work seamlessly\n'
+                'on iOS and Android.',
           ),
           const SizedBox(height: 16),
           _buildServiceItem(
             context,
             icon: Icons.design_services,
             title: 'UI/UX Design',
-            description:
-                'Intuitive interfaces with beautiful animations and responsive layouts.',
+            description: 'Intuitive interfaces with beautiful animations\n'
+                'and responsive layouts.',
           ),
           const SizedBox(height: 16),
           _buildServiceItem(
             context,
             icon: Icons.cloud,
             title: 'Backend Integration',
-            description:
-                'Seamless integration with Firebase, REST APIs, and other backend services.',
+            description: 'Seamless integration with Firebase, REST APIs,\n'
+                'and other backend services.',
           ),
           const SizedBox(height: 16),
           _buildServiceItem(

@@ -83,6 +83,7 @@ class CareerTimelineSection extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               // Company with badge for current position
               Row(
@@ -96,6 +97,8 @@ class CareerTimelineSection extends StatelessWidget {
                                 ? Theme.of(context).colorScheme.primary
                                 : null,
                           ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                     ),
                   ),
                   if (isFirst)
@@ -126,6 +129,8 @@ class CareerTimelineSection extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
               ),
               const SizedBox(height: 4),
               // Period with icon
@@ -153,6 +158,8 @@ class CareerTimelineSection extends StatelessWidget {
                       height: 1.5,
                       letterSpacing: 0.2,
                     ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 5,
               ),
             ],
           ),

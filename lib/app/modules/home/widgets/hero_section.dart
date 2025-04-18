@@ -1,6 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:my_portfolio_web/app/modules/home/controllers/home_controller.dart';
 
 class HeroSection extends StatelessWidget {
@@ -198,7 +197,7 @@ class HeroSection extends StatelessWidget {
       child: const CircleAvatar(
         radius: 80,
         backgroundColor: Color(0xFF675AF2),
-        child: Icon(Icons.person, size: 80, color: Colors.white),
+        backgroundImage: AssetImage('assets/images/myself.jpeg'),
       ),
     );
   }
@@ -236,17 +235,20 @@ class HeroSection extends StatelessWidget {
             child: AnimatedTextKit(
               animatedTexts: [
                 FadeAnimatedText(
-                  'I create beautiful, high-performance mobile apps that users love.',
+                  'I create beautiful, high-performance mobile apps\n'
+                  'that users love.',
                   duration: const Duration(milliseconds: 3000),
                   fadeInEnd: 0.2,
                 ),
                 FadeAnimatedText(
-                  'With 6+ years of Flutter expertise, I transform complex ideas into elegant experiences.',
+                  'With 6+ years of Flutter expertise, I transform\n'
+                  'complex ideas into elegant experiences.',
                   duration: const Duration(milliseconds: 3000),
                   fadeInEnd: 0.2,
                 ),
                 FadeAnimatedText(
-                  'Let me help bring your app idea to life with flawless execution across platforms.',
+                  'Let me help bring your app idea to life with\n'
+                  'flawless execution across platforms.',
                   duration: const Duration(milliseconds: 3000),
                   fadeInEnd: 0.2,
                 ),

@@ -75,7 +75,11 @@ class HomeController extends GetxController {
   ];
 
   // Flat skills list for backward compatibility
-  List<String> get skills {
+  late final List<String> _cachedSkills = _computeSkills();
+  List<String> get skills => _cachedSkills;
+
+  // Compute skills once and cache the result
+  List<String> _computeSkills() {
     final allSkills = <String>[];
     for (final category in skillCategories) {
       allSkills.addAll(category['skills']! as List<String>);

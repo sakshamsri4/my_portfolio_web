@@ -29,28 +29,28 @@ class HomeView extends GetView<HomeController> {
                 const SizedBox(height: 32),
 
                 // About Me section
-                Container(
+                KeyedSubtree(
                   key: controller.aboutKey,
                   child: AboutSection(controller: controller),
                 ),
                 const SizedBox(height: 32),
 
-                // Education section
-                Container(
-                  key: controller.educationKey,
-                  child: EducationSection(controller: controller),
-                ),
-                const SizedBox(height: 32),
+                // // Education section
+                // KeyedSubtree(
+                //   key: controller.educationKey,
+                //   child: EducationSection(controller: controller),
+                // ),
+                // const SizedBox(height: 32),
 
                 // Skills section
-                Container(
+                KeyedSubtree(
                   key: controller.skillsKey,
                   child: SkillsSection(controller: controller),
                 ),
                 const SizedBox(height: 32),
 
                 // Projects section
-                Container(
+                KeyedSubtree(
                   key: controller.projectsKey,
                   child: ProjectsSection(
                     controller: controller,
@@ -60,14 +60,14 @@ class HomeView extends GetView<HomeController> {
                 const SizedBox(height: 32),
 
                 // Career Timeline section
-                Container(
+                KeyedSubtree(
                   key: controller.careerKey,
                   child: CareerTimelineSection(controller: controller),
                 ),
                 const SizedBox(height: 32),
 
                 // Contact section
-                Container(
+                KeyedSubtree(
                   key: controller.contactKey,
                   child: ContactSection(controller: controller),
                 ),
