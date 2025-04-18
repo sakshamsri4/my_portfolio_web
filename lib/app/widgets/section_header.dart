@@ -14,20 +14,20 @@ class SectionHeader extends StatelessWidget {
 
   /// The title of the section
   final String title;
-  
+
   /// Optional subtitle for the section
   final String? subtitle;
-  
+
   /// Alignment of the header content
   final CrossAxisAlignment alignment;
-  
+
   /// Width of the underline
   final double underlineWidth;
 
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).colorScheme.primary;
-    
+
     return Column(
       crossAxisAlignment: alignment,
       children: [
@@ -36,9 +36,9 @@ class SectionHeader extends StatelessWidget {
           title,
           style: AppTextStyles.sectionTitle,
         ),
-        
+
         const SizedBox(height: 8),
-        
+
         // Underline
         Container(
           width: underlineWidth,
@@ -48,7 +48,7 @@ class SectionHeader extends StatelessWidget {
             borderRadius: BorderRadius.circular(1),
           ),
         ),
-        
+
         // Subtitle if provided
         if (subtitle != null) ...[
           const SizedBox(height: 16),

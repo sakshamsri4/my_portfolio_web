@@ -14,13 +14,13 @@ class NeoPOPTechIcon extends StatelessWidget {
 
   /// The icon to display
   final IconData icon;
-  
+
   /// The name of the technology
   final String name;
-  
+
   /// The color associated with the technology
   final Color color;
-  
+
   /// Optional size override (will use responsive sizing if null)
   final double? size;
 

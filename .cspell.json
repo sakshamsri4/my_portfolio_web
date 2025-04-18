@@ -1,0 +1,32 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "ABEYAANTRIX",
+    "CBNITS",
+    "CRED",
+    "GetX",
+    "BLoC",
+    "MVVM",
+    "NeoPOP",
+    "Firestore",
+    "mPhatek",
+    "SpaceVox",
+    "Zuellig",
+    "eZHealth",
+    "eZTrade",
+    "Manulife",
+    "Vitality",
+    "FlutterFlow",
+    "Saksham",
+    "Srivastava",
+    "sakshamsri"
+  ],
+  "ignorePaths": [
+    "node_modules",
+    "build",
+    ".dart_tool",
+    ".github",
+    "pubspec.lock"
+  ]
+}

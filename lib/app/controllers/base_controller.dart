@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 abstract class BaseController extends GetxController {
   /// Initializes the controller
   void initializeController();
-  
+
   /// Cleans up resources when controller is no longer needed
   void cleanupResources();
 }

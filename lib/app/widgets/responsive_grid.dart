@@ -17,22 +17,22 @@ class ResponsiveGrid extends StatelessWidget {
 
   /// The children to display in the grid
   final List<Widget> children;
-  
+
   /// Number of columns on mobile
   final int mobileColumns;
-  
+
   /// Number of columns on tablet
   final int tabletColumns;
-  
+
   /// Number of columns on desktop
   final int desktopColumns;
-  
+
   /// Spacing between items
   final double spacing;
-  
+
   /// Run spacing between rows
   final double runSpacing;
-  
+
   /// Child aspect ratio
   final double childAspectRatio;
 

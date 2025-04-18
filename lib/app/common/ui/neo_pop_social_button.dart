@@ -15,16 +15,16 @@ class NeoPOPSocialButton extends StatelessWidget {
 
   /// The icon to display on the button
   final IconData icon;
-  
+
   /// The background color of the button
   final Color color;
-  
+
   /// Callback when button is pressed
   final VoidCallback onPressed;
-  
+
   /// Size of the button container
   final double size;
-  
+
   /// Size of the icon
   final double iconSize;
 

@@ -14,19 +14,19 @@ class ContentWrapper extends StatelessWidget {
 
   /// The child widget
   final Widget child;
-  
+
   /// Maximum width of the content
   final double maxWidth;
-  
+
   /// Optional horizontal padding override
   final double? horizontalPadding;
-  
+
   /// Alignment of the child
   final Alignment alignment;
 
   @override
   Widget build(BuildContext context) {
-    final padding = horizontalPadding ?? 
+    final padding = horizontalPadding ??
         ResponsiveUtils.getResponsiveValue<double>(
           context: context,
           mobile: 16,

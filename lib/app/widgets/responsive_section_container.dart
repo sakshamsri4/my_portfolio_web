@@ -16,19 +16,19 @@ class ResponsiveSectionContainer extends StatelessWidget {
 
   /// The child widget
   final Widget child;
-  
+
   /// Optional background color
   final Color? backgroundColor;
-  
+
   /// Optional padding override (otherwise uses responsive padding)
   final EdgeInsetsGeometry? padding;
-  
+
   /// Optional constraints
   final BoxConstraints? constraints;
-  
+
   /// Alignment of the child
   final Alignment alignment;
-  
+
   /// Optional margin
   final EdgeInsetsGeometry? margin;
 

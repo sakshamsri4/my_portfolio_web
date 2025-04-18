@@ -30,7 +30,8 @@ class SvgIconHelper {
           '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>',
           width: size,
           height: size,
-          colorFilter: color != null ? ColorFilter.mode(color, BlendMode.srcIn) : null,
+          colorFilter:
+              color != null ? ColorFilter.mode(color, BlendMode.srcIn) : null,
         );
       }
     }
@@ -39,7 +40,8 @@ class SvgIconHelper {
       svgString,
       width: size,
       height: size,
-      colorFilter: color != null ? ColorFilter.mode(color, BlendMode.srcIn) : null,
+      colorFilter:
+          color != null ? ColorFilter.mode(color, BlendMode.srcIn) : null,
     );
   }
 
@@ -52,7 +54,7 @@ class SvgIconHelper {
     return FutureBuilder<SvgPicture>(
       future: loadSvgIcon(name, size: size, color: color),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done && 
+        if (snapshot.connectionState == ConnectionState.done &&
             snapshot.hasData) {
           return snapshot.data!;
         } else {

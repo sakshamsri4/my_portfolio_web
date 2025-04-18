@@ -4,25 +4,25 @@ import 'package:flutter/material.dart';
 class AppAnimations {
   /// Private constructor to prevent instantiation
   AppAnimations._();
-  
+
   /// Standard duration for most animations
   static const Duration standardDuration = Duration(milliseconds: 300);
-  
+
   /// Longer duration for more elaborate animations
   static const Duration longDuration = Duration(milliseconds: 500);
-  
+
   /// Short duration for quick feedback animations
   static const Duration shortDuration = Duration(milliseconds: 150);
-  
+
   /// Standard curve for most animations
   static const Curve standardCurve = Curves.easeInOut;
-  
+
   /// Bounce curve for playful animations
   static const Curve bounceCurve = Curves.elasticOut;
-  
+
   /// Fast out, slow in curve for natural motion
   static const Curve fastOutSlowIn = Curves.fastOutSlowIn;
-  
+
   /// Create a hover animation controller
   static AnimationController createHoverController(TickerProvider vsync) {
     return AnimationController(
@@ -30,7 +30,7 @@ class AppAnimations {
       vsync: vsync,
     );
   }
-  
+
   /// Create an elevation animation for hover effects
   static Animation<double> createElevationAnimation(
     AnimationController controller, {
@@ -47,7 +47,7 @@ class AppAnimations {
       ),
     );
   }
-  
+
   /// Create a brightness animation for hover effects
   static Animation<double> createBrightnessAnimation(
     AnimationController controller, {
@@ -64,7 +64,7 @@ class AppAnimations {
       ),
     );
   }
-  
+
   /// Create a slide animation
   static Animation<Offset> createSlideAnimation(
     AnimationController controller, {
@@ -81,7 +81,7 @@ class AppAnimations {
       ),
     );
   }
-  
+
   /// Create a scale animation
   static Animation<double> createScaleAnimation(
     AnimationController controller, {

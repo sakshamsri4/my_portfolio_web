@@ -14,23 +14,23 @@ class SectionContainer extends StatelessWidget {
 
   /// The main content of the section
   final Widget child;
-  
+
   /// Optional section title
   final String? title;
-  
+
   /// Optional section subtitle
   final String? subtitle;
-  
+
   /// Padding for the container
   final EdgeInsetsGeometry padding;
-  
+
   /// Optional gradient for the background
   final Gradient? gradient;
 
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).colorScheme.primary;
-    
+
     return Container(
       padding: padding,
       decoration: BoxDecoration(
