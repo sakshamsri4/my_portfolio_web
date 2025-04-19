@@ -11,19 +11,19 @@ class ErrorUtilsTestHelper {
 
   /// Last error message
   static String? lastErrorMessage;
-  
+
   /// Last error title
   static String? lastErrorTitle;
-  
+
   /// Last success message
   static String? lastSuccessMessage;
-  
+
   /// Last success title
   static String? lastSuccessTitle;
-  
+
   /// Last info message
   static String? lastInfoMessage;
-  
+
   /// Last info title
   static String? lastInfoTitle;
 
@@ -34,7 +34,7 @@ class ErrorUtilsTestHelper {
       lastErrorMessage = message;
       return;
     }
-    
+
     // In real implementation, this would show a snackbar
     if (kDebugMode) {
       print('ERROR: $title - $message');
@@ -48,7 +48,7 @@ class ErrorUtilsTestHelper {
       lastSuccessMessage = message;
       return;
     }
-    
+
     // In real implementation, this would show a snackbar
     if (kDebugMode) {
       print('SUCCESS: $title - $message');
@@ -62,7 +62,7 @@ class ErrorUtilsTestHelper {
       lastInfoMessage = message;
       return;
     }
-    
+
     // In real implementation, this would show a snackbar
     if (kDebugMode) {
       print('INFO: $title - $message');
@@ -72,7 +72,7 @@ class ErrorUtilsTestHelper {
   /// Handle URL launch errors
   static String handleUrlLaunchError(String url) {
     final errorMessage = 'Could not launch $url';
-    
+
     showErrorSnackbar(
       'Error',
       errorMessage,
@@ -82,7 +82,7 @@ class ErrorUtilsTestHelper {
     if (kDebugMode) {
       print('Error launching URL: $url');
     }
-    
+
     return errorMessage;
   }
 
@@ -98,10 +98,10 @@ class ErrorUtilsTestHelper {
     if (kDebugMode) {
       print(errorMessage);
     }
-    
+
     return errorMessage;
   }
-  
+
   /// Reset all test values
   static void resetTestValues() {
     lastErrorMessage = null;

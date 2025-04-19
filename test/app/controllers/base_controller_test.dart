@@ -43,7 +43,7 @@ void main() {
     test('onInit should call initializeController', () {
       // Manually call onInit (normally called by GetX)
       controller.onInit();
-      
+
       // Verify initializeController was called
       expect(controller.initializeCount, equals(1));
     });
@@ -51,7 +51,7 @@ void main() {
     test('onClose should call cleanupResources', () {
       // Manually call onClose (normally called by GetX)
       controller.onClose();
-      
+
       // Verify cleanupResources was called
       expect(controller.cleanupCount, equals(1));
     });

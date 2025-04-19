@@ -21,12 +21,18 @@ void main() {
     });
 
     test('animation duration constants should have correct values', () {
-      expect(AppConstants.animationDurationFast,
-          equals(const Duration(milliseconds: 200)),);
-      expect(AppConstants.animationDurationMedium,
-          equals(const Duration(milliseconds: 300)),);
-      expect(AppConstants.animationDurationSlow,
-          equals(const Duration(milliseconds: 500)),);
+      expect(
+        AppConstants.animationDurationFast,
+        equals(const Duration(milliseconds: 200)),
+      );
+      expect(
+        AppConstants.animationDurationMedium,
+        equals(const Duration(milliseconds: 300)),
+      );
+      expect(
+        AppConstants.animationDurationSlow,
+        equals(const Duration(milliseconds: 500)),
+      );
     });
 
     test('social media URL constants should not be empty', () {
