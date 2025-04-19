@@ -38,9 +38,11 @@ class ErrorUtils {
 
   /// Handle URL launch errors
   static void handleUrlLaunchError(String url) {
+    final errorMessage = 'Could not launch $url';
+
     showErrorSnackbar(
       'Error',
-      'Could not launch $url',
+      errorMessage,
     );
 
     // Log the error in debug mode
