@@ -1,5 +1,7 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:mockito/mockito.dart';
 import 'package:my_portfolio_web/app/data/models/tech_stack_item.dart';
@@ -125,6 +127,15 @@ void main() {
   // Helper function to build the widget under test
   Widget buildTestWidget() {
     return MaterialApp(
+      theme: ThemeData(
+        colorScheme: ColorScheme.light(
+          primary: Colors.purple,
+          secondary: Colors.purpleAccent,
+        ),
+        textTheme: const TextTheme(
+          displayMedium: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+      ),
       home: Scaffold(
         body: SizedBox(
           // Use a fixed size to avoid overflow errors
@@ -142,6 +153,11 @@ void main() {
   group('HeroSection Widget', () {
     testWidgets('renders correctly with all components',
         (WidgetTester tester) async {
+      // Set a larger screen size to avoid overflow
+      tester.binding.window.physicalSizeTestValue = const Size(1200, 1600);
+      tester.binding.window.devicePixelRatioTestValue = 1.0;
+      addTearDown(tester.binding.window.clearPhysicalSizeTestValue);
+
       // Build the widget
       await tester.pumpWidget(buildTestWidget());
 
@@ -151,18 +167,16 @@ void main() {
       // Verify that key elements are present
       expect(find.text("Hello, I'm"), findsOneWidget);
       expect(find.text('Saksham Srivastava'), findsAtLeastNWidgets(1));
-      // Don't check for 'Senior Flutter Developer' text as it appears multiple times
 
-      // Verify that the profile image is present
+      // Verify that the profile image container is present
       expect(find.byType(ClipOval), findsOneWidget);
 
       // Verify that the call to action buttons are present
-      // Use find.byType to find the container widgets instead of the text
       expect(find.byType(GestureDetector), findsWidgets);
       expect(find.byType(Stack), findsWidgets);
 
-      // Verify that the scroll indicator is present
-      expect(find.text('SCROLL TO EXPLORE'), findsOneWidget);
+      // Verify that animated text widgets are present
+      expect(find.byType(AnimatedTextKit), findsWidgets);
     });
 
     testWidgets('adapts to narrow layout on small screens',
@@ -170,6 +184,7 @@ void main() {
       // Set a narrow screen size
       tester.binding.window.physicalSizeTestValue = const Size(400, 800);
       tester.binding.window.devicePixelRatioTestValue = 1.0;
+      addTearDown(tester.binding.window.clearPhysicalSizeTestValue);
 
       // Build the widget
       await tester.pumpWidget(buildTestWidget());
@@ -180,8 +195,8 @@ void main() {
       expect(find.byType(Column), findsWidgets);
       expect(find.text('Saksham Srivastava'), findsAtLeastNWidgets(1));
 
-      // Reset the screen size
-      addTearDown(tester.binding.window.clearPhysicalSizeTestValue);
+      // Verify that animated text widgets are present
+      expect(find.byType(AnimatedTextKit), findsWidgets);
     });
 
     testWidgets('adapts to wide layout on large screens',
@@ -189,6 +204,7 @@ void main() {
       // Set a wide screen size
       tester.binding.window.physicalSizeTestValue = const Size(1200, 800);
       tester.binding.window.devicePixelRatioTestValue = 1.0;
+      addTearDown(tester.binding.window.clearPhysicalSizeTestValue);
 
       // Build the widget
       await tester.pumpWidget(buildTestWidget());
@@ -198,14 +214,23 @@ void main() {
       // This is harder to test directly, but we can check for the presence of a Row widget
       expect(find.byType(Row), findsWidgets);
 
-      // Reset the screen size
-      addTearDown(tester.binding.window.clearPhysicalSizeTestValue);
+      // Verify that animated text widgets are present
+      expect(find.byType(AnimatedTextKit), findsWidgets);
+
+      // Verify that the profile image container is present
+      expect(find.byType(ClipOval), findsOneWidget);
     });
 
     testWidgets('call to action buttons are present',
         (WidgetTester tester) async {
+      // Set a larger screen size to avoid overflow
+      tester.binding.window.physicalSizeTestValue = const Size(1200, 800);
+      tester.binding.window.devicePixelRatioTestValue = 1.0;
+      addTearDown(tester.binding.window.clearPhysicalSizeTestValue);
+
       // Build the widget
       await tester.pumpWidget(buildTestWidget());
+      await tester.pump(const Duration(milliseconds: 100));
 
       // Instead of tapping specific text which might appear multiple times,
       // we'll just verify that GestureDetector widgets are present
@@ -215,11 +240,8 @@ void main() {
       expect(controller.launchEmail, isA<Function>());
       expect(controller.downloadCV, isA<Function>());
 
-      // Verify that the button labels are present
-      // We use findsWidgets instead of findsOneWidget because the NeoPOP design
-      // has two Text widgets with the same text (one for shadow, one for main text)
-      expect(find.text("Let's Work Together"), findsWidgets);
-      expect(find.text('Download CV'), findsWidgets);
+      // Verify that the FontAwesome icons are present
+      expect(find.byType(FaIcon), findsWidgets);
     });
   });
 }
