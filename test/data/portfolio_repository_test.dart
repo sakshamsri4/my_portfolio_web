@@ -11,6 +11,12 @@ void main() {
       repository = PortfolioRepository();
     });
 
+    test('initialize and dispose methods complete without errors', () async {
+      // These methods should complete without throwing exceptions
+      await expectLater(repository.initialize(), completes);
+      expect(() => repository.dispose(), returnsNormally);
+    });
+
     test('getTechStack returns non-empty list of TechStackItems', () {
       final techStack = repository.getTechStack();
 
@@ -67,6 +73,41 @@ void main() {
       }
     });
 
+    test('getAnimatedIntroductions returns non-empty list of strings', () {
+      final introductions = repository.getAnimatedIntroductions();
+
+      expect(introductions, isA<List<String>>());
+      expect(introductions, isNotEmpty);
+
+      for (final intro in introductions) {
+        expect(intro, isNotEmpty);
+      }
+    });
+
+    test('getSkillCategories returns non-empty list of skill categories', () {
+      final skillCategories = repository.getSkillCategories();
+
+      expect(skillCategories, isA<List<Map<String, dynamic>>>());
+      expect(skillCategories, isNotEmpty);
+
+      // Verify structure of skill categories
+      for (final category in skillCategories) {
+        expect(category.containsKey('category'), isTrue);
+        expect(category.containsKey('iconType'), isTrue);
+        expect(category.containsKey('skills'), isTrue);
+        expect(category['category'], isA<String>());
+        expect(category['iconType'], isA<String>());
+        expect(category['skills'], isA<List<dynamic>>());
+        expect((category['skills'] as List).isNotEmpty, isTrue);
+
+        // Check that all skills are non-empty strings
+        for (final skill in category['skills'] as List) {
+          expect(skill, isA<String>());
+          expect(skill, isNotEmpty);
+        }
+      }
+    });
+
     test('getProjects returns non-empty list of project maps', () {
       final projects = repository.getProjects();
 
@@ -79,10 +120,12 @@ void main() {
         expect(project.containsKey('description'), isTrue);
         expect(project.containsKey('image'), isTrue);
         expect(project.containsKey('url'), isTrue);
+        expect(project.containsKey('tileImage'), isTrue);
         expect(project['title'], isNotEmpty);
         expect(project['description'], isNotEmpty);
         expect(project['image'], isNotEmpty);
         expect(project['url'], isNotEmpty);
+        expect(project['tileImage'], isNotEmpty);
       }
     });
 
@@ -114,8 +157,38 @@ void main() {
       // Check for required contact information
       expect(contactInfo.containsKey('email'), isTrue);
       expect(contactInfo.containsKey('phone'), isTrue);
+      expect(contactInfo.containsKey('location'), isTrue);
       expect(contactInfo['email'], isNotEmpty);
       expect(contactInfo['phone'], isNotEmpty);
+      expect(contactInfo['location'], isNotEmpty);
+    });
+
+    test('getEducationInfo returns non-empty list of education entries', () {
+      final educationInfo = repository.getEducationInfo();
+
+      expect(educationInfo, isA<List<Map<String, String>>>());
+      expect(educationInfo, isNotEmpty);
+
+      // Verify structure of education entries
+      for (final entry in educationInfo) {
+        expect(entry.containsKey('institution'), isTrue);
+        expect(entry.containsKey('degree'), isTrue);
+        expect(entry.containsKey('period'), isTrue);
+        expect(entry['institution'], isNotEmpty);
+        expect(entry['degree'], isNotEmpty);
+        expect(entry['period'], isNotEmpty);
+      }
+    });
+
+    test('getProfessionalSummary returns non-empty string', () {
+      final summary = repository.getProfessionalSummary();
+
+      expect(summary, isA<String>());
+      expect(summary, isNotEmpty);
+      expect(
+        summary.contains('Experienced Mobile Application Developer'),
+        isTrue,
+      );
     });
   });
 }

@@ -11,9 +11,7 @@ void main() {
       themeController = ThemeController();
     });
 
-    tearDown(() {
-      Get.reset();
-    });
+    tearDown(Get.reset);
 
     test('initial theme mode should be dark', () {
       expect(themeController.themeMode.value, equals(ThemeMode.dark));
@@ -23,12 +21,12 @@ void main() {
     test('toggleTheme should switch between light and dark mode', () {
       // Initially dark mode
       expect(themeController.themeMode.value, equals(ThemeMode.dark));
-      
+
       // Toggle to light mode
       themeController.toggleTheme();
       expect(themeController.themeMode.value, equals(ThemeMode.light));
       expect(themeController.isDarkMode, isFalse);
-      
+
       // Toggle back to dark mode
       themeController.toggleTheme();
       expect(themeController.themeMode.value, equals(ThemeMode.dark));
