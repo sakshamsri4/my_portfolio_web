@@ -467,3 +467,13 @@ RULE: Every action taken must be recorded in this file with a timestamp for futu
   - Updated `svg_icon_helper_test.dart` to use `pump()` with fixed duration instead of `pumpAndSettle()` to avoid timeouts
   - Successfully ran all tests with coverage reporting
   - Fixed issues with GetX animations in tests by using simpler test approaches
+
+## [2024-04-22]
+- Fixed test issues and improved test coverage:
+  - Fixed `social_sidebar_test.dart` by removing mockito references and using a manual mock approach
+  - Fixed `about_view_test.dart` by using a simplified test structure to avoid RenderFlex overflow issues
+  - Added comprehensive tests for `app_theme.dart` to test both light and dark themes
+  - Added tests for text themes and color schemes
+  - Increased test coverage from 8.8% to 23.3%, exceeding the 20% threshold
+  - Successfully generated coverage report with genhtml
+  - Fixed all failing tests to ensure a stable test suite

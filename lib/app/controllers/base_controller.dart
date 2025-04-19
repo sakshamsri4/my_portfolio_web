@@ -7,4 +7,16 @@ abstract class BaseController extends GetxController {
 
   /// Cleans up resources when controller is no longer needed
   void cleanupResources();
+
+  @override
+  void onInit() {
+    super.onInit();
+    initializeController();
+  }
+
+  @override
+  void onClose() {
+    cleanupResources();
+    super.onClose();
+  }
 }
