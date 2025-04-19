@@ -11,17 +11,15 @@ void main() {
     setUp(() {
       // Initialize GetX
       Get.testMode = true;
-      
+
       // Create a real repository
       repository = PortfolioRepository();
-      
+
       // Create controller with real repository
       controller = HomeController(repository: repository);
     });
 
-    tearDown(() {
-      Get.reset();
-    });
+    tearDown(Get.reset);
 
     test('initializes with correct data from repository', () {
       // Verify that the controller initialized with data from the repository
@@ -47,27 +45,33 @@ void main() {
       // Directly update the activeSection
       controller.activeSection.value = 'home';
       expect(controller.activeSection.value, equals('home'));
-      
+
       controller.activeSection.value = 'about';
       expect(controller.activeSection.value, equals('about'));
     });
 
     test('getImageWithFallback returns correct image path', () {
       // Test with a project image path
-      expect(controller.getImageWithFallback('project_image.jpg'), equals('assets/images/placeholder.jpg'));
-      
+      expect(
+        controller.getImageWithFallback('project_image.jpg'),
+        equals('assets/images/placeholder.jpg'),
+      );
+
       // Test with a non-project image path
-      expect(controller.getImageWithFallback('other_image.jpg'), equals('other_image.jpg'));
+      expect(
+        controller.getImageWithFallback('other_image.jpg'),
+        equals('other_image.jpg'),
+      );
     });
 
     test('toggleCarouselPlay toggles isCarouselPlaying', () {
       // Initially true
       expect(controller.isCarouselPlaying.value, isTrue);
-      
+
       // Toggle to false
       controller.toggleCarouselPlay();
       expect(controller.isCarouselPlaying.value, isFalse);
-      
+
       // Toggle back to true
       controller.toggleCarouselPlay();
       expect(controller.isCarouselPlaying.value, isTrue);

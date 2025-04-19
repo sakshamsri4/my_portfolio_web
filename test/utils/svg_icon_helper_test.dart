@@ -16,7 +16,8 @@ void main() {
         if (methodCall.arguments == 'assets/tech_icon_svg/flutter.svg') {
           // Return a simple SVG string for flutter icon
           return '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2L2 12h4l6-6 6 6h4L12 2z"/></svg>';
-        } else if (methodCall.arguments == 'assets/tech_icon_svg/nonexistent.svg') {
+        } else if (methodCall.arguments ==
+            'assets/tech_icon_svg/nonexistent.svg') {
           // Simulate a file not found error
           throw FlutterError('File not found');
         }
@@ -37,15 +38,16 @@ void main() {
     testWidgets('loadSvgIcon loads SVG correctly', (WidgetTester tester) async {
       // Load an SVG icon
       final svgPicture = await SvgIconHelper.loadSvgIcon('flutter');
-      
+
       // Verify it's an SvgPicture
       expect(svgPicture, isA<SvgPicture>());
     });
 
-    testWidgets('loadSvgIcon handles non-existent SVG files', (WidgetTester tester) async {
+    testWidgets('loadSvgIcon handles non-existent SVG files',
+        (WidgetTester tester) async {
       // Load a non-existent SVG icon
       final svgPicture = await SvgIconHelper.loadSvgIcon('nonexistent');
-      
+
       // Verify it returns a placeholder
       expect(svgPicture, isA<SvgPicture>());
     });
@@ -60,22 +62,23 @@ void main() {
           ),
         ),
       );
-      
+
       // Initially it should show a loading indicator
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
-      
+
       // Pump the widget a few times to progress the future
       await tester.pump(const Duration(milliseconds: 50));
       await tester.pump(const Duration(milliseconds: 50));
-      
+
       // The widget should exist
       expect(find.byType(FutureBuilder<SvgPicture>), findsOneWidget);
     });
 
-    testWidgets('getSvgIcon accepts custom size and color parameters', (WidgetTester tester) async {
+    testWidgets('getSvgIcon accepts custom size and color parameters',
+        (WidgetTester tester) async {
       const double customSize = 48;
       const Color customColor = Colors.red;
-      
+
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -89,14 +92,14 @@ void main() {
           ),
         ),
       );
-      
+
       // Pump the widget a few times
       await tester.pump(const Duration(milliseconds: 50));
       await tester.pump(const Duration(milliseconds: 50));
-      
+
       // Verify the FutureBuilder is created with the right parameters
       expect(find.byType(FutureBuilder<SvgPicture>), findsOneWidget);
-      
+
       // Verify the loading indicator has the right size
       final sizedBox = tester.widget<SizedBox>(find.byType(SizedBox).first);
       expect(sizedBox.width, equals(customSize));
