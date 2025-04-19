@@ -15,6 +15,11 @@ void main() {
   tearDown(Get.reset);
 
   testWidgets('ProjectsView renders correctly', (WidgetTester tester) async {
+    // Set a larger screen size to avoid overflow
+    tester.binding.window.physicalSizeTestValue = const Size(1024, 1600);
+    tester.binding.window.devicePixelRatioTestValue = 1.0;
+    addTearDown(tester.binding.window.clearPhysicalSizeTestValue);
+
     await tester.pumpWidget(
       GetMaterialApp(
         initialRoute: Routes.projects,
