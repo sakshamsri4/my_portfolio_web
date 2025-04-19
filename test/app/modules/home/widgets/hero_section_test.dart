@@ -101,6 +101,12 @@ class MockPortfolioRepository extends Mock implements PortfolioRepository {
   @override
   String getProfessionalSummary() =>
       'Experienced developer with expertise in Flutter and Dart.';
+
+  @override
+  List<String> getDesignPhilosophyQuotes() => [
+        'Turning ideas into exceptional mobile experiences',
+        'Simplicity is the ultimate sophistication',
+      ];
 }
 
 void main() {
@@ -196,7 +202,7 @@ void main() {
       addTearDown(tester.binding.window.clearPhysicalSizeTestValue);
     });
 
-    testWidgets('call to action buttons are tappable',
+    testWidgets('call to action buttons are present',
         (WidgetTester tester) async {
       // Build the widget
       await tester.pumpWidget(buildTestWidget());
@@ -209,7 +215,11 @@ void main() {
       expect(controller.launchEmail, isA<Function>());
       expect(controller.downloadCV, isA<Function>());
 
-      // Again, we're just verifying that the tap doesn't cause an error
+      // Verify that the button labels are present
+      // We use findsWidgets instead of findsOneWidget because the NeoPOP design
+      // has two Text widgets with the same text (one for shadow, one for main text)
+      expect(find.text("Let's Work Together"), findsWidgets);
+      expect(find.text('Download CV'), findsWidgets);
     });
   });
 }
