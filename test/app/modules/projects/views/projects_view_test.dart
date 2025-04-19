@@ -30,7 +30,8 @@ void main() {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8),
-                  const Text('A personal portfolio website built with Flutter and GetX.'),
+                  const Text(
+                      'A personal portfolio website built with Flutter and GetX.'),
                   const SizedBox(height: 8),
                   const Text(
                     'This website showcases my skills and projects in a clean, responsive interface.',
@@ -64,23 +65,23 @@ void main() {
 
     // Verify card is rendered
     expect(find.byType(Card), findsOneWidget);
-    
+
     // Verify card structure
     final card = tester.widget<Card>(find.byType(Card));
     expect(card.elevation, equals(3));
-    
+
     // Verify title text style
     final titleFinder = find.text('Portfolio Website');
     final titleWidget = tester.widget<Text>(titleFinder);
     expect(titleWidget.style!.fontSize, equals(18));
     expect(titleWidget.style!.fontWeight, equals(FontWeight.bold));
-    
+
     // Verify description text
     expect(
       find.text('A personal portfolio website built with Flutter and GetX.'),
       findsOneWidget,
     );
-    
+
     // Verify details text
     final detailsFinder = find.text(
       'This website showcases my skills and projects in a clean, responsive interface.',
@@ -88,18 +89,18 @@ void main() {
     expect(detailsFinder, findsOneWidget);
     final detailsWidget = tester.widget<Text>(detailsFinder);
     expect(detailsWidget.style!.fontSize, equals(14));
-    
+
     // Verify technology chips
     expect(find.byType(Chip), findsNWidgets(3));
     expect(find.text('Flutter'), findsOneWidget);
     expect(find.text('GetX'), findsOneWidget);
     expect(find.text('Web'), findsOneWidget);
-    
+
     // Verify chip padding
     final chipFinder = find.byType(Chip).first;
     final chip = tester.widget<Chip>(chipFinder);
     expect(chip.padding, equals(const EdgeInsets.all(4)));
-    
+
     // Verify chip text style
     final chipTextFinder = find.descendant(
       of: chipFinder,

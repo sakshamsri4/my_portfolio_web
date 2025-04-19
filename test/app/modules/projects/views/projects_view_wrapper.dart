@@ -11,11 +11,12 @@ class ProjectsViewWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Initialize GetX dependencies
-    final controller = Get.put(ProjectsController());
-    
-    // Add routes for navigation testing
-    Get.addPages(AppPages.routes);
-    
+    Get
+      ..put(ProjectsController())
+
+      // Add routes for navigation testing
+      ..addPages(AppPages.routes);
+
     return const MaterialApp(
       home: SingleChildScrollView(
         child: ProjectsView(),
