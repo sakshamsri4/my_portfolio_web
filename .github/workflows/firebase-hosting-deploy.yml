@@ -8,19 +8,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.3'
+          flutter-version: '3.29.2'
           channel: 'stable'
-      
+
       - name: Install dependencies
         run: flutter pub get
-      
+
       - name: Build web app
         run: flutter build web --release --target=lib/main_production.dart
-      
+
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:

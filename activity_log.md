@@ -452,5 +452,7 @@ RULE: Every action taken must be recorded in this file with a timestamp for futu
   - Increased test coverage from 3.3% to 8.8%
 
 - Fixed dependency conflict in GitHub Actions workflow:
-  - Downgraded intl package from ^0.19.0 to ^0.18.1 to be compatible with flutter_localizations
+  - Updated intl package to ^0.19.0 to be compatible with Flutter 3.29.x
+  - Specified Flutter version 3.29.2 in GitHub Actions workflows to ensure consistent builds
+  - Updated both main.yaml and firebase-hosting-deploy.yml workflows to use the same Flutter version
   - Resolved CI build failure caused by dependency resolution error
