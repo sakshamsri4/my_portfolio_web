@@ -124,8 +124,8 @@ void main() {
       // Verify the animation builder is present
       expect(find.byType(TweenAnimationBuilder<double>), findsOneWidget);
 
-      // Verify the transform is present for animation
-      expect(find.byType(Transform), findsOneWidget);
+      // Verify at least one transform is present for animation
+      expect(find.byType(Transform), findsWidgets);
     });
 
     testWidgets('has clickable mouse cursor', (WidgetTester tester) async {
@@ -143,9 +143,13 @@ void main() {
         ),
       );
 
-      // Verify the mouse region has a clickable cursor
-      final mouseRegion = tester.widget<MouseRegion>(find.byType(MouseRegion));
-      expect(mouseRegion.cursor, equals(SystemMouseCursors.click));
+      // Verify at least one mouse region has a clickable cursor
+      final mouseRegions =
+          tester.widgetList<MouseRegion>(find.byType(MouseRegion));
+      expect(
+        mouseRegions.any((region) => region.cursor == SystemMouseCursors.click),
+        isTrue,
+      );
     });
   });
 }

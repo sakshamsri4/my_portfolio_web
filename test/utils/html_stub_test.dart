@@ -19,9 +19,8 @@ void main() {
     });
 
     test('setAttribute does nothing for non-href attributes', () {
-      final anchor = AnchorElement(href: 'initial');
-
-      anchor.setAttribute('target', '_blank');
+      final anchor = AnchorElement(href: 'initial')
+        ..setAttribute('target', '_blank');
       expect(anchor.href, equals('initial'));
     });
 
