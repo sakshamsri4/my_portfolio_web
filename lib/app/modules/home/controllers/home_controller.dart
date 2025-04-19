@@ -52,6 +52,10 @@ class HomeController extends GetxController {
   /// Animated introduction texts
   late final List<String> animatedIntroductions =
       _repository.getAnimatedIntroductions();
+
+  /// Design philosophy quotes
+  late final List<String> designPhilosophyQuotes =
+      _repository.getDesignPhilosophyQuotes();
   // Skills organized by category
   late final List<Map<String, dynamic>> skillCategories =
       _repository.getSkillCategories();

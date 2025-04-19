@@ -67,6 +67,9 @@ class MockHomeController extends GetxController implements HomeController {
   final List<String> animatedIntroductions = ['I am a Flutter Developer'];
 
   @override
+  final List<String> designPhilosophyQuotes = ['Design is important'];
+
+  @override
   final List<Map<String, dynamic>> skillCategories = [
     {
       'name': 'Flutter',

@@ -61,24 +61,28 @@ class HeroSection extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
             child: AnimatedTextKit(
-              animatedTexts: [
-                ColorizeAnimatedText(
-                  '"Turning ideas into exceptional mobile experiences"',
-                  textStyle: const TextStyle(
-                    fontSize: 20,
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  textAlign: TextAlign.center,
-                  colors: [
-                    Theme.of(context).colorScheme.primary,
-                    Theme.of(context).colorScheme.secondary,
-                    Theme.of(context).colorScheme.primary.withAlpha(150),
-                    Theme.of(context).colorScheme.primary,
-                  ],
-                ),
-              ],
+              animatedTexts: controller.designPhilosophyQuotes
+                  .map(
+                    (text) => ColorizeAnimatedText(
+                      '"$text"',
+                      textStyle: const TextStyle(
+                        fontSize: 20,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      textAlign: TextAlign.center,
+                      colors: [
+                        Theme.of(context).colorScheme.primary,
+                        Theme.of(context).colorScheme.secondary,
+                        Theme.of(context).colorScheme.primary.withAlpha(150),
+                        Theme.of(context).colorScheme.primary,
+                      ],
+                    ),
+                  )
+                  .toList(),
               repeatForever: true,
+              pause: const Duration(milliseconds: 2000),
+              displayFullTextOnTap: true,
             ),
           ),
 
@@ -314,7 +318,9 @@ class HeroSection extends StatelessWidget {
             fontWeight: FontWeight.w800,
             letterSpacing: -1,
             height: 0.9,
-            color: Colors.black87,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.white
+                : Colors.black87,
           ),
         ),
         const SizedBox(height: 16),
@@ -327,7 +333,9 @@ class HeroSection extends StatelessWidget {
               height: 1.4,
               letterSpacing: 0.2,
               fontWeight: FontWeight.w500,
-              color: Colors.black54,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : Colors.black54,
             ),
             child: AnimatedTextKit(
               animatedTexts: [
@@ -491,13 +499,15 @@ class HeroSection extends StatelessWidget {
     return Column(
       children: [
         // Text with CRED-style typography
-        const Text(
+        Text(
           'SCROLL TO EXPLORE',
           style: TextStyle(
             fontSize: 12,
             letterSpacing: 1.5,
             fontWeight: FontWeight.w600,
-            color: Colors.black54,
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.white70
+                : Colors.black54,
           ),
         ),
         const SizedBox(height: 12),

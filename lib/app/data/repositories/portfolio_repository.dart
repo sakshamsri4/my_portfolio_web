@@ -206,6 +206,19 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
   }
 
   @override
+
+  /// Get design philosophy quotes
+  List<String> getDesignPhilosophyQuotes() {
+    return [
+      'Turning ideas into exceptional mobile experiences',
+      'Simplicity is the ultimate sophistication',
+      "Design is not just what it looks like, it's how it works",
+      'Details make perfection, and perfection is not a detail',
+      'Good design is obvious. Great design is transparent',
+    ];
+  }
+
+  @override
   List<Map<String, dynamic>> getSkillCategories() {
     return [
       {

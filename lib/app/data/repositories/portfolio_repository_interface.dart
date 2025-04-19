@@ -15,6 +15,9 @@ abstract class PortfolioRepositoryInterface extends RepositoryInterface {
   /// Get animated introduction texts
   List<String> getAnimatedIntroductions();
 
+  /// Get design philosophy quotes
+  List<String> getDesignPhilosophyQuotes();
+
   /// Get skills categories
   List<Map<String, dynamic>> getSkillCategories();
 
