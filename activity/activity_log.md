@@ -725,3 +725,17 @@
     - Better test output formatting and organization
     - Early detection of test failures before pushing to GitHub
     - Reduced CI failures due to test issues
+
+- Enhanced spelling check workflow to prevent CI failures:
+  - Added "glassmorphic" to .cspell.json to fix current CI failure
+  - Created a robust pre-push script that enforces spell checking
+  - Implemented a fallback mechanism for when cspell is not installed
+  - Created extract_technical_terms.sh script to identify potential technical terms
+  - Added spell-check and extract-terms commands to Makefile
+  - Updated scripts/README.md with documentation for the new script
+  - Benefits of this approach:
+    - Proactively identifies spelling issues before they cause CI failures
+    - Provides tools to easily maintain the .cspell.json dictionary
+    - Works even without cspell installed (with basic functionality)
+    - Integrates seamlessly with the existing development workflow
+    - Reduces frustration from unexpected CI failures

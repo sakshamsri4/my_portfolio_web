@@ -71,6 +71,30 @@ If you encounter issues with the pre-push hook:
    make test-stable
    ```
 
+## Extract Technical Terms Script
+
+The `extract_technical_terms.sh` script helps identify potential technical terms in the codebase that should be added to `.cspell.json` to prevent spelling check failures.
+
+### What it does:
+
+1. Extracts camelCase and PascalCase identifiers from Dart files
+2. Extracts technical terms from markdown files
+3. Extracts code terms surrounded by backticks in markdown files
+4. Compares the extracted terms with the current list in `.cspell.json`
+5. Outputs potential terms to add to `.cspell.json`
+
+### How to use:
+
+```bash
+./scripts/extract_technical_terms.sh
+```
+
+Or use the Makefile command:
+
+```bash
+make extract-terms
+```
+
 ### Benefits of using very_good_cli:
 
 - Automatically generates coverage reports

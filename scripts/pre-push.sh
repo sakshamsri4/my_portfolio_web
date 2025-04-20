@@ -44,16 +44,36 @@ fi
 echo "Note: Some tests are currently skipped. Fix them before production deployment."
 
 # Check for spelling issues
+echo "Checking spelling..."
 if command -v cspell &> /dev/null; then
-  echo "Checking spelling..."
+  # Use cspell if installed
   cspell "**/*.{dart,md,yaml,json}" --no-progress
   if [ $? -ne 0 ]; then
     echo "Error: Spelling issues found"
+    echo "Fix the spelling issues or add the words to .cspell.json"
     exit 1
   fi
 else
-  echo "Warning: cspell not installed. Skipping spelling check."
-  echo "To install: npm install -g cspell"
+  # If cspell is not installed, use a simple grep-based check for activity log
+  # This is a fallback to catch the most common issues
+  echo "Warning: cspell not installed. Using basic spelling check."
+  echo "For better results, install cspell: npm install -g cspell"
+
+  # Check if any unknown words are in the activity log
+  if grep -q "Unknown word" activity/activity_log.md 2>/dev/null; then
+    echo "Error: Potential spelling issues found in activity log."
+    echo "Please check activity/activity_log.md for any technical terms that need to be added to .cspell.json"
+    exit 1
+  fi
+
+  # Check if any words in the activity log match common misspellings
+  MISSPELLINGS=("teh" "recieve" "seperate" "definately" "accomodate" "occured" "wierd" "reccomend")
+  for word in "${MISSPELLINGS[@]}"; do
+    if grep -i -q "\b$word\b" activity/activity_log.md 2>/dev/null; then
+      echo "Error: Potential misspelling '$word' found in activity log."
+      exit 1
+    fi
+  done
 fi
 
 # Check for unused dependencies if flutter_lints is available

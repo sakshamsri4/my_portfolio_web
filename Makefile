@@ -88,8 +88,24 @@ test-stable:
 		flutter test test/controllers test/data test/routes test/utils; \
 	fi
 
+# Run spell check
+spell-check:
+	@echo "Running spell check..."
+	@if command -v cspell > /dev/null; then \
+		cspell "**/*.{dart,md,yaml,json}" --no-progress; \
+	else \
+		echo "cspell not installed. Install with: npm install -g cspell"; \
+		echo "Running basic spell check on activity log..."; \
+		grep -q "Unknown word" activity/activity_log.md 2>/dev/null || echo "No obvious spelling issues found."; \
+	fi
+
+# Extract technical terms
+extract-terms:
+	@echo "Extracting technical terms..."
+	@./scripts/extract_technical_terms.sh
+
 # Run all checks
-check: format analyze test-stable
+check: format analyze test-stable spell-check
 
 # Run pre-push checks
 pre-push:

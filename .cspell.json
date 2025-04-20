@@ -30,7 +30,9 @@
     "fficiency",
     "urability",
     "snackbars",
-    "SOLID"
+    "SOLID",
+    "glassmorphic",
+    "Glassmorphic"
   ],
   "ignorePaths": [
     "node_modules",
