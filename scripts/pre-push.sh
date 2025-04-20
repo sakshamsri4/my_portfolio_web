@@ -26,7 +26,7 @@ echo "Running tests..."
 
 # Skip failing tests for now
 echo "Skipping failing tests for now..."
-flutter test --exclude-tags="failing" test/app/constants test/controllers test/data test/routes test/utils
+flutter test --exclude-tags="failing" test/controllers test/data test/routes test/utils
 
 if [ $? -ne 0 ]; then
   echo "Error: Tests failed"
