@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Pre-push script to run tests and check for issues before pushing
+# Uses very_good_cli for enhanced checks when available
 
 echo "Running pre-push checks..."
 
@@ -20,12 +21,23 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# Run tests
-echo "Running tests..."
-flutter test
-if [ $? -ne 0 ]; then
-  echo "Error: Tests failed"
-  exit 1
+# Run tests with very_good_cli if available, otherwise use flutter test
+if command -v very_good &> /dev/null; then
+  echo "Running tests with very_good_cli..."
+  very_good test --coverage --min-coverage=20
+  if [ $? -ne 0 ]; then
+    echo "Error: Tests failed or coverage is below 20%"
+    exit 1
+  fi
+else
+  echo "Running tests with flutter test..."
+  flutter test
+  if [ $? -ne 0 ]; then
+    echo "Error: Tests failed"
+    exit 1
+  fi
+  echo "Note: Install very_good_cli for enhanced test coverage checks:"
+  echo "      dart pub global activate very_good_cli"
 fi
 
 # Check for spelling issues
@@ -40,6 +52,18 @@ else
   echo "Warning: cspell not installed. Skipping spelling check."
   echo "To install: npm install -g cspell"
 fi
+
+# Check for unused dependencies if flutter_lints is available
+if flutter pub deps | grep -q flutter_lints; then
+  echo "Checking for unused dependencies..."
+  flutter pub deps --no-dev | grep -v "[*]" | grep -v "└─" | grep -v "├─" | grep -v "│"
+  echo "Review the list above for any unused dependencies"
+fi
+
+# Check for outdated dependencies
+echo "Checking for outdated dependencies..."
+flutter pub outdated
+echo "Review any outdated dependencies above"
 
 echo "All pre-push checks passed!"
 exit 0

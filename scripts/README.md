@@ -10,8 +10,12 @@ The `pre-push.sh` script runs before pushing code to the remote repository to ca
 
 1. Formats code using `dart format`
 2. Runs Flutter analyzer to check for code issues
-3. Runs tests to ensure all tests pass
+3. Runs tests with coverage checks:
+   - Uses very_good_cli if available (with minimum 20% coverage check)
+   - Falls back to flutter test if very_good_cli is not installed
 4. Checks for spelling issues using cspell (if installed)
+5. Checks for unused dependencies
+6. Checks for outdated dependencies
 
 ### How to use:
 
@@ -41,5 +45,15 @@ Now the script will run automatically before each `git push` command.
 
 - Flutter SDK
 - Dart SDK
+- very_good_cli (recommended, for enhanced test coverage checks)
+  - Install with: `dart pub global activate very_good_cli`
 - cspell (optional, for spell checking)
   - Install with: `npm install -g cspell`
+
+### Benefits of using very_good_cli:
+
+- Automatically generates coverage reports
+- Enforces minimum coverage thresholds
+- Provides better test output formatting
+- Supports test filtering by tags
+- Optimizes test performance
