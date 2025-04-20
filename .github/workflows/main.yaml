@@ -4,6 +4,10 @@ concurrency:
   group: $-$
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  pull-requests: write
+
 on:
   push:
     branches:
@@ -13,8 +17,7 @@ on:
       - main
 
 jobs:
-  semantic-pull-request:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/semantic_pull_request.yml@v1
+  # Semantic pull request check is now handled by a separate workflow file
 
   build:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
