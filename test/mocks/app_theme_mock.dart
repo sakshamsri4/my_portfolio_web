@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_portfolio_web/app/theme/app_theme.dart';
+
 import '../mocks/google_fonts_mock.dart';
 
 /// A mock version of AppTheme for testing
@@ -10,7 +11,7 @@ class AppThemeMock {
   // Light theme with mock Google Fonts
   static ThemeData get lightTheme {
     final originalTheme = AppTheme.lightTheme;
-    
+
     return ThemeData(
       useMaterial3: originalTheme.useMaterial3,
       primarySwatch: AppTheme.primarySwatch,
@@ -94,7 +95,7 @@ class AppThemeMock {
   // Dark theme with mock Google Fonts
   static ThemeData get darkTheme {
     final originalTheme = AppTheme.darkTheme;
-    
+
     return ThemeData(
       useMaterial3: originalTheme.useMaterial3,
       brightness: Brightness.dark,

@@ -8,8 +8,8 @@ void mockSvgLoading() {
     const MethodChannel('flutter/assets'),
     (MethodCall methodCall) async {
       if (methodCall.method == 'loadString') {
-        final String path = methodCall.arguments as String;
-        
+        final path = methodCall.arguments as String;
+
         // Return a simple SVG string for any SVG path
         if (path.endsWith('.svg')) {
           return _getMockSvg(path);
@@ -33,7 +33,7 @@ void cleanupSvgMock() {
 String _getMockSvg(String path) {
   // Extract the file name from the path
   final fileName = path.split('/').last.split('.').first;
-  
+
   // Return different SVGs based on the file name
   switch (fileName) {
     case 'flutter':

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import '../mocks/google_fonts_mock.dart';
 
 /// A helper class to patch GoogleFonts methods for testing
@@ -9,11 +9,11 @@ class GoogleFontsTestHelper {
   static void patchGoogleFontsMontserrat() {
     // Create a test binding if not already created
     TestWidgetsFlutterBinding.ensureInitialized();
-    
+
     // Mock the GoogleFonts configuration
     mockGoogleFonts();
   }
-  
+
   /// Creates a mock TextTheme with Montserrat font
   static TextTheme createMockMontserratTextTheme(TextTheme baseTheme) {
     return TextTheme(
