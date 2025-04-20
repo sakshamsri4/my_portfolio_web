@@ -16,7 +16,29 @@ jobs:
   semantic-pull-request:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/semantic_pull_request.yml@v1
 
+  format-check:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.29.2'
+        channel: 'stable'
+
+    - name: Check for formatting issues
+      run: |
+        echo "Running format check..."
+        dart format --line-length 80 --output=none --set-exit-if-changed lib test || (
+          echo "::warning::Formatting issues detected. Please run 'dart format --line-length 80 lib test' locally before committing."
+          echo "Proceeding with the workflow despite formatting issues."
+          exit 0
+        )
+
   build:
+    needs: format-check
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
     with:
       flutter_channel: stable
