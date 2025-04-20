@@ -1,5 +1,58 @@
 # Activity Log
-RULE: Every action taken must be recorded in this file with a timestamp for future reference or sharing.
+
+## Rules and Guidelines
+
+1. **Documentation Rules:**
+   - Every action taken must be recorded in this file with a timestamp for future reference or sharing.
+   - Use clear, concise language with proper formatting (bullet points, code blocks, etc.).
+   - Include both what was done and why it was done to provide context.
+   - Document all errors encountered and how they were resolved.
+   - For significant changes, include before/after comparisons when relevant.
+
+2. **Code Quality Rules:**
+   - Follow SOLID principles in all code changes:
+     - **S**ingle Responsibility: Each class should have only one reason to change.
+     - **O**pen/Closed: Classes should be open for extension but closed for modification.
+     - **L**iskov Substitution: Subtypes must be substitutable for their base types.
+     - **I**nterface Segregation: Clients shouldn't depend on interfaces they don't use.
+     - **D**ependency Inversion: Depend on abstractions, not concretions.
+   - Apply DRY (Don't Repeat Yourself) principles to eliminate code duplication.
+   - Follow CRED design principles for UI components:
+     - **C**larity: UI elements should be clear and intuitive.
+     - **R**eliability: Components should work consistently across devices and platforms.
+     - **E**fficiency: UI should be optimized for performance and user flow.
+     - **D**urability: Design should be resilient to content changes and future updates.
+
+3. **Testing Rules:**
+   - Write tests before fixing bugs (Test-Driven Development when possible).
+   - Ensure all tests are independent and don't rely on other tests.
+   - Mock external dependencies to isolate the component being tested.
+   - Test both happy paths and edge cases/error conditions.
+   - Maintain a minimum test coverage threshold of 20%.
+   - Run the full test suite locally before pushing changes.
+   - Document test failures and their resolutions in this log.
+
+4. **Git Workflow Rules:**
+   - Use descriptive commit messages with prefixes (feat:, fix:, docs:, test:, refactor:, etc.).
+   - Run linting and tests locally before committing.
+   - Keep commits focused on a single logical change.
+   - Reference issue numbers in commit messages when applicable.
+   - Create separate branches for features, fixes, and refactoring.
+   - Regularly pull from the main branch to avoid merge conflicts.
+
+5. **Performance Rules:**
+   - Optimize images and assets before adding them to the project.
+   - Use const constructors for widgets that don't change.
+   - Implement proper state management to avoid unnecessary rebuilds.
+   - Profile the app regularly to identify performance bottlenecks.
+   - Document performance improvements with metrics when possible.
+
+6. **Accessibility Rules:**
+   - Ensure proper contrast ratios for text and background colors.
+   - Add semantic labels to interactive elements for screen readers.
+   - Support keyboard navigation for web applications.
+   - Test with screen readers and accessibility tools periodically.
+   - Document accessibility improvements in this log.
 ## [2024-07-10]
 - Initial setup of activity log file
 - Project structure review
@@ -572,3 +625,21 @@ RULE: Every action taken must be recorded in this file with a timestamp for futu
     - Use testWidgets for UI components and test for unit tests
     - Prefer finding widgets by type or key rather than by text when possible
     - Always add proper theme data to test widgets to avoid null theme errors
+
+- Enhanced activity log with comprehensive rules and guidelines:
+  - Added detailed documentation rules for better record-keeping
+  - Added code quality rules emphasizing SOLID and DRY principles
+  - Added testing rules to ensure consistent test quality
+  - Added Git workflow rules for better version control practices
+  - Added performance rules to maintain app efficiency
+  - Added accessibility rules to ensure the app is usable by everyone
+  - Organized rules into clear categories for easy reference
+
+- Created comprehensive code report documenting test fixes:
+  - Documented all issues addressed in the failing tests
+  - Explained solutions implemented for each issue
+  - Highlighted best practices applied during the fixes
+  - Summarized results and improvements made
+  - Suggested future improvements for the test suite
+  - Used clear formatting with headers, bullet points, and sections
+  - Followed documentation rules from the activity log
