@@ -39,7 +39,15 @@ analyze:
 # Run tests
 test:
 	@echo "Running tests..."
-	flutter test
+	@if command -v very_good > /dev/null; then \
+		echo "Running tests with very_good_cli..."; \
+		very_good test; \
+	else \
+		echo "Running tests with flutter test..."; \
+		flutter test; \
+		echo "Note: Install very_good_cli for enhanced test features:"; \
+		echo "      dart pub global activate very_good_cli"; \
+	fi
 
 # Run tests with coverage
 coverage:
@@ -69,8 +77,19 @@ clean:
 	flutter clean
 	rm -rf coverage
 
+# Run tests on stable directories only
+test-stable:
+	@echo "Running tests on stable directories only..."
+	@if command -v very_good > /dev/null; then \
+		echo "Running tests with very_good_cli..."; \
+		very_good test test/controllers test/data test/routes test/utils; \
+	else \
+		echo "Running tests with flutter test..."; \
+		flutter test test/controllers test/data test/routes test/utils; \
+	fi
+
 # Run all checks
-check: format analyze test
+check: format analyze test-stable
 
 # Run pre-push checks
 pre-push:

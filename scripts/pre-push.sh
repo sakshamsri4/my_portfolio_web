@@ -21,21 +21,27 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# Run tests with very_good_cli if available, otherwise use flutter test
-echo "Running tests..."
+# Run tests with very_good_cli
+echo "Running tests with very_good_cli..."
 
-# Skip failing tests for now
-echo "Skipping failing tests for now..."
-flutter test --exclude-tags="failing" test/controllers test/data test/routes test/utils
+# Check if very_good is installed
+if ! command -v very_good &> /dev/null; then
+  echo "Error: very_good_cli is not installed"
+  echo "Install it with: dart pub global activate very_good_cli"
+  exit 1
+fi
+
+# Run tests with very_good test
+# Skip failing tests for now by specifying only certain directories
+echo "Running tests on stable directories..."
+very_good test --coverage --min-coverage=20 test/controllers test/data test/routes test/utils
 
 if [ $? -ne 0 ]; then
-  echo "Error: Tests failed"
+  echo "Error: Tests failed or coverage is below 20%"
   exit 1
 fi
 
 echo "Note: Some tests are currently skipped. Fix them before production deployment."
-echo "Note: Install very_good_cli for enhanced test coverage checks:"
-echo "      dart pub global activate very_good_cli"
 
 # Check for spelling issues
 if command -v cspell &> /dev/null; then

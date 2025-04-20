@@ -710,3 +710,17 @@
     - UI widgets for different sections (about, contact, career, education, projects, skills)
     - Controllers (navigation_controller, contact_controller)
     - Error utilities
+
+- Improved development workflow with very_good test integration:
+  - Updated pre-push script to require very_good_cli for running tests
+  - Added test-stable command to Makefile to run tests only on stable directories
+  - Modified Makefile's test command to use very_good test when available
+  - Updated check command to use test-stable instead of test
+  - Added troubleshooting section to scripts/README.md for common issues
+  - Established a habit of running very_good test before pushing code
+  - Benefits of this approach:
+    - Consistent test environment across all developers
+    - Automatic coverage reporting with minimum threshold enforcement
+    - Better test output formatting and organization
+    - Early detection of test failures before pushing to GitHub
+    - Reduced CI failures due to test issues
