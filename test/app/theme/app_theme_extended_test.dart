@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:my_portfolio_web/app/theme/app_theme.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+
+  // Mock Google Fonts to avoid issues in tests
+  GoogleFonts.config.allowRuntimeFetching = false;
 
   group('AppTheme', () {
     test('lightTheme has correct properties', () {
