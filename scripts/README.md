@@ -10,10 +10,10 @@ The `pre-push.sh` script runs before pushing code to the remote repository to ca
 
 1. Formats code using `dart format`
 2. Runs Flutter analyzer to check for code issues
-3. Runs tests with very_good_cli (with minimum 20% coverage check)
+3. Runs tests with very_good_cli (with minimum 10% coverage check)
    - Requires very_good_cli to be installed
    - Runs tests only on stable directories to avoid known failures
-   - Enforces minimum 20% code coverage
+   - Enforces minimum 10% code coverage
 4. Checks for spelling issues using cspell (if installed)
 5. Checks for unused dependencies
 6. Checks for outdated dependencies

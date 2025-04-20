@@ -82,7 +82,7 @@ test-stable:
 	@echo "Running tests on stable directories only..."
 	@if command -v very_good > /dev/null; then \
 		echo "Running tests with very_good_cli..."; \
-		very_good test test/controllers test/data test/routes test/utils; \
+		very_good test --coverage --min-coverage=10 test/controllers test/data test/routes test/utils; \
 	else \
 		echo "Running tests with flutter test..."; \
 		flutter test test/controllers test/data test/routes test/utils; \

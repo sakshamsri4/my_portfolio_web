@@ -718,6 +718,7 @@
   - Updated check command to use test-stable instead of test
   - Added troubleshooting section to scripts/README.md for common issues
   - Established a habit of running very_good test before pushing code
+  - Set minimum coverage threshold to 10% for stable tests
   - Benefits of this approach:
     - Consistent test environment across all developers
     - Automatic coverage reporting with minimum threshold enforcement
