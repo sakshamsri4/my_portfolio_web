@@ -53,7 +53,7 @@ class ControllerFactory {
       Get.find<ContactController>().initializeController();
       Get.find<SkillsController>().initializeController();
       Get.find<ThemeController>().initializeController();
-    } catch (e) {
+    } on Exception catch (e) {
       debugPrint('Error initializing controllers: $e');
     }
   }
@@ -68,7 +68,7 @@ class ControllerFactory {
       Get.find<ContactController>().cleanupResources();
       Get.find<SkillsController>().cleanupResources();
       Get.find<ThemeController>().cleanupResources();
-    } catch (e) {
+    } on Exception catch (e) {
       debugPrint('Error cleaning up controllers: $e');
     }
   }
