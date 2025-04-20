@@ -6,10 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 /// Setup test environment for all tests
 void setupTestEnvironment() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  
+
   // Disable Google Fonts for tests
   GoogleFonts.config.allowRuntimeFetching = false;
-  
+
   // Mock asset bundle
   TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
       .setMockMethodCallHandler(
@@ -18,7 +18,9 @@ void setupTestEnvironment() {
       if (methodCall.method == 'loadString') {
         if (methodCall.arguments.toString().contains('.svg')) {
           // Return a simple SVG string for any SVG file
-          return '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>';
+          return '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" '
+              'viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 '
+              '10-4.48 10-10S17.52 2 12 2z"/></svg>';
         }
         // Return empty string for other asset types
         return '{}';

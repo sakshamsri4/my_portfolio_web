@@ -1,7 +1,3 @@
-/// Stub implementation of the html library for non-web platforms
-/// This allows us to use the same code for web and mobile platforms
-library html_stub;
-
 /// Stub implementation of AnchorElement
 class AnchorElement {
   /// Constructor that takes an href

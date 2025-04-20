@@ -41,7 +41,7 @@ void main() {
         final svgPicture = await SvgIconHelper.loadSvgIcon('flutter');
         // Verify it's an SvgPicture
         expect(svgPicture, isA<SvgPicture>());
-      } catch (e) {
+      } on Exception {
         // If there's an error loading the SVG, we'll consider the test passed
         // as long as the method exists and is callable
         expect(SvgIconHelper.loadSvgIcon, isA<Function>());
@@ -55,7 +55,7 @@ void main() {
         final svgPicture = await SvgIconHelper.loadSvgIcon('nonexistent');
         // Verify it returns a placeholder
         expect(svgPicture, isA<SvgPicture>());
-      } catch (e) {
+      } on Exception {
         // If there's an error loading the SVG, we'll consider the test passed
         // as long as the method exists and is callable
         expect(SvgIconHelper.loadSvgIcon, isA<Function>());
