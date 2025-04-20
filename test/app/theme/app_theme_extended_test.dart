@@ -80,11 +80,25 @@ void main() {
       expect(lightTextTheme.bodyMedium, isNotNull);
       expect(lightTextTheme.bodySmall, isNotNull);
 
+      // Verify font family is Montserrat
+      expect(lightTextTheme.displayLarge?.fontFamily, contains('Montserrat'));
+      expect(lightTextTheme.bodyMedium?.fontFamily, contains('Montserrat'));
+
+      // Verify font weights
+      expect(lightTextTheme.displayLarge?.fontWeight, equals(FontWeight.bold));
+
       // Dark theme text styles
       final darkTextTheme = AppTheme.darkTheme.textTheme;
       expect(darkTextTheme.displayLarge, isNotNull);
       expect(darkTextTheme.bodyMedium, isNotNull);
       expect(darkTextTheme.bodySmall, isNotNull);
+
+      // Verify font family is Montserrat
+      expect(darkTextTheme.displayLarge?.fontFamily, contains('Montserrat'));
+      expect(darkTextTheme.bodyMedium?.fontFamily, contains('Montserrat'));
+
+      // Verify font weights
+      expect(darkTextTheme.displayLarge?.fontWeight, equals(FontWeight.bold));
     });
   });
 }
