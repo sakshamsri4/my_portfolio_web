@@ -111,3 +111,14 @@ check: format analyze test-stable spell-check
 pre-push:
 	@echo "Running pre-push checks..."
 	./scripts/pre-push.sh
+
+# Create a new feature branch
+feature:
+	@read -p "Enter feature name (e.g., add-login): " name; \
+	git checkout -b feature/$$name main
+
+# Create a new bugfix branch
+bugfix:
+	@read -p "Enter issue number: " issue; \
+	read -p "Enter brief description: " desc; \
+	git checkout -b bugfix/$$issue-$$desc main

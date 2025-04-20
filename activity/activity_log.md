@@ -739,3 +739,17 @@
     - Works even without cspell installed (with basic functionality)
     - Integrates seamlessly with the existing development workflow
     - Reduces frustration from unexpected CI failures
+
+- Implemented proper Git workflow practices:
+  - Created docs/git_workflow.md with comprehensive Git guidelines
+  - Updated pre-push script to prevent direct pushes to main branch
+  - Added feature and bugfix branch creation commands to Makefile
+  - Established branch naming conventions (feature/, bugfix/, hotfix/, etc.)
+  - Documented commit message format following Conventional Commits
+  - Outlined proper PR process and code review requirements
+  - Benefits of this approach:
+    - Protects the main branch from untested changes
+    - Enforces code review before merging to production
+    - Maintains a clean, meaningful commit history
+    - Provides clear guidelines for all contributors
+    - Follows industry best practices for Git workflow

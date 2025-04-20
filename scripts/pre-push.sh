@@ -5,6 +5,19 @@
 
 echo "Running pre-push checks..."
 
+# Prevent direct pushes to main branch
+CURRENT_BRANCH=$(git symbolic-ref --short HEAD)
+PROTECTED_BRANCHES="main master"
+
+for branch in $PROTECTED_BRANCHES; do
+  if [ "$CURRENT_BRANCH" = "$branch" ]; then
+    echo "ERROR: Direct push to $branch branch is not allowed."
+    echo "Please create a feature branch and submit a pull request instead."
+    echo "See docs/git_workflow.md for proper Git workflow."
+    exit 1
+  fi
+done
+
 # Format code
 echo "Formatting code..."
 dart format .
