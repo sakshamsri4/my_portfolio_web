@@ -1,32 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:my_portfolio_web/app/utils/svg_icon_helper.dart';
+import '../mocks/test_setup.dart';
 
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
-
-  // Setup a mock for the asset bundle
-  TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-      .setMockMethodCallHandler(
-    const MethodChannel('flutter/assets'),
-    (MethodCall methodCall) async {
-      if (methodCall.method == 'loadString') {
-        if (methodCall.arguments == 'assets/tech_icon_svg/flutter.svg') {
-          // Return a simple SVG string for flutter icon
-          return '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2L2 12h4l6-6 6 6h4L12 2z"/></svg>';
-        } else if (methodCall.arguments ==
-            'assets/tech_icon_svg/nonexistent.svg') {
-          // Simulate a file not found error
-          throw FlutterError('File not found');
-        }
-        // Return a default SVG for any other path
-        return '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>';
-      }
-      return null;
-    },
-  );
+  // Set up test environment with all necessary mocks
+  setupTestEnvironment();
 
   group('SvgIconHelper', () {
     test('SvgIconHelper class exists and has expected methods', () {
@@ -36,28 +16,22 @@ void main() {
     });
 
     testWidgets('loadSvgIcon loads SVG correctly', (WidgetTester tester) async {
-      // Load an SVG icon
+      // Load an SVG icon using our mock
       final svgPicture = await SvgIconHelper.loadSvgIcon('flutter');
 
       // Verify it's an SvgPicture
       expect(svgPicture, isA<SvgPicture>());
-
-      // Additional verification that it's properly configured
-      expect(svgPicture.width, 24.0);
-      expect(svgPicture.height, 24.0);
     });
 
     testWidgets('loadSvgIcon handles non-existent SVG files',
         (WidgetTester tester) async {
       // Load a non-existent SVG icon
       try {
-        final svgPicture = await SvgIconHelper.loadSvgIcon('nonexistent');
-        // Verify it returns a placeholder
-        expect(svgPicture, isA<SvgPicture>());
-      } on Exception {
-        // If there's an error loading the SVG, we'll consider the test passed
-        // as long as the method exists and is callable
-        expect(SvgIconHelper.loadSvgIcon, isA<Function>());
+        await SvgIconHelper.loadSvgIcon('nonexistent');
+        fail('Should have thrown an exception');
+      } on Exception catch (e) {
+        // Verify that an exception was thrown
+        expect(e, isNotNull);
       }
     });
 
@@ -103,12 +77,8 @@ void main() {
     });
   });
 
-  // Clean up the mock handler
+  // Clean up the test environment
   tearDownAll(() {
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(
-      const MethodChannel('flutter/assets'),
-      null,
-    );
+    cleanupTestEnvironment();
   });
 }

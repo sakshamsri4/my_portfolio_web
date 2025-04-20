@@ -1,0 +1,20 @@
+#!/bin/sh
+# Pre-commit hook to ensure code is properly formatted
+
+# Get a list of staged Dart files
+STAGED_DART_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.dart$')
+
+if [ -n "$STAGED_DART_FILES" ]; then
+  echo "Running dart format on staged Dart files..."
+  
+  # Format the staged Dart files
+  echo "$STAGED_DART_FILES" | xargs dart format --line-length 80
+  
+  # Add the formatted files back to the staging area
+  echo "$STAGED_DART_FILES" | xargs git add
+  
+  echo "Dart files formatted and staged."
+fi
+
+# Continue with the commit
+exit 0

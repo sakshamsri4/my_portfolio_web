@@ -1,28 +1,20 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:my_portfolio_web/app/theme/app_theme.dart';
 
 void main() {
   // Initialize Flutter binding
   TestWidgetsFlutterBinding.ensureInitialized();
+
   group('AppTheme', () {
-    test('primarySwatch should have correct primary color', () {
+    test('has correct color constants', () {
+      // Test color constants
+      expect(AppTheme.primarySwatch, isA<MaterialColor>());
       expect(AppTheme.primarySwatch.value, equals(0xFF675AF2));
-    });
-
-    test('backgroundColor should have correct value', () {
-      expect(AppTheme.backgroundColor.value, equals(0xFFF4F0FF));
-    });
-
-    test('textPrimary should have correct value', () {
-      expect(AppTheme.textPrimary.value, equals(0xFF333333));
-    });
-
-    test('textSecondary should have correct value', () {
-      expect(AppTheme.textSecondary.value, equals(0xFF666666));
-    });
-
-    test('textLight should have correct value', () {
-      expect(AppTheme.textLight.value, equals(0xFF999999));
+      expect(AppTheme.backgroundColor, equals(const Color(0xFFF4F0FF)));
+      expect(AppTheme.textPrimary, equals(const Color(0xFF333333)));
+      expect(AppTheme.textSecondary, equals(const Color(0xFF666666)));
+      expect(AppTheme.textLight, equals(const Color(0xFF999999)));
     });
   });
 }
