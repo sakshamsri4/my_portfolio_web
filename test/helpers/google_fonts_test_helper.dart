@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import '../mocks/google_fonts_mock.dart';
 
 /// A helper class to patch GoogleFonts methods for testing
