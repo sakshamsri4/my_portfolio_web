@@ -37,15 +37,14 @@ void main() {
 
     testWidgets('loadSvgIcon loads SVG correctly', (WidgetTester tester) async {
       // Load an SVG icon
-      try {
-        final svgPicture = await SvgIconHelper.loadSvgIcon('flutter');
-        // Verify it's an SvgPicture
-        expect(svgPicture, isA<SvgPicture>());
-      } on Exception {
-        // If there's an error loading the SVG, we'll consider the test passed
-        // as long as the method exists and is callable
-        expect(SvgIconHelper.loadSvgIcon, isA<Function>());
-      }
+      final svgPicture = await SvgIconHelper.loadSvgIcon('flutter');
+
+      // Verify it's an SvgPicture
+      expect(svgPicture, isA<SvgPicture>());
+
+      // Additional verification that it's properly configured
+      expect(svgPicture.width, 24.0);
+      expect(svgPicture.height, 24.0);
     });
 
     testWidgets('loadSvgIcon handles non-existent SVG files',
