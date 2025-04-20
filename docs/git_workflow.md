@@ -118,7 +118,7 @@ Follow the [Conventional Commits](https://www.conventionalcommits.org/) specific
    git push origin your-branch --force-with-lease
    ```
 
-## Emergency Hotfixes
+## Emergency hotfixes
 
 For critical production issues:
 
