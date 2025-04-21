@@ -4,7 +4,7 @@ This document outlines the Git workflow and best practices for this project.
 
 ## Core Principles
 
-1. **Main branch is sacred**: The `main` branch is for production-ready code only.
+1. **The main branch is sacred**: The `main` branch is for production-ready code only.
 2. **Feature branches**: All development work happens in feature branches.
 3. **Code review**: All changes require review before merging to `main`.
 4. **Testing**: All code must pass tests before merging to `main`.
@@ -18,6 +18,7 @@ This document outlines the Git workflow and best practices for this project.
 - `refactor/component-name` - For code refactoring
 - `docs/topic` - For documentation updates
 - `test/component-name` - For adding or updating tests
+- `chore/task-description` - For build scripts, dependency updates, and maintenance tasks
 
 ## Workflow
 

@@ -9,15 +9,21 @@ NC='\033[0m' # No Color
 
 echo -e "${BLUE}Running pre-push checks...${NC}"
 
+# Define protected branches as an array
+readonly PROTECTED_BRANCHES=("main" "master")
+
 # Get the current branch
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
-# Check if the current branch is main
-if [ "$CURRENT_BRANCH" = "main" ] || [ "$CURRENT_BRANCH" = "master" ]; then
-  echo -e "${RED}You're attempting to push directly to $CURRENT_BRANCH branch, which is not allowed.${NC}"
-  echo -e "${YELLOW}Please create a feature branch and submit a pull request instead.${NC}"
-  exit 1
-fi
+# Check if the current branch is a protected branch
+for branch in "${PROTECTED_BRANCHES[@]}"; do
+  if [ "$CURRENT_BRANCH" = "$branch" ]; then
+    echo -e "${RED}You're attempting to push directly to $CURRENT_BRANCH branch, which is not allowed.${NC}"
+    echo -e "${YELLOW}Please create a feature branch and submit a pull request instead.${NC}"
+    echo -e "${YELLOW}See docs/git_workflow.md for more information.${NC}"
+    exit 1
+  fi
+done
 
 # Format the code using dart format
 echo -e "${BLUE}Formatting code...${NC}"

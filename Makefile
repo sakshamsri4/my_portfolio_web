@@ -1,6 +1,7 @@
 # Makefile for Flutter project
 
-.PHONY: help setup format analyze test coverage lint fix-lint clean check pre-push
+.PHONY: help setup format analyze test coverage lint fix-lint clean check pre-push \
+        extract-terms feature bugfix
 
 # Default target
 help:
@@ -120,5 +121,6 @@ feature:
 # Create a new bugfix branch
 bugfix:
 	@read -p "Enter issue number: " issue; \
-	read -p "Enter brief description: " desc; \
+	@read -p "Enter brief description (use hyphens, no spaces): " desc; \
+	desc=$${desc// /-}; \
 	git checkout -b bugfix/$$issue-$$desc main
