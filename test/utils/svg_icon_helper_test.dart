@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:my_portfolio_web/app/utils/svg_icon_helper.dart';
-import '../mocks/svg_mock.dart';
 import '../helpers/test_helpers.dart';
+import '../mocks/svg_mock.dart';
 
 void main() {
   // Set up test environment with all necessary mocks
