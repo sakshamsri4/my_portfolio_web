@@ -25,15 +25,62 @@ for branch in "${PROTECTED_BRANCHES[@]}"; do
   fi
 done
 
+# Define problematic files that need special attention
+PROBLEM_FILES=(
+  "test/helpers/google_fonts_test_helper.dart"
+  "test/mocks/app_theme_mock.dart"
+  "test/mocks/svg_mock.dart"
+)
+
+# Format problem files first with extra attention
+echo -e "${YELLOW}Formatting problematic files with special attention...${NC}"
+for file in "${PROBLEM_FILES[@]}"; do
+  if [ -f "$file" ]; then
+    echo -e "  ${BLUE}Formatting $file${NC}"
+    dart format --line-length 80 "$file"
+    if [ $? -eq 0 ]; then
+      echo -e "  ${GREEN}✓ Formatted successfully${NC}"
+    else
+      echo -e "  ${RED}✗ Formatting failed${NC}"
+      echo -e "${RED}There was an issue formatting $file. This will cause CI to fail.${NC}"
+      echo -e "${YELLOW}Please fix the formatting issues manually and try again.${NC}"
+      exit 1
+    fi
+  fi
+done
+
 # Format the code using dart format
-echo -e "${BLUE}Formatting code...${NC}"
-dart format .
+echo -e "${BLUE}Formatting all code...${NC}"
+dart format --line-length 80 .
 FORMAT_EXIT_CODE=$?
 if [ $FORMAT_EXIT_CODE -ne 0 ]; then
   echo -e "${RED}Code formatting failed. Please fix the issues and try again.${NC}"
   exit 1
 fi
 echo -e "${GREEN}Code formatting successful.${NC}"
+
+# Verify formatting of problematic files as a final check
+echo -e "${BLUE}Verifying format of problematic files...${NC}"
+for file in "${PROBLEM_FILES[@]}"; do
+  if [ -f "$file" ]; then
+    echo -e "  ${BLUE}Checking $file${NC}"
+    dart format --line-length 80 --output=none --set-exit-if-changed "$file"
+    if [ $? -ne 0 ]; then
+      echo -e "  ${RED}✗ $file still has formatting issues!${NC}"
+      echo -e "${RED}This will cause CI to fail. Running format one more time...${NC}"
+      dart format --line-length 80 "$file"
+      # Verify again
+      dart format --line-length 80 --output=none --set-exit-if-changed "$file"
+      if [ $? -ne 0 ]; then
+        echo -e "${RED}CRITICAL: Cannot fix formatting issues in $file${NC}"
+        echo -e "${YELLOW}Please fix this file manually before pushing.${NC}"
+        exit 1
+      fi
+    else
+      echo -e "  ${GREEN}✓ Correctly formatted${NC}"
+    fi
+  fi
+done
 
 # Run the Flutter analyzer
 echo -e "${BLUE}Running Flutter analyzer...${NC}"
