@@ -32,7 +32,19 @@
     "snackbars",
     "SOLID",
     "glassmorphic",
-    "Glassmorphic"
+    "Glassmorphic",
+    "hotfix",
+    "hotfixes",
+    "Hotfixes",
+    "bugfix",
+    "rebase",
+    "squash",
+    "rebasing",
+    "codebase",
+    "workflow",
+    "workflows",
+    "Makefile",
+    "pre-push"
   ],
   "ignorePaths": [
     "node_modules",

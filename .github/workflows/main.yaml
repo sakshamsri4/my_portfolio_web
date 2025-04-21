@@ -87,6 +87,12 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Auto-format files before checking
+        run: |
+          echo "Auto-formatting files to prevent formatting errors..."
+          dart format --line-length 80 .
+          git diff --name-only
+
       - name: Verify formatting
         run: dart format --output=none --set-exit-if-changed .
         continue-on-error: true

@@ -1,12 +1,14 @@
 # Makefile for Flutter project
 
-.PHONY: help setup format analyze test coverage lint fix-lint clean check pre-push
+.PHONY: help setup format format-all analyze test coverage lint fix-lint clean check pre-push \
+        extract-terms feature bugfix
 
 # Default target
 help:
 	@echo "Available commands:"
 	@echo "  make setup      - Set up the project (install dependencies, etc.)"
 	@echo "  make format     - Format code using dart format"
+	@echo "  make format-all - Format all Dart files with 80-character line length"
 	@echo "  make analyze    - Run Flutter analyzer"
 	@echo "  make test       - Run tests"
 	@echo "  make coverage   - Run tests with coverage"
@@ -23,13 +25,23 @@ setup:
 	@echo "Setting up git hooks..."
 	@mkdir -p .git/hooks
 	@ln -sf ../../scripts/pre-push.sh .git/hooks/pre-push
+	@ln -sf ../../scripts/pre-commit.sh .git/hooks/pre-commit
 	@chmod +x scripts/pre-push.sh
+	@chmod +x scripts/pre-commit.sh
+	@chmod +x scripts/format_all.sh
+	@echo "Formatting all Dart files..."
+	./scripts/format_all.sh
 	@echo "Setup complete!"
 
 # Format code
 format:
 	@echo "Formatting code..."
 	dart format .
+
+# Format all Dart files with line length 80
+format-all:
+	@echo "Formatting all Dart files with 80-character line length..."
+	./scripts/format_all.sh
 
 # Run analyzer
 analyze:
@@ -111,3 +123,15 @@ check: format analyze test-stable spell-check
 pre-push:
 	@echo "Running pre-push checks..."
 	./scripts/pre-push.sh
+
+# Create a new feature branch
+feature:
+	@read -p "Enter feature name (e.g., add-login): " name; \
+	git checkout -b feature/$$name main
+
+# Create a new bugfix branch
+bugfix:
+	@read -p "Enter issue number: " issue; \
+	@read -p "Enter brief description (use hyphens, no spaces): " desc; \
+	desc=$${desc// /-}; \
+	git checkout -b bugfix/$$issue-$$desc main

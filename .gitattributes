@@ -1,0 +1,20 @@
+# Force line endings to be LF for all text files
+* text=auto eol=lf
+
+# Force Dart files to be treated as text with LF line endings
+*.dart text eol=lf
+
+# Explicitly set problematic files as text with LF line endings
+test/helpers/google_fonts_test_helper.dart text eol=lf linguist-language=Dart
+test/mocks/app_theme_mock.dart text eol=lf linguist-language=Dart
+test/mocks/svg_mock.dart text eol=lf linguist-language=Dart
+
+# Binary files should not be modified
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ttf binary
+*.otf binary
+*.pdf binary
