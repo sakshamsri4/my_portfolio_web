@@ -1,4 +1,11 @@
 #!/bin/bash
+set -euo pipefail
+
+# Verify Dart SDK is available
+if ! command -v dart > /dev/null; then
+  echo -e "${RED}✗ 'dart' command not found. Please install the Dart SDK.${NC}"
+  exit 1
+fi
 
 # Color codes for output
 GREEN='\033[0;32m'
@@ -35,7 +42,10 @@ format_file() {
 echo -e "${YELLOW}Formatting problematic files with special attention...${NC}"
 for file in "${PROBLEMATIC_FILES[@]}"; do
   if [ -f "$file" ]; then
-    format_file "$file"
+    if ! format_file "$file"; then
+      echo -e "${RED}Aborting due to formatting failure on $file${NC}"
+      exit 1
+    fi
   else
     echo -e "  ${YELLOW}⚠ File not found: $file${NC}"
   fi
@@ -43,7 +53,11 @@ done
 
 # Format all Dart files in the entire project
 echo -e "${BLUE}Formatting all Dart files in the project...${NC}"
-find . -name "*.dart" -type f | xargs dart format --line-length 80
+find . -name "*.dart" -type f -print0 | xargs -0 dart format --line-length 80
+if [ $? -ne 0 ]; then
+  echo -e "${RED}✗ Errors occurred during bulk formatting${NC}"
+  exit 1
+fi
 echo -e "${GREEN}Dart files formatted successfully.${NC}"
 
 # Count how many files were formatted
