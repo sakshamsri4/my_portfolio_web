@@ -53,7 +53,7 @@ void cleanupTestEnvironment() {
     const MethodChannel('flutter/assets'),
     null,
   );
-  
+
   TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
       .setMockMethodCallHandler(
     const MethodChannel('plugins.flutter.io/svg'),

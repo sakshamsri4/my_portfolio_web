@@ -39,11 +39,11 @@ void main() {
       // Skip the actual loading test in CI environment
       // This is a compromise to fix the persistent failures
       // Instead, we'll verify that the function exists and can be called
-      
+
       // Mock a successful result instead of trying to load a real SVG
       final mockSvg = SvgMock.createMockSvg(assetName: 'flutter');
       expect(mockSvg, isNotNull);
-      
+
       // Success - we're not testing actual asset loading which is unreliable in CI
     });
 

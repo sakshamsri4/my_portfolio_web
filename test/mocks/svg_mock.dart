@@ -28,6 +28,7 @@ class SvgMock {
 
   /// Setup SVG mocking for the test environment
   static void setupSvgMocking() {
+    TestWidgetsFlutterBinding.ensureInitialized();
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMessageHandler('plugins.flutter.io/svg', (message) async {
       return null;
