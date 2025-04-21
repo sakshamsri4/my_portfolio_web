@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:my_portfolio_web/app/utils/svg_icon_helper.dart';
+
 import '../helpers/test_helpers.dart';
 
 void main() {
@@ -45,8 +45,9 @@ void main() {
 
         // Success - we don't need to verify the exact type or implementation
         // This makes the test more resilient to implementation changes
-      } catch (e) {
+      } on Exception catch (e) {
         // If an exception occurs, print it but don't fail the test in CI
+        // ignore: avoid_print
         print('SVG loading test encountered an issue: $e');
         // Not failing the test to prevent CI blocking
       }
@@ -73,7 +74,7 @@ void main() {
         await SvgIconHelper.loadSvgIcon('nonexistent');
         // If it doesn't throw, that's also acceptable in a test environment
         // with mocked assets
-      } catch (e) {
+      } on Exception catch (e) {
         // If it throws, that's also fine - we're just ensuring it doesn't crash
         expect(e, isNotNull);
       }
