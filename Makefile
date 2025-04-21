@@ -1,6 +1,6 @@
 # Makefile for Flutter project
 
-.PHONY: help setup format analyze test coverage lint fix-lint clean check pre-push \
+.PHONY: help setup format format-all analyze test coverage lint fix-lint clean check pre-push \
         extract-terms feature bugfix
 
 # Default target
@@ -8,6 +8,7 @@ help:
 	@echo "Available commands:"
 	@echo "  make setup      - Set up the project (install dependencies, etc.)"
 	@echo "  make format     - Format code using dart format"
+	@echo "  make format-all - Format all Dart files with 80-character line length"
 	@echo "  make analyze    - Run Flutter analyzer"
 	@echo "  make test       - Run tests"
 	@echo "  make coverage   - Run tests with coverage"
@@ -27,12 +28,20 @@ setup:
 	@ln -sf ../../scripts/pre-commit.sh .git/hooks/pre-commit
 	@chmod +x scripts/pre-push.sh
 	@chmod +x scripts/pre-commit.sh
+	@chmod +x scripts/format_all.sh
+	@echo "Formatting all Dart files..."
+	./scripts/format_all.sh
 	@echo "Setup complete!"
 
 # Format code
 format:
 	@echo "Formatting code..."
 	dart format .
+
+# Format all Dart files with line length 80
+format-all:
+	@echo "Formatting all Dart files with 80-character line length..."
+	./scripts/format_all.sh
 
 # Run analyzer
 analyze:
