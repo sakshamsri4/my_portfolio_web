@@ -8,16 +8,16 @@ void setupTestEnvironment() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   // Mock Google Fonts
-  GoogleFontsTestHelper.patchGoogleFontsMontserrat();
+  setupGoogleFontsMock();
 
   // Mock SVG loading
-  mockSvgLoading();
+  SvgMock.setupSvgMocking();
 }
 
 /// Cleans up all mocks after tests
 void cleanupTestEnvironment() {
   // Clean up SVG mocks
-  cleanupSvgMock();
+  SvgMock.cleanupSvgMocking();
 }
 
 /// Builds a test widget with the proper theme and context
