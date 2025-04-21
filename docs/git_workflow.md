@@ -91,8 +91,8 @@ Follow the [Conventional Commits](https://www.conventionalcommits.org/) specific
 
 ## Protected Branches
 
-- The `main` branch is protected.
-- Direct pushes to `main` are prohibited.
+- The `main` and `master` branches are protected.
+- Direct pushes to these branches are prohibited.
 - PRs require at least one approval before merging.
 - All CI checks must pass before merging.
 
@@ -132,3 +132,31 @@ For critical production issues:
 2. Make the minimal necessary changes.
 3. Follow the normal PR process, but mark it as high priority.
 4. After merging, ensure the fix is also applied to any in-progress feature branches.
+
+## Makefile Helpers
+
+To streamline the Git workflow process, this project includes several Makefile targets that automate common Git operations:
+
+### Creating Feature Branches
+
+Instead of manually typing the git commands to create a feature branch, you can use:
+
+```bash
+make feature
+```
+
+This will:
+1. Prompt you for a feature name
+2. Automatically create a branch named `feature/your-feature-name` based on the latest `main` branch
+3. Follow the branch naming conventions defined in this document
+
+### Example Usage:
+```
+$ make feature
+Enter feature name (e.g., add-login): user-authentication
+# Creates and checks out: feature/user-authentication
+```
+
+This ensures consistent branch naming and that all feature branches start from the latest `main`.
+
+Similar helpers exist for other branch types (bugfix, etc.) to maintain consistency across the project.

@@ -16,11 +16,19 @@ void main() {
     });
 
     testWidgets('loadSvgIcon loads SVG correctly', (WidgetTester tester) async {
-      // Load an SVG icon using our mock
-      final svgPicture = await SvgIconHelper.loadSvgIcon('flutter');
+      // Add a fixed delay to allow asset loading time
+      await tester.pump(const Duration(milliseconds: 50));
 
-      // Verify it's an SvgPicture
-      expect(svgPicture, isA<SvgPicture>());
+      try {
+        // Load an SVG icon using our mock
+        final svgPicture = await SvgIconHelper.loadSvgIcon('flutter');
+
+        // Verify it's an SvgPicture
+        expect(svgPicture, isA<SvgPicture>());
+      } catch (e) {
+        // If an exception occurs, fail with more context
+        fail('Failed to load SVG: $e');
+      }
     });
 
     testWidgets('loadSvgIcon handles non-existent SVG files',
