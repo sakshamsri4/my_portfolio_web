@@ -24,7 +24,9 @@ setup:
 	@echo "Setting up git hooks..."
 	@mkdir -p .git/hooks
 	@ln -sf ../../scripts/pre-push.sh .git/hooks/pre-push
+	@ln -sf ../../scripts/pre-commit.sh .git/hooks/pre-commit
 	@chmod +x scripts/pre-push.sh
+	@chmod +x scripts/pre-commit.sh
 	@echo "Setup complete!"
 
 # Format code

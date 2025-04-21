@@ -1,4 +1,5 @@
-# Git Workflow Guidelines
+chmod +x scripts/pre-commit.sh
+make setup# Git Workflow Guidelines
 
 This document outlines the Git workflow and best practices for this project.
 

@@ -872,3 +872,47 @@
     - Clear post-task checklists reduce the chance of missing important steps
     - Explicit verification steps increase accountability
     - Prevention is better than fixing issues after they occur
+
+## [2024-04-27]
+- Task: Fixed formatting issues and implemented automatic code formatting
+  - **Issue Description**:
+    - CI build repeatedly failing due to formatting issues in test files
+    - Three specific files flagged in the latest build failure:
+      - test/helpers/google_fonts_test_helper.dart
+      - test/mocks/app_theme_mock.dart
+      - test/mocks/svg_mock.dart
+    - Format checking with line length of 80 characters kept failing despite manual fixes
+  
+  - **Root Cause Analysis**:
+    - Developers were not consistently applying the required code formatting
+    - No automated mechanism to ensure code is formatted before being committed
+    - Manual formatting is error-prone and easy to forget
+    - The PR review process was catching these issues too late in the workflow
+  
+  - **Attempted Solutions**:
+    1. First manually fixed the formatting issues in the three files using `dart format --line-length 80`
+    2. Considered making format changes part of the pre-push check, but this would still allow unformatted code to be committed
+  
+  - **Working Solution**:
+    - Created a comprehensive two-layer approach:
+      1. Implemented a new pre-commit hook (scripts/pre-commit.sh) that:
+         - Automatically detects Dart files being committed
+         - Formats them with the required 80-character line length
+         - Re-stages the formatted files before the commit completes
+      2. Updated the Makefile to install both pre-commit and pre-push hooks:
+         - Added symbolic link from .git/hooks/pre-commit to scripts/pre-commit.sh
+         - Made the pre-commit.sh script executable
+         - Ensured the setup process installs both hooks
+    
+    - This solution ensures:
+      - Code is automatically formatted before being committed
+      - Developers don't need to remember to run format checks manually
+      - The CI build won't fail due to formatting issues
+  
+  - **Lessons Learned**:
+    - Automation is critical for enforcing code standards
+    - Git hooks provide an excellent mechanism for ensuring quality before code is shared
+    - Multi-layered approach (pre-commit, pre-push, and CI) provides defense in depth
+    - Early intervention (at commit time) prevents issues from propagating further
+    - Documentation in the activity log is essential (as I initially forgot to do)
+    - Even small formatting issues can disrupt the development workflow if not addressed systematically
