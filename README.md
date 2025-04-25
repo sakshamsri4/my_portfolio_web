@@ -87,6 +87,30 @@ $ open coverage/index.html
 
 Contributions, issues, and feature requests are welcome! See the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines.
 
+## Code Formatting 📝
+
+This project uses `dart format` with a line length of 80 characters. To ensure your code is properly formatted before committing, you can:
+
+### Option 1: Use the Pre-commit Hook (Recommended)
+
+Set up the pre-commit hook to automatically format your code before each commit:
+
+```sh
+# Configure Git to use the hooks in the .githooks directory
+git config core.hooksPath .githooks
+chmod +x .githooks/pre-commit
+```
+
+### Option 2: Format Manually
+
+Run the formatter manually before committing:
+
+```sh
+dart format --line-length 80 lib test
+```
+
+Proper formatting is enforced in the CI pipeline, but the pipeline will not fail if formatting issues are detected. Instead, it will display a warning message.
+
 [coverage_badge]: coverage_badge.svg
 [flutter_localizations_link]: https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html
 [internationalization_link]: https://flutter.dev/docs/development/accessibility-and-localization/internationalization

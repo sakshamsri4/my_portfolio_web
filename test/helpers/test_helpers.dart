@@ -18,9 +18,12 @@ void setupTestEnvironment() {
       if (methodCall.method == 'loadString') {
         if (methodCall.arguments.toString().contains('.svg')) {
           // Return a simple SVG string for any SVG file
-          return '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" '
-              'viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 '
-              '10-4.48 10-10S17.52 2 12 2z"/></svg>';
+          return '''
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+            viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+          </svg>
+          ''';
         }
         // Return empty string for other asset types
         return '{}';
@@ -31,6 +34,16 @@ void setupTestEnvironment() {
       return null;
     },
   );
+
+  // Mock additional plugin channels that might be used
+  TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+      .setMockMethodCallHandler(
+    const MethodChannel('plugins.flutter.io/svg'),
+    (MethodCall methodCall) async {
+      // Return success for any SVG-related method calls
+      return null;
+    },
+  );
 }
 
 /// Clean up test environment after tests
@@ -38,6 +51,12 @@ void cleanupTestEnvironment() {
   TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
       .setMockMethodCallHandler(
     const MethodChannel('flutter/assets'),
+    null,
+  );
+
+  TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+      .setMockMethodCallHandler(
+    const MethodChannel('plugins.flutter.io/svg'),
     null,
   );
 }
