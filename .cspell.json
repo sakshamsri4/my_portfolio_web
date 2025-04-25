@@ -44,7 +44,8 @@
     "workflow",
     "workflows",
     "Makefile",
-    "pre-push"
+    "pre-push",
+    "dartdoc"
   ],
   "ignorePaths": [
     "node_modules",
