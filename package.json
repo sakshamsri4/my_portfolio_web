@@ -1,0 +1,13 @@
+{
+  "name": "my_portfolio_web",
+  "version": "1.0.0",
+  "description": "Portfolio website",
+  "private": true,
+  "scripts": {
+    "spell-check": "cspell \"**/*\" --config .cspell.json",
+    "spell-check:docs": "cspell \"docs/**/*\" --config .cspell.json"
+  },
+  "devDependencies": {
+    "cspell": "^6.31.2"
+  }
+}

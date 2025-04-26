@@ -1,19 +1,41 @@
 #!/bin/sh
-# Pre-commit hook to ensure code is properly formatted
+# Pre-commit hook to ensure code is properly formatted and spell-checked
 
 # Get a list of staged Dart files
 STAGED_DART_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.dart$')
 
 if [ -n "$STAGED_DART_FILES" ]; then
   echo "Running dart format on staged Dart files..."
-  
+
   # Format the staged Dart files
   echo "$STAGED_DART_FILES" | xargs dart format --line-length 80
-  
+
   # Add the formatted files back to the staging area
   echo "$STAGED_DART_FILES" | xargs git add
-  
+
   echo "Dart files formatted and staged."
+fi
+
+# Run spell check on all staged files
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
+
+if [ -n "$STAGED_FILES" ]; then
+  echo "Running spell check on staged files..."
+
+  # Check if the spell check script exists and is executable
+  if [ -x "scripts/check-spelling.sh" ]; then
+    ./scripts/check-spelling.sh
+    SPELL_CHECK_RESULT=$?
+
+    if [ $SPELL_CHECK_RESULT -ne 0 ]; then
+      echo "❌ Spell check failed. Please fix the spelling issues before committing."
+      exit 1
+    else
+      echo "✅ Spell check passed!"
+    fi
+  else
+    echo "Warning: Spell check script not found or not executable. Skipping spell check."
+  fi
 fi
 
 # Continue with the commit
