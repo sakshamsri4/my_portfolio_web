@@ -25,10 +25,17 @@ setup:
 	@echo "Setting up git hooks..."
 	@mkdir -p .git/hooks
 	@ln -sf ../../scripts/pre-push.sh .git/hooks/pre-push
-	@ln -sf ../../scripts/pre-commit.sh .git/hooks/pre-commit
+	@ln -sf ../../.githooks/pre-commit .git/hooks/pre-commit
 	@chmod +x scripts/pre-push.sh
-	@chmod +x scripts/pre-commit.sh
+	@chmod +x scripts/check-spelling.sh
 	@chmod +x scripts/format_all.sh
+	@echo "Setting up spell checking..."
+	@if command -v npm > /dev/null; then \
+		npm install; \
+	else \
+		echo "npm not found. Skipping spell check setup."; \
+		echo "To enable spell checking, install Node.js and npm, then run 'npm install'."; \
+	fi
 	@echo "Formatting all Dart files..."
 	./scripts/format_all.sh
 	@echo "Setup complete!"
@@ -103,12 +110,17 @@ test-stable:
 # Run spell check
 spell-check:
 	@echo "Running spell check..."
-	@if command -v cspell > /dev/null; then \
-		cspell "**/*.{dart,md,yaml,json}" --no-progress; \
+	@if [ -x "scripts/check-spelling.sh" ]; then \
+		./scripts/check-spelling.sh; \
+	elif command -v npx > /dev/null; then \
+		npx cspell "**/*" --config .cspell.json; \
+	elif command -v cspell > /dev/null; then \
+		cspell "**/*" --config .cspell.json; \
 	else \
 		echo "cspell not installed. Install with: npm install -g cspell"; \
-		echo "Running basic spell check on activity log..."; \
-		grep -q "Unknown word" activity/activity_log.md 2>/dev/null || echo "No obvious spelling issues found."; \
+		echo "Or run: npm install"; \
+		echo "Running basic spell check on documentation..."; \
+		grep -q "Unknown word" docs/activity/activity_log.md docs/copilot_rules.md docs/git_workflow.md 2>/dev/null || echo "No obvious spelling issues found."; \
 	fi
 
 # Extract technical terms

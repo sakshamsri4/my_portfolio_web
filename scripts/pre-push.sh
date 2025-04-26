@@ -102,6 +102,25 @@ if [ $TEST_EXIT_CODE -ne 0 ]; then
 fi
 echo -e "${GREEN}Tests passed successfully.${NC}"
 
+# Run spell check
+echo -e "${BLUE}Running spell check...${NC}"
+if [ -x "scripts/check-spelling.sh" ]; then
+  ./scripts/check-spelling.sh
+  SPELL_CHECK_RESULT=$?
+
+  if [ $SPELL_CHECK_RESULT -ne 0 ]; then
+    echo -e "${RED}Spell check failed. Please fix the spelling issues before pushing.${NC}"
+    echo -e "${YELLOW}Tip: You can add words to .cspell.json or use inline comments like:${NC}"
+    echo -e "${YELLOW}<!-- cspell:ignore word1 word2 -->${NC}"
+    exit 1
+  else
+    echo -e "${GREEN}Spell check passed!${NC}"
+  fi
+else
+  echo -e "${YELLOW}Warning: Spell check script not found or not executable. Skipping spell check.${NC}"
+  echo -e "${YELLOW}Consider running 'chmod +x scripts/check-spelling.sh' to enable spell checking.${NC}"
+fi
+
 # Check if changes have been made to the codebase but not to the activity log
 echo -e "${BLUE}Checking activity log updates...${NC}"
 
@@ -118,14 +137,14 @@ if [ -n "$CHANGED_FILES" ] && [ -z "$ACTIVITY_LOG_UPDATED" ]; then
   echo -e ""
   echo -e "${BLUE}Changes detected in:${NC}"
   git diff --cached --name-only | grep -v "docs/activity/activity_log.md" | sed 's/^/  /'
-  
+
   # Ask the user if they want to continue anyway
   read -p "Do you want to proceed without updating the activity log? (y/N): " response
   if [[ ! "$response" =~ ^[Yy]$ ]]; then
     echo -e "${YELLOW}Push cancelled. Please update the activity log and try again.${NC}"
     exit 1
   fi
-  
+
   echo -e "${YELLOW}Proceeding without activity log update. Please remember to update it later.${NC}"
 fi
 
