@@ -63,7 +63,8 @@
     "POPCTA",
     "mocktail",
     "genhtml",
-    "Namaste"
+    "Namaste",
+    "pubspec"
   ],
   "ignorePaths": [
     "node_modules",
