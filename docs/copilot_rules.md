@@ -53,18 +53,18 @@ Use this template for all activity log entries:
 - Task: [Brief description of what you were trying to accomplish]
   - **Issue Description**:
     - [Clear explanation of the problem or task]
-  
+
   - **Root Cause Analysis** (if applicable):
     - [Analysis of why the issue occurred]
-  
+
   - **Attempted Solutions**:
     1. [First approach tried]
     2. [Second approach tried]
-  
+
   - **Working Solution**:
     - [The approach that solved the problem]
     - [Code snippets or file changes made]
-  
+
   - **Lessons Learned**:
     - [Key insights gained from this task]
     - [How to avoid similar issues in the future]
@@ -79,6 +79,7 @@ Use this template for all activity log entries:
 5. Recommend proper error handling where applicable.
 
 ## Documentation
+<!-- cspell:ignore dartdoc -->
 1. Include dartdoc comments for public APIs.
 2. Explain complex algorithms or business logic with inline comments.
 3. Document any workarounds or non-standard approaches.
@@ -126,13 +127,13 @@ Use this template for all activity log entries:
    ## Attempted Solutions
    1. [First approach tried]
    2. [Second approach tried]
-   
+
    ## Root Cause
    [Analysis of why the issue occurred]
-   
+
    ## Working Solution
    [The approach that solved the problem]
-   
+
    ## Prevention Strategy
    [How to avoid this issue in the future]
    ```

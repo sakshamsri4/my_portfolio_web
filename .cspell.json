@@ -45,13 +45,37 @@
     "workflows",
     "Makefile",
     "pre-push",
-    "dartdoc"
+    "dartdoc",
+    "dartdocs",
+    "Keras",
+    "Codemagic",
+    "webp",
+    "WCAG",
+    "geospatial",
+    "telemedicine",
+    "zuelligpharma",
+    "Pharma",
+    "Wipro",
+    "Noida",
+    "ICSE",
+    "fintech",
+    "criss",
+    "POPCTA",
+    "mocktail",
+    "genhtml",
+    "Namaste",
+    "pubspec"
   ],
   "ignorePaths": [
     "node_modules",
     "build",
     ".dart_tool",
     ".github",
-    "pubspec.lock"
+    "pubspec.lock",
+    "windows/**",
+    "macos/**",
+    "linux/**",
+    "android/**",
+    "ios/**"
   ]
 }

@@ -186,7 +186,7 @@ void main() {
       expect(summary, isA<String>());
       expect(summary, isNotEmpty);
       expect(
-        summary.contains('Experienced Mobile Application Developer'),
+        summary.contains('Senior Mobile Application Architect'),
         isTrue,
       );
     });

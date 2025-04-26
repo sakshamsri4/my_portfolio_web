@@ -76,7 +76,7 @@ void main() {
       expect(careerController.professionalSummary, equals(repoSummary));
       expect(
         careerController.professionalSummary
-            .contains('Experienced Mobile Application Developer'),
+            .contains('Senior Mobile Application Architect'),
         isTrue,
       );
     });
