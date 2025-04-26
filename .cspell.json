@@ -53,6 +53,11 @@
     "build",
     ".dart_tool",
     ".github",
-    "pubspec.lock"
+    "pubspec.lock",
+    "windows/**",
+    "macos/**",
+    "linux/**",
+    "android/**",
+    "ios/**"
   ]
 }

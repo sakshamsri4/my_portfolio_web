@@ -8,8 +8,8 @@ fi
 
 echo "Running spell check..."
 
-# Run cspell on all files in the repository
-npx cspell "**/*" --config .cspell.json
+# Run cspell on specific file types in the repository
+npx cspell "**/*.{dart,md,yaml,json,txt}" --config .cspell.json
 
 # Check the exit code
 if [ $? -eq 0 ]; then
