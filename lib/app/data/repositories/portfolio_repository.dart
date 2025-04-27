@@ -203,9 +203,9 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
     return [
       'Architecting high-performance Flutter apps\nserving 500K+ users with 99.9% crash-free sessions.',
       'Delivering enterprise-grade mobile solutions\nthat reduced app startup times by 40%.',
-      'Leading teams that transformed complex requirements\ninto elegant apps with 4.8+ star ratings.',
+      'Leading teams that transformed complex requirements\ninto optimized apps with 4.8+ star ratings.',
       'Pioneering on-device ML and AI integrations\nthat increased user engagement by 35%.',
-      'Building healthcare and fintech apps\nthat passed rigorous security audits and compliance reviews.',
+      'Engineering healthcare and fintech apps\nthat passed rigorous security audits and compliance reviews.',
     ];
   }
 
@@ -218,7 +218,7 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
       "Flutter's true power lies in composition: complex UIs from simple, reusable components",
       'The thumb zone dictates mobile UX success more than any design trend',
       'Stateful architecture decisions in Flutter determine both user experience and developer velocity',
-      'The best mobile animations provide spatial context, not just visual delight',
+      'The best mobile animations provide spatial context and improve usability, not just visual appeal',
       "Offline-first isn't a feature—it's the baseline for professional mobile applications",
       "Flutter's widget tree should mirror your mental model of the UI's logical structure",
       'Mobile excellence is measured in the milliseconds between user intent and app response',
@@ -539,11 +539,11 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
         "star ratings. I've architected and delivered 15+ production apps across "
         'healthcare, fintech, and enterprise sectors, serving over 500,000 users globally. '
         '\n\nMy technical toolkit includes advanced Flutter state management (GetX, BLoC, '
-        'Riverpod), comprehensive Firebase integration, and custom UI/UX development '
-        "that balances aesthetic excellence with performance optimization. I've reduced "
+        'Riverpod), comprehensive Firebase integration, and advanced UI/UX development '
+        "that balances technical precision with performance optimization. I've reduced "
         'app startup times by 40% and decreased memory usage by 35% through strategic '
         'architecture decisions and performance tuning. '
-        '\n\nI excel at translating complex business requirements into elegant technical '
+        '\n\nI excel at translating complex business requirements into efficient technical '
         'solutions, having successfully implemented real-time synchronization systems with '
         '99.9% reliability, offline-first architectures that maintain 100% data integrity, '
         'and sophisticated data visualization components that process millions of data points. '
@@ -555,8 +555,8 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
         'while maintaining strict privacy standards. '
         "I've also established robust CI/CD pipelines that reduced deployment time by 60%, "
         'automated 85% of the QA process, and decreased regression bugs by 75%. '
-        "\n\nI'm passionate about creating mobile experiences that feel magical to users "
-        'while solving real business problems through thoughtful architecture and '
+        "\n\nI'm passionate about creating mobile experiences that deliver exceptional value to users "
+        'while solving real business problems through systematic architecture and '
         'meticulous attention to detail. My leadership has helped teams increase velocity by 45% '
         'while maintaining code quality standards that exceed industry benchmarks.';
   }

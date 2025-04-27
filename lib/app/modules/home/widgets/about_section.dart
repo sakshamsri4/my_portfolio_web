@@ -152,7 +152,7 @@ class AboutSection extends StatelessWidget {
                 Expanded(
                   child: Text(
                     "I'm passionate about creating apps that not only look "
-                    'beautiful but also solve real problems and deliver '
+                    'technically excellent but also solve real problems and deliver '
                     'exceptional user experiences.',
                     style: TextStyle(
                       fontSize: 15,
@@ -210,7 +210,7 @@ class AboutSection extends StatelessWidget {
             context,
             icon: Icons.design_services,
             title: 'UI/UX Design',
-            description: 'Intuitive interfaces with beautiful animations '
+            description: 'Intuitive interfaces with purposeful animations '
                 'and responsive layouts.',
           ),
           const SizedBox(height: 16),
