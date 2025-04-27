@@ -36,8 +36,10 @@ class MockPortfolioRepository extends Mock implements PortfolioRepository {
   List<String> getAnimatedGreetings() => ['Hello', 'Hi', 'Greetings'];
 
   @override
-  List<String> getAnimatedIntroductions() =>
-      ['I am a developer', 'I build apps'];
+  List<String> getAnimatedIntroductions() => [
+        'Architecting high-performance Flutter apps\nserving 500K+ users with 99.9% crash-free sessions.',
+        'Delivering enterprise-grade mobile solutions\nthat reduced app startup times by 40%.',
+      ];
 
   @override
   List<Map<String, dynamic>> getSkillCategories() => [

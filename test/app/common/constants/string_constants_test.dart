@@ -95,7 +95,7 @@ void main() {
           AppStrings.aboutMeDescription,
           equals(
             "I'm a passionate Flutter developer with 6+ years of experience in "
-            'creating beautiful, high-performance mobile applications. I specialize '
+            'creating optimized, high-performance mobile applications. I specialize '
             'in cross-platform development, responsive UI design, and integrating '
             'with various backend services.',
           ),
@@ -106,7 +106,7 @@ void main() {
         expect(
           AppStrings.aboutMePassion,
           equals(
-            "I'm passionate about creating apps that not only look beautiful but "
+            "I'm passionate about creating apps that not only have exceptional UX but "
             'also solve real problems and deliver exceptional user experiences.',
           ),
         );
