@@ -7,11 +7,6 @@ name: my_portfolio_web
 # 3. Limited operations for fork PRs
 # 4. Careful handling of checkout with explicit ref
 
-permissions:
-  contents: write
-  pull-requests: write
-  checks: write
-
 concurrency:
   group: $-$
   cancel-in-progress: true

@@ -340,7 +340,7 @@ class HeroSection extends StatelessWidget {
             child: AnimatedTextKit(
               animatedTexts: [
                 FadeAnimatedText(
-                  'I create beautiful, high-performance mobile apps\n'
+                  'I create optimized, high-performance mobile apps\n'
                   'that users love.',
                   duration: const Duration(milliseconds: 3000),
                   fadeInEnd: 0.2,

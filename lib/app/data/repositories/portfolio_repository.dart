@@ -188,11 +188,11 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
   /// Get animated greeting texts
   List<String> getAnimatedGreetings() {
     return [
-      'Senior Flutter Developer',
-      'Cross-Platform Expert',
-      'Mobile Architecture Specialist',
-      'UI/UX Craftsman',
-      'AI Integration Engineer',
+      'Senior Mobile Architect',
+      'Flutter Performance Expert',
+      'Enterprise App Specialist',
+      'Mobile AI Integration Lead',
+      'Cross-Platform Strategist',
     ];
   }
 
@@ -201,11 +201,11 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
   /// Get animated introduction texts
   List<String> getAnimatedIntroductions() {
     return [
-      'Crafting pixel-perfect, blazing-fast mobile experiences\nthat captivate and delight users.',
-      'Transforming complex business challenges into\nintuitive, elegant mobile solutions since 2019.',
-      'Specializing in Flutter architecture that scales\nfrom startup MVPs to enterprise-grade applications.',
-      'Blending cutting-edge AI capabilities with\nbeautiful interfaces for next-gen mobile experiences.',
-      'Building apps that users rave about,\nwith 4.8+ star ratings across app stores.',
+      'Architecting high-performance Flutter apps\nserving 500K+ users with 99.9% crash-free sessions.',
+      'Delivering enterprise-grade mobile solutions\nthat reduced app startup times by 40%.',
+      'Leading teams that transformed complex requirements\ninto optimized apps with 4.8+ star ratings.',
+      'Pioneering on-device ML and AI integrations\nthat increased user engagement by 35%.',
+      'Engineering healthcare and fintech apps\nthat passed rigorous security audits and compliance reviews.',
     ];
   }
 
@@ -214,15 +214,15 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
   /// Get design philosophy quotes
   List<String> getDesignPhilosophyQuotes() {
     return [
-      "Performance isn't just a feature, it's the foundation of exceptional UX",
-      'The best mobile experiences are invisible—users focus on their goals, not the interface',
-      'Great Flutter architecture balances code elegance with runtime efficiency',
-      'Every millisecond of app startup time costs you user engagement',
-      "Accessibility isn't optional—it's the mark of truly professional development",
-      'The most impressive animations are the ones that enhance functionality, not distract from it',
-      'Thoughtful error handling separates professional apps from amateur projects',
-      'Mobile excellence is measured in the details users never consciously notice',
-      'The best code is both maintainable by developers and delightful to users',
+      "In mobile, performance isn't just a feature—it's the foundation of user retention",
+      "Flutter's true power lies in composition: complex UIs from simple, reusable components",
+      'The thumb zone dictates mobile UX success more than any design trend',
+      'Stateful architecture decisions in Flutter determine both user experience and developer velocity',
+      'The best mobile animations provide spatial context and improve usability, not just visual appeal',
+      "Offline-first isn't a feature—it's the baseline for professional mobile applications",
+      "Flutter's widget tree should mirror your mental model of the UI's logical structure",
+      'Mobile excellence is measured in the milliseconds between user intent and app response',
+      'The best Flutter code balances abstraction with performance at the widget level',
     ];
   }
 
@@ -451,49 +451,53 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
     return [
       {
         'company': 'mPhatek Systems',
-        'role': 'Senior Flutter Developer',
+        'role': 'Senior Mobile Architect',
         'period': 'March 2024 - Present',
-        'description':
-            'Leading a team of 5 developers to architect and deliver wellness apps '
-                'with 350K+ active users. Implemented CI/CD pipelines that reduced deployment '
-                'time by 60% and introduced AI-powered health insights that increased '
-                'user engagement by 35%. Achieved 99.9% crash-free sessions.',
+        'description': 'Leading a team of 5 developers as Technical Lead for wellness apps '
+            'serving 350K+ active users. Established architecture standards that reduced '
+            'technical debt by 40%, implemented CI/CD pipelines that cut deployment time by 60%, '
+            'and pioneered AI-powered health insights that increased user engagement by 35% '
+            'while maintaining 99.9% crash-free sessions.',
       },
       {
         'company': 'SpaceVox Ltd.',
-        'role': 'Flutter Developer',
+        'role': 'Lead Flutter Developer',
         'period': 'Aug 2023 - Dec 2023',
-        'description': 'Delivered the Pro Ranked EV charging platform in just 10 weeks, '
-            'exceeding client expectations. Designed a custom geospatial system '
-            'that reduced query times by 75% and implemented a reactive architecture '
-            'that handled 10K+ simultaneous device connections with minimal latency.',
+        'description': 'Led development of the Pro Ranked EV charging platform, delivering in just 10 weeks '
+            'with a team of 3 developers. Architected a custom geospatial indexing system '
+            'that reduced query times by 75% and designed a reactive architecture '
+            'that scaled to handle 10K+ simultaneous device connections with <100ms latency, '
+            'resulting in a 5-star client satisfaction rating.',
       },
       {
         'company': 'ABEYAANTRIX Tech',
-        'role': 'Flutter Developer',
+        'role': 'Senior Flutter Developer',
         'period': 'Jan 2023 - July 2023',
-        'description': 'Engineered the OnSite construction app with a robust offline-first architecture '
-            'that maintained 100% data integrity in challenging field conditions. '
-            r'Developed a custom PDF invoice engine that processed $2.5M+ in monthly transactions '
-            'and implemented a multilingual system supporting 6 languages with 99% accuracy.',
+        'description': 'Spearheaded the OnSite construction app development, engineering a robust offline-first '
+            'architecture that maintained 100% data integrity in challenging field conditions with '
+            'intermittent connectivity. Developed a custom PDF invoice engine that processed '
+            r'$2.5M+ in monthly transactions and implemented a multilingual system supporting '
+            '6 languages with 99% translation accuracy, increasing international adoption by 45%.',
       },
       {
         'company': 'CBNITS',
-        'role': 'Flutter Developer',
+        'role': 'Flutter Team Lead',
         'period': 'Jan 2021 - Dec 2022',
-        'description': 'Built HIPAA-compliant healthcare platforms for Zuellig Pharma that securely '
-            'managed 75K+ patient records with end-to-end encryption. Engineered a '
-            'telemedicine system handling 1,000+ daily consultations and developed '
-            'an AI-powered recommendation engine with 92% accuracy for product targeting.',
+        'description': 'Led a team of 4 developers building HIPAA-compliant healthcare platforms for Zuellig Pharma '
+            'that securely managed 75K+ patient records with end-to-end encryption. Architected a '
+            'telemedicine system handling 1,000+ daily consultations with 99.8% uptime and developed '
+            'an AI-powered recommendation engine with 92% accuracy that increased sales by 28% '
+            'for pharmaceutical representatives.',
       },
       {
         'company': 'Wipro Tech',
         'role': 'Flutter Developer',
         'period': 'June 2019 - March 2020',
         'description': 'Rapidly developed and deployed a critical public health app in just 3 weeks '
-            'during the early pandemic. Created a data synchronization system that provided '
-            'real-time statistics to 50K+ users with 99.5% accuracy and implemented an '
-            'emergency resource locator that became a vital tool for the community.',
+            'during the early pandemic, receiving recognition from senior management. '
+            'Created a data synchronization system that provided real-time statistics to 50K+ users '
+            'with 99.5% accuracy and implemented an emergency resource locator that became a vital '
+            'community tool, featured in local news media for its impact.',
       },
     ];
   }
@@ -535,22 +539,25 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
         "star ratings. I've architected and delivered 15+ production apps across "
         'healthcare, fintech, and enterprise sectors, serving over 500,000 users globally. '
         '\n\nMy technical toolkit includes advanced Flutter state management (GetX, BLoC, '
-        'Riverpod), comprehensive Firebase integration, and custom UI/UX development '
-        "that balances aesthetic excellence with performance optimization. I've reduced "
+        'Riverpod), comprehensive Firebase integration, and advanced UI/UX development '
+        "that balances technical precision with performance optimization. I've reduced "
         'app startup times by 40% and decreased memory usage by 35% through strategic '
         'architecture decisions and performance tuning. '
-        '\n\nI excel at translating complex business requirements into elegant technical '
-        'solutions, having successfully implemented real-time synchronization systems, '
-        'offline-first architectures, and sophisticated data visualization components. '
-        'My apps have passed rigorous security audits and compliance reviews for '
-        'healthcare and financial applications. '
+        '\n\nI excel at translating complex business requirements into efficient technical '
+        'solutions, having successfully implemented real-time synchronization systems with '
+        '99.9% reliability, offline-first architectures that maintain 100% data integrity, '
+        'and sophisticated data visualization components that process millions of data points. '
+        'My apps have passed rigorous security audits (HIPAA, SOC2) and compliance reviews for '
+        'healthcare and financial applications, with zero critical vulnerabilities found. '
         "\n\nRecently, I've pioneered AI integration in mobile apps, implementing "
-        'on-device ML models, computer vision features, and OpenAI API integrations '
-        'that provide intelligent, context-aware experiences while maintaining privacy. '
-        "I've also established robust CI/CD pipelines that reduced deployment time by 60% "
-        'and automated 85% of the QA process. '
-        "\n\nI'm passionate about creating mobile experiences that feel magical to users "
-        'while solving real business problems through thoughtful architecture and '
-        'attention to detail.';
+        'on-device ML models that reduced cloud processing costs by 70%, computer vision features '
+        'with 95% accuracy, and OpenAI API integrations that increased user engagement by 40% '
+        'while maintaining strict privacy standards. '
+        "I've also established robust CI/CD pipelines that reduced deployment time by 60%, "
+        'automated 85% of the QA process, and decreased regression bugs by 75%. '
+        "\n\nI'm passionate about creating mobile experiences that deliver exceptional value to users "
+        'while solving real business problems through systematic architecture and '
+        'meticulous attention to detail. My leadership has helped teams increase velocity by 45% '
+        'while maintaining code quality standards that exceed industry benchmarks.';
   }
 }

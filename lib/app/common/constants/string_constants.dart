@@ -34,11 +34,11 @@ class AppStrings {
   // About section
   static const String aboutMeDescription =
       "I'm a passionate Flutter developer with 6+ years of experience in "
-      'creating beautiful, high-performance mobile applications. I specialize '
+      'creating optimized, high-performance mobile applications. I specialize '
       'in cross-platform development, responsive UI design, and integrating '
       'with various backend services.';
   static const String aboutMePassion =
-      "I'm passionate about creating apps that not only look beautiful but "
+      "I'm passionate about creating apps that not only have exceptional UX but "
       'also solve real problems and deliver exceptional user experiences.';
 
   // Contact section

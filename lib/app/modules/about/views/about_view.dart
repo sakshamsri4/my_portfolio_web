@@ -125,7 +125,7 @@ class AboutView extends GetView<AboutController> {
             Text(
               'I am a passionate Flutter developer with experience in building '
               'cross-platform mobile applications. I specialize in creating '
-              'beautiful, responsive, and user-friendly interfaces.',
+              'optimized, responsive, and user-friendly interfaces.',
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 24),
