@@ -121,7 +121,7 @@ void main() {
       test('cvPath has correct value', () {
         expect(
           AppConstants.cvPath,
-          equals('assets/cv/CV_3April.pdf'),
+          equals('assets/cv/27Feb25.pdf'),
         );
       });
     });
