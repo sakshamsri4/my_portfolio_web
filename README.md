@@ -82,6 +82,25 @@ $ open coverage/index.html
 - `lib/app/common/` - Shared components, constants, and utilities
 - `lib/app/routes/` - Application routing configuration
 - `lib/app/theme/` - Theme configuration and styling
+- `scripts/` - Utility scripts for development and deployment
+
+## App Icons 🎨
+
+This project uses `flutter_launcher_icons` to generate app icons for all platforms. The icon configuration is defined in `flutter_launcher_icons.yaml`.
+
+### Generating App Icons
+
+To generate app icons for all platforms, run:
+
+```sh
+# Using the provided script
+./scripts/generate_app_icons.sh
+
+# Or directly using flutter_launcher_icons
+flutter pub run flutter_launcher_icons
+```
+
+This will generate icons for Android, iOS, web, macOS, and Windows based on the configuration in `flutter_launcher_icons.yaml`.
 
 ## Contributing 🤝
 
