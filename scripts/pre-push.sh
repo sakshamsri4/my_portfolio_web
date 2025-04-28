@@ -110,7 +110,7 @@ if [ -x "scripts/check-spelling.sh" ]; then
 
   if [ $SPELL_CHECK_RESULT -ne 0 ]; then
     echo -e "${RED}Spell check failed. Please fix the spelling issues before pushing.${NC}"
-    echo -e "${YELLOW}Tip: You can add words to .cspell.json or use inline comments like:${NC}"
+    echo -e "${YELLOW}Tip: You can add words to .github/cspell.json or use inline comments like:${NC}"
     echo -e "${YELLOW}<!-- cspell:ignore word1 word2 -->${NC}"
     exit 1
   else
