@@ -216,8 +216,10 @@ class HomeController extends GetxController {
         if (Platform.isAndroid) {
           final status = await Permission.storage.request();
           if (!status.isGranted) {
-            // Close loading dialog
+            // Close loading dialog and show error
             Get.back<void>();
+            // Cannot use cascade here because Get.back() returns void
+            // ignore: cascade_invocations
             Get.snackbar(
               'Permission Denied',
               'Storage permission is required to download the CV',
@@ -235,6 +237,8 @@ class HomeController extends GetxController {
         if (directory == null) {
           // Close loading dialog
           Get.back<void>();
+          // Cannot use cascade here because Get.back() returns void
+          // ignore: cascade_invocations
           Get.snackbar(
             'Error',
             'Could not access storage directory',
