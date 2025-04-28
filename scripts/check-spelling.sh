@@ -9,7 +9,7 @@ fi
 echo "Running spell check..."
 
 # Run cspell on specific file types in the repository
-npx cspell "**/*.{dart,md,yaml,json,txt}" --config .cspell.json
+npx cspell "**/*.{dart,md,yaml,json,txt}" --config .github/cspell.json
 
 # Check the exit code
 if [ $? -eq 0 ]; then
