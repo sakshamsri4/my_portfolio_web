@@ -125,7 +125,7 @@ class MockHomeController extends GetxController implements HomeController {
   Future<void> launchWhatsApp() async {}
 
   @override
-  void downloadCV() {}
+  Future<void> downloadCV() async {}
 
   @override
   Future<void> launchProjectUrl(String url) async {}

@@ -70,7 +70,7 @@ class _MockHomeController extends GetxController implements HomeController {
   void copyToClipboard(String text) {}
 
   @override
-  void downloadCV() {}
+  Future<void> downloadCV() async {}
 
   @override
   GlobalKey educationKey = GlobalKey();
