@@ -63,6 +63,11 @@ class _ProjectsSectionState extends State<ProjectsSection>
       if (!_userInteracting && mounted) {
         final isMobile = MediaQuery.of(context).size.width < 768;
 
+        // Check if there are any projects to display
+        if (widget.controller.projects.isEmpty) {
+          return;
+        }
+
         if (isMobile) {
           // For mobile view
           final nextPage =
@@ -70,7 +75,7 @@ class _ProjectsSectionState extends State<ProjectsSection>
           _scrollToPage(nextPage);
         } else {
           // For desktop view
-          if (_totalPages > 0) {
+          if (_totalPages > 0 && _pageController.hasClients) {
             final nextPage = (_currentPage + 1) % _totalPages;
             _pageController.animateToPage(
               nextPage,
@@ -84,6 +89,12 @@ class _ProjectsSectionState extends State<ProjectsSection>
   }
 
   void _scrollToPage(int page) {
+    // Check if the scroll controller is attached to any scroll views
+    if (!_scrollController.hasClients) {
+      // Skip scrolling if controller is not attached yet
+      return;
+    }
+
     // Calculate the target offset
     final targetOffset = page * 300.0;
 
@@ -160,7 +171,7 @@ class _ProjectsSectionState extends State<ProjectsSection>
             _buildDesktopGridProjects(),
 
           // Carousel dots for mobile
-          if (isMobile)
+          if (isMobile && widget.controller.projects.isNotEmpty)
             Padding(
               padding: const EdgeInsets.only(top: 24),
               child: Row(
@@ -192,6 +203,17 @@ class _ProjectsSectionState extends State<ProjectsSection>
   // Mobile snap-scroll list of projects with infinite scrolling
   Widget _buildMobileSnapScrollProjects() {
     final projectCount = widget.controller.projects.length;
+
+    // Handle the case when there are no projects
+    if (projectCount == 0) {
+      return const SizedBox(
+        height: 450, // Keep the same height as when there are projects
+        child: Center(
+          child: Text('No projects available'),
+        ),
+      );
+    }
+
     // Use a large number for infinite scrolling effect
     const virtualItemCount = 10000;
 
@@ -272,9 +294,18 @@ class _ProjectsSectionState extends State<ProjectsSection>
   // Desktop 3-column grid of projects with infinite scrolling
   Widget _buildDesktopGridProjects() {
     const projectsPerPage = 3; // 3 columns per row
+
+    // Handle the case when there are no projects
+    if (widget.controller.projects.isEmpty) {
+      _totalPages = 0;
+      return const Center(
+        child: Text('No projects available'),
+      );
+    }
+
     final actualPages =
         (widget.controller.projects.length / projectsPerPage).ceil();
-    _totalPages = actualPages;
+    _totalPages = actualPages > 0 ? actualPages : 1; // Ensure at least 1 page
     // Use a large number for infinite scrolling effect
     const virtualPageCount = 10000;
 
@@ -362,7 +393,7 @@ class _ProjectsSectionState extends State<ProjectsSection>
 
         // Pagination dots for desktop
         Visibility(
-          visible: _totalPages > 1,
+          visible: _totalPages > 1 && widget.controller.projects.isNotEmpty,
           child: Padding(
             padding: const EdgeInsets.only(top: 24),
             child: Row(
@@ -380,7 +411,9 @@ class _ProjectsSectionState extends State<ProjectsSection>
 
   // Carousel dot indicator
   Widget _buildCarouselDot(int index) {
-    final isActive = index == _currentPage % _totalPages;
+    // Prevent division by zero by ensuring _totalPages is at least 1
+    final safeTotalPages = _totalPages > 0 ? _totalPages : 1;
+    final isActive = index == _currentPage % safeTotalPages;
     final primaryColor = Theme.of(context).colorScheme.primary;
 
     return AnimatedContainer(

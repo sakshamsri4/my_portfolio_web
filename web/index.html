@@ -1,72 +1,123 @@
-<!DOCTYPE html>
-<html>
-
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="$FLUTTER_BASE_HREF">
-
   <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A Very Good Project created by Very Good CLI.">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="My Portfolio Web">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Saksham Srivastava's personal portfolio showcasing projects, skills, and contact information.">
+  <meta name="author" content="Saksham Srivastava">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <!-- Open Graph Meta Tags for Social Sharing -->
+  <meta property="og:title" content="Saksham Srivastava | Portfolio">
+  <meta property="og:description" content="Explore projects, skills, and get in touch with Saksham Srivastava.">
+  <meta property="og:image" content="assets/images/social_preview.png">
+  <meta property="og:url" content="https://saksham-portfolio-ba828.web.app/">
+  <meta property="og:type" content="website">
 
-  <title>My Portfolio Web</title>
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Saksham Srivastava | Portfolio">
+  <meta name="twitter:description" content="Explore projects, skills, and get in touch with Saksham Srivastava.">
+  <meta name="twitter:image" content="assets/images/social_preview.png">
+
+  <!-- Web App Manifest -->
   <link rel="manifest" href="manifest.json">
 
-  <!-- Preload Google Fonts -->
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+
+  <!-- Web App Title -->
+  <meta name="apple-mobile-web-app-title" content="Saksham Portfolio">
+  <meta name="application-name" content="Saksham Portfolio">
+
+  <!-- Title -->
+  <title>Saksham Srivastava | Portfolio</title>
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
 
-  <!-- This script adds the flutter initialization JS code -->
+  <!-- Flutter Web Initialization -->
   <script src="flutter.js" defer></script>
   <script>
-    // The value below is injected by flutter build, do not touch.
     var serviceWorkerVersion = null;
   </script>
 </head>
 
 <body>
-  <script>
-    window.flutterWebRenderer = "html";
-  </script>
+  <div id="loading">
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+      }
+
+      #loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+      }
+
+      #loading img {
+        animation: 1s ease-in-out 0s infinite alternate breathe;
+        opacity: .9;
+        transition: opacity .4s;
+      }
+
+      #loading.main_done img {
+        opacity: 1;
+      }
+
+      #loading.init_done img {
+        animation: .33s ease-in-out 0s 1 forwards zooooom;
+        opacity: .05;
+      }
+
+      @keyframes breathe {
+        from {
+          transform: scale(1)
+        }
+
+        to {
+          transform: scale(0.95)
+        }
+      }
+
+      @keyframes zooooom {
+        from {
+          transform: scale(1)
+        }
+
+        to {
+          transform: scale(10)
+        }
+      }
+    </style>
+    <img src="assets/images/logo.svg" alt="Loading indicator..." width="100" height="100" />
+  </div>
 
   <script>
-    window.addEventListener('load', function (ev) {
-      // Download main.dart.js
+    window.addEventListener('load', function () {
+      var loading = document.querySelector('#loading');
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
         },
-        onEntrypointLoaded: function (engineInitializer) {
-          engineInitializer.initializeEngine().then(function (appRunner) {
-            appRunner.runApp();
-          });
+        onEntrypointLoaded: async function (engineInitializer) {
+          loading.classList.add('main_done');
+          let appRunner = await engineInitializer.initializeEngine();
+          loading.classList.add('init_done');
+          await appRunner.runApp();
         }
       });
     });
   </script>
 </body>
-
-</html>

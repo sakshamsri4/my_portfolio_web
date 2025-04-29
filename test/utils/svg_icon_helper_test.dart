@@ -111,7 +111,7 @@ void main() {
       setScreenSize(tester, const Size(800, 600));
 
       const double customSize = 48;
-      const Color customColor = Colors.red;
+      const customColor = Colors.red;
 
       await tester.pumpWidget(
         MaterialApp(

@@ -15,7 +15,7 @@ void main() {
       );
 
       // Get the BuildContext
-      final BuildContext context = tester.element(find.byType(Container));
+      final context = tester.element(find.byType(Container));
 
       // Test the isMobile method
       expect(ResponsiveHelper.isMobile(context), isTrue);
@@ -34,7 +34,7 @@ void main() {
       );
 
       // Get the BuildContext
-      final BuildContext context = tester.element(find.byType(Container));
+      final context = tester.element(find.byType(Container));
 
       // Test the isTablet method
       expect(ResponsiveHelper.isMobile(context), isFalse);
@@ -53,7 +53,7 @@ void main() {
       );
 
       // Get the BuildContext
-      final BuildContext context = tester.element(find.byType(Container));
+      final context = tester.element(find.byType(Container));
 
       // Test the isDesktop method
       expect(ResponsiveHelper.isMobile(context), isFalse);
@@ -72,7 +72,7 @@ void main() {
         ),
       );
 
-      BuildContext context = tester.element(find.byType(Container));
+      var context = tester.element(find.byType(Container));
       expect(
         ResponsiveHelper.responsiveValue<String>(
           context: context,
@@ -132,7 +132,7 @@ void main() {
         ),
       );
 
-      final BuildContext context = tester.element(find.byType(Container));
+      final context = tester.element(find.byType(Container));
       expect(
         ResponsiveHelper.responsiveValue<String>(
           context: context,

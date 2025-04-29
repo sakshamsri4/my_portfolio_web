@@ -200,9 +200,10 @@ class HomeController extends GetxController {
     // For web platform
     if (kIsWeb) {
       html.AnchorElement(
-        href: AppConstants.cvPath,
+        href: 'assets/cv/27Feb25.pdf', // Direct web-accessible path
       )
-        ..setAttribute('download', AppStrings.cvFileName)
+        ..target = 'blank'
+        ..download = 'Saksham_CV.pdf'
         ..click();
     } else {
       try {
