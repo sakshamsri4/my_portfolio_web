@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   // Private constructor to prevent instantiation
   AppTheme._();
+
+  // Define a system font stack that works across all platforms
+  static const String fontFamily = '.SF Pro Text, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif';
 
   // Primary color swatch
   static const MaterialColor primarySwatch = MaterialColor(
@@ -36,6 +38,7 @@ class AppTheme {
     brightness: Brightness.dark,
     primarySwatch: primarySwatch,
     primaryColor: primarySwatch,
+    fontFamily: fontFamily,  // Set the global font family
     scaffoldBackgroundColor: const Color(0xFF1A1A2E),
     colorScheme: ColorScheme.dark(
       primary: primarySwatch,
@@ -46,52 +49,62 @@ class AppTheme {
       backgroundColor: const Color(0xFF2C2C44),
       foregroundColor: Colors.white,
       elevation: 0,
-      titleTextStyle: GoogleFonts.montserrat(
+      titleTextStyle: const TextStyle(
+        fontFamily: fontFamily,
         fontWeight: FontWeight.bold,
         fontSize: 20,
         color: Colors.white,
       ),
     ),
     textTheme: TextTheme(
-      displayLarge: GoogleFonts.montserrat(
+      displayLarge: const TextStyle(
+        fontFamily: fontFamily,
         fontWeight: FontWeight.bold,
         fontSize: 32,
         color: Colors.white,
       ),
-      displayMedium: GoogleFonts.montserrat(
+      displayMedium: const TextStyle(
+        fontFamily: fontFamily,
         fontWeight: FontWeight.bold,
         fontSize: 28,
         color: Colors.white,
       ),
-      displaySmall: GoogleFonts.montserrat(
+      displaySmall: const TextStyle(
+        fontFamily: fontFamily,
         fontWeight: FontWeight.bold,
         fontSize: 24,
         color: Colors.white,
       ),
-      headlineMedium: GoogleFonts.montserrat(
+      headlineMedium: const TextStyle(
+        fontFamily: fontFamily,
         fontWeight: FontWeight.bold,
         fontSize: 20,
         color: Colors.white,
       ),
-      headlineSmall: GoogleFonts.montserrat(
+      headlineSmall: const TextStyle(
+        fontFamily: fontFamily,
         fontWeight: FontWeight.bold,
         fontSize: 18,
         color: Colors.white,
       ),
-      titleLarge: GoogleFonts.montserrat(
+      titleLarge: const TextStyle(
+        fontFamily: fontFamily,
         fontWeight: FontWeight.bold,
         fontSize: 16,
         color: Colors.white,
       ),
-      bodyLarge: GoogleFonts.montserrat(
+      bodyLarge: const TextStyle(
+        fontFamily: fontFamily,
         fontSize: 16,
         color: Colors.white,
       ),
-      bodyMedium: GoogleFonts.montserrat(
+      bodyMedium: const TextStyle(
+        fontFamily: fontFamily,
         fontSize: 14,
         color: Colors.white,
       ),
-      bodySmall: GoogleFonts.montserrat(
+      bodySmall: const TextStyle(
+        fontFamily: fontFamily,
         fontSize: 12,
         color: Colors.white70,
       ),
@@ -100,7 +113,8 @@ class AppTheme {
       style: ElevatedButton.styleFrom(
         backgroundColor: primarySwatch,
         foregroundColor: Colors.white,
-        textStyle: GoogleFonts.montserrat(
+        textStyle: const TextStyle(
+          fontFamily: fontFamily,
           fontWeight: FontWeight.bold,
         ),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -113,7 +127,8 @@ class AppTheme {
       style: OutlinedButton.styleFrom(
         foregroundColor: primarySwatch,
         side: const BorderSide(color: primarySwatch),
-        textStyle: GoogleFonts.montserrat(
+        textStyle: const TextStyle(
+          fontFamily: fontFamily,
           fontWeight: FontWeight.bold,
         ),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -131,7 +146,8 @@ class AppTheme {
     ),
     chipTheme: ChipThemeData(
       backgroundColor: primarySwatch.shade900,
-      labelStyle: GoogleFonts.montserrat(
+      labelStyle: TextStyle(  // Removed const here since we use non-constant values
+        fontFamily: fontFamily,
         color: Colors.white,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -151,6 +167,7 @@ class AppTheme {
     useMaterial3: true,
     primarySwatch: primarySwatch,
     primaryColor: primarySwatch,
+    fontFamily: fontFamily,  // Set the global font family
     scaffoldBackgroundColor: backgroundColor,
     colorScheme: ColorScheme.light(
       primary: primarySwatch,
@@ -163,7 +180,8 @@ class AppTheme {
       foregroundColor: textPrimary,
       elevation: 0,
       centerTitle: true,
-      titleTextStyle: GoogleFonts.montserrat(
+      titleTextStyle: const TextStyle(
+        fontFamily: fontFamily,
         fontWeight: FontWeight.bold,
         fontSize: 20,
         color: textPrimary,
@@ -171,45 +189,54 @@ class AppTheme {
       iconTheme: const IconThemeData(color: primarySwatch),
     ),
     textTheme: TextTheme(
-      displayLarge: GoogleFonts.montserrat(
+      displayLarge: const TextStyle(
+        fontFamily: fontFamily,
         fontWeight: FontWeight.bold,
         fontSize: 32,
         color: textPrimary,
       ),
-      displayMedium: GoogleFonts.montserrat(
+      displayMedium: const TextStyle(
+        fontFamily: fontFamily,
         fontWeight: FontWeight.bold,
         fontSize: 28,
         color: textPrimary,
       ),
-      displaySmall: GoogleFonts.montserrat(
+      displaySmall: const TextStyle(
+        fontFamily: fontFamily,
         fontWeight: FontWeight.bold,
         fontSize: 24,
         color: textPrimary,
       ),
-      headlineMedium: GoogleFonts.montserrat(
+      headlineMedium: const TextStyle(
+        fontFamily: fontFamily,
         fontWeight: FontWeight.bold,
         fontSize: 20,
         color: textPrimary,
       ),
-      headlineSmall: GoogleFonts.montserrat(
+      headlineSmall: const TextStyle(
+        fontFamily: fontFamily,
         fontWeight: FontWeight.bold,
         fontSize: 18,
         color: textPrimary,
       ),
-      titleLarge: GoogleFonts.montserrat(
+      titleLarge: const TextStyle(
+        fontFamily: fontFamily,
         fontWeight: FontWeight.bold,
         fontSize: 16,
         color: textPrimary,
       ),
-      bodyLarge: GoogleFonts.montserrat(
+      bodyLarge: const TextStyle(
+        fontFamily: fontFamily,
         fontSize: 16,
         color: textPrimary,
       ),
-      bodyMedium: GoogleFonts.montserrat(
+      bodyMedium: const TextStyle(
+        fontFamily: fontFamily,
         fontSize: 14,
         color: textPrimary,
       ),
-      bodySmall: GoogleFonts.montserrat(
+      bodySmall: const TextStyle(
+        fontFamily: fontFamily,
         fontSize: 12,
         color: textSecondary,
       ),
@@ -220,7 +247,8 @@ class AppTheme {
         foregroundColor: Colors.white,
         elevation: 4,
         shadowColor: primarySwatch.withAlpha(51),
-        textStyle: GoogleFonts.montserrat(
+        textStyle: const TextStyle(
+          fontFamily: fontFamily,
           fontWeight: FontWeight.bold,
           fontSize: 14,
           letterSpacing: 0.5,
@@ -235,7 +263,8 @@ class AppTheme {
       style: OutlinedButton.styleFrom(
         foregroundColor: primarySwatch,
         side: const BorderSide(color: primarySwatch, width: 2),
-        textStyle: GoogleFonts.montserrat(
+        textStyle: const TextStyle(
+          fontFamily: fontFamily,
           fontWeight: FontWeight.bold,
           fontSize: 14,
           letterSpacing: 0.5,
@@ -267,7 +296,8 @@ class AppTheme {
     ),
     chipTheme: ChipThemeData(
       backgroundColor: primarySwatch.shade100,
-      labelStyle: GoogleFonts.montserrat(
+      labelStyle: TextStyle(  // Removed const here since we're using non-constant values
+        fontFamily: fontFamily,
         color: primarySwatch.shade800,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 8),

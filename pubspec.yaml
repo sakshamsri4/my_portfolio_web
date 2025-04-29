@@ -50,11 +50,13 @@ flutter:
     - assets/icons/
     - assets/tile_images/
     - assets/tech_icon_svg/
+    - assets/animations/
 
-  # Using Google Fonts instead of local fonts
+  # Using system fonts instead of local font files
   # fonts:
   #   - family: Montserrat
   #     fonts:
   #       - asset: assets/fonts/Montserrat-Regular.ttf
+  #         weight: 400
   #       - asset: assets/fonts/Montserrat-Bold.ttf
   #         weight: 700
