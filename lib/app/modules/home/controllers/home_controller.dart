@@ -204,17 +204,38 @@ class HomeController extends GetxController {
           'https://saksham-portfolio-ba828.web.app/${AppConstants.cvPath}';
 
       try {
-        // Create anchor element with absolute URL
-        final anchor = html.AnchorElement(href: cvUrl)
-          ..target = '_blank'
-          ..download = 'Saksham_CV.pdf'
-          ..setAttribute('rel', 'noopener');
+        // Check if the browser is a mobile browser
+        final userAgent = html.window.navigator.userAgent.toLowerCase();
+        final isMobileBrowser = userAgent.contains('mobi') ||
+            userAgent.contains('android') ||
+            userAgent.contains('iphone') ||
+            userAgent.contains('ipad');
 
-        // Add to DOM, click, and remove to trigger download
-        html.document.body?.append(anchor);
-        anchor
-          ..click()
-          ..remove();
+        if (isMobileBrowser) {
+          // For mobile browsers: Open the PDF in a new tab with a direct link to force download
+          // This bypasses the download attribute which doesn't work well on mobile
+          html.window.open(cvUrl, '_blank');
+
+          // Show guidance to the user
+          Get.snackbar(
+            'Download Tip',
+            'For mobile browsers: Use the browser menu to download the PDF after it opens',
+            duration: const Duration(seconds: 5),
+            snackPosition: SnackPosition.BOTTOM,
+          );
+        } else {
+          // Desktop browser approach - use download attribute
+          final anchor = html.AnchorElement(href: cvUrl)
+            ..target = '_blank'
+            ..download = 'Saksham_CV.pdf'
+            ..setAttribute('rel', 'noopener');
+
+          // Add to DOM, click, and remove to trigger download
+          html.document.body?.append(anchor);
+          anchor
+            ..click()
+            ..remove();
+        }
       } on Exception catch (e) {
         Get.snackbar(
           'Error',
