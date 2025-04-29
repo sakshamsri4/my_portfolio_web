@@ -5,7 +5,8 @@ class AppTheme {
   AppTheme._();
 
   // Define a system font stack that works across all platforms
-  static const String fontFamily = '.SF Pro Text, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif';
+  static const String fontFamily =
+      '.SF Pro Text, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif';
 
   // Primary color swatch
   static const MaterialColor primarySwatch = MaterialColor(
@@ -38,7 +39,7 @@ class AppTheme {
     brightness: Brightness.dark,
     primarySwatch: primarySwatch,
     primaryColor: primarySwatch,
-    fontFamily: fontFamily,  // Set the global font family
+    fontFamily: fontFamily, // Set the global font family
     scaffoldBackgroundColor: const Color(0xFF1A1A2E),
     colorScheme: ColorScheme.dark(
       primary: primarySwatch,
@@ -146,7 +147,8 @@ class AppTheme {
     ),
     chipTheme: ChipThemeData(
       backgroundColor: primarySwatch.shade900,
-      labelStyle: TextStyle(  // Removed const here since we use non-constant values
+      labelStyle: TextStyle(
+        // Removed const here since we use non-constant values
         fontFamily: fontFamily,
         color: Colors.white,
       ),
@@ -167,7 +169,7 @@ class AppTheme {
     useMaterial3: true,
     primarySwatch: primarySwatch,
     primaryColor: primarySwatch,
-    fontFamily: fontFamily,  // Set the global font family
+    fontFamily: fontFamily, // Set the global font family
     scaffoldBackgroundColor: backgroundColor,
     colorScheme: ColorScheme.light(
       primary: primarySwatch,
@@ -296,7 +298,8 @@ class AppTheme {
     ),
     chipTheme: ChipThemeData(
       backgroundColor: primarySwatch.shade100,
-      labelStyle: TextStyle(  // Removed const here since we're using non-constant values
+      labelStyle: TextStyle(
+        // Removed const here since we're using non-constant values
         fontFamily: fontFamily,
         color: primarySwatch.shade800,
       ),

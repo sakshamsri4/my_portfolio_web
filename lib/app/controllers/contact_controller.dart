@@ -87,11 +87,27 @@ class ContactController extends BaseController {
   Future<void> downloadCV() async {
     // For web platform
     if (kIsWeb) {
-      html.AnchorElement(
-        href: AppConstants.cvPath,
-      )
-        ..setAttribute('download', AppStrings.cvFileName)
-        ..click();
+      // Create a proper URL to the PDF file
+      const cvUrl =
+          'https://saksham-portfolio-ba828.web.app/${AppConstants.cvPath}';
+
+      try {
+        // Create anchor element with absolute URL
+        final anchor = html.AnchorElement(href: cvUrl)
+          ..target = '_blank'
+          ..download = 'Saksham_CV.pdf'
+          ..setAttribute('rel', 'noopener');
+
+        // Add to DOM, click, and remove to trigger download
+        html.document.body?.append(anchor);
+        anchor.click();
+        anchor.remove();
+      } on Exception catch (e) {
+        ErrorUtils.showErrorSnackbar(
+          'Error',
+          'Could not download CV. Please try again.',
+        );
+      }
     } else {
       try {
         // Show loading indicator

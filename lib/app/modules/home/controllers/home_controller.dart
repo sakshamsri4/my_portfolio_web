@@ -199,12 +199,30 @@ class HomeController extends GetxController {
   Future<void> downloadCV() async {
     // For web platform
     if (kIsWeb) {
-      html.AnchorElement(
-        href: 'assets/cv/27Feb25.pdf', // Direct web-accessible path
-      )
-        ..target = 'blank'
-        ..download = 'Saksham_CV.pdf'
-        ..click();
+      // Create a proper URL to the PDF file
+      const cvUrl =
+          'https://saksham-portfolio-ba828.web.app/${AppConstants.cvPath}';
+
+      try {
+        // Create anchor element with absolute URL
+        final anchor = html.AnchorElement(href: cvUrl)
+          ..target = '_blank'
+          ..download = 'Saksham_CV.pdf'
+          ..setAttribute('rel', 'noopener');
+
+        // Add to DOM, click, and remove to trigger download
+        html.document.body?.append(anchor);
+        anchor
+          ..click()
+          ..remove();
+      } on Exception catch (e) {
+        Get.snackbar(
+          'Error',
+          'Could not download CV. Please try again.',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        debugPrint('Error downloading CV: $e');
+      }
     } else {
       try {
         // Show loading indicator
