@@ -100,13 +100,15 @@ class ContactController extends BaseController {
 
         // Add to DOM, click, and remove to trigger download
         html.document.body?.append(anchor);
-        anchor.click();
-        anchor.remove();
+        anchor
+          ..click()
+          ..remove();
       } on Exception catch (e) {
         ErrorUtils.showErrorSnackbar(
           'Error',
           'Could not download CV. Please try again.',
         );
+        debugPrint('Error downloading CV: $e');
       }
     } else {
       try {
