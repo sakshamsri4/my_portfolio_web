@@ -1,11 +1,11 @@
 {
-    "name": "My Portfolio Web",
-    "short_name": "My Portfolio Web",
+    "name": "Saksham Srivastava | Portfolio",
+    "short_name": "Saksham Portfolio",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A Very Good Project created by Very Good CLI.",
+    "background_color": "#675AF2",
+    "theme_color": "#675AF2",
+    "description": "Senior Flutter Developer & Mobile Architect with 6+ years of experience in cross-platform development.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
