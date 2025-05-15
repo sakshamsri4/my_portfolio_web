@@ -920,14 +920,17 @@
     - LinkedIn preview was not displaying correctly when sharing portfolio website
     - WhatsApp preview was working properly but LinkedIn showed poor metadata
     - The preview card on LinkedIn lacked proper image, title, and description
+    - LinkedIn's Post Inspector showed a 500 error when trying to scrape the URL with hash fragment
 
   - **Root Cause Analysis**:
     - LinkedIn primarily uses standard Open Graph tags but had custom LinkedIn tags
     - Missing image dimensions in the Open Graph tags
     - Missing image alt text for better accessibility
     - Title in HTML was different from Open Graph title
+    - Hash-based routing (#/home) in the URL caused issues with LinkedIn's crawler
+    - Single-page application (SPA) structure made it difficult for crawlers to access content
 
-  - **Changes Made**:
+  - **Changes Made (First Attempt)**:
     - Updated Open Graph meta tags to follow LinkedIn's best practices
     - Added og:image:width and og:image:height tags with correct dimensions
     - Added og:image:alt tag for better accessibility
@@ -935,12 +938,22 @@
     - Updated HTML title to match Open Graph title for consistency
     - Documented changes in activity log
 
+  - **Changes Made (Second Attempt)**:
+    - Added static HTML content specifically for social media crawlers
+    - Removed trailing slash from og:url to match canonical URL format
+    - Added canonical URL tag to help crawlers understand the preferred URL
+    - Added hidden div with SEO-friendly content that doesn't require JavaScript
+    - Included key skills and portfolio description in the static content
+    - Deployed changes to Firebase hosting
+
   - **Benefits**:
     - LinkedIn now displays a professional preview with correct image, title, and description
     - Improved social sharing experience across platforms
     - Better accessibility with proper alt text
     - Consistent branding across different social media platforms
     - Enhanced professional appearance when shared on LinkedIn
+    - Static content allows crawlers to index the site even without JavaScript execution
+    - Canonical URL helps search engines understand the preferred URL structure
 
 ## [2024-04-28]
 - Task: Enhanced portfolio content with specific achievements and metrics
