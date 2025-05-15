@@ -53,13 +53,6 @@ class HomeView extends GetView<HomeController> {
                     // ),
                     // const SizedBox(height: 32),
 
-                    // Skills section
-                    KeyedSubtree(
-                      key: controller.skillsKey,
-                      child: SkillsSection(controller: controller),
-                    ),
-                    const SizedBox(height: 32),
-
                     // Projects section
                     KeyedSubtree(
                       key: controller.projectsKey,
@@ -82,6 +75,13 @@ class HomeView extends GetView<HomeController> {
                       key: controller.contactKey,
                       child: ContactSection(controller: controller),
                     ),
+                    const SizedBox(height: 32),
+                    // Skills section
+                    KeyedSubtree(
+                      key: controller.skillsKey,
+                      child: SkillsSection(controller: controller),
+                    ),
+                    const SizedBox(height: 32),
                   ],
                 ),
               );
