@@ -383,13 +383,13 @@ class HeroSection extends StatelessWidget {
           onPressed: controller.launchEmail,
         ),
         // Secondary CTA with NeoPOP effect
-        _buildNeoPOPCTA(
-          context: context,
-          label: 'Download CV',
-          icon: FontAwesomeIcons.fileArrowDown,
-          isPrimary: false,
-          onPressed: controller.downloadCV,
-        ),
+        // _buildNeoPOPCTA(
+        //   context: context,
+        //   label: 'Download CV',
+        //   icon: FontAwesomeIcons.fileArrowDown,
+        //   isPrimary: false,
+        //   onPressed: controller.downloadCV,
+        // ),
       ],
     );
   }
