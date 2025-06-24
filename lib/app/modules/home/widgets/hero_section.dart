@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:my_portfolio_web/app/common/constants/app_constants.dart';
 import 'package:my_portfolio_web/app/modules/home/controllers/home_controller.dart';
 
 class HeroSection extends StatelessWidget {
@@ -227,9 +228,9 @@ class HeroSection extends StatelessWidget {
           child: Container(
             width: radius * 2,
             height: radius * 2,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('images/myself.jpeg'),
+                image: AssetImage(AppConstants.profileImagePath),
                 fit: BoxFit.cover,
                 alignment: Alignment(0, -0.5), // Center on face
               ),

@@ -157,7 +157,7 @@ class HomeController extends GetxController {
   // Observable for carousel auto-play is defined at the top
 
   // Fallback image URL if project image is not found
-  final String fallbackImageUrl = 'images/placeholder.jpg';
+  final String fallbackImageUrl = 'assets/images/placeholder.jpg';
 
   // Get image with fallback
   String getImageWithFallback(String imagePath) {

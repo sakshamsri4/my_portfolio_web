@@ -34,8 +34,8 @@ class AppConstants {
   static const String phoneNumber = '+91 8795304811';
 
   /// Asset paths
-  static const String profileImagePath = 'images/myself.jpeg';
-  static const String cvPath = 'cv/27Feb25.pdf';
+  static const String profileImagePath = 'assets/images/myself.jpeg';
+  static const String cvPath = 'assets/cv/27Feb25.pdf';
 }
 
 /// Color constants for the application

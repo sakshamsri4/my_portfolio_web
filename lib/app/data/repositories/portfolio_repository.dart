@@ -374,8 +374,8 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
                 'Architected a high-performance activity tracking system with 99.9% sync reliability '
                 'and implemented an AI-powered health insights engine that increased user engagement by 35%. '
                 'Optimized battery usage by 40% while maintaining GPS accuracy.',
-        'image': 'images/project1.jpg',
-        'tileImage': 'tile_images/John_hancock.webp',
+        'image': 'assets/images/project1.jpg',
+        'tileImage': 'assets/tile_images/John_hancock.webp',
         'url':
             'https://apps.apple.com/us/app/john-hancock-vitality/id1192577836',
       },
@@ -385,8 +385,8 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
             'that achieved a 4.8-star rating and 98% user retention. Implemented custom '
             'HealthKit integration that synced 15+ data types with 99.7% accuracy. '
             'Reduced crash rate to <0.1% while serving 150K+ Canadian users.',
-        'image': 'images/project2.jpg',
-        'tileImage': 'tile_images/manulife.webp',
+        'image': 'assets/images/project2.jpg',
+        'tileImage': 'assets/tile_images/manulife.webp',
         'url': 'https://apps.apple.com/ca/app/manulife-vitality/id1198760352',
       },
       {
@@ -396,8 +396,8 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
                 'featuring real-time monitoring of 500+ charging stations with 99.99% uptime. '
                 'Implemented a custom geospatial indexing system that reduced query times by 75% '
                 'and a reactive UI that updates within 250ms of backend changes.',
-        'image': 'images/project3.jpg',
-        'tileImage': 'tile_images/pro_ranked.webp',
+        'image': 'assets/images/project3.jpg',
+        'tileImage': 'assets/tile_images/pro_ranked.webp',
         'url': 'https://proranked.com',
       },
       {
@@ -406,8 +406,8 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
             'with limited connectivity, achieving 100% data integrity across sync events. '
             r'Built a custom PDF generation engine for invoices that processed $2.5M in transactions '
             'monthly. Implemented a multilingual system supporting 6 languages with 99% translation accuracy.',
-        'image': 'images/project4.jpg',
-        'tileImage': 'tile_images/onsite.webp',
+        'image': 'assets/images/project4.jpg',
+        'tileImage': 'assets/tile_images/onsite.webp',
         'url':
             'https://play.google.com/store/apps/details?id=com.abeyaantrix.onsite',
       },
@@ -417,8 +417,8 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
             'that securely manages 75K+ patient records. Engineered a telemedicine system '
             'that handled 1,000+ daily consultations with 99.8% connection reliability. '
             'Reduced app size by 40% while adding offline access to critical health data.',
-        'image': 'images/project5.jpg',
-        'tileImage': 'tile_images/ezHealth.webp',
+        'image': 'assets/images/project5.jpg',
+        'tileImage': 'assets/tile_images/ezHealth.webp',
         'url': 'https://play.google.com/store/apps/details?id='
             'com.zuelligpharma.ezhealth',
       },
@@ -428,8 +428,8 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
             '60% faster data processing than the previous solution. Created a custom '
             'analytics dashboard that helped medical reps increase sales by 28%. '
             'Implemented an AI-powered recommendation engine with 92% accuracy for product targeting.',
-        'image': 'images/project6.jpg',
-        'tileImage': 'tile_images/ezTrade.webp',
+        'image': 'assets/images/project6.jpg',
+        'tileImage': 'assets/tile_images/ezTrade.webp',
         'url': 'https://play.google.com/store/apps/details?id='
             'com.zuelligpharma.eztrade',
       },
@@ -439,8 +439,8 @@ class PortfolioRepository implements PortfolioRepositoryInterface {
             'during the pandemic. Engineered a data synchronization system that provided '
             'real-time statistics to 50K+ users with 99.5% accuracy. Implemented an '
             'emergency resource locator that helped users find testing and vaccination centers.',
-        'image': 'images/project7.jpg',
-        'tileImage': 'tile_images/covid.webp',
+        'image': 'assets/images/project7.jpg',
+        'tileImage': 'assets/tile_images/covid.webp',
         'url': 'https://github.com/sakshamsri4/Covid-19-App',
       },
     ];
