@@ -49,8 +49,7 @@ class AnalyticsDebugHelper {
     if (!isDebugMode) return;
 
     try {
-      final analyticsService = Get.find<AnalyticsService>();
-      analyticsService.printDebugEvents();
+      final analyticsService = Get.find<AnalyticsService>()..printDebugEvents();
     } on Exception catch (e) {
       log('$_debugPrefix Error printing debug events: $e');
     }
@@ -61,8 +60,7 @@ class AnalyticsDebugHelper {
     if (!isDebugMode) return;
 
     try {
-      final analyticsService = Get.find<AnalyticsService>();
-      analyticsService.clearDebugEvents();
+      final analyticsService = Get.find<AnalyticsService>()..clearDebugEvents();
       log('$_debugPrefix Debug events cleared');
     } on Exception catch (e) {
       log('$_debugPrefix Error clearing debug events: $e');
@@ -201,24 +199,16 @@ class AnalyticsDebugHelper {
     log('$_debugPrefix Running Analytics Test Scenarios...');
 
     try {
-      final analyticsService = Get.find<AnalyticsService>();
+      final analyticsService = Get.find<AnalyticsService>()
 
       // Clear existing events
-      analyticsService.clearDebugEvents();
+      ..clearDebugEvents();
 
       // Test scenario 1: Page navigation
-      await analyticsService.trackPageView(
-        pageName: 'test_page',
-        pageClass: 'test_class',
-        parameters: {'test': 'page_view'},
-      );
+      await analyticsService.trackPageView('test_page', 'test_class');
 
       // Test scenario 2: Button interaction
-      await analyticsService.trackButtonClick(
-        buttonName: 'test_button',
-        section: 'test_section',
-        parameters: {'test': 'button_click'},
-      );
+      await analyticsService.trackButtonClick('test_button', 'test_section');
 
       // Test scenario 3: Custom event
       await analyticsService.trackCustomEvent(

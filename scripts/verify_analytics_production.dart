@@ -1,7 +1,10 @@
 #!/usr/bin/env dart
+// This is a development script that needs to use print statements for output
+// and async I/O operations for file verification
+// ignore_for_file: avoid_print, avoid_slow_async_io, avoid_dynamic_calls, directives_ordering
 
-import 'dart:io';
 import 'dart:convert';
+import 'dart:io';
 
 /// Production Analytics Verification Script
 ///

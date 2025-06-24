@@ -43,6 +43,12 @@ flutter:
   uses-material-design: true
   generate: true
 
+flutter_gen:
+  output: lib/gen/
+  line_length: 80
+  integrations:
+    flutter_svg: true
+
   assets:
     - assets/cv/
     - assets/images/

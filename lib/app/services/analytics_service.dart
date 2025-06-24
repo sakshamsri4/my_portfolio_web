@@ -50,7 +50,7 @@ class AnalyticsService {
       await _setDefaultUserProperties();
 
       log('Firebase Analytics service initialized successfully');
-    } catch (e) {
+    } on Exception catch (e) {
       _isInitialized = false;
       log('Firebase Analytics initialization error: $e');
     }
@@ -68,7 +68,7 @@ class AnalyticsService {
       await setUserProperty('app_type', 'portfolio_web');
       await setUserProperty('platform', kIsWeb ? 'web' : 'mobile');
       await setUserProperty('user_type', 'visitor');
-    } catch (e) {
+    } on Exception catch (e) {
       log('Error setting default user properties: $e');
     }
   }
@@ -96,7 +96,7 @@ class AnalyticsService {
         // For native platforms, we would use Flutter plugins
         log('Native analytics tracking not implemented yet');
       }
-    } catch (e) {
+    } on Exception catch (e) {
       log('Error tracking event $eventName: $e');
     }
   }
@@ -118,7 +118,7 @@ class AnalyticsService {
       } else {
         log('Firebase Analytics JavaScript SDK not available');
       }
-    } catch (e) {
+    } on Exception catch (e) {
       log('Error tracking web event: $e');
     }
   }
@@ -132,13 +132,13 @@ class AnalyticsService {
       final value = entry.value;
 
       if (value is String) {
-        return '"$key": "${value.replaceAll('"', '\\"')}"';
+        return '"$key": "${value.replaceAll('"', r'\"')}"';
       } else if (value is num) {
         return '"$key": $value';
       } else if (value is bool) {
         return '"$key": $value';
       } else {
-        return '"$key": "${value.toString().replaceAll('"', '\\"')}"';
+        return '"$key": "${value.toString().replaceAll('"', r'\"')}"';
       }
     }).join(', ');
 
@@ -158,7 +158,7 @@ class AnalyticsService {
         // For native platforms, we would use Flutter plugins
         log('Native user property setting not implemented yet');
       }
-    } catch (e) {
+    } on Exception catch (e) {
       log('Error setting user property $name: $e');
     }
   }
@@ -178,7 +178,7 @@ class AnalyticsService {
         ]);
         log('Web user property set: $name = $value');
       }
-    } catch (e) {
+    } on Exception catch (e) {
       log('Error setting web user property: $e');
     }
   }
@@ -239,5 +239,36 @@ class AnalyticsService {
   /// Clear debug events (for testing)
   void clearDebugEvents() {
     _debugEvents.clear();
+  }
+
+  /// Get analytics status for debugging
+  Map<String, dynamic> getAnalyticsStatus() {
+    return {
+      'is_initialized': _isInitialized,
+      'debug_mode': _kAnalyticsDebugMode,
+      'debug_events_count': _debugEvents.length,
+      'project_id': 'saksham-portfolio-ba828',
+      'measurement_id': 'G-VVVFQJL1WD',
+      'firebase_app_id': '1:51439261225:web:bb97fff3613e72ef96ae38',
+    };
+  }
+
+  /// Print debug events for debugging
+  void printDebugEvents() {
+    if (_kAnalyticsDebugMode) {
+      log('Analytics Debug Events (${_debugEvents.length} total):');
+      for (var i = 0; i < _debugEvents.length; i++) {
+        final event = _debugEvents[i];
+        log('Event ${i + 1}: ${event['event_name']} - ${event['parameters']}');
+      }
+    }
+  }
+
+  /// Track custom event (alias for trackEvent for backward compatibility)
+  Future<void> trackCustomEvent({
+    required String eventName,
+    Map<String, dynamic>? parameters,
+  }) async {
+    await trackEvent(eventName, parameters);
   }
 }
