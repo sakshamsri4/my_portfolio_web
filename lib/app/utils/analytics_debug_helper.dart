@@ -49,7 +49,7 @@ class AnalyticsDebugHelper {
     if (!isDebugMode) return;
 
     try {
-      final analyticsService = Get.find<AnalyticsService>()..printDebugEvents();
+      Get.find<AnalyticsService>().printDebugEvents();
     } on Exception catch (e) {
       log('$_debugPrefix Error printing debug events: $e');
     }
@@ -60,7 +60,7 @@ class AnalyticsDebugHelper {
     if (!isDebugMode) return;
 
     try {
-      final analyticsService = Get.find<AnalyticsService>()..clearDebugEvents();
+      Get.find<AnalyticsService>().clearDebugEvents();
       log('$_debugPrefix Debug events cleared');
     } on Exception catch (e) {
       log('$_debugPrefix Error clearing debug events: $e');
@@ -201,8 +201,8 @@ class AnalyticsDebugHelper {
     try {
       final analyticsService = Get.find<AnalyticsService>()
 
-      // Clear existing events
-      ..clearDebugEvents();
+        // Clear existing events
+        ..clearDebugEvents();
 
       // Test scenario 1: Page navigation
       await analyticsService.trackPageView('test_page', 'test_class');
