@@ -10,9 +10,14 @@ import 'package:my_portfolio_web/app/controllers/theme_controller.dart';
 import 'package:my_portfolio_web/app/data/repositories/portfolio_repository.dart';
 import 'package:my_portfolio_web/app/data/repositories/portfolio_repository_interface.dart';
 
+import '../mocks/test_setup.dart';
+
 void main() {
   group('ControllerFactory', () {
     setUp(() {
+      // Set up analytics dependencies first
+      setupAnalyticsDependencies();
+
       // Register the repository
       Get.put<PortfolioRepositoryInterface>(
         PortfolioRepository(),
@@ -20,7 +25,9 @@ void main() {
       );
     });
 
-    tearDown(Get.reset);
+    tearDown(() {
+      cleanupTestEnvironment();
+    });
 
     test('initializeControllers should register all controllers', () {
       // Initialize controllers

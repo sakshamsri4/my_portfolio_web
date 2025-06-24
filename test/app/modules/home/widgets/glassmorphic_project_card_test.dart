@@ -6,6 +6,8 @@ import 'package:my_portfolio_web/app/data/repositories/portfolio_repository.dart
 import 'package:my_portfolio_web/app/modules/home/controllers/home_controller.dart';
 import 'package:my_portfolio_web/app/modules/home/widgets/glassmorphic_project_card.dart';
 
+import '../../../../mocks/test_setup.dart';
+
 class MockHomeController extends GetxController {
   void launchProjectUrl(String url) {
     // Mock implementation
@@ -19,12 +21,15 @@ void main() {
 
   setUp(() {
     Get.testMode = true;
+    setupAnalyticsDependencies();
     Get.put<HomeController>(
       HomeController(repository: MockPortfolioRepository()),
     );
   });
 
-  tearDown(Get.reset);
+  tearDown(() {
+    cleanupTestEnvironment();
+  });
 
   // Helper function to build the widget under test
   Widget buildTestWidget() {

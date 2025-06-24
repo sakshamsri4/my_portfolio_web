@@ -80,9 +80,9 @@ void main() {
       expect(lightTextTheme.bodyMedium, isNotNull);
       expect(lightTextTheme.bodySmall, isNotNull);
 
-      // Verify font family is Montserrat
-      expect(lightTextTheme.displayLarge?.fontFamily, contains('Montserrat'));
-      expect(lightTextTheme.bodyMedium?.fontFamily, contains('Montserrat'));
+      // Verify font family is system font stack
+      expect(lightTextTheme.displayLarge?.fontFamily, contains('.SF Pro Text'));
+      expect(lightTextTheme.bodyMedium?.fontFamily, contains('.SF Pro Text'));
 
       // Verify font weights
       expect(lightTextTheme.displayLarge?.fontWeight, equals(FontWeight.bold));
@@ -93,9 +93,9 @@ void main() {
       expect(darkTextTheme.bodyMedium, isNotNull);
       expect(darkTextTheme.bodySmall, isNotNull);
 
-      // Verify font family is Montserrat
-      expect(darkTextTheme.displayLarge?.fontFamily, contains('Montserrat'));
-      expect(darkTextTheme.bodyMedium?.fontFamily, contains('Montserrat'));
+      // Verify font family is system font stack
+      expect(darkTextTheme.displayLarge?.fontFamily, contains('.SF Pro Text'));
+      expect(darkTextTheme.bodyMedium?.fontFamily, contains('.SF Pro Text'));
 
       // Verify font weights
       expect(darkTextTheme.displayLarge?.fontWeight, equals(FontWeight.bold));

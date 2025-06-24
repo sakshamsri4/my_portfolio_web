@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:my_portfolio_web/app/common/constants/app_constants.dart';
 import 'package:my_portfolio_web/app/common/constants/string_constants.dart';
+import 'package:my_portfolio_web/app/controllers/analytics_controller.dart';
 import 'package:my_portfolio_web/app/data/models/tech_stack_item.dart';
 import 'package:my_portfolio_web/app/data/repositories/portfolio_repository.dart';
 import 'package:open_file/open_file.dart';
@@ -25,6 +26,9 @@ class HomeController extends GetxController {
       : _repository = repository ?? PortfolioRepository();
 
   final PortfolioRepository _repository;
+
+  /// Analytics controller for tracking user interactions
+  late final AnalyticsController _analyticsController;
 
   /// Scroll controller for the main page
   final ScrollController scrollController = ScrollController();
@@ -95,8 +99,19 @@ class HomeController extends GetxController {
   // Professional summary
   late final String professionalSummary = _repository.getProfessionalSummary();
 
+  @override
+  void onInit() {
+    super.onInit();
+    _analyticsController = Get.find<AnalyticsController>();
+
+    // Track initial page view
+    _analyticsController.trackPageView('home');
+  }
+
   // Scroll to section
   void scrollToSection(String section) {
+    // Track navigation analytics
+    _analyticsController.trackNavigationClick(section);
     GlobalKey? key;
 
     switch (section) {
@@ -157,6 +172,10 @@ class HomeController extends GetxController {
 
   // Launch email client
   Future<void> launchEmail() async {
+    // Track email contact interaction
+    await _analyticsController.trackContactAction('email_click',
+        method: 'email');
+
     final emailUri = Uri(
       scheme: 'mailto',
       path: contactInfo['email'],
@@ -167,7 +186,16 @@ class HomeController extends GetxController {
 
     if (await canLaunchUrl(emailUri)) {
       await launchUrl(emailUri);
+      // Track successful email launch
+      await _analyticsController.trackContactAction('email_launched',
+          method: 'email');
     } else {
+      // Track email launch error
+      await _analyticsController.trackError(
+        errorType: 'email_launch_failed',
+        errorMessage: 'Could not launch email client',
+        context: 'home_controller',
+      );
       Get.snackbar(
         'Error',
         'Could not launch email client',
@@ -197,6 +225,9 @@ class HomeController extends GetxController {
 
   /// Download CV
   Future<void> downloadCV() async {
+    // Track CV download attempt
+    await _analyticsController.trackCVDownload(source: 'hero_section');
+
     // For web platform
     if (kIsWeb) {
       // Create a proper URL to the PDF file
@@ -350,10 +381,27 @@ class HomeController extends GetxController {
 
   // Launch URL
   Future<void> launchProjectUrl(String url) async {
+    // Track project URL click
+    await _analyticsController.trackProjectClick(
+      projectName: 'external_link',
+      action: 'url_click',
+    );
+
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
+      // Track successful URL launch
+      await _analyticsController.trackProjectClick(
+        projectName: 'external_link',
+        action: 'url_launched',
+      );
     } else {
+      // Track URL launch error
+      await _analyticsController.trackError(
+        errorType: 'url_launch_failed',
+        errorMessage: 'Could not launch URL: $url',
+        context: 'home_controller',
+      );
       Get.snackbar(
         'Error',
         'Could not launch URL',
