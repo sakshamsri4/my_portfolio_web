@@ -56,6 +56,9 @@ class AppStrings {
   static const String learnMore = 'Learn More';
   static const String sendMessage = 'Send Message';
   static const String viewAll = 'View All';
+  static const String getInTouch = 'Get in Touch';
+  static const String callMe = 'Call Me';
+  static const String whatsappMe = 'WhatsApp Me';
 
   // Error messages
   static const String errorLaunchingUrl = 'Could not launch URL';

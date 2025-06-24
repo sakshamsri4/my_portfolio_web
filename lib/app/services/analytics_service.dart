@@ -2,7 +2,8 @@ import 'dart:developer';
 // Import dart:js conditionally only for web
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as js
-    if (dart.library.io) 'package:my_portfolio_web/app/utils/js_stub.dart';
+    if (dart.library.io) 'package:my_portfolio_web/app/utils/js_stub.dart'
+    if (dart.library.js_interop) 'dart:js';
 
 import 'package:flutter/foundation.dart';
 

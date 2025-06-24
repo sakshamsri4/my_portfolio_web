@@ -6,8 +6,8 @@ class ResponsiveUtils {
   ResponsiveUtils._();
 
   /// Screen size breakpoints
-  static const double mobileBreakpoint = 600;
-  static const double tabletBreakpoint = 1024;
+  static const double mobileBreakpoint = 768.0;
+  static const double tabletBreakpoint = 1024.0;
 
   /// Check if the current screen size is mobile
   static bool isMobile(BuildContext context) {
@@ -91,5 +91,25 @@ class ResponsiveUtils {
       tablet: tablet,
       desktop: desktop,
     );
+  }
+
+  /// Get appropriate title font size based on screen size
+  static double getTitleFontSize(BuildContext context) {
+    if (isMobile(context)) return 24.0;
+    if (isTablet(context)) return 28.0;
+    return 32.0;
+  }
+
+  /// Get appropriate subtitle font size based on screen size
+  static double getSubtitleFontSize(BuildContext context) {
+    if (isMobile(context)) return 18.0;
+    if (isTablet(context)) return 20.0;
+    return 22.0;
+  }
+
+  /// Get appropriate body font size based on screen size
+  static double getBodyFontSize(BuildContext context) {
+    if (isMobile(context)) return 14.0;
+    return 16.0;
   }
 }
