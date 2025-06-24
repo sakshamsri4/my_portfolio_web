@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:my_portfolio_web/app/controllers/analytics_controller.dart';
 import 'package:my_portfolio_web/app/controllers/career_controller.dart';
 import 'package:my_portfolio_web/app/controllers/contact_controller.dart';
 import 'package:my_portfolio_web/app/controllers/navigation_controller.dart';
@@ -20,6 +21,7 @@ class ControllerFactory {
     // Register all controllers with GetX dependency injection
     // Using cascade notation for cleaner code
     Get
+      ..put<AnalyticsController>(AnalyticsController(), permanent: true)
       ..put<NavigationController>(NavigationController(), permanent: true)
       ..put<ProjectsController>(
         ProjectsController(repository: repository),

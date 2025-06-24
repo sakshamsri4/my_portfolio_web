@@ -18,7 +18,7 @@
   <meta property="og:image:width" content="1306">
   <meta property="og:image:height" content="683">
   <meta property="og:image:alt" content="Saksham Srivastava Portfolio Preview">
-  <meta property="og:url" content="https://saksham-portfolio-ba828.web.app/">
+  <meta property="og:url" content="https://saksham-portfolio-ba828.web.app">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Saksham Srivastava Portfolio">
   <meta property="og:locale" content="en_US">
@@ -42,6 +42,9 @@
   <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
   <link rel="apple-touch-icon" href="assets/images/logo.svg">
 
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://saksham-portfolio-ba828.web.app">
+
   <!-- Web App Title -->
   <meta name="apple-mobile-web-app-title" content="Saksham Portfolio">
   <meta name="application-name" content="Saksham Portfolio">
@@ -55,18 +58,81 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
 
-  <!-- Preload local font files as fallback -->
-  <link rel="preload" href="assets/fonts/Montserrat-Regular.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="assets/fonts/Montserrat-Bold.ttf" as="font" type="font/ttf" crossorigin>
-
-  <!-- Flutter Web Initialization -->
-  <script src="flutter.js" defer></script>
+  <!-- Disable Firebase auto-injection completely to prevent platform channel conflicts -->
   <script>
-    var serviceWorkerVersion = null;
+    // Prevent Firebase auto-injection of all plugins to avoid dual initialization
+    window.flutterfire_ignore_scripts = true;
+
+    // Also disable automatic Firebase initialization
+    window.firebase_core_auto_init = false;
+    window.firebase_analytics_auto_init = false;
   </script>
+
+  <!-- Firebase JavaScript SDK -->
+  <script type="module">
+    // Import Firebase SDK modules
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js';
+    import { getAnalytics } from 'https://www.gstatic.com/firebasejs/11.9.1/firebase-analytics.js';
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: 'AIzaSyDmsKfdPCsOyE4V9b9rh_7M4GIoQh4zcsM',
+      appId: '1:51439261225:web:bb97fff3613e72ef96ae38',
+      messagingSenderId: '51439261225',
+      projectId: 'saksham-portfolio-ba828',
+      authDomain: 'saksham-portfolio-ba828.firebaseapp.com',
+      databaseURL: 'https://saksham-portfolio-ba828-default-rtdb.firebaseio.com',
+      storageBucket: 'saksham-portfolio-ba828.firebasestorage.app',
+      measurementId: 'G-VVVFQJL1WD',
+    };
+
+    // Initialize Firebase with error handling
+    try {
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+
+      // Make Firebase available globally for Flutter with better error handling
+      window.firebase_core = {
+        initializeApp: () => app,
+        app: () => app
+      };
+      window.firebase_analytics = {
+        getAnalytics: () => analytics,
+        analytics: analytics
+      };
+      window.firebaseConfig = firebaseConfig;
+      window.firebaseApp = app;
+      window.firebaseAnalytics = analytics;
+
+      console.log('Firebase JavaScript SDK initialized successfully');
+    } catch (error) {
+      console.warn('Firebase JavaScript SDK initialization failed:', error);
+      // Provide fallback objects to prevent platform channel errors
+      window.firebase_core = {
+        initializeApp: () => null,
+        app: () => null
+      };
+      window.firebase_analytics = {
+        getAnalytics: () => null,
+        analytics: null
+      };
+    }
+  </script>
+
 </head>
 
 <body>
+  <!-- Static content for social media crawlers -->
+  <div id="social-media-content" style="display: none;">
+    <h1>Saksham Srivastava | Senior Flutter Developer & Mobile Architect</h1>
+    <p>Senior Flutter Developer & Mobile Architect with 6+ years of experience in cross-platform development. Explore my
+      projects, skills, and get in touch.</p>
+    <img src="https://saksham-portfolio-ba828.web.app/assets/images/social_preview.png"
+      alt="Saksham Srivastava Portfolio Preview" width="1306" height="683">
+    <p>Skills: Flutter, Dart, Firebase, GetX, BLoC, Provider, REST APIs, GraphQL, CI/CD, Mobile Architecture</p>
+    <p>Visit my portfolio to see my projects and get in touch!</p>
+  </div>
+
   <div id="loading">
     <style>
       body {
@@ -154,20 +220,35 @@
     </div>
   </div>
 
+  <!-- Flutter Bootstrap Script -->
+  <script src="flutter_bootstrap.js" async></script>
+
+  <!-- Custom loading animation and initialization -->
   <script>
     window.addEventListener('load', function () {
       var loading = document.querySelector('#loading');
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        },
-        onEntrypointLoaded: async function (engineInitializer) {
-          loading.classList.add('main_done');
-          let appRunner = await engineInitializer.initializeEngine();
-          loading.classList.add('init_done');
-          await appRunner.runApp();
+
+      // Wait for Flutter loader to be available
+      function waitForFlutter() {
+        if (window._flutter && window._flutter.loader) {
+          _flutter.loader.load({
+            serviceWorker: {
+              serviceWorkerVersion: null,
+            },
+            onEntrypointLoaded: async function (engineInitializer) {
+              loading.classList.add('main_done');
+              let appRunner = await engineInitializer.initializeEngine();
+              loading.classList.add('init_done');
+              await appRunner.runApp();
+            }
+          });
+        } else {
+          // Retry after a short delay
+          setTimeout(waitForFlutter, 50);
         }
-      });
+      }
+
+      waitForFlutter();
     });
   </script>
 </body>

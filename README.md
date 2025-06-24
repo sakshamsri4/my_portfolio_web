@@ -22,6 +22,7 @@ A professional portfolio website built with Flutter, showcasing my skills, proje
 
 - **Framework**: Flutter Web
 - **State Management**: GetX
+- **Analytics**: Firebase Analytics with comprehensive event tracking
 - **Animations**: animated_text_kit
 - **Icons**: font_awesome_flutter, flutter_svg
 - **Navigation**: Single-page scrolling with section keys
@@ -75,6 +76,27 @@ $ genhtml coverage/lcov.info -o coverage/
 $ open coverage/index.html
 ```
 
+## Firebase Analytics 📊
+
+The portfolio includes comprehensive Firebase Analytics integration to track user engagement and interactions:
+
+### Tracked Events
+- **Page Views**: Automatic tracking of section navigation
+- **User Interactions**: Button clicks, project views, contact actions
+- **Downloads**: CV/Resume download tracking
+- **Social Media**: Social platform link clicks
+- **Theme Changes**: Light/dark mode toggle tracking
+- **Error Events**: Failed operations and error handling
+
+### Analytics Architecture
+- **Service Layer**: `AnalyticsService` for Firebase integration
+- **Controller Layer**: `AnalyticsController` for GetX integration
+- **Event Tracking**: Comprehensive user journey analytics
+
+For detailed analytics documentation, see:
+- [Firebase Analytics Integration Guide](docs/firebase_analytics_integration.md)
+- [Analytics Testing Guide](docs/analytics_testing_guide.md)
+
 ## Project Structure 📁
 
 - `lib/app/modules/` - Feature modules (home, about, projects, contact)
@@ -82,7 +104,10 @@ $ open coverage/index.html
 - `lib/app/common/` - Shared components, constants, and utilities
 - `lib/app/routes/` - Application routing configuration
 - `lib/app/theme/` - Theme configuration and styling
+- `lib/app/services/` - Core services including analytics
+- `lib/app/controllers/` - GetX controllers and business logic
 - `scripts/` - Utility scripts for development and deployment
+- `docs/` - Documentation and guides
 
 ## App Icons 🎨
 
