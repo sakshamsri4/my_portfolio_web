@@ -13,24 +13,12 @@ class AnalyticsController extends GetxController {
 
   /// Track page navigation
   Future<void> trackPageView(String pageName) async {
-    await _analyticsService.trackPageView(
-      pageName: pageName,
-      pageClass: 'portfolio_page',
-      parameters: {
-        'timestamp': DateTime.now().millisecondsSinceEpoch,
-      },
-    );
+    await _analyticsService.trackPageView(pageName, 'portfolio_page');
   }
 
   /// Track navigation button clicks
   Future<void> trackNavigationClick(String destination) async {
-    await _analyticsService.trackButtonClick(
-      buttonName: 'navigation_$destination',
-      section: 'header_navigation',
-      parameters: {
-        'destination': destination,
-      },
-    );
+    await _analyticsService.trackButtonClick('navigation_$destination', 'header_navigation');
   }
 
   /// Track button clicks (generic method for tests and widgets)
@@ -39,186 +27,161 @@ class AnalyticsController extends GetxController {
     String? section,
     Map<String, Object>? parameters,
   }) async {
-    await _analyticsService.trackButtonClick(
-      buttonName: buttonName,
-      section: section,
-      parameters: parameters,
-    );
+    await _analyticsService.trackButtonClick(buttonName, section);
   }
 
   /// Track hero section interactions
   Future<void> trackHeroInteraction(String action) async {
-    await _analyticsService.trackButtonClick(
-      buttonName: 'hero_$action',
-      section: 'hero_section',
-      parameters: {
-        'action': action,
-      },
-    );
+    await _analyticsService.trackButtonClick('hero_$action', 'hero_section');
   }
 
-  /// Track project card interactions
+  /// Track project interactions
   Future<void> trackProjectClick({
     required String projectName,
     required String action,
   }) async {
-    await _analyticsService.trackProjectInteraction(
-      projectName: projectName,
-      action: action,
-      parameters: {
-        'section': 'projects_section',
-      },
-    );
+    await _analyticsService.trackEvent('project_interaction', {
+      'project_name': projectName,
+      'action': action,
+    });
   }
 
-  /// Track skill chip interactions
+  /// Track skill interactions
   Future<void> trackSkillClick({
     required String skillName,
     String? category,
   }) async {
-    await _analyticsService.trackSkillInteraction(
-      skillName: skillName,
-      action: 'click',
-      category: category,
-      parameters: {
-        'section': 'skills_section',
-      },
-    );
+    await _analyticsService.trackEvent('skill_interaction', {
+      'skill_name': skillName,
+      'category': category ?? 'unknown',
+    });
   }
 
-  /// Track contact form interactions
+  /// Track contact actions
   Future<void> trackContactAction(String action, {String? method}) async {
-    await _analyticsService.trackContactInteraction(
-      action: action,
-      method: method,
-      parameters: {
-        'section': 'contact_section',
-      },
-    );
+    await _analyticsService.trackContactSubmission(method ?? action);
   }
 
   /// Track CV download
   Future<void> trackCVDownload({String? source}) async {
-    await _analyticsService.trackCVDownload(
-      source: source,
-      parameters: {
-        'file_type': 'pdf',
-        'timestamp': DateTime.now().millisecondsSinceEpoch,
-      },
-    );
-  }
-
-  /// Track social media clicks
-  Future<void> trackSocialClick({
-    required String platform,
-    String? source,
-  }) async {
-    await _analyticsService.trackSocialMediaClick(
-      platform: platform,
-      source: source,
-      parameters: {
-        'timestamp': DateTime.now().millisecondsSinceEpoch,
-      },
-    );
-  }
-
-  /// Track carousel interactions
-  Future<void> trackCarouselInteraction({
-    required String carouselType,
-    required String action,
-    int? itemIndex,
-  }) async {
-    await _analyticsService.trackCustomEvent(
-      eventName: 'carousel_interaction',
-      parameters: {
-        'carousel_type': carouselType,
-        'action': action,
-        if (itemIndex != null) 'item_index': itemIndex,
-      },
-    );
-  }
-
-  /// Track scroll events
-  Future<void> trackScrollEvent({
-    required String section,
-    required double scrollPercentage,
-  }) async {
-    await _analyticsService.trackCustomEvent(
-      eventName: 'scroll_event',
-      parameters: {
-        'section': section,
-        'scroll_percentage': scrollPercentage.round(),
-      },
-    );
+    await _analyticsService.trackDownload('cv.pdf', 'pdf');
   }
 
   /// Track theme changes
-  Future<void> trackThemeChange(String theme) async {
-    await _analyticsService.trackCustomEvent(
-      eventName: 'theme_change',
-      parameters: {
-        'theme': theme,
-      },
-    );
+  Future<void> trackThemeChange(String themeName) async {
+    await _analyticsService.trackEvent('theme_change', {
+      'theme_name': themeName,
+    });
   }
 
-  /// Track search interactions (if applicable)
-  Future<void> trackSearchInteraction({
-    required String query,
-    int? resultsCount,
-  }) async {
-    await _analyticsService.trackCustomEvent(
-      eventName: 'search_interaction',
-      parameters: {
-        'query': query,
-        if (resultsCount != null) 'results_count': resultsCount,
-      },
-    );
-  }
-
-  /// Track error events
+  /// Track errors
   Future<void> trackError({
     required String errorType,
     required String errorMessage,
     String? context,
   }) async {
-    await _analyticsService.trackCustomEvent(
-      eventName: 'error_event',
-      parameters: {
-        'error_type': errorType,
-        'error_message': errorMessage,
-        if (context != null) 'context': context,
-      },
-    );
+    await _analyticsService.trackError(errorType, errorMessage);
+  }
+
+  /// Track section views
+  Future<void> trackSectionView(String sectionName) async {
+    await _analyticsService.trackSectionView(sectionName);
+  }
+
+  /// Track social media clicks
+  Future<void> trackSocialClick(String platform) async {
+    await _analyticsService.trackButtonClick('social_$platform', 'social_links');
+  }
+
+  /// Track external link clicks
+  Future<void> trackExternalLink(String url, String context) async {
+    await _analyticsService.trackEvent('external_link_click', {
+      'url': url,
+      'context': context,
+    });
+  }
+
+  /// Track form interactions
+  Future<void> trackFormInteraction(String formName, String action) async {
+    await _analyticsService.trackEvent('form_interaction', {
+      'form_name': formName,
+      'action': action,
+    });
+  }
+
+  /// Track search actions
+  Future<void> trackSearch(String query, String context) async {
+    await _analyticsService.trackEvent('search', {
+      'query': query,
+      'context': context,
+    });
+  }
+
+  /// Track scroll depth
+  Future<void> trackScrollDepth(int percentage) async {
+    await _analyticsService.trackEvent('scroll_depth', {
+      'percentage': percentage,
+    });
+  }
+
+  /// Track time spent on page
+  Future<void> trackTimeOnPage(String pageName, int seconds) async {
+    await _analyticsService.trackEvent('time_on_page', {
+      'page_name': pageName,
+      'seconds': seconds,
+    });
+  }
+
+  /// Track user engagement
+  Future<void> trackEngagement(String type, String value) async {
+    await _analyticsService.trackEvent('user_engagement', {
+      'engagement_type': type,
+      'value': value,
+    });
   }
 
   /// Track performance metrics
-  Future<void> trackPerformance({
-    required String metricName,
-    required double value,
-    String? unit,
-  }) async {
-    await _analyticsService.trackCustomEvent(
-      eventName: 'performance_metric',
-      parameters: {
-        'metric_name': metricName,
-        'value': value,
-        if (unit != null) 'unit': unit,
-      },
-    );
+  Future<void> trackPerformance(String metric, double value) async {
+    await _analyticsService.trackEvent('performance_metric', {
+      'metric': metric,
+      'value': value,
+    });
   }
 
-  /// Track user engagement time
-  Future<void> trackEngagementTime({
-    required String section,
-    required int timeSpentSeconds,
-  }) async {
-    await _analyticsService.trackCustomEvent(
-      eventName: 'engagement_time',
-      parameters: {
-        'section': section,
-        'time_spent_seconds': timeSpentSeconds,
-      },
-    );
+  /// Track feature usage
+  Future<void> trackFeatureUsage(String featureName) async {
+    await _analyticsService.trackEvent('feature_usage', {
+      'feature_name': featureName,
+    });
   }
+
+  /// Track user preferences
+  Future<void> trackUserPreference(String preference, String value) async {
+    await _analyticsService.trackEvent('user_preference', {
+      'preference': preference,
+      'value': value,
+    });
+  }
+
+  /// Track conversion events
+  Future<void> trackConversion(String conversionType, String value) async {
+    await _analyticsService.trackEvent('conversion', {
+      'conversion_type': conversionType,
+      'value': value,
+    });
+  }
+
+  /// Track custom events
+  Future<void> trackCustomEvent(String eventName, Map<String, dynamic> parameters) async {
+    await _analyticsService.trackEvent(eventName, parameters);
+  }
+
+  /// Get analytics service for direct access if needed
+  AnalyticsService get analyticsService => _analyticsService;
+
+  /// Check if analytics is initialized
+  bool get isAnalyticsInitialized => _analyticsService.isInitialized;
+
+  /// Get debug events (for testing)
+  List<Map<String, dynamic>> get debugEvents => _analyticsService.debugEvents;
 }

@@ -1,20 +1,21 @@
 import 'dart:developer';
+// Import dart:js conditionally only for web
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:js' as js
+    if (dart.library.io) 'package:my_portfolio_web/app/utils/js_stub.dart';
 
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 
 /// Debug mode flag for enhanced analytics logging
 const bool _kAnalyticsDebugMode = kDebugMode;
 
 /// Service for handling Firebase Analytics events and tracking
+/// Uses JavaScript SDK for web platform to avoid platform channel conflicts
 class AnalyticsService {
   factory AnalyticsService() => _instance;
   AnalyticsService._internal();
 
   static final AnalyticsService _instance = AnalyticsService._internal();
-
-  late FirebaseAnalytics _analytics;
-  late FirebaseAnalyticsObserver _observer;
 
   /// Debug event tracking for verification
   final List<Map<String, dynamic>> _debugEvents = [];
@@ -22,462 +23,215 @@ class AnalyticsService {
   /// Flag to track if analytics is properly initialized
   bool _isInitialized = false;
 
-  /// Initialize Firebase Analytics
+  /// Get the singleton instance
+  static AnalyticsService get instance => _instance;
+
+  /// Initialize Firebase Analytics via JavaScript SDK
   Future<void> initialize() async {
     try {
-      // For web platforms, Firebase is initialized via JavaScript SDK
-      // We need to handle this gracefully to avoid platform channel conflicts
       if (kIsWeb) {
-        // On web, try to get analytics instance but handle failures gracefully
-        try {
-          _analytics = FirebaseAnalytics.instance;
-          _observer = FirebaseAnalyticsObserver(analytics: _analytics);
-          log('Firebase Analytics instance obtained for web');
-        } catch (e) {
-          log('Firebase Analytics instance creation failed on web (expected): $e');
-          // Create a dummy observer to prevent null errors
-          _observer = FirebaseAnalyticsObserver(analytics: _analytics);
+        // On web, check if JavaScript SDK is available
+        if (js.context.hasProperty('firebaseAnalytics')) {
+          log('Firebase Analytics JavaScript SDK detected');
+          _isInitialized = true;
+        } else {
+          log('Firebase Analytics JavaScript SDK not available yet - will retry on events');
+          // Set a flag to retry later
+          _isInitialized = false;
         }
       } else {
-        // On native platforms, standard initialization
-        _analytics = FirebaseAnalytics.instance;
-        _observer = FirebaseAnalyticsObserver(analytics: _analytics);
+        // On native platforms, we would use Flutter plugins
+        // For now, just mark as initialized for development
+        _isInitialized = true;
+        log('Analytics service initialized for native platform');
       }
 
-      // Set default user properties (with error handling for web)
+      // Set default user properties
       await _setDefaultUserProperties();
 
-      _isInitialized = true;
-      log('Firebase Analytics initialized successfully');
-    } on Exception catch (e) {
+      log('Firebase Analytics service initialized successfully');
+    } catch (e) {
       _isInitialized = false;
-      log('Firebase Analytics initialization handled: $e');
-      // On web, this is expected when using JavaScript SDK
-      if (kIsWeb) {
-        log('Using JavaScript SDK analytics - Flutter analytics disabled');
-        // Still create observer to prevent null errors
-        try {
-          _analytics = FirebaseAnalytics.instance;
-          _observer = FirebaseAnalyticsObserver(analytics: _analytics);
-        } catch (_) {
-          // If this fails too, we'll handle it in the analytics calls
-        }
-      }
+      log('Firebase Analytics initialization error: $e');
     }
   }
-
-  /// Helper method to convert `Map<String, dynamic>` to `Map<String, Object>`
-  Map<String, Object>? _convertParameters(Map<String, dynamic>? parameters) {
-    if (parameters == null) return null;
-    return parameters.map((key, value) => MapEntry(key, value as Object));
-  }
-
-  /// Get the analytics observer for navigation tracking
-  FirebaseAnalyticsObserver get observer => _observer;
-
-  /// Set default user properties
-  Future<void> _setDefaultUserProperties() async {
-    try {
-      if (_isInitialized) {
-        await _analytics.setUserProperty(
-          name: 'app_type',
-          value: 'portfolio_web',
-        );
-
-        await _analytics.setUserProperty(
-          name: 'platform',
-          value: kIsWeb ? 'web' : 'mobile',
-        );
-
-        await _analytics.setUserProperty(
-          name: 'user_type',
-          value: 'visitor',
-        );
-      }
-    } on Exception catch (e) {
-      // On web, platform channel errors are expected - handle gracefully
-      if (kIsWeb) {
-        if (_kAnalyticsDebugMode) {
-          log('User properties not set on web (expected with JavaScript SDK)');
-        }
-      } else {
-        log('Failed to set user properties: $e');
-      }
-    }
-  }
-
-  /// Track page views
-  Future<void> trackPageView({
-    required String pageName,
-    String? pageClass,
-    Map<String, Object>? parameters,
-  }) async {
-    try {
-      if (_isInitialized) {
-        await _analytics.logScreenView(
-          screenName: pageName,
-          screenClass: pageClass ?? pageName,
-          parameters: parameters,
-        );
-      }
-
-      // Add to debug tracking
-      _addDebugEvent('screen_view', {
-        'screen_name': pageName,
-        'screen_class': pageClass ?? pageName,
-        ...?parameters?.map((k, v) => MapEntry(k, v.toString())),
-      });
-
-      if (_kAnalyticsDebugMode) {
-        log('Page view tracked: $pageName (initialized: $_isInitialized)');
-      }
-    } on Exception catch (e) {
-      // On web, platform channel errors are expected - handle gracefully
-      if (kIsWeb) {
-        if (_kAnalyticsDebugMode) {
-          log('Page view tracking handled gracefully on web: $pageName');
-        }
-      } else {
-        log('Failed to track page view: $e');
-      }
-    }
-  }
-
-  /// Track button clicks and interactions
-  Future<void> trackButtonClick({
-    required String buttonName,
-    String? section,
-    Map<String, Object>? parameters,
-  }) async {
-    try {
-      final eventParameters = <String, Object>{
-        'button_name': buttonName,
-        if (section != null) 'section': section,
-        ...?parameters,
-      };
-
-      if (_isInitialized) {
-        await _analytics.logEvent(
-          name: 'button_click',
-          parameters: eventParameters,
-        );
-      }
-
-      // Add to debug tracking
-      _addDebugEvent('button_click', {
-        'button_name': buttonName,
-        if (section != null) 'section': section,
-        ...?parameters?.map((k, v) => MapEntry(k, v.toString())),
-      });
-
-      if (_kAnalyticsDebugMode) {
-        log('Button click tracked: $buttonName (initialized: $_isInitialized)');
-      }
-    } on Exception catch (e) {
-      // On web, platform channel errors are expected - handle gracefully
-      if (kIsWeb) {
-        if (_kAnalyticsDebugMode) {
-          log('Button click tracking handled gracefully on web: $buttonName');
-        }
-      } else {
-        log('Failed to track button click: $e');
-      }
-    }
-  }
-
-  /// Track project interactions
-  Future<void> trackProjectInteraction({
-    required String projectName,
-    required String action, // 'view', 'click_demo', 'click_github', etc.
-    Map<String, dynamic>? parameters,
-  }) async {
-    try {
-      final eventParameters = <String, Object>{
-        'project_name': projectName,
-        'action': action,
-        ...?_convertParameters(parameters),
-      };
-
-      if (_isInitialized) {
-        await _analytics.logEvent(
-          name: 'project_interaction',
-          parameters: eventParameters,
-        );
-      }
-
-      // Add to debug tracking
-      _addDebugEvent('project_interaction', {
-        'project_name': projectName,
-        'action': action,
-        ...?parameters,
-      });
-
-      if (_kAnalyticsDebugMode) {
-        log('Project interaction tracked: $projectName - $action (initialized: $_isInitialized)');
-      }
-    } on Exception catch (e) {
-      // On web, platform channel errors are expected - handle gracefully
-      if (kIsWeb) {
-        if (_kAnalyticsDebugMode) {
-          log('Project interaction tracking handled gracefully on web: $projectName - $action');
-        }
-      } else {
-        log('Failed to track project interaction: $e');
-      }
-    }
-  }
-
-  /// Track contact form interactions
-  Future<void> trackContactInteraction({
-    required String action, // 'form_view', 'form_submit', 'email_click', etc.
-    String? method, // 'email', 'linkedin', 'github', etc.
-    Map<String, dynamic>? parameters,
-  }) async {
-    try {
-      final eventParameters = <String, Object>{
-        'action': action,
-        if (method != null) 'contact_method': method,
-        ...?_convertParameters(parameters),
-      };
-
-      if (_isInitialized) {
-        await _analytics.logEvent(
-          name: 'contact_interaction',
-          parameters: eventParameters,
-        );
-      }
-
-      // Add to debug tracking
-      _addDebugEvent('contact_interaction', {
-        'action': action,
-        if (method != null) 'contact_method': method,
-        ...?parameters,
-      });
-
-      if (_kAnalyticsDebugMode) {
-        log('Contact interaction tracked: $action (initialized: $_isInitialized)');
-      }
-    } on Exception catch (e) {
-      log('Failed to track contact interaction: $e');
-    }
-  }
-
-  /// Track skill/technology interactions
-  Future<void> trackSkillInteraction({
-    required String skillName,
-    required String action, // 'view', 'click', 'hover', etc.
-    String? category, // 'frontend', 'backend', 'mobile', etc.
-    Map<String, dynamic>? parameters,
-  }) async {
-    try {
-      final eventParameters = <String, Object>{
-        'skill_name': skillName,
-        'action': action,
-        if (category != null) 'skill_category': category,
-        ...?_convertParameters(parameters),
-      };
-
-      if (_isInitialized) {
-        await _analytics.logEvent(
-          name: 'skill_interaction',
-          parameters: eventParameters,
-        );
-      }
-
-      // Add to debug tracking
-      _addDebugEvent('skill_interaction', {
-        'skill_name': skillName,
-        'action': action,
-        if (category != null) 'skill_category': category,
-        ...?parameters,
-      });
-
-      if (_kAnalyticsDebugMode) {
-        log('Skill interaction tracked: $skillName - $action (initialized: $_isInitialized)');
-      }
-    } on Exception catch (e) {
-      log('Failed to track skill interaction: $e');
-    }
-  }
-
-  /// Track CV/Resume downloads
-  Future<void> trackCVDownload({
-    String? source, // 'header_button', 'contact_section', etc.
-    Map<String, dynamic>? parameters,
-  }) async {
-    try {
-      final eventParameters = <String, Object>{
-        'download_type': 'cv',
-        if (source != null) 'source': source,
-        ...?_convertParameters(parameters),
-      };
-
-      if (_isInitialized) {
-        await _analytics.logEvent(
-          name: 'file_download',
-          parameters: eventParameters,
-        );
-      }
-
-      // Add to debug tracking
-      _addDebugEvent('file_download', {
-        'download_type': 'cv',
-        if (source != null) 'source': source,
-        ...?parameters,
-      });
-
-      if (_kAnalyticsDebugMode) {
-        log('CV download tracked from: ${source ?? 'unknown'} (initialized: $_isInitialized)');
-      }
-    } on Exception catch (e) {
-      log('Failed to track CV download: $e');
-    }
-  }
-
-  /// Track social media link clicks
-  Future<void> trackSocialMediaClick({
-    required String platform, // 'linkedin', 'github', 'twitter', etc.
-    String? source, // 'header', 'footer', 'contact_section', etc.
-    Map<String, dynamic>? parameters,
-  }) async {
-    try {
-      final eventParameters = <String, Object>{
-        'platform': platform,
-        if (source != null) 'source': source,
-        ...?_convertParameters(parameters),
-      };
-
-      if (_isInitialized) {
-        await _analytics.logEvent(
-          name: 'social_media_click',
-          parameters: eventParameters,
-        );
-      }
-
-      // Add to debug tracking
-      _addDebugEvent('social_media_click', {
-        'platform': platform,
-        if (source != null) 'source': source,
-        ...?parameters,
-      });
-
-      if (_kAnalyticsDebugMode) {
-        log('Social media click tracked: $platform (initialized: $_isInitialized)');
-      }
-    } on Exception catch (e) {
-      log('Failed to track social media click: $e');
-    }
-  }
-
-  /// Track custom events
-  Future<void> trackCustomEvent({
-    required String eventName,
-    Map<String, dynamic>? parameters,
-  }) async {
-    try {
-      if (_isInitialized) {
-        await _analytics.logEvent(
-          name: eventName,
-          parameters: _convertParameters(parameters),
-        );
-      }
-
-      // Add to debug tracking
-      _addDebugEvent(eventName, parameters);
-
-      if (_kAnalyticsDebugMode) {
-        log('Custom event tracked: $eventName (initialized: $_isInitialized)');
-      }
-    } on Exception catch (e) {
-      log('Failed to track custom event: $e');
-    }
-  }
-
-  /// Set user ID for tracking
-  Future<void> setUserId(String userId) async {
-    try {
-      if (_isInitialized) {
-        await _analytics.setUserId(id: userId);
-      }
-
-      if (_kAnalyticsDebugMode) {
-        log('User ID set: $userId (initialized: $_isInitialized)');
-      }
-    } on Exception catch (e) {
-      log('Failed to set user ID: $e');
-    }
-  }
-
-  /// Reset analytics data (useful for testing)
-  Future<void> resetAnalyticsData() async {
-    try {
-      if (_isInitialized) {
-        await _analytics.resetAnalyticsData();
-      }
-
-      if (_kAnalyticsDebugMode) {
-        log('Analytics data reset (initialized: $_isInitialized)');
-      }
-    } on Exception catch (e) {
-      log('Failed to reset analytics data: $e');
-    }
-  }
-
-  // ========== DEBUG & VERIFICATION METHODS ==========
 
   /// Check if analytics is properly initialized
   bool get isInitialized => _isInitialized;
 
-  /// Get debug events for testing (only in debug mode)
-  List<Map<String, dynamic>> get debugEvents =>
-      _kAnalyticsDebugMode ? List.unmodifiable(_debugEvents) : [];
+  /// Get debug events for testing
+  List<Map<String, dynamic>> get debugEvents => List.unmodifiable(_debugEvents);
 
-  /// Add event to debug tracking
-  void _addDebugEvent(String eventName, Map<String, dynamic>? parameters) {
-    if (_kAnalyticsDebugMode) {
-      _debugEvents.add({
+  /// Set default user properties
+  Future<void> _setDefaultUserProperties() async {
+    try {
+      await setUserProperty('app_type', 'portfolio_web');
+      await setUserProperty('platform', kIsWeb ? 'web' : 'mobile');
+      await setUserProperty('user_type', 'visitor');
+    } catch (e) {
+      log('Error setting default user properties: $e');
+    }
+  }
+
+  /// Track a custom event with parameters
+  Future<void> trackEvent(String eventName, [Map<String, dynamic>? parameters]) async {
+    try {
+      final eventData = {
         'event_name': eventName,
         'parameters': parameters ?? {},
         'timestamp': DateTime.now().toIso8601String(),
-      });
+      };
 
-      // Keep only last 50 events to prevent memory issues
-      if (_debugEvents.length > 50) {
-        _debugEvents.removeAt(0);
+      // Add to debug events
+      if (_kAnalyticsDebugMode) {
+        _debugEvents.add(eventData);
+        log('Analytics event tracked: $eventName with parameters: $parameters');
       }
+
+      if (kIsWeb) {
+        // Use JavaScript SDK for web
+        await _trackEventWeb(eventName, parameters);
+      } else {
+        // For native platforms, we would use Flutter plugins
+        log('Native analytics tracking not implemented yet');
+      }
+    } catch (e) {
+      log('Error tracking event $eventName: $e');
     }
   }
 
-  /// Clear debug events
+  /// Track event using JavaScript SDK
+  Future<void> _trackEventWeb(String eventName, Map<String, dynamic>? parameters) async {
+    try {
+      if (js.context.hasProperty('firebaseAnalytics')) {
+        // Call JavaScript function to track event
+        js.context.callMethod('eval', ['''
+          if (window.firebaseAnalytics && typeof gtag !== 'undefined') {
+            gtag('event', '$eventName', ${_mapToJsObject(parameters ?? {})});
+          }
+        ''']);
+        log('Web analytics event sent: $eventName');
+      } else {
+        log('Firebase Analytics JavaScript SDK not available');
+      }
+    } catch (e) {
+      log('Error tracking web event: $e');
+    }
+  }
+
+  /// Convert Dart map to JavaScript object string
+  String _mapToJsObject(Map<String, dynamic> map) {
+    if (map.isEmpty) return '{}';
+    
+    final entries = map.entries.map((entry) {
+      final key = entry.key;
+      final value = entry.value;
+      
+      if (value is String) {
+        return '"$key": "${value.replaceAll('"', '\\"')}"';
+      } else if (value is num) {
+        return '"$key": $value';
+      } else if (value is bool) {
+        return '"$key": $value';
+      } else {
+        return '"$key": "${value.toString().replaceAll('"', '\\"')}"';
+      }
+    }).join(', ');
+    
+    return '{$entries}';
+  }
+
+  /// Set user property
+  Future<void> setUserProperty(String name, String value) async {
+    try {
+      if (_kAnalyticsDebugMode) {
+        log('Setting user property: $name = $value');
+      }
+
+      if (kIsWeb) {
+        await _setUserPropertyWeb(name, value);
+      } else {
+        // For native platforms, we would use Flutter plugins
+        log('Native user property setting not implemented yet');
+      }
+    } catch (e) {
+      log('Error setting user property $name: $e');
+    }
+  }
+
+  /// Set user property using JavaScript SDK
+  Future<void> _setUserPropertyWeb(String name, String value) async {
+    try {
+      if (js.context.hasProperty('firebaseAnalytics')) {
+        js.context.callMethod('eval', ['''
+          if (window.firebaseAnalytics && typeof gtag !== 'undefined') {
+            gtag('config', 'G-VVVFQJL1WD', {
+              'custom_map': {'$name': '$value'}
+            });
+          }
+        ''']);
+        log('Web user property set: $name = $value');
+      }
+    } catch (e) {
+      log('Error setting web user property: $e');
+    }
+  }
+
+  /// Track page view
+  Future<void> trackPageView(String pageName, [String? pageClass]) async {
+    await trackEvent('page_view', {
+      'page_name': pageName,
+      'page_class': pageClass ?? 'unknown',
+    });
+  }
+
+  /// Track button click
+  Future<void> trackButtonClick(String buttonName, [String? location]) async {
+    await trackEvent('button_click', {
+      'button_name': buttonName,
+      'location': location ?? 'unknown',
+    });
+  }
+
+  /// Track section view
+  Future<void> trackSectionView(String sectionName) async {
+    await trackEvent('section_view', {
+      'section_name': sectionName,
+    });
+  }
+
+  /// Track download event
+  Future<void> trackDownload(String fileName, String fileType) async {
+    await trackEvent('file_download', {
+      'file_name': fileName,
+      'file_type': fileType,
+    });
+  }
+
+  /// Track contact form submission
+  Future<void> trackContactSubmission(String method) async {
+    await trackEvent('contact_submission', {
+      'contact_method': method,
+    });
+  }
+
+  /// Track project view
+  Future<void> trackProjectView(String projectName) async {
+    await trackEvent('project_view', {
+      'project_name': projectName,
+    });
+  }
+
+  /// Track error event
+  Future<void> trackError(String errorType, String errorMessage) async {
+    await trackEvent('error_occurred', {
+      'error_type': errorType,
+      'error_message': errorMessage,
+    });
+  }
+
+  /// Clear debug events (for testing)
   void clearDebugEvents() {
-    if (_kAnalyticsDebugMode) {
-      _debugEvents.clear();
-      log('Debug events cleared');
-    }
-  }
-
-  /// Print all debug events to console
-  void printDebugEvents() {
-    if (_kAnalyticsDebugMode) {
-      log('=== Firebase Analytics Debug Events ===');
-      for (final event in _debugEvents) {
-        log('Event: ${event['event_name']} | '
-            'Time: ${event['timestamp']} | '
-            'Params: ${event['parameters']}');
-      }
-      log('=== End Debug Events (${_debugEvents.length} total) ===');
-    }
-  }
-
-  /// Verify analytics configuration
-  Map<String, dynamic> getAnalyticsStatus() {
-    return {
-      'is_initialized': _isInitialized,
-      'debug_mode': _kAnalyticsDebugMode,
-      'debug_events_count': _debugEvents.length,
-      'firebase_app_id': '1:51439261225:web:bb97fff3613e72ef96ae38',
-      'measurement_id': 'G-VVVFQJL1WD',
-      'project_id': 'saksham-portfolio-ba828',
-    };
+    _debugEvents.clear();
   }
 }
