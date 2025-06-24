@@ -8,7 +8,7 @@ class ThemeController extends BaseController {
   final Rx<ThemeMode> themeMode = ThemeMode.dark.obs;
 
   // Analytics controller for tracking theme changes
-  late final AnalyticsController _analyticsController;
+  AnalyticsController? _analyticsController;
 
   // Toggle theme mode
   void toggleTheme() {
@@ -17,7 +17,7 @@ class ThemeController extends BaseController {
     themeMode.value = newTheme;
 
     // Track theme change
-    _analyticsController.trackThemeChange(newTheme.name);
+    _analyticsController?.trackThemeChange(newTheme.name);
   }
 
   // Get current theme mode
@@ -25,8 +25,8 @@ class ThemeController extends BaseController {
 
   @override
   void initializeController() {
-    // Initialize analytics controller
-    _analyticsController = Get.find<AnalyticsController>();
+    // Initialize analytics controller only if not already initialized
+    _analyticsController ??= Get.find<AnalyticsController>();
 
     // Initialize theme settings
   }

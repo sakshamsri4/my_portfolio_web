@@ -229,7 +229,7 @@ class HeroSection extends StatelessWidget {
             height: radius * 2,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/myself.jpeg'),
+                image: AssetImage('images/myself.jpeg'),
                 fit: BoxFit.cover,
                 alignment: Alignment(0, -0.5), // Center on face
               ),

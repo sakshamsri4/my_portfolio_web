@@ -17,7 +17,7 @@ class ProjectsController extends BaseController {
   final isCarouselPlaying = true.obs;
 
   /// Fallback image URL if project image is not found
-  final String fallbackImageUrl = 'assets/images/placeholder.jpg';
+  final String fallbackImageUrl = 'images/placeholder.jpg';
 
   // Projects list for carousel
   late final List<Map<String, String>> projects = _repository.getProjects();

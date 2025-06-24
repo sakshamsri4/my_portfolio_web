@@ -13,7 +13,7 @@ class SvgIconHelper {
     double size = 24,
     Color? color,
   }) async {
-    final assetPath = 'assets/tech_icon_svg/$name.svg';
+    final assetPath = 'tech_icon_svg/$name.svg';
     String svgString;
 
     // Check if SVG is already in cache
