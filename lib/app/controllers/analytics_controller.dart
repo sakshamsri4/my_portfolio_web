@@ -18,7 +18,8 @@ class AnalyticsController extends GetxController {
 
   /// Track navigation button clicks
   Future<void> trackNavigationClick(String destination) async {
-    await _analyticsService.trackButtonClick('navigation_$destination', 'header_navigation');
+    await _analyticsService.trackButtonClick(
+        'navigation_$destination', 'header_navigation');
   }
 
   /// Track button clicks (generic method for tests and widgets)
@@ -90,7 +91,8 @@ class AnalyticsController extends GetxController {
 
   /// Track social media clicks
   Future<void> trackSocialClick(String platform) async {
-    await _analyticsService.trackButtonClick('social_$platform', 'social_links');
+    await _analyticsService.trackButtonClick(
+        'social_$platform', 'social_links');
   }
 
   /// Track external link clicks
@@ -172,7 +174,8 @@ class AnalyticsController extends GetxController {
   }
 
   /// Track custom events
-  Future<void> trackCustomEvent(String eventName, Map<String, dynamic> parameters) async {
+  Future<void> trackCustomEvent(
+      String eventName, Map<String, dynamic> parameters) async {
     await _analyticsService.trackEvent(eventName, parameters);
   }
 

@@ -4,18 +4,18 @@ import 'dart:io';
 import 'dart:convert';
 
 /// Production Analytics Verification Script
-/// 
+///
 /// This script verifies that Firebase Analytics is properly configured
 /// and deployed in the production environment.
 void main(List<String> args) async {
   print('🔍 Firebase Analytics Production Verification');
   print('=' * 50);
-  
+
   await verifyFirebaseConfiguration();
   await verifyDeploymentFiles();
   await verifyWebConfiguration();
   await generateTestInstructions();
-  
+
   print('\n✅ Verification Complete!');
   print('=' * 50);
 }
@@ -23,21 +23,21 @@ void main(List<String> args) async {
 /// Verify Firebase configuration files
 Future<void> verifyFirebaseConfiguration() async {
   print('\n📋 Checking Firebase Configuration...');
-  
+
   // Check firebase_options.dart
   final firebaseOptionsFile = File('lib/firebase_options.dart');
   if (await firebaseOptionsFile.exists()) {
     final content = await firebaseOptionsFile.readAsString();
-    
+
     print('✅ firebase_options.dart exists');
-    
+
     // Check for required configuration
     final checks = [
       {'key': 'projectId', 'value': 'saksham-portfolio-ba828'},
       {'key': 'measurementId', 'value': 'G-VVVFQJL1WD'},
       {'key': 'appId', 'value': '1:51439261225:web:bb97fff3613e72ef96ae38'},
     ];
-    
+
     for (final check in checks) {
       if (content.contains(check['value']!)) {
         print('✅ ${check['key']}: ${check['value']}');
@@ -48,15 +48,15 @@ Future<void> verifyFirebaseConfiguration() async {
   } else {
     print('❌ firebase_options.dart not found');
   }
-  
+
   // Check firebase.json
   final firebaseJsonFile = File('firebase.json');
   if (await firebaseJsonFile.exists()) {
     print('✅ firebase.json exists');
-    
+
     final content = await firebaseJsonFile.readAsString();
     final config = jsonDecode(content);
-    
+
     if (config['hosting'] != null) {
       print('✅ Firebase Hosting configured');
       print('   Public directory: ${config['hosting']['public']}');
@@ -64,15 +64,15 @@ Future<void> verifyFirebaseConfiguration() async {
   } else {
     print('❌ firebase.json not found');
   }
-  
+
   // Check .firebaserc
   final firebasercFile = File('.firebaserc');
   if (await firebasercFile.exists()) {
     print('✅ .firebaserc exists');
-    
+
     final content = await firebasercFile.readAsString();
     final config = jsonDecode(content);
-    
+
     if (config['projects']?['default'] == 'saksham-portfolio-ba828') {
       print('✅ Default project: saksham-portfolio-ba828');
     } else {
@@ -86,40 +86,40 @@ Future<void> verifyFirebaseConfiguration() async {
 /// Verify deployment files
 Future<void> verifyDeploymentFiles() async {
   print('\n🚀 Checking Deployment Configuration...');
-  
+
   // Check GitHub Actions workflow
   final workflowFile = File('.github/workflows/firebase-hosting-deploy.yml');
   if (await workflowFile.exists()) {
     print('✅ GitHub Actions workflow exists');
-    
+
     final content = await workflowFile.readAsString();
-    
+
     if (content.contains('flutter build web')) {
       print('✅ Flutter web build configured');
     }
-    
+
     if (content.contains('FirebaseExtended/action-hosting-deploy')) {
       print('✅ Firebase hosting deploy action configured');
     }
-    
+
     if (content.contains('saksham-portfolio-ba828')) {
       print('✅ Project ID in workflow: saksham-portfolio-ba828');
     }
   } else {
     print('❌ GitHub Actions workflow not found');
   }
-  
+
   // Check pubspec.yaml dependencies
   final pubspecFile = File('pubspec.yaml');
   if (await pubspecFile.exists()) {
     final content = await pubspecFile.readAsString();
-    
+
     if (content.contains('firebase_core:')) {
       print('✅ firebase_core dependency found');
     } else {
       print('❌ firebase_core dependency missing');
     }
-    
+
     if (content.contains('firebase_analytics:')) {
       print('✅ firebase_analytics dependency found');
     } else {
@@ -131,19 +131,19 @@ Future<void> verifyDeploymentFiles() async {
 /// Verify web-specific configuration
 Future<void> verifyWebConfiguration() async {
   print('\n🌐 Checking Web Configuration...');
-  
+
   // Check if build/web directory exists (after build)
   final buildWebDir = Directory('build/web');
   if (await buildWebDir.exists()) {
     print('✅ build/web directory exists');
-    
+
     // Check for index.html
     final indexFile = File('build/web/index.html');
     if (await indexFile.exists()) {
       print('✅ index.html exists in build');
-      
+
       final content = await indexFile.readAsString();
-      
+
       // Check for Firebase SDK
       if (content.contains('firebase-app.js') || content.contains('firebase')) {
         print('✅ Firebase SDK references found in index.html');
@@ -151,7 +151,7 @@ Future<void> verifyWebConfiguration() async {
         print('⚠️  Firebase SDK references not found in index.html');
       }
     }
-    
+
     // Check for main.dart.js
     final mainJsFile = File('build/web/main.dart.js');
     if (await mainJsFile.exists()) {
@@ -162,16 +162,17 @@ Future<void> verifyWebConfiguration() async {
   } else {
     print('⚠️  build/web directory not found (run flutter build web first)');
   }
-  
+
   // Check web/index.html template
   final webIndexFile = File('web/index.html');
   if (await webIndexFile.exists()) {
     print('✅ web/index.html template exists');
-    
+
     final content = await webIndexFile.readAsString();
-    
+
     // Check for Firebase configuration
-    if (content.contains('firebase-config') || content.contains('G-VVVFQJL1WD')) {
+    if (content.contains('firebase-config') ||
+        content.contains('G-VVVFQJL1WD')) {
       print('✅ Firebase configuration in web template');
     } else {
       print('⚠️  Firebase configuration not found in web template');
@@ -183,7 +184,7 @@ Future<void> verifyWebConfiguration() async {
 Future<void> generateTestInstructions() async {
   print('\n📝 Analytics Testing Instructions');
   print('-' * 40);
-  
+
   print('''
 🔧 IMMEDIATE VERIFICATION STEPS:
 
@@ -263,7 +264,7 @@ If issues persist:
 Future<bool> fileContains(String filePath, String content) async {
   final file = File(filePath);
   if (!await file.exists()) return false;
-  
+
   final fileContent = await file.readAsString();
   return fileContent.contains(content);
 }

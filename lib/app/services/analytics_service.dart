@@ -74,7 +74,8 @@ class AnalyticsService {
   }
 
   /// Track a custom event with parameters
-  Future<void> trackEvent(String eventName, [Map<String, dynamic>? parameters]) async {
+  Future<void> trackEvent(String eventName,
+      [Map<String, dynamic>? parameters]) async {
     try {
       final eventData = {
         'event_name': eventName,
@@ -101,15 +102,18 @@ class AnalyticsService {
   }
 
   /// Track event using JavaScript SDK
-  Future<void> _trackEventWeb(String eventName, Map<String, dynamic>? parameters) async {
+  Future<void> _trackEventWeb(
+      String eventName, Map<String, dynamic>? parameters) async {
     try {
       if (js.context.hasProperty('firebaseAnalytics')) {
         // Call JavaScript function to track event
-        js.context.callMethod('eval', ['''
+        js.context.callMethod('eval', [
+          '''
           if (window.firebaseAnalytics && typeof gtag !== 'undefined') {
             gtag('event', '$eventName', ${_mapToJsObject(parameters ?? {})});
           }
-        ''']);
+        '''
+        ]);
         log('Web analytics event sent: $eventName');
       } else {
         log('Firebase Analytics JavaScript SDK not available');
@@ -122,11 +126,11 @@ class AnalyticsService {
   /// Convert Dart map to JavaScript object string
   String _mapToJsObject(Map<String, dynamic> map) {
     if (map.isEmpty) return '{}';
-    
+
     final entries = map.entries.map((entry) {
       final key = entry.key;
       final value = entry.value;
-      
+
       if (value is String) {
         return '"$key": "${value.replaceAll('"', '\\"')}"';
       } else if (value is num) {
@@ -137,7 +141,7 @@ class AnalyticsService {
         return '"$key": "${value.toString().replaceAll('"', '\\"')}"';
       }
     }).join(', ');
-    
+
     return '{$entries}';
   }
 
@@ -163,13 +167,15 @@ class AnalyticsService {
   Future<void> _setUserPropertyWeb(String name, String value) async {
     try {
       if (js.context.hasProperty('firebaseAnalytics')) {
-        js.context.callMethod('eval', ['''
+        js.context.callMethod('eval', [
+          '''
           if (window.firebaseAnalytics && typeof gtag !== 'undefined') {
             gtag('config', 'G-VVVFQJL1WD', {
               'custom_map': {'$name': '$value'}
             });
           }
-        ''']);
+        '''
+        ]);
         log('Web user property set: $name = $value');
       }
     } catch (e) {
