@@ -46,11 +46,16 @@ flutter:
   assets:
     - assets/cv/
     - assets/images/
-    - assets/fonts/
     - assets/icons/
     - assets/tile_images/
     - assets/tech_icon_svg/
     - assets/animations/
+
+flutter_gen:
+  output: lib/gen/
+  line_length: 80
+  integrations:
+    flutter_svg: true
 
   # Using system fonts instead of local font files
   # fonts:
