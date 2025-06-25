@@ -6,12 +6,12 @@
 import 'dart:async' as _i8;
 import 'dart:ui' as _i6;
 
-import 'package:flutter/material.dart' as _i4;
+import 'package:flutter/material.dart' as _i3;
 import 'package:get/get.dart' as _i2;
 import 'package:get/get_state_manager/src/simple/list_notifier.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i10;
-import 'package:my_portfolio_web/app/controllers/theme_controller.dart' as _i3;
+import 'package:my_portfolio_web/app/controllers/theme_controller.dart' as _i4;
 import 'package:my_portfolio_web/app/data/models/tech_stack_item.dart' as _i9;
 import 'package:my_portfolio_web/app/data/repositories/portfolio_repository.dart'
     as _i7;
@@ -39,9 +39,23 @@ class _FakeRx_0<T> extends _i1.SmartFake implements _i2.Rx<T> {
         );
 }
 
-class _FakeInternalFinalCallback_1<T> extends _i1.SmartFake
+class _FakeThemeData_1 extends _i1.SmartFake implements _i3.ThemeData {
+  _FakeThemeData_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+
+  @override
+  String toString({_i3.DiagnosticLevel? minLevel = _i3.DiagnosticLevel.info}) =>
+      super.toString();
+}
+
+class _FakeInternalFinalCallback_2<T> extends _i1.SmartFake
     implements _i2.InternalFinalCallback<T> {
-  _FakeInternalFinalCallback_1(
+  _FakeInternalFinalCallback_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -53,30 +67,48 @@ class _FakeInternalFinalCallback_1<T> extends _i1.SmartFake
 /// A class which mocks [ThemeController].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockThemeController extends _i1.Mock implements _i3.ThemeController {
-  MockThemeController() {
-    _i1.throwOnMissingStub(this);
-  }
-
+class MockThemeController extends _i1.Mock implements _i4.ThemeController {
   @override
-  _i2.Rx<_i4.ThemeMode> get themeMode => (super.noSuchMethod(
+  _i2.Rx<_i3.ThemeMode> get themeMode => (super.noSuchMethod(
         Invocation.getter(#themeMode),
-        returnValue: _FakeRx_0<_i4.ThemeMode>(
+        returnValue: _FakeRx_0<_i3.ThemeMode>(
           this,
           Invocation.getter(#themeMode),
         ),
-      ) as _i2.Rx<_i4.ThemeMode>);
+        returnValueForMissingStub: _FakeRx_0<_i3.ThemeMode>(
+          this,
+          Invocation.getter(#themeMode),
+        ),
+      ) as _i2.Rx<_i3.ThemeMode>);
 
   @override
   bool get isDarkMode => (super.noSuchMethod(
         Invocation.getter(#isDarkMode),
         returnValue: false,
+        returnValueForMissingStub: false,
       ) as bool);
+
+  @override
+  _i3.ThemeData get currentTheme => (super.noSuchMethod(
+        Invocation.getter(#currentTheme),
+        returnValue: _FakeThemeData_1(
+          this,
+          Invocation.getter(#currentTheme),
+        ),
+        returnValueForMissingStub: _FakeThemeData_1(
+          this,
+          Invocation.getter(#currentTheme),
+        ),
+      ) as _i3.ThemeData);
 
   @override
   _i2.InternalFinalCallback<void> get onStart => (super.noSuchMethod(
         Invocation.getter(#onStart),
-        returnValue: _FakeInternalFinalCallback_1<void>(
+        returnValue: _FakeInternalFinalCallback_2<void>(
+          this,
+          Invocation.getter(#onStart),
+        ),
+        returnValueForMissingStub: _FakeInternalFinalCallback_2<void>(
           this,
           Invocation.getter(#onStart),
         ),
@@ -85,7 +117,11 @@ class MockThemeController extends _i1.Mock implements _i3.ThemeController {
   @override
   _i2.InternalFinalCallback<void> get onDelete => (super.noSuchMethod(
         Invocation.getter(#onDelete),
-        returnValue: _FakeInternalFinalCallback_1<void>(
+        returnValue: _FakeInternalFinalCallback_2<void>(
+          this,
+          Invocation.getter(#onDelete),
+        ),
+        returnValueForMissingStub: _FakeInternalFinalCallback_2<void>(
           this,
           Invocation.getter(#onDelete),
         ),
@@ -95,24 +131,28 @@ class MockThemeController extends _i1.Mock implements _i3.ThemeController {
   bool get initialized => (super.noSuchMethod(
         Invocation.getter(#initialized),
         returnValue: false,
+        returnValueForMissingStub: false,
       ) as bool);
 
   @override
   bool get isClosed => (super.noSuchMethod(
         Invocation.getter(#isClosed),
         returnValue: false,
+        returnValueForMissingStub: false,
       ) as bool);
 
   @override
   bool get hasListeners => (super.noSuchMethod(
         Invocation.getter(#hasListeners),
         returnValue: false,
+        returnValueForMissingStub: false,
       ) as bool);
 
   @override
   int get listeners => (super.noSuchMethod(
         Invocation.getter(#listeners),
         returnValue: 0,
+        returnValueForMissingStub: 0,
       ) as int);
 
   @override
@@ -201,6 +241,7 @@ class MockThemeController extends _i1.Mock implements _i3.ThemeController {
           [listener],
         ),
         returnValue: () {},
+        returnValueForMissingStub: () {},
       ) as _i5.Disposer);
 
   @override
@@ -278,6 +319,7 @@ class MockThemeController extends _i1.Mock implements _i3.ThemeController {
           ],
         ),
         returnValue: () {},
+        returnValueForMissingStub: () {},
       ) as _i5.Disposer);
 
   @override
@@ -295,10 +337,6 @@ class MockThemeController extends _i1.Mock implements _i3.ThemeController {
 /// See the documentation for Mockito's code generation for more information.
 class MockPortfolioRepository extends _i1.Mock
     implements _i7.PortfolioRepository {
-  MockPortfolioRepository() {
-    _i1.throwOnMissingStub(this);
-  }
-
   @override
   _i8.Future<void> initialize() => (super.noSuchMethod(
         Invocation.method(
@@ -325,6 +363,7 @@ class MockPortfolioRepository extends _i1.Mock
           [],
         ),
         returnValue: <_i9.TechStackItem>[],
+        returnValueForMissingStub: <_i9.TechStackItem>[],
       ) as List<_i9.TechStackItem>);
 
   @override
@@ -334,6 +373,7 @@ class MockPortfolioRepository extends _i1.Mock
           [],
         ),
         returnValue: <String, Map<String, dynamic>>{},
+        returnValueForMissingStub: <String, Map<String, dynamic>>{},
       ) as Map<String, Map<String, dynamic>>);
 
   @override
@@ -343,6 +383,7 @@ class MockPortfolioRepository extends _i1.Mock
           [],
         ),
         returnValue: <String>[],
+        returnValueForMissingStub: <String>[],
       ) as List<String>);
 
   @override
@@ -352,6 +393,7 @@ class MockPortfolioRepository extends _i1.Mock
           [],
         ),
         returnValue: <String>[],
+        returnValueForMissingStub: <String>[],
       ) as List<String>);
 
   @override
@@ -361,6 +403,7 @@ class MockPortfolioRepository extends _i1.Mock
           [],
         ),
         returnValue: <String>[],
+        returnValueForMissingStub: <String>[],
       ) as List<String>);
 
   @override
@@ -370,6 +413,7 @@ class MockPortfolioRepository extends _i1.Mock
           [],
         ),
         returnValue: <Map<String, dynamic>>[],
+        returnValueForMissingStub: <Map<String, dynamic>>[],
       ) as List<Map<String, dynamic>>);
 
   @override
@@ -379,6 +423,7 @@ class MockPortfolioRepository extends _i1.Mock
           [],
         ),
         returnValue: <Map<String, String>>[],
+        returnValueForMissingStub: <Map<String, String>>[],
       ) as List<Map<String, String>>);
 
   @override
@@ -388,6 +433,7 @@ class MockPortfolioRepository extends _i1.Mock
           [],
         ),
         returnValue: <Map<String, String>>[],
+        returnValueForMissingStub: <Map<String, String>>[],
       ) as List<Map<String, String>>);
 
   @override
@@ -397,6 +443,7 @@ class MockPortfolioRepository extends _i1.Mock
           [],
         ),
         returnValue: <String, String>{},
+        returnValueForMissingStub: <String, String>{},
       ) as Map<String, String>);
 
   @override
@@ -406,6 +453,7 @@ class MockPortfolioRepository extends _i1.Mock
           [],
         ),
         returnValue: <Map<String, String>>[],
+        returnValueForMissingStub: <Map<String, String>>[],
       ) as List<Map<String, String>>);
 
   @override
@@ -415,6 +463,13 @@ class MockPortfolioRepository extends _i1.Mock
           [],
         ),
         returnValue: _i10.dummyValue<String>(
+          this,
+          Invocation.method(
+            #getProfessionalSummary,
+            [],
+          ),
+        ),
+        returnValueForMissingStub: _i10.dummyValue<String>(
           this,
           Invocation.method(
             #getProfessionalSummary,

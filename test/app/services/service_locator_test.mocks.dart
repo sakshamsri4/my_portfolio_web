@@ -12,7 +12,8 @@ import 'package:my_portfolio_web/app/controllers/controller_factory.dart'
 import 'package:my_portfolio_web/app/data/models/tech_stack_item.dart' as _i5;
 import 'package:my_portfolio_web/app/data/repositories/portfolio_repository.dart'
     as _i4;
-import 'package:my_portfolio_web/app/services/analytics_service.dart' as _i2;
+import 'package:my_portfolio_web/app/services/analytics_service_web.dart'
+    as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values

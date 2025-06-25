@@ -102,6 +102,20 @@ class _FakeRx_5<T> extends _i1.SmartFake implements _i3.Rx<T> {
         );
 }
 
+class _FakeThemeData_6 extends _i1.SmartFake implements _i2.ThemeData {
+  _FakeThemeData_6(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+
+  @override
+  String toString({_i2.DiagnosticLevel? minLevel = _i2.DiagnosticLevel.info}) =>
+      super.toString();
+}
+
 /// A class which mocks [NavigationController].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -1453,6 +1467,15 @@ class MockThemeController extends _i1.Mock implements _i14.ThemeController {
         Invocation.getter(#isDarkMode),
         returnValue: false,
       ) as bool);
+
+  @override
+  _i2.ThemeData get currentTheme => (super.noSuchMethod(
+        Invocation.getter(#currentTheme),
+        returnValue: _FakeThemeData_6(
+          this,
+          Invocation.getter(#currentTheme),
+        ),
+      ) as _i2.ThemeData);
 
   @override
   _i3.InternalFinalCallback<void> get onStart => (super.noSuchMethod(
