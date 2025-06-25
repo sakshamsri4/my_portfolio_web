@@ -7,8 +7,10 @@ import 'dart:async' as _i3;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i6;
+import 'package:my_portfolio_web/app/controllers/controller_factory.dart'
+    as _i7;
 import 'package:my_portfolio_web/app/data/models/tech_stack_item.dart' as _i5;
-import 'package:my_portfolio_web/app/data/repositories/portfolio_repository_interface.dart'
+import 'package:my_portfolio_web/app/data/repositories/portfolio_repository.dart'
     as _i4;
 import 'package:my_portfolio_web/app/services/analytics_service.dart' as _i2;
 
@@ -234,14 +236,33 @@ class MockAnalyticsService extends _i1.Mock implements _i2.AnalyticsService {
       ) as _i3.Future<void>);
 }
 
-/// A class which mocks [PortfolioRepositoryInterface].
+/// A class which mocks [PortfolioRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPortfolioRepositoryInterface extends _i1.Mock
-    implements _i4.PortfolioRepositoryInterface {
-  MockPortfolioRepositoryInterface() {
+class MockPortfolioRepository extends _i1.Mock
+    implements _i4.PortfolioRepository {
+  MockPortfolioRepository() {
     _i1.throwOnMissingStub(this);
   }
+
+  @override
+  _i3.Future<void> initialize() => (super.noSuchMethod(
+        Invocation.method(
+          #initialize,
+          [],
+        ),
+        returnValue: _i3.Future<void>.value(),
+        returnValueForMissingStub: _i3.Future<void>.value(),
+      ) as _i3.Future<void>);
+
+  @override
+  void dispose() => super.noSuchMethod(
+        Invocation.method(
+          #dispose,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 
   @override
   List<_i5.TechStackItem> getTechStack() => (super.noSuchMethod(
@@ -347,23 +368,13 @@ class MockPortfolioRepositoryInterface extends _i1.Mock
           ),
         ),
       ) as String);
+}
 
-  @override
-  _i3.Future<void> initialize() => (super.noSuchMethod(
-        Invocation.method(
-          #initialize,
-          [],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
-
-  @override
-  void dispose() => super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
+/// A class which mocks [ControllerFactory].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockControllerFactory extends _i1.Mock implements _i7.ControllerFactory {
+  MockControllerFactory() {
+    _i1.throwOnMissingStub(this);
+  }
 }
