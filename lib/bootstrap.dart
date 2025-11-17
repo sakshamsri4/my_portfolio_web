@@ -2,9 +2,11 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:my_portfolio_web/app/services/service_locator.dart';
+import 'package:my_portfolio_web/firebase_options.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
@@ -26,12 +28,17 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   // Ensure Flutter binding is initialized
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Firebase initialization is handled by JavaScript SDK for web
-  // No Flutter Firebase initialization needed to avoid platform channel conflicts
-  if (kIsWeb) {
-    log('Using Firebase JavaScript SDK for web platform');
-  } else {
-    log('Native platform detected - Firebase plugins would be needed for full functionality');
+  // Initialize Firebase
+  // For web, this works alongside the JavaScript SDK without conflicts
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    log('Firebase initialized successfully');
+  } catch (e) {
+    // Firebase may already be initialized by JavaScript SDK on web
+    // This is expected and not an error
+    log('Firebase initialization: $e');
   }
 
   FlutterError.onError = (details) {
