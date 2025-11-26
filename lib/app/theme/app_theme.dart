@@ -138,7 +138,7 @@ class AppTheme {
         ),
       ),
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: const Color(0xFF2C2C44),
       elevation: 2,
       shape: RoundedRectangleBorder(
@@ -287,7 +287,7 @@ class AppTheme {
         ),
       ),
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: Colors.white,
       elevation: 4,
       shadowColor: primarySwatch.withAlpha(51), // 20% opacity (51/255)
