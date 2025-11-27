@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio_web/app/common/ui/tech_chip.dart';
 import 'package:my_portfolio_web/app/data/models/tech_stack_item.dart';
 import 'package:my_portfolio_web/app/modules/home/controllers/home_controller.dart';
-import 'package:my_portfolio_web/app/modules/home/widgets/infinite_scroll_row.dart';
 import 'package:my_portfolio_web/app/utils/skill_icons.dart';
 import 'package:my_portfolio_web/app/utils/svg_icon_helper.dart';
 
@@ -57,66 +56,25 @@ class SkillsSection extends StatelessWidget {
         // Skills categories grid
         LayoutBuilder(
           builder: (context, constraints) {
+            final width = constraints.maxWidth;
+            final cardWidth = width >= 1100
+                ? 340.0
+                : width >= 820
+                    ? 300.0
+                    : 280.0;
             return Column(
               children: [
-                // Scrollable skill categories
-                Column(
-                  children: [
-                    SizedBox(
-                      height: 350, // Fixed height for the scrolling area
-                      child: InfiniteScrollRow(
-                        itemCount: controller.skillCategories.length,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          final category = controller.skillCategories[index];
-                          return _buildSkillCategory(
-                            context,
-                            category: category['category']! as String,
-                            skills: category['skills']! as List<String>,
-                            width: 300, // Fixed width for each card
-                          );
-                        },
-                      ),
-                    ),
-                    // Scroll indicator
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.keyboard_arrow_left,
-                            color: Theme.of(context)
-                                .colorScheme
-                                .primary
-                                .withAlpha(150),
-                            size: 16,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            'Scroll to see more skills',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .primary
-                                  .withAlpha(150),
-                              fontStyle: FontStyle.italic,
-                            ),
-                          ),
-                          const SizedBox(width: 4),
-                          Icon(
-                            Icons.keyboard_arrow_right,
-                            color: Theme.of(context)
-                                .colorScheme
-                                .primary
-                                .withAlpha(150),
-                            size: 16,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                Wrap(
+                  spacing: 20,
+                  runSpacing: 20,
+                  children: controller.skillCategories.map((category) {
+                    return _buildSkillCategory(
+                      context,
+                      category: category['category']! as String,
+                      skills: category['skills']! as List<String>,
+                      width: cardWidth,
+                    );
+                  }).toList(),
                 ),
                 const SizedBox(height: 40),
                 // Tech Stack section title
@@ -133,18 +91,21 @@ class SkillsSection extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      const Text(
-                        'Technologies I work with',
+                      Text(
+                        'Technologies I rely on day to day',
                         style: TextStyle(
                           fontSize: 14,
-                          color: Colors.black54,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurface
+                              .withAlpha(190),
                         ),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 24),
-                // Tech stack icons with scroll animation
+                const SizedBox(height: 20),
+                // Tech stack icons without hidden scroll
                 _buildTechIcons(context),
               ],
             );
@@ -252,66 +213,26 @@ class SkillsSection extends StatelessWidget {
 
   // Technology icons with CRED-inspired design
   Widget _buildTechIcons(BuildContext context) {
-    final primaryColor = Theme.of(context).colorScheme.primary;
     final techStack = controller.techStack;
 
-    return Column(
-      children: [
-        // Tech icons in a responsive grid with scroll animation
-        SizedBox(
-          height: 120, // Fixed height for the scrolling area
-          child: InfiniteScrollRow(
-            itemCount: techStack.length,
-            itemSpacing: 24,
-            physics: const BouncingScrollPhysics(),
-            itemBuilder: (context, index) {
-              final tech = techStack[index];
-              return tech.iconType == IconType.fontAwesome
-                  ? _buildTechIcon(
-                      context: context,
-                      icon: tech.icon!,
-                      name: tech.name,
-                      color: tech.color,
-                    )
-                  : _buildSvgTechIcon(
-                      context: context,
-                      svgName: tech.svgName!,
-                      name: tech.name,
-                      color: tech.color,
-                    );
-            },
-          ),
-        ),
-        // Scroll indicator
-        Padding(
-          padding: const EdgeInsets.only(top: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.keyboard_arrow_left,
-                color: primaryColor.withAlpha(150),
-                size: 16,
-              ),
-              const SizedBox(width: 4),
-              Text(
-                'Scroll to see more',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: primaryColor.withAlpha(150),
-                  fontStyle: FontStyle.italic,
-                ),
-              ),
-              const SizedBox(width: 4),
-              Icon(
-                Icons.keyboard_arrow_right,
-                color: primaryColor.withAlpha(150),
-                size: 16,
-              ),
-            ],
-          ),
-        ),
-      ],
+    return Wrap(
+      spacing: 24,
+      runSpacing: 20,
+      children: techStack.map((tech) {
+        return tech.iconType == IconType.fontAwesome
+            ? _buildTechIcon(
+                context: context,
+                icon: tech.icon!,
+                name: tech.name,
+                color: tech.color,
+              )
+            : _buildSvgTechIcon(
+                context: context,
+                svgName: tech.svgName!,
+                name: tech.name,
+                color: tech.color,
+              );
+      }).toList(),
     );
   }
 

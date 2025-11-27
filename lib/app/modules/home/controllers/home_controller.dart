@@ -44,9 +44,6 @@ class HomeController extends GetxController {
   /// Active section
   final RxString activeSection = 'home'.obs;
 
-  /// Observable for carousel auto-play
-  final isCarouselPlaying = true.obs;
-
   /// Tech stack items
   late final List<TechStackItem> techStack = _repository.getTechStack();
 
@@ -54,17 +51,6 @@ class HomeController extends GetxController {
   late final Map<String, Map<String, dynamic>> socialLinks =
       _repository.getSocialLinks();
 
-  /// Animated greeting texts
-  late final List<String> animatedGreetings =
-      _repository.getAnimatedGreetings();
-
-  /// Animated introduction texts
-  late final List<String> animatedIntroductions =
-      _repository.getAnimatedIntroductions();
-
-  /// Design philosophy quotes
-  late final List<String> designPhilosophyQuotes =
-      _repository.getDesignPhilosophyQuotes();
   // Skills organized by category
   late final List<Map<String, dynamic>> skillCategories =
       _repository.getSkillCategories();
@@ -419,10 +405,5 @@ class HomeController extends GetxController {
       snackPosition: SnackPosition.BOTTOM,
       duration: const Duration(seconds: 2),
     );
-  }
-
-  // Toggle carousel auto-play
-  void toggleCarouselPlay() {
-    isCarouselPlaying.value = !isCarouselPlaying.value;
   }
 }

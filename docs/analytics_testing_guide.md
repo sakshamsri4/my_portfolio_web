@@ -32,7 +32,8 @@ gtag('config', 'G-VVVFQJL1WD', {
 ### 2. Run Development Build
 ```bash
 cd /Users/sakshamsrivastava/my_portfolio_web
-flutter run -d chrome --flavor development --target lib/main_development.dart
+flutter run -d chrome --target lib/main_development.dart
+# Note: Flutter web runners ignore --flavor; only mobile platforms can use flavors.
 ```
 
 ## 📊 Test Scenarios

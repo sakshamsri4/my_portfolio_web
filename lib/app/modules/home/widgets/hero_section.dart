@@ -1,4 +1,3 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_portfolio_web/app/common/constants/app_constants.dart';
@@ -14,31 +13,31 @@ class HeroSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 28),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Theme.of(context).colorScheme.primary.withAlpha(40),
+            Theme.of(context).colorScheme.primary.withAlpha(18),
             Theme.of(context).scaffoldBackgroundColor,
           ],
         ),
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).colorScheme.primary.withAlpha(20),
-            blurRadius: 20,
-            spreadRadius: 5,
+            color: Theme.of(context).colorScheme.primary.withAlpha(24),
+            blurRadius: 24,
+            spreadRadius: 4,
           ),
         ],
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Animated greeting text
-          _buildAnimatedGreeting(context),
+          // Nameplate and role
+          _buildPreamble(context),
           const SizedBox(height: 32),
-
           // Two-column layout for wider screens
           LayoutBuilder(
             builder: (context, constraints) {
@@ -50,49 +49,12 @@ class HeroSection extends StatelessWidget {
             },
           ),
 
-          const SizedBox(height: 40),
-
-          // Tagline that shows personality
-          DefaultTextStyle(
-            style: TextStyle(
-              fontSize: 20,
-              fontStyle: FontStyle.italic,
-              color: Theme.of(context).colorScheme.primary,
-              fontWeight: FontWeight.w500,
-            ),
-            textAlign: TextAlign.center,
-            child: AnimatedTextKit(
-              animatedTexts: controller.designPhilosophyQuotes
-                  .map(
-                    (text) => ColorizeAnimatedText(
-                      '"$text"',
-                      textStyle: const TextStyle(
-                        fontSize: 20,
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      textAlign: TextAlign.center,
-                      colors: [
-                        Theme.of(context).colorScheme.primary,
-                        Theme.of(context).colorScheme.secondary,
-                        Theme.of(context).colorScheme.primary.withAlpha(150),
-                        Theme.of(context).colorScheme.primary,
-                      ],
-                    ),
-                  )
-                  .toList(),
-              repeatForever: true,
-              pause: const Duration(milliseconds: 2000),
-              displayFullTextOnTap: true,
-            ),
-          ),
-
-          const SizedBox(height: 40),
+          const SizedBox(height: 36),
 
           // Call to action buttons with improved design
           _buildCallToAction(context),
 
-          const SizedBox(height: 32),
+          const SizedBox(height: 28),
 
           // Scroll indicator
           _buildScrollIndicator(context),
@@ -101,51 +63,25 @@ class HeroSection extends StatelessWidget {
     );
   }
 
-  // Animated greeting text that cycles through different phrases
-  Widget _buildAnimatedGreeting(BuildContext context) {
+  // Calm preamble instead of constant animation
+  Widget _buildPreamble(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Hello, I'm",
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.w500,
-            color: Theme.of(context).colorScheme.onSurface.withAlpha(179),
-          ),
-        ),
-        const SizedBox(height: 8),
         Text(
           'Saksham Srivastava',
           style: Theme.of(context).textTheme.displayMedium?.copyWith(
                 fontWeight: FontWeight.w800,
-                letterSpacing: 0.5,
+                letterSpacing: -0.5,
               ),
-          textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 16),
-        DefaultTextStyle(
+        const SizedBox(height: 12),
+        Text(
+          'Principal Flutter Engineer · Product-minded builder',
           style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
             color: Theme.of(context).colorScheme.primary,
-          ),
-          child: AnimatedTextKit(
-            animatedTexts: [
-              TypewriterAnimatedText(
-                'Flutter Developer',
-                speed: const Duration(milliseconds: 100),
-              ),
-              TypewriterAnimatedText(
-                'Mobile App Specialist',
-                speed: const Duration(milliseconds: 100),
-              ),
-              TypewriterAnimatedText(
-                'UI/UX Enthusiast',
-                speed: const Duration(milliseconds: 100),
-              ),
-            ],
-            repeatForever: true,
-            displayFullTextOnTap: true,
           ),
         ),
       ],
@@ -253,116 +189,44 @@ class HeroSection extends StatelessWidget {
 
   // Introduction text with CRED-inspired NeoPOP design
   Widget _buildIntroduction(BuildContext context) {
-    final primaryColor = Theme.of(context).colorScheme.primary;
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = screenWidth < 600;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Role with NeoPOP style
-        Stack(
-          clipBehavior: Clip.none,
-          children: [
-            // Shadow container with offset
-            Positioned(
-              left: 4,
-              top: 4,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Text(
-                  'Senior Flutter Developer',
-                  style: TextStyle(
-                    color: Colors.transparent,
-                    fontSize: isMobile ? 18 : 22,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            // Main container
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              decoration: BoxDecoration(
-                color: primaryColor,
-                borderRadius: BorderRadius.circular(4),
-                boxShadow: [
-                  BoxShadow(
-                    color: primaryColor.withAlpha(40),
-                    blurRadius: 10,
-                    spreadRadius: 1,
-                  ),
-                ],
-              ),
-              child: Text(
-                'Senior Flutter Developer',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: isMobile ? 18 : 22,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 32),
-        // Name with bold typography
         Text(
-          'Saksham Srivastava',
+          'Building reliable Flutter products that balance polish, performance, and longevity.',
           style: TextStyle(
-            fontSize: isMobile ? 32 : 48,
-            fontWeight: FontWeight.w800,
-            letterSpacing: -1,
-            height: 0.9,
-            color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.white
-                : Colors.black87,
+            fontSize: isMobile ? 26 : 32,
+            fontWeight: FontWeight.w700,
+            height: 1.2,
+            color: Theme.of(context).colorScheme.onSurface,
+            letterSpacing: -0.3,
           ),
         ),
         const SizedBox(height: 16),
-        // Brief introduction with CRED-style typography
-        SizedBox(
-          height: 100, // Increased height for better readability
-          child: DefaultTextStyle(
-            style: TextStyle(
-              fontSize: isMobile ? 16 : 18,
-              height: 1.4,
-              letterSpacing: 0.2,
-              fontWeight: FontWeight.w500,
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.white
-                  : Colors.black54,
-            ),
-            child: AnimatedTextKit(
-              animatedTexts: [
-                FadeAnimatedText(
-                  'I create optimized, high-performance mobile apps\n'
-                  'that users love.',
-                  duration: const Duration(milliseconds: 3000),
-                  fadeInEnd: 0.2,
-                ),
-                FadeAnimatedText(
-                  'With 6+ years of Flutter expertise, I transform\n'
-                  'complex ideas into elegant experiences.',
-                  duration: const Duration(milliseconds: 3000),
-                  fadeInEnd: 0.2,
-                ),
-                FadeAnimatedText(
-                  'Let me help bring your app idea to life with\n'
-                  'flawless execution across platforms.',
-                  duration: const Duration(milliseconds: 3000),
-                  fadeInEnd: 0.2,
-                ),
-              ],
-              repeatForever: true,
-              pause: const Duration(milliseconds: 500),
-            ),
+        Text(
+          '6+ years shipping cross-platform apps for founders and teams that care about craft. '
+          'I translate fuzzy product goals into calm interfaces, scalable architecture, and steady delivery.',
+          style: TextStyle(
+            fontSize: isMobile ? 15 : 16,
+            height: 1.6,
+            letterSpacing: 0.1,
+            fontWeight: FontWeight.w500,
+            color: Theme.of(context).colorScheme.onSurface.withAlpha(210),
           ),
+        ),
+        const SizedBox(height: 20),
+        Wrap(
+          spacing: 12,
+          runSpacing: 8,
+          children: const [
+            _Pill(label: 'Product-minded delivery'),
+            _Pill(label: 'Design systems & accessibility'),
+            _Pill(label: 'Performance-first Flutter'),
+            _Pill(label: 'Analytics with intent'),
+          ],
         ),
       ],
     );
@@ -370,126 +234,52 @@ class HeroSection extends StatelessWidget {
 
   // Call to action buttons with CRED-inspired NeoPOP design
   Widget _buildCallToAction(BuildContext context) {
-    return Wrap(
-      spacing: 20,
-      runSpacing: 20,
-      alignment: WrapAlignment.center,
-      children: [
-        // Primary CTA with NeoPOP effect
-        _buildNeoPOPCTA(
-          context: context,
-          label: "Let's Work Together",
-          icon: FontAwesomeIcons.envelope,
-          isPrimary: true,
-          onPressed: controller.launchEmail,
-        ),
-        // Secondary CTA with NeoPOP effect
-        // _buildNeoPOPCTA(
-        //   context: context,
-        //   label: 'Download CV',
-        //   icon: FontAwesomeIcons.fileArrowDown,
-        //   isPrimary: false,
-        //   onPressed: controller.downloadCV,
-        // ),
-      ],
-    );
-  }
-
-  // Helper method to create NeoPOP style CTA buttons
-  Widget _buildNeoPOPCTA({
-    required BuildContext context,
-    required String label,
-    required IconData icon,
-    required bool isPrimary,
-    required VoidCallback onPressed,
-  }) {
-    final primaryColor = Theme.of(context).colorScheme.primary;
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = screenWidth < 600;
-
-    return GestureDetector(
-      onTap: onPressed,
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          // Shadow container with offset
-          Positioned(
-            left: 4,
-            top: 4,
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: isMobile ? 20 : 28,
-                vertical: isMobile ? 12 : 16,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  FaIcon(
-                    icon,
-                    color: Colors.transparent,
-                    size: isMobile ? 18 : 20,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    label,
-                    style: TextStyle(
-                      color: Colors.transparent,
-                      fontSize: isMobile ? 14 : 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          // Main container
-          Container(
+    return Wrap(
+      spacing: 16,
+      runSpacing: 12,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        FilledButton.icon(
+          onPressed: controller.launchEmail,
+          style: FilledButton.styleFrom(
             padding: EdgeInsets.symmetric(
-              horizontal: isMobile ? 20 : 28,
-              vertical: isMobile ? 12 : 16,
+              horizontal: isMobile ? 18 : 22,
+              vertical: isMobile ? 12 : 14,
             ),
-            decoration: BoxDecoration(
-              color: isPrimary ? primaryColor : Colors.white,
-              borderRadius: BorderRadius.circular(4),
-              border:
-                  isPrimary ? null : Border.all(color: primaryColor, width: 2),
-              boxShadow: isPrimary
-                  ? [
-                      BoxShadow(
-                        color: primaryColor.withAlpha(40),
-                        blurRadius: 8,
-                        spreadRadius: 1,
-                      ),
-                    ]
-                  : null,
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                FaIcon(
-                  icon,
-                  color: isPrimary ? Colors.white : primaryColor,
-                  size: isMobile ? 18 : 20,
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  label,
-                  style: TextStyle(
-                    color: isPrimary ? Colors.white : primaryColor,
-                    fontSize: isMobile ? 14 : 16,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.5,
-                  ),
-                ),
-              ],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
             ),
           ),
-        ],
-      ),
+          icon: const FaIcon(FontAwesomeIcons.envelope, size: 16),
+          label: const Text(
+            "Let's work together",
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
+        ),
+        OutlinedButton.icon(
+          onPressed: () => controller.scrollToSection('projects'),
+          style: OutlinedButton.styleFrom(
+            padding: EdgeInsets.symmetric(
+              horizontal: isMobile ? 16 : 20,
+              vertical: isMobile ? 12 : 14,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            side: BorderSide(
+              color: Theme.of(context).colorScheme.primary.withAlpha(180),
+              width: 1.5,
+            ),
+          ),
+          icon: const FaIcon(FontAwesomeIcons.codeBranch, size: 16),
+          label: const Text(
+            'See recent work',
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
+        ),
+      ],
     );
   }
 
@@ -512,43 +302,51 @@ class HeroSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        // Arrow with NeoPOP effect
-        Stack(
-          clipBehavior: Clip.none,
-          alignment: Alignment.center,
-          children: [
-            // Shadow container with offset
-            Positioned(
-              left: 3,
-              top: 3,
-              child: Container(
-                width: 36,
-                height: 36,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-              ),
+        // Arrow with reduced ornamentation
+        Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            color: primaryColor.withAlpha(24),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: primaryColor.withAlpha(120)),
+          ),
+          child: const Center(
+            child: FaIcon(
+              FontAwesomeIcons.angleDown,
+              size: 18,
             ),
-            // Main container
-            Container(
-              width: 36,
-              height: 36,
-              decoration: BoxDecoration(
-                color: primaryColor,
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: const Center(
-                child: FaIcon(
-                  FontAwesomeIcons.angleDown,
-                  color: Colors.white,
-                  size: 20,
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ],
+    );
+  }
+}
+
+class _Pill extends StatelessWidget {
+  const _Pill({required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary.withAlpha(20),
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.primary.withAlpha(120),
+        ),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          fontSize: 13,
+          fontWeight: FontWeight.w600,
+          color: Theme.of(context).colorScheme.onSurface,
+        ),
+      ),
     );
   }
 }

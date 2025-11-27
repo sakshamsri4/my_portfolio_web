@@ -48,6 +48,9 @@ $ flutter run --flavor staging --target lib/main_staging.dart
 
 # Production
 $ flutter run --flavor production --target lib/main_production.dart
+
+# Web (flavors are not supported by Flutter web runners)
+$ flutter run -d chrome --target lib/main_development.dart
 ```
 
 _\*My Portfolio Web works on iOS, Android, Web, and Windows._

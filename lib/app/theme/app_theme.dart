@@ -10,28 +10,28 @@ class AppTheme {
 
   // Primary color swatch
   static const MaterialColor primarySwatch = MaterialColor(
-    0xFF675AF2, // Primary color
+    0xFF1D4ED8, // Deep blue for a more timeless palette
     <int, Color>{
-      50: Color(0xFFEEECFD),
-      100: Color(0xFFD4D0FA),
-      200: Color(0xFFB7B0F7),
-      300: Color(0xFF9A90F4),
-      400: Color(0xFF8479F3),
-      500: Color(0xFF675AF2), // Primary color
-      600: Color(0xFF5F52F1),
-      700: Color(0xFF5448EF),
-      800: Color(0xFF4A3FEE),
-      900: Color(0xFF392EEC),
+      50: Color(0xFFEFF6FF),
+      100: Color(0xFFDBEAFE),
+      200: Color(0xFFBFDBFE),
+      300: Color(0xFF93C5FD),
+      400: Color(0xFF60A5FA),
+      500: Color(0xFF3B82F6),
+      600: Color(0xFF2563EB),
+      700: Color(0xFF1D4ED8), // Primary color
+      800: Color(0xFF1E40AF),
+      900: Color(0xFF1E3A8A),
     },
   );
 
   // Background color
-  static const Color backgroundColor = Color(0xFFF4F0FF);
+  static const Color backgroundColor = Color(0xFFF9FAFB);
 
   // Text colors
-  static const Color textPrimary = Color(0xFF333333);
-  static const Color textSecondary = Color(0xFF666666);
-  static const Color textLight = Color(0xFF999999);
+  static const Color textPrimary = Color(0xFF0F172A);
+  static const Color textSecondary = Color(0xFF4B5563);
+  static const Color textLight = Color(0xFF6B7280);
 
   // Dark theme
   static ThemeData darkTheme = ThemeData(
@@ -40,14 +40,14 @@ class AppTheme {
     primarySwatch: primarySwatch,
     primaryColor: primarySwatch,
     fontFamily: fontFamily, // Set the global font family
-    scaffoldBackgroundColor: const Color(0xFF1A1A2E),
+    scaffoldBackgroundColor: const Color(0xFF0F172A),
     colorScheme: ColorScheme.dark(
       primary: primarySwatch,
       secondary: primarySwatch.shade300,
-      surface: const Color(0xFF2C2C44),
+      surface: const Color(0xFF111827),
     ),
     appBarTheme: AppBarTheme(
-      backgroundColor: const Color(0xFF2C2C44),
+      backgroundColor: const Color(0xFF111827),
       foregroundColor: Colors.white,
       elevation: 0,
       titleTextStyle: const TextStyle(

@@ -223,32 +223,22 @@
   <!-- Flutter Bootstrap Script -->
   <script src="flutter_bootstrap.js" async></script>
 
-  <!-- Custom loading animation and initialization -->
   <script>
-    window.addEventListener('load', function () {
-      var loading = document.querySelector('#loading');
+    (function () {
+      const loading = document.getElementById('loading');
+      if (!loading) return;
 
-      // Wait for Flutter loader to be available
-      function waitForFlutter() {
-        if (window._flutter && window._flutter.loader) {
-          _flutter.loader.load({
-            serviceWorker: {
-              serviceWorkerVersion: null,
-            },
-            onEntrypointLoaded: async function (engineInitializer) {
-              loading.classList.add('main_done');
-              let appRunner = await engineInitializer.initializeEngine();
-              loading.classList.add('init_done');
-              await appRunner.runApp();
-            }
-          });
-        } else {
-          // Retry after a short delay
-          setTimeout(waitForFlutter, 50);
-        }
-      }
+      // Mark that bootstrapping has started once the page is loaded
+      window.addEventListener('load', () => loading.classList.add('main_done'));
 
-      waitForFlutter();
-    });
+      // Flutter fires this when the first frame is rendered
+      window.addEventListener('flutter-first-frame', () => {
+        loading.classList.add('init_done');
+        setTimeout(() => loading.remove(), 400);
+      });
+
+      // Safety timeout in case something goes wrong
+      setTimeout(() => loading.remove(), 12000);
+    })();
   </script>
 </body>

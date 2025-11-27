@@ -29,28 +29,32 @@ class SocialSidebar extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            NeoPOPSocialButton(
+            _SidebarButton(
+              label: 'LinkedIn',
               icon: FontAwesomeIcons.linkedin,
               color: AppColors.linkedin,
               onPressed: () =>
                   controller.launchProjectUrl(AppConstants.linkedInUrl),
             ),
             const SizedBox(height: 24),
-            NeoPOPSocialButton(
+            _SidebarButton(
+              label: 'GitHub',
               icon: FontAwesomeIcons.github,
               color: AppColors.github,
               onPressed: () =>
                   controller.launchProjectUrl(AppConstants.githubUrl),
             ),
             const SizedBox(height: 24),
-            NeoPOPSocialButton(
+            _SidebarButton(
+              label: 'Twitter / X',
               icon: FontAwesomeIcons.xTwitter,
               color: AppColors.twitter,
               onPressed: () =>
                   controller.launchProjectUrl(AppConstants.twitterUrl),
             ),
             const SizedBox(height: 24),
-            NeoPOPSocialButton(
+            _SidebarButton(
+              label: 'WhatsApp',
               icon: FontAwesomeIcons.whatsapp,
               color: AppColors.whatsapp,
               onPressed: controller.launchWhatsApp,
@@ -73,6 +77,41 @@ class SocialSidebar extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SidebarButton extends StatelessWidget {
+  const _SidebarButton({
+    required this.label,
+    required this.icon,
+    required this.color,
+    required this.onPressed,
+  });
+
+  final String label;
+  final IconData icon;
+  final Color color;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: label,
+      preferBelow: false,
+      child: FocusableActionDetector(
+        mouseCursor: SystemMouseCursors.click,
+        onShowFocusHighlight: (_) {},
+        child: Semantics(
+          button: true,
+          label: label,
+          child: NeoPOPSocialButton(
+            icon: icon,
+            color: color,
+            onPressed: onPressed,
+          ),
         ),
       ),
     );

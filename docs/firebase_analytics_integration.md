@@ -137,8 +137,9 @@ AnalyticsController (GetX)
 
 ### Testing Commands
 ```bash
-# Run in development mode
-flutter run --flavor development --target lib/main_development.dart
+# Run in development mode (web)
+flutter run -d chrome --target lib/main_development.dart
+# Note: Web runners ignore --flavor; use flavors only when running Android/iOS builds.
 
 # Build for web
 flutter build web --target=lib/main_production.dart
