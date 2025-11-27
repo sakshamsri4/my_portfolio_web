@@ -15,7 +15,8 @@ class HomeView extends GetView<HomeController> {
             builder: (context, constraints) {
               return SingleChildScrollView(
                 controller: controller.scrollController,
-                padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
                 child: Center(
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 1180),

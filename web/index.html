@@ -220,25 +220,46 @@
     </div>
   </div>
 
-  <!-- Flutter Bootstrap Script -->
-  <script src="flutter_bootstrap.js" async></script>
+  <script src="flutter.js" defer></script>
 
   <script>
     (function () {
       const loading = document.getElementById('loading');
-      if (!loading) return;
 
-      // Mark that bootstrapping has started once the page is loaded
-      window.addEventListener('load', () => loading.classList.add('main_done'));
-
-      // Flutter fires this when the first frame is rendered
+      // Splash handling
+      window.addEventListener('load', () => loading?.classList.add('main_done'));
       window.addEventListener('flutter-first-frame', () => {
+        if (!loading) return;
         loading.classList.add('init_done');
         setTimeout(() => loading.remove(), 400);
       });
+      setTimeout(() => loading?.remove(), 12000);
 
-      // Safety timeout in case something goes wrong
-      setTimeout(() => loading.remove(), 12000);
+      // Guard against double engine initialization
+      let flutterStarted = false;
+      function startFlutter() {
+        if (flutterStarted || !window._flutter || !window._flutter.loader) return;
+        flutterStarted = true;
+        window._flutter.loader.loadEntrypoint({
+          serviceWorker: { serviceWorkerVersion: null },
+          onEntrypointLoaded: async (engineInitializer) => {
+            const appRunner = await engineInitializer.initializeEngine();
+            await appRunner.runApp();
+          },
+        });
+      }
+
+      window.addEventListener('load', () => {
+        // Kick off once the page is loaded and the loader is ready
+        const poll = setInterval(() => {
+          if (window._flutter && window._flutter.loader) {
+            clearInterval(poll);
+            startFlutter();
+          }
+        }, 20);
+        // Fallback in case the loader arrives after the interval starts
+        setTimeout(() => clearInterval(poll), 2000);
+      });
     })();
   </script>
 </body>
