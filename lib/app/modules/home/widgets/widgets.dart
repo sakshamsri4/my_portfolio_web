@@ -1,11 +1,11 @@
 export 'about_section.dart';
-export 'career_timeline_section.dart';
+export 'ai_skills_section.dart';
 export 'contact_section.dart';
 export 'custom_app_bar.dart';
-export 'custom_drawer.dart';
-export 'education_section.dart';
+export 'flagship_case_study_section.dart';
+export 'footer_section.dart';
 export 'hero_section.dart';
-export 'project_card.dart';
-export 'projects_section.dart';
-export 'skills_section.dart';
+export 'mini_ai_projects_section.dart';
+export 'mobile_apps_section.dart';
+export 'other_case_studies_section.dart';
 export 'social_sidebar.dart';

@@ -8,343 +8,299 @@ class HeroSection extends StatelessWidget {
     required this.controller,
     super.key,
   });
+
   final HomeController controller;
 
   @override
   Widget build(BuildContext context) {
+    final isWide = MediaQuery.of(context).size.width > 980;
+    final theme = Theme.of(context);
+
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 28),
+      padding: EdgeInsets.symmetric(
+        vertical: isWide ? 48 : 32,
+        horizontal: isWide ? 40 : 24,
+      ),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
+        gradient: const LinearGradient(
           end: Alignment.bottomRight,
           colors: [
-            Theme.of(context).colorScheme.primary.withAlpha(18),
-            Theme.of(context).scaffoldBackgroundColor,
+            Color(0xFF0B1221),
+            Color(0xFF0F172A),
           ],
         ),
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(color: Colors.white.withAlpha(18)),
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).colorScheme.primary.withAlpha(24),
-            blurRadius: 24,
-            spreadRadius: 4,
+            color: theme.colorScheme.primary.withAlpha(40),
+            blurRadius: 32,
+            spreadRadius: 6,
+            offset: const Offset(0, 12),
           ),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Nameplate and role
-          _buildPreamble(context),
+          Row(
+            children: [
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                decoration: BoxDecoration(
+                  color: Colors.white.withAlpha(20),
+                  borderRadius: BorderRadius.circular(999),
+                  border: Border.all(
+                    color: theme.colorScheme.primary.withAlpha(80),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: 10,
+                      height: 10,
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.primary,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: theme.colorScheme.primary.withAlpha(120),
+                            blurRadius: 12,
+                            spreadRadius: 1,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Text(
+                      'AI × Mobile × Agents · 2025',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 0.5,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Spacer(),
+              if (isWide)
+                IconButton(
+                  icon: const FaIcon(
+                    FontAwesomeIcons.download,
+                    color: Colors.white70,
+                    size: 16,
+                  ),
+                  tooltip: 'Download CV',
+                  onPressed: controller.downloadCV,
+                ),
+            ],
+          ),
           const SizedBox(height: 32),
-          // Two-column layout for wider screens
           LayoutBuilder(
             builder: (context, constraints) {
-              if (constraints.maxWidth > 800) {
-                return _buildWideLayout(context);
-              } else {
-                return _buildNarrowLayout(context);
+              if (constraints.maxWidth > 900) {
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(child: _buildIntro(context)),
+                    const SizedBox(width: 32),
+                    Expanded(
+                      child: _buildIdentityCard(context),
+                    ),
+                  ],
+                );
               }
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildIntro(context),
+                  const SizedBox(height: 28),
+                  _buildIdentityCard(context),
+                ],
+              );
             },
           ),
-
-          const SizedBox(height: 36),
-
-          // Call to action buttons with improved design
-          _buildCallToAction(context),
-
-          const SizedBox(height: 28),
-
-          // Scroll indicator
-          _buildScrollIndicator(context),
         ],
       ),
     );
   }
 
-  // Calm preamble instead of constant animation
-  Widget _buildPreamble(BuildContext context) {
+  Widget _buildIntro(BuildContext context) {
+    final theme = Theme.of(context);
+    final isMobile = MediaQuery.of(context).size.width < 600;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Saksham Srivastava',
-          style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                fontWeight: FontWeight.w800,
-                letterSpacing: -0.5,
-              ),
+          style: theme.textTheme.displayMedium?.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.w800,
+            letterSpacing: -1,
+          ),
         ),
         const SizedBox(height: 12),
         Text(
-          'Principal Flutter Engineer · Product-minded builder',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-        ),
-      ],
-    );
-  }
-
-  // Layout for wider screens with image and text side by side
-  Widget _buildWideLayout(BuildContext context) {
-    return Row(
-      children: [
-        // Left side - Profile image
-        Expanded(
-          flex: 2,
-          child: _buildProfileImage(context),
-        ),
-        const SizedBox(width: 40),
-        // Right side - Introduction text
-        Expanded(
-          flex: 3,
-          child: _buildIntroduction(context),
-        ),
-      ],
-    );
-  }
-
-  // Layout for narrow screens with image and text stacked
-  Widget _buildNarrowLayout(BuildContext context) {
-    return Column(
-      children: [
-        _buildProfileImage(context),
-        const SizedBox(height: 32),
-        _buildIntroduction(context),
-      ],
-    );
-  }
-
-  // Profile image with CRED-inspired NeoPOP design
-  Widget _buildProfileImage(BuildContext context) {
-    // Determine if we're in mobile or desktop view
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isMobile = screenWidth < 600;
-
-    // Adjust radius based on screen size
-    final radius = isMobile ? 80.0 : 100.0;
-    final primaryColor = Theme.of(context).colorScheme.primary;
-
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        // Background shape with offset for NeoPOP effect
-        Container(
-          width: radius * 2 + 16,
-          height: radius * 2 + 16,
-          decoration: const BoxDecoration(
-            color: Colors.black,
-            shape: BoxShape.circle,
-          ),
-          margin: const EdgeInsets.only(left: 8, top: 8),
-        ),
-
-        // Main container with shadow
-        Container(
-          width: radius * 2 + 12,
-          height: radius * 2 + 12,
-          decoration: BoxDecoration(
-            color: primaryColor,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: primaryColor.withAlpha(60),
-                blurRadius: 20,
-                spreadRadius: 2,
-              ),
-            ],
-          ),
-        ),
-
-        // Image container
-        ClipOval(
-          child: Container(
-            width: radius * 2,
-            height: radius * 2,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(AppConstants.profileImagePath),
-                fit: BoxFit.cover,
-                alignment: Alignment(0, -0.5), // Center on face
-              ),
-            ),
-            // Add subtle inner border
-            foregroundDecoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: Colors.white.withAlpha(75),
-                width: 2,
-              ),
-            ),
-          ),
-        ),
-
-        // Accent element removed
-      ],
-    );
-  }
-
-  // Introduction text with CRED-inspired NeoPOP design
-  Widget _buildIntroduction(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isMobile = screenWidth < 600;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Building reliable Flutter products that balance polish, performance, and longevity.',
-          style: TextStyle(
-            fontSize: isMobile ? 26 : 32,
-            fontWeight: FontWeight.w700,
-            height: 1.2,
-            color: Theme.of(context).colorScheme.onSurface,
-            letterSpacing: -0.3,
-          ),
-        ),
-        const SizedBox(height: 16),
-        Text(
-          '6+ years shipping cross-platform apps for founders and teams that care about craft. '
-          'I translate fuzzy product goals into calm interfaces, scalable architecture, and steady delivery.',
-          style: TextStyle(
-            fontSize: isMobile ? 15 : 16,
+          'Senior Flutter + AI engineer focused on mobile architectures, agent integrations, and reliable shipping across iOS, Android, and web.',
+          style: theme.textTheme.bodyLarge?.copyWith(
+            color: Colors.white.withAlpha(220),
+            fontSize: isMobile ? 16 : 18,
             height: 1.6,
-            letterSpacing: 0.1,
-            fontWeight: FontWeight.w500,
-            color: Theme.of(context).colorScheme.onSurface.withAlpha(210),
           ),
         ),
         const SizedBox(height: 20),
         Wrap(
           spacing: 12,
-          runSpacing: 8,
+          runSpacing: 12,
           children: const [
-            _Pill(label: 'Product-minded delivery'),
-            _Pill(label: 'Design systems & accessibility'),
-            _Pill(label: 'Performance-first Flutter'),
-            _Pill(label: 'Analytics with intent'),
+            _Pill(text: 'Flutter specialist'),
+            _Pill(text: 'AI agents & RAG'),
+            _Pill(text: 'ML pipelines'),
+            _Pill(text: 'Mobile architectures'),
+          ],
+        ),
+        const SizedBox(height: 24),
+        Wrap(
+          spacing: 12,
+          runSpacing: 12,
+          children: [
+            FilledButton.icon(
+              onPressed: controller.downloadCV,
+              icon: const FaIcon(FontAwesomeIcons.fileArrowDown, size: 16),
+              label: const Text('Download CV'),
+              style: FilledButton.styleFrom(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+                backgroundColor: theme.colorScheme.primary,
+                foregroundColor: Colors.black,
+              ),
+            ),
+            OutlinedButton.icon(
+              onPressed: () => controller.launchProjectUrl(
+                AppConstants.githubUrl,
+              ),
+              icon: const FaIcon(FontAwesomeIcons.github, size: 14),
+              label: const Text('GitHub'),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.white,
+                side: BorderSide(color: Colors.white.withAlpha(90)),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+              ),
+            ),
+            if (!isMobile)
+              TextButton.icon(
+                onPressed: () => controller.launchProjectUrl(
+                  AppConstants.linkedInUrl,
+                ),
+                icon: const FaIcon(FontAwesomeIcons.linkedin, size: 14),
+                label: const Text(
+                  'LinkedIn',
+                  style: TextStyle(color: Colors.white70),
+                ),
+              ),
           ],
         ),
       ],
     );
   }
 
-  // Call to action buttons with CRED-inspired NeoPOP design
-  Widget _buildCallToAction(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isMobile = screenWidth < 600;
-    return Wrap(
-      spacing: 16,
-      runSpacing: 12,
-      crossAxisAlignment: WrapCrossAlignment.center,
-      children: [
-        FilledButton.icon(
-          onPressed: controller.launchEmail,
-          style: FilledButton.styleFrom(
-            padding: EdgeInsets.symmetric(
-              horizontal: isMobile ? 18 : 22,
-              vertical: isMobile ? 12 : 14,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
+  Widget _buildIdentityCard(BuildContext context) {
+    final theme = Theme.of(context);
+    final primary = theme.colorScheme.primary;
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.white.withAlpha(6),
+        border: Border.all(color: Colors.white.withAlpha(30)),
+        boxShadow: [
+          BoxShadow(
+            color: primary.withAlpha(30),
+            blurRadius: 30,
+            spreadRadius: 6,
           ),
-          icon: const FaIcon(FontAwesomeIcons.envelope, size: 16),
-          label: const Text(
-            "Let's work together",
-            style: TextStyle(fontWeight: FontWeight.w700),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              CircleAvatar(
+                radius: 34,
+                backgroundImage: AssetImage(AppConstants.profileImagePath),
+              ),
+              const SizedBox(width: 14),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'AI × Mobile Product Engineer',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'Bangalore · Remote · Intl friendly',
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              ),
+              const Spacer(),
+              IconButton(
+                onPressed: () => controller.launchProjectUrl(
+                  AppConstants.linkedInUrl,
+                ),
+                icon: const FaIcon(FontAwesomeIcons.linkedin, size: 18),
+                color: Colors.white,
+                tooltip: 'LinkedIn',
+              ),
+            ],
           ),
-        ),
-        OutlinedButton.icon(
-          onPressed: () => controller.scrollToSection('projects'),
-          style: OutlinedButton.styleFrom(
-            padding: EdgeInsets.symmetric(
-              horizontal: isMobile ? 16 : 20,
-              vertical: isMobile ? 12 : 14,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            side: BorderSide(
-              color: Theme.of(context).colorScheme.primary.withAlpha(180),
-              width: 1.5,
-            ),
-          ),
-          icon: const FaIcon(FontAwesomeIcons.codeBranch, size: 16),
-          label: const Text(
-            'See recent work',
-            style: TextStyle(fontWeight: FontWeight.w700),
-          ),
-        ),
-      ],
-    );
-  }
-
-  // Scroll indicator with CRED-inspired NeoPOP design
-  Widget _buildScrollIndicator(BuildContext context) {
-    final primaryColor = Theme.of(context).colorScheme.primary;
-
-    return Column(
-      children: [
-        // Text with CRED-style typography
-        Text(
-          'SCROLL TO EXPLORE',
-          style: TextStyle(
-            fontSize: 12,
-            letterSpacing: 1.5,
-            fontWeight: FontWeight.w600,
-            color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.white70
-                : Colors.black54,
-          ),
-        ),
-        const SizedBox(height: 12),
-        // Arrow with reduced ornamentation
-        Container(
-          width: 40,
-          height: 40,
-          decoration: BoxDecoration(
-            color: primaryColor.withAlpha(24),
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: primaryColor.withAlpha(120)),
-          ),
-          child: const Center(
-            child: FaIcon(
-              FontAwesomeIcons.angleDown,
-              size: 18,
+          const SizedBox(height: 20),
+          Text(
+            'Mobile-focused engineer building AI features with a strong reliability baseline. Interested in senior roles where Flutter, agents, and ML meet production needs.',
+            style: TextStyle(
+              color: Colors.white.withAlpha(210),
+              height: 1.5,
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
 
 class _Pill extends StatelessWidget {
-  const _Pill({required this.label});
+  const _Pill({required this.text});
 
-  final String label;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary.withAlpha(20),
+        color: Colors.white.withAlpha(14),
         borderRadius: BorderRadius.circular(999),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.primary.withAlpha(120),
-        ),
+        border: Border.all(color: Colors.white.withAlpha(32)),
       ),
       child: Text(
-        label,
-        style: TextStyle(
+        text,
+        style: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.w700,
           fontSize: 13,
-          fontWeight: FontWeight.w600,
-          color: Theme.of(context).colorScheme.onSurface,
         ),
       ),
     );

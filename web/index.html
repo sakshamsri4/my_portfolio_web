@@ -240,7 +240,7 @@
       function startFlutter() {
         if (flutterStarted || !window._flutter || !window._flutter.loader) return;
         flutterStarted = true;
-        window._flutter.loader.loadEntrypoint({
+        window._flutter.loader.load({
           serviceWorker: { serviceWorkerVersion: null },
           onEntrypointLoaded: async (engineInitializer) => {
             const appRunner = await engineInitializer.initializeEngine();

@@ -1,257 +1,218 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  // Private constructor to prevent instantiation
   AppTheme._();
 
-  // Define a system font stack that works across all platforms
-  static const String fontFamily =
-      '.SF Pro Text, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif';
-
-  // Primary color swatch
   static const MaterialColor primarySwatch = MaterialColor(
-    0xFF1D4ED8, // Deep blue for a more timeless palette
+    0xFF10B981,
     <int, Color>{
-      50: Color(0xFFEFF6FF),
-      100: Color(0xFFDBEAFE),
-      200: Color(0xFFBFDBFE),
-      300: Color(0xFF93C5FD),
-      400: Color(0xFF60A5FA),
-      500: Color(0xFF3B82F6),
-      600: Color(0xFF2563EB),
-      700: Color(0xFF1D4ED8), // Primary color
-      800: Color(0xFF1E40AF),
-      900: Color(0xFF1E3A8A),
+      50: Color(0xFFE6FFF5),
+      100: Color(0xFFC5FDE6),
+      200: Color(0xFF92F9D0),
+      300: Color(0xFF5EF3B6),
+      400: Color(0xFF34E89A),
+      500: Color(0xFF10B981),
+      600: Color(0xFF0DA36F),
+      700: Color(0xFF0A8B5C),
+      800: Color(0xFF0A744E),
+      900: Color(0xFF0B5E40),
     },
   );
 
-  // Background color
-  static const Color backgroundColor = Color(0xFFF9FAFB);
+  static const Color backgroundColor = Color(0xFFF8FAFC);
+  static const Color textPrimary = Color(0xFF0B1221);
+  static const Color textSecondary = Color(0xFF475569);
 
-  // Text colors
-  static const Color textPrimary = Color(0xFF0F172A);
-  static const Color textSecondary = Color(0xFF4B5563);
-  static const Color textLight = Color(0xFF6B7280);
+  static final TextTheme _darkTextTheme = GoogleFonts.interTextTheme().copyWith(
+    displayLarge: GoogleFonts.spaceGrotesk(
+      fontWeight: FontWeight.w800,
+      fontSize: 34,
+      color: Colors.white,
+    ),
+    displayMedium: GoogleFonts.spaceGrotesk(
+      fontWeight: FontWeight.w800,
+      fontSize: 30,
+      color: Colors.white,
+    ),
+    displaySmall: GoogleFonts.spaceGrotesk(
+      fontWeight: FontWeight.w700,
+      fontSize: 24,
+      color: Colors.white,
+    ),
+    headlineMedium: GoogleFonts.spaceGrotesk(
+      fontWeight: FontWeight.w700,
+      fontSize: 20,
+      color: Colors.white,
+    ),
+    headlineSmall: GoogleFonts.spaceGrotesk(
+      fontWeight: FontWeight.w700,
+      fontSize: 18,
+      color: Colors.white,
+    ),
+    titleLarge: GoogleFonts.spaceGrotesk(
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: Colors.white,
+    ),
+    bodyLarge: GoogleFonts.inter(
+      fontSize: 16,
+      color: Colors.white,
+    ),
+    bodyMedium: GoogleFonts.inter(
+      fontSize: 14,
+      color: Colors.white,
+    ),
+    bodySmall: GoogleFonts.inter(
+      fontSize: 12,
+      color: Colors.white70,
+    ),
+  );
 
-  // Dark theme
+  static final TextTheme _lightTextTheme =
+      GoogleFonts.interTextTheme().copyWith(
+    displayLarge: GoogleFonts.spaceGrotesk(
+      fontWeight: FontWeight.w800,
+      fontSize: 32,
+      color: textPrimary,
+    ),
+    displayMedium: GoogleFonts.spaceGrotesk(
+      fontWeight: FontWeight.w800,
+      fontSize: 28,
+      color: textPrimary,
+    ),
+    displaySmall: GoogleFonts.spaceGrotesk(
+      fontWeight: FontWeight.w700,
+      fontSize: 24,
+      color: textPrimary,
+    ),
+    headlineMedium: GoogleFonts.spaceGrotesk(
+      fontWeight: FontWeight.w700,
+      fontSize: 20,
+      color: textPrimary,
+    ),
+    headlineSmall: GoogleFonts.spaceGrotesk(
+      fontWeight: FontWeight.w700,
+      fontSize: 18,
+      color: textPrimary,
+    ),
+    titleLarge: GoogleFonts.spaceGrotesk(
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
+      color: textPrimary,
+    ),
+    bodyLarge: GoogleFonts.inter(
+      fontSize: 16,
+      color: textPrimary,
+    ),
+    bodyMedium: GoogleFonts.inter(
+      fontSize: 14,
+      color: textPrimary,
+    ),
+    bodySmall: GoogleFonts.inter(
+      fontSize: 12,
+      color: textSecondary,
+    ),
+  );
+
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
     primarySwatch: primarySwatch,
     primaryColor: primarySwatch,
-    fontFamily: fontFamily, // Set the global font family
-    scaffoldBackgroundColor: const Color(0xFF0F172A),
+    scaffoldBackgroundColor: const Color(0xFF0B1221),
     colorScheme: ColorScheme.dark(
       primary: primarySwatch,
-      secondary: primarySwatch.shade300,
-      surface: const Color(0xFF111827),
+      secondary: primarySwatch.shade200,
+      surface: const Color(0xFF0F172A),
+      background: const Color(0xFF0B1221),
     ),
     appBarTheme: AppBarTheme(
-      backgroundColor: const Color(0xFF111827),
+      backgroundColor: Colors.transparent,
       foregroundColor: Colors.white,
       elevation: 0,
-      titleTextStyle: const TextStyle(
-        fontFamily: fontFamily,
-        fontWeight: FontWeight.bold,
+      titleTextStyle: GoogleFonts.spaceGrotesk(
+        fontWeight: FontWeight.w700,
         fontSize: 20,
         color: Colors.white,
       ),
     ),
-    textTheme: TextTheme(
-      displayLarge: const TextStyle(
-        fontFamily: fontFamily,
-        fontWeight: FontWeight.bold,
-        fontSize: 32,
-        color: Colors.white,
-      ),
-      displayMedium: const TextStyle(
-        fontFamily: fontFamily,
-        fontWeight: FontWeight.bold,
-        fontSize: 28,
-        color: Colors.white,
-      ),
-      displaySmall: const TextStyle(
-        fontFamily: fontFamily,
-        fontWeight: FontWeight.bold,
-        fontSize: 24,
-        color: Colors.white,
-      ),
-      headlineMedium: const TextStyle(
-        fontFamily: fontFamily,
-        fontWeight: FontWeight.bold,
-        fontSize: 20,
-        color: Colors.white,
-      ),
-      headlineSmall: const TextStyle(
-        fontFamily: fontFamily,
-        fontWeight: FontWeight.bold,
-        fontSize: 18,
-        color: Colors.white,
-      ),
-      titleLarge: const TextStyle(
-        fontFamily: fontFamily,
-        fontWeight: FontWeight.bold,
-        fontSize: 16,
-        color: Colors.white,
-      ),
-      bodyLarge: const TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 16,
-        color: Colors.white,
-      ),
-      bodyMedium: const TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 14,
-        color: Colors.white,
-      ),
-      bodySmall: const TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 12,
-        color: Colors.white70,
-      ),
-    ),
+    textTheme: _darkTextTheme,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: primarySwatch,
-        foregroundColor: Colors.white,
-        textStyle: const TextStyle(
-          fontFamily: fontFamily,
-          fontWeight: FontWeight.bold,
-        ),
+        foregroundColor: Colors.black,
+        textStyle: GoogleFonts.spaceGrotesk(fontWeight: FontWeight.w700),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
         ),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        foregroundColor: primarySwatch,
-        side: const BorderSide(color: primarySwatch),
-        textStyle: const TextStyle(
-          fontFamily: fontFamily,
-          fontWeight: FontWeight.bold,
-        ),
+        foregroundColor: Colors.white,
+        side: BorderSide(color: Colors.white.withAlpha(80)),
+        textStyle: GoogleFonts.spaceGrotesk(fontWeight: FontWeight.w700),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
         ),
       ),
     ),
     cardTheme: CardThemeData(
-      color: const Color(0xFF2C2C44),
+      color: const Color(0xFF111827),
       elevation: 2,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
       ),
     ),
     chipTheme: ChipThemeData(
       backgroundColor: primarySwatch.shade900,
-      labelStyle: TextStyle(
-        // Removed const here since we use non-constant values
-        fontFamily: fontFamily,
-        color: Colors.white,
-      ),
+      labelStyle: GoogleFonts.inter(color: Colors.white),
       padding: const EdgeInsets.symmetric(horizontal: 8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
     ),
     dividerTheme: const DividerThemeData(
-      color: Color(0xFF444444),
+      color: Color(0xFF334155),
       thickness: 1,
       space: 24,
     ),
   );
 
-  // Light theme
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     primarySwatch: primarySwatch,
     primaryColor: primarySwatch,
-    fontFamily: fontFamily, // Set the global font family
     scaffoldBackgroundColor: backgroundColor,
     colorScheme: ColorScheme.light(
       primary: primarySwatch,
-      secondary: primarySwatch.shade300,
+      secondary: primarySwatch.shade200,
       onSurface: textPrimary,
       onSecondary: Colors.white,
+      background: backgroundColor,
     ),
     appBarTheme: AppBarTheme(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       foregroundColor: textPrimary,
       elevation: 0,
       centerTitle: true,
-      titleTextStyle: const TextStyle(
-        fontFamily: fontFamily,
-        fontWeight: FontWeight.bold,
+      titleTextStyle: GoogleFonts.spaceGrotesk(
+        fontWeight: FontWeight.w700,
         fontSize: 20,
         color: textPrimary,
       ),
       iconTheme: const IconThemeData(color: primarySwatch),
     ),
-    textTheme: TextTheme(
-      displayLarge: const TextStyle(
-        fontFamily: fontFamily,
-        fontWeight: FontWeight.bold,
-        fontSize: 32,
-        color: textPrimary,
-      ),
-      displayMedium: const TextStyle(
-        fontFamily: fontFamily,
-        fontWeight: FontWeight.bold,
-        fontSize: 28,
-        color: textPrimary,
-      ),
-      displaySmall: const TextStyle(
-        fontFamily: fontFamily,
-        fontWeight: FontWeight.bold,
-        fontSize: 24,
-        color: textPrimary,
-      ),
-      headlineMedium: const TextStyle(
-        fontFamily: fontFamily,
-        fontWeight: FontWeight.bold,
-        fontSize: 20,
-        color: textPrimary,
-      ),
-      headlineSmall: const TextStyle(
-        fontFamily: fontFamily,
-        fontWeight: FontWeight.bold,
-        fontSize: 18,
-        color: textPrimary,
-      ),
-      titleLarge: const TextStyle(
-        fontFamily: fontFamily,
-        fontWeight: FontWeight.bold,
-        fontSize: 16,
-        color: textPrimary,
-      ),
-      bodyLarge: const TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 16,
-        color: textPrimary,
-      ),
-      bodyMedium: const TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 14,
-        color: textPrimary,
-      ),
-      bodySmall: const TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 12,
-        color: textSecondary,
-      ),
-    ),
+    textTheme: _lightTextTheme,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: primarySwatch,
-        foregroundColor: Colors.white,
-        elevation: 4,
-        shadowColor: primarySwatch.withAlpha(51),
-        textStyle: const TextStyle(
-          fontFamily: fontFamily,
-          fontWeight: FontWeight.bold,
+        foregroundColor: Colors.black,
+        textStyle: GoogleFonts.spaceGrotesk(
+          fontWeight: FontWeight.w700,
           fontSize: 14,
           letterSpacing: 0.5,
         ),
@@ -265,9 +226,8 @@ class AppTheme {
       style: OutlinedButton.styleFrom(
         foregroundColor: primarySwatch,
         side: const BorderSide(color: primarySwatch, width: 2),
-        textStyle: const TextStyle(
-          fontFamily: fontFamily,
-          fontWeight: FontWeight.bold,
+        textStyle: GoogleFonts.spaceGrotesk(
+          fontWeight: FontWeight.w700,
           fontSize: 14,
           letterSpacing: 0.5,
         ),
@@ -290,7 +250,7 @@ class AppTheme {
     cardTheme: CardThemeData(
       color: Colors.white,
       elevation: 4,
-      shadowColor: primarySwatch.withAlpha(51), // 20% opacity (51/255)
+      shadowColor: primarySwatch.withAlpha(51),
       margin: const EdgeInsets.symmetric(vertical: 8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
@@ -298,11 +258,7 @@ class AppTheme {
     ),
     chipTheme: ChipThemeData(
       backgroundColor: primarySwatch.shade100,
-      labelStyle: TextStyle(
-        // Removed const here since we're using non-constant values
-        fontFamily: fontFamily,
-        color: primarySwatch.shade800,
-      ),
+      labelStyle: GoogleFonts.inter(color: primarySwatch.shade800),
       padding: const EdgeInsets.symmetric(horizontal: 8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),

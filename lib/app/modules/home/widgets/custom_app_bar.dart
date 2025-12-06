@@ -19,7 +19,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       centerTitle: true,
       elevation: 0,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Colors.transparent,
+      foregroundColor: Theme.of(context).brightness == Brightness.dark
+          ? Colors.white
+          : Theme.of(context).colorScheme.onSurface,
       actions: [
         // Navigation links for wide screens
         if (isWideScreen) ..._buildNavigationLinks(homeController),
@@ -58,43 +61,43 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         },
                       ),
                       _buildNavItem(
+                        icon: Icons.phone_iphone,
+                        title: 'Mobile Apps',
+                        onTap: () {
+                          Get.back<void>(); // Close dialog
+                          homeController.scrollToSection('mobile');
+                        },
+                      ),
+                      _buildNavItem(
+                        icon: Icons.layers,
+                        title: 'Case Study',
+                        onTap: () {
+                          Get.back<void>(); // Close dialog
+                          homeController.scrollToSection('case_study');
+                        },
+                      ),
+                      _buildNavItem(
+                        icon: Icons.library_books,
+                        title: 'Other Cases',
+                        onTap: () {
+                          Get.back<void>(); // Close dialog
+                          homeController.scrollToSection('other_cases');
+                        },
+                      ),
+                      _buildNavItem(
+                        icon: Icons.bolt,
+                        title: 'AI Skills',
+                        onTap: () {
+                          Get.back<void>(); // Close dialog
+                          homeController.scrollToSection('ai_skills');
+                        },
+                      ),
+                      _buildNavItem(
                         icon: Icons.person,
                         title: 'About',
                         onTap: () {
                           Get.back<void>(); // Close dialog
                           homeController.scrollToSection('about');
-                        },
-                      ),
-                      _buildNavItem(
-                        icon: Icons.school,
-                        title: 'Education',
-                        onTap: () {
-                          Get.back<void>(); // Close dialog
-                          homeController.scrollToSection('education');
-                        },
-                      ),
-                      _buildNavItem(
-                        icon: Icons.code,
-                        title: 'Skills',
-                        onTap: () {
-                          Get.back<void>(); // Close dialog
-                          homeController.scrollToSection('skills');
-                        },
-                      ),
-                      _buildNavItem(
-                        icon: Icons.work,
-                        title: 'Projects',
-                        onTap: () {
-                          Get.back<void>(); // Close dialog
-                          homeController.scrollToSection('projects');
-                        },
-                      ),
-                      _buildNavItem(
-                        icon: Icons.timeline,
-                        title: 'Career',
-                        onTap: () {
-                          Get.back<void>(); // Close dialog
-                          homeController.scrollToSection('career');
                         },
                       ),
                       _buildNavItem(
@@ -120,30 +123,37 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return [
       Obx(
         () => _buildNavLink(
+          title: 'Mobile Apps',
+          isActive: controller.activeSection.value == 'mobile',
+          onTap: () => controller.scrollToSection('mobile'),
+        ),
+      ),
+      Obx(
+        () => _buildNavLink(
+          title: 'Case Study',
+          isActive: controller.activeSection.value == 'case_study',
+          onTap: () => controller.scrollToSection('case_study'),
+        ),
+      ),
+      Obx(
+        () => _buildNavLink(
+          title: 'Other Cases',
+          isActive: controller.activeSection.value == 'other_cases',
+          onTap: () => controller.scrollToSection('other_cases'),
+        ),
+      ),
+      Obx(
+        () => _buildNavLink(
+          title: 'AI Skills',
+          isActive: controller.activeSection.value == 'ai_skills',
+          onTap: () => controller.scrollToSection('ai_skills'),
+        ),
+      ),
+      Obx(
+        () => _buildNavLink(
           title: 'About',
           isActive: controller.activeSection.value == 'about',
           onTap: () => controller.scrollToSection('about'),
-        ),
-      ),
-      Obx(
-        () => _buildNavLink(
-          title: 'Skills',
-          isActive: controller.activeSection.value == 'skills',
-          onTap: () => controller.scrollToSection('skills'),
-        ),
-      ),
-      Obx(
-        () => _buildNavLink(
-          title: 'Projects',
-          isActive: controller.activeSection.value == 'projects',
-          onTap: () => controller.scrollToSection('projects'),
-        ),
-      ),
-      Obx(
-        () => _buildNavLink(
-          title: 'Career',
-          isActive: controller.activeSection.value == 'career',
-          onTap: () => controller.scrollToSection('career'),
         ),
       ),
       Obx(

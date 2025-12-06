@@ -3,6 +3,7 @@ import 'package:my_portfolio_web/app/controllers/controller_factory.dart';
 import 'package:my_portfolio_web/app/data/repositories/portfolio_repository.dart';
 import 'package:my_portfolio_web/app/data/repositories/portfolio_repository_interface.dart';
 import 'package:my_portfolio_web/app/services/analytics_service.dart';
+import 'package:my_portfolio_web/app/services/log_service.dart';
 
 /// Service locator for dependency injection
 class ServiceLocator {
@@ -11,11 +12,15 @@ class ServiceLocator {
 
   /// Initialize all services and dependencies
   static Future<void> init() async {
-    // Register and initialize Analytics service
-    Get.put<AnalyticsService>(
-      AnalyticsService(),
-      permanent: true,
-    );
+    // Register LogService
+    Get
+      ..put<LogService>(LogService(), permanent: true)
+
+      // Register and initialize Analytics service
+      ..put<AnalyticsService>(
+        AnalyticsService(),
+        permanent: true,
+      );
     await Get.find<AnalyticsService>().initialize();
 
     // Register repositories

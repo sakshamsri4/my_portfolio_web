@@ -24,6 +24,18 @@ abstract class PortfolioRepositoryInterface extends RepositoryInterface {
   /// Get projects data
   List<Map<String, String>> getProjects();
 
+  /// Get flagship AI case study details
+  Map<String, dynamic> getFlagshipCaseStudy();
+
+  /// Get mini AI demos/projects
+  List<Map<String, dynamic>> getMiniAIProjects();
+
+  /// Get AI and agent skills list
+  List<String> getAISkills();
+
+  /// Get mobile apps showcase data
+  List<Map<String, dynamic>> getMobileAppsShowcase();
+
   /// Get career timeline data
   List<Map<String, String>> getCareerTimeline();
 

@@ -15,6 +15,9 @@ class JsObject {
 
   /// Set property (stub implementation)
   void operator []=(String property, dynamic value) {}
+
+  /// Call method (stub implementation)
+  dynamic callMethod(String method, [List<dynamic>? args]) => null;
 }
 
 /// Stub implementation of context

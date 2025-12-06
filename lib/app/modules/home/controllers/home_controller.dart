@@ -8,12 +8,10 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:my_portfolio_web/app/common/constants/app_constants.dart';
 import 'package:my_portfolio_web/app/common/constants/string_constants.dart';
 import 'package:my_portfolio_web/app/controllers/analytics_controller.dart';
-import 'package:my_portfolio_web/app/data/models/tech_stack_item.dart';
 import 'package:my_portfolio_web/app/data/repositories/portfolio_repository.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
@@ -34,56 +32,60 @@ class HomeController extends GetxController {
   final ScrollController scrollController = ScrollController();
 
   /// Section keys for scrolling
-  final aboutKey = GlobalKey();
-  final educationKey = GlobalKey();
-  final skillsKey = GlobalKey();
-  final projectsKey = GlobalKey();
-  final careerKey = GlobalKey();
   final contactKey = GlobalKey();
+  final mobileKey = GlobalKey();
+  final caseStudyKey = GlobalKey();
+  final otherCaseKey = GlobalKey();
+  final aiSkillsKey = GlobalKey();
+  final aboutKey = GlobalKey();
 
   /// Active section
   final RxString activeSection = 'home'.obs;
 
-  /// Tech stack items
-  late final List<TechStackItem> techStack = _repository.getTechStack();
+  // Flagship case study
+  late final Map<String, dynamic> flagshipCaseStudy =
+      _repository.getFlagshipCaseStudy();
 
-  /// Social media links
-  late final Map<String, Map<String, dynamic>> socialLinks =
-      _repository.getSocialLinks();
+  // Mini AI demos
+  late final List<Map<String, dynamic>> miniAIProjects =
+      _repository.getMiniAIProjects();
 
-  // Skills organized by category
-  late final List<Map<String, dynamic>> skillCategories =
-      _repository.getSkillCategories();
+  // AI skills
+  late final List<String> aiSkills = _repository.getAISkills();
 
-  // Flat skills list for backward compatibility
-  late final List<String> _cachedSkills = _computeSkills();
-  List<String> get skills => _cachedSkills;
+  // Mobile apps showcase
+  late final List<Map<String, dynamic>> mobileAppsShowcase =
+      _repository.getMobileAppsShowcase();
 
-  // Compute skills once and cache the result
-  List<String> _computeSkills() {
-    final allSkills = <String>[];
-    for (final category in skillCategories) {
-      allSkills.addAll(category['skills']! as List<String>);
-    }
-    return allSkills;
-  }
-
-  // Projects list for carousel
-  late final List<Map<String, String>> projects = _repository.getProjects();
-
-  // Career timeline data
-  late final List<Map<String, String>> careerTimeline =
-      _repository.getCareerTimeline();
+  // Other case studies short format
+  late final List<Map<String, String>> otherCaseStudies = [
+    {
+      'title': 'Nudron',
+      'problem': 'Realtime water metering for utilities teams.',
+      'ownership': 'Built Android client, IoT data handling, and sync flows.',
+      'tech': 'Flutter, Firebase, Realtime APIs',
+      'link':
+          'https://play.google.com/store/apps/details?id=com.nudron.water_meter2',
+    },
+    {
+      'title': 'RailOps',
+      'problem': 'Mobile control for rail operations.',
+      'ownership': 'Led Flutter app with offline-first architecture.',
+      'tech': 'Flutter, SQLite, Firebase',
+      'link':
+          'https://play.google.com/store/apps/details?id=com.biputri.railops',
+    },
+    {
+      'title': 'OnSite',
+      'problem': 'Field data capture and invoicing for construction.',
+      'ownership': 'Engineered offline-first workflows and sync.',
+      'tech': 'Flutter, Firebase, Local caching',
+      'link': 'https://play.google.com/store/apps/details?id=com.app.onsite',
+    },
+  ];
 
   /// Contact information
   late final Map<String, String> contactInfo = _repository.getContactInfo();
-
-  // Education information
-  late final List<Map<String, String>> educationInfo =
-      _repository.getEducationInfo();
-
-  // Professional summary
-  late final String professionalSummary = _repository.getProfessionalSummary();
 
   @override
   void onInit() {
@@ -103,16 +105,22 @@ class HomeController extends GetxController {
     switch (section) {
       case 'about':
         key = aboutKey;
-      case 'education':
-        key = educationKey;
-      case 'skills':
-        key = skillsKey;
-      case 'projects':
-        key = projectsKey;
-      case 'career':
-        key = careerKey;
+        break;
+      case 'mobile':
+        key = mobileKey;
+        break;
+      case 'case_study':
+        key = caseStudyKey;
+        break;
+      case 'other_cases':
+        key = otherCaseKey;
+        break;
+      case 'ai_skills':
+        key = aiSkillsKey;
+        break;
       case 'contact':
         key = contactKey;
+        break;
       default:
         // Scroll to top for home
         scrollController.animateTo(
@@ -139,22 +147,6 @@ class HomeController extends GetxController {
     scrollController.dispose();
     super.onClose();
   }
-
-  // Observable for carousel auto-play is defined at the top
-
-  // Fallback image URL if project image is not found
-  final String fallbackImageUrl = 'assets/images/placeholder.jpg';
-
-  // Get image with fallback
-  String getImageWithFallback(String imagePath) {
-    // For empty project images, use the fallback
-    if (imagePath.contains('project')) {
-      return fallbackImageUrl;
-    }
-    return imagePath;
-  }
-
-  // No need for empty onInit
 
   // Launch email client
   Future<void> launchEmail() async {
@@ -185,25 +177,6 @@ class HomeController extends GetxController {
       Get.snackbar(
         'Error',
         'Could not launch email client',
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }
-  }
-
-  // Launch WhatsApp chat
-  Future<void> launchWhatsApp() async {
-    // Format phone number (remove any non-digit characters)
-    final phoneNumber = contactInfo['phone']!.replaceAll(RegExp(r'\D'), '');
-
-    // Create WhatsApp URL
-    final whatsappUrl = Uri.parse('https://wa.me/$phoneNumber');
-
-    if (await canLaunchUrl(whatsappUrl)) {
-      await launchUrl(whatsappUrl, mode: LaunchMode.externalApplication);
-    } else {
-      Get.snackbar(
-        'Error',
-        'Could not launch WhatsApp',
         snackPosition: SnackPosition.BOTTOM,
       );
     }
@@ -394,16 +367,5 @@ class HomeController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
     }
-  }
-
-  // Copy to clipboard
-  void copyToClipboard(String text) {
-    Clipboard.setData(ClipboardData(text: text));
-    Get.snackbar(
-      'Copied',
-      'Text copied to clipboard',
-      snackPosition: SnackPosition.BOTTOM,
-      duration: const Duration(seconds: 2),
-    );
   }
 }

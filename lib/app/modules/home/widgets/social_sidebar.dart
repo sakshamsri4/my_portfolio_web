@@ -53,13 +53,6 @@ class SocialSidebar extends StatelessWidget {
                   controller.launchProjectUrl(AppConstants.twitterUrl),
             ),
             const SizedBox(height: 24),
-            _SidebarButton(
-              label: 'WhatsApp',
-              icon: FontAwesomeIcons.whatsapp,
-              color: AppColors.whatsapp,
-              onPressed: controller.launchWhatsApp,
-            ),
-            const SizedBox(height: 24),
             // Vertical line with gradient
             Container(
               width: 2,

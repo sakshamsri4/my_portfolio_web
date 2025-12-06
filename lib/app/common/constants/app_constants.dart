@@ -44,10 +44,10 @@ class AppColors {
   AppColors._();
 
   /// Primary brand color
-  static const Color primary = Color(0xFF675AF2);
+  static const Color primary = Color(0xFF10B981);
 
   /// Light variant of primary color
-  static const Color primaryLight = Color(0xFF8A7DF7);
+  static const Color primaryLight = Color(0xFF34E89A);
 
   /// Background color
   static const Color background = Color(0xFFF4F0FF);
