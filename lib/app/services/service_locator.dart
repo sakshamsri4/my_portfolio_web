@@ -16,11 +16,11 @@ class ServiceLocator {
     Get.put<LogService>(LogService(), permanent: true);
 
     // Register and initialize Analytics service
-    Get.put<AnalyticsService>(
+    // Register and initialize Analytics service
+    await Get.put<AnalyticsService>(
       AnalyticsService(),
       permanent: true,
-    );
-    await Get.find<AnalyticsService>().initialize();
+    ).initialize();
 
     // Register repositories
     Get.put<PortfolioRepositoryInterface>(

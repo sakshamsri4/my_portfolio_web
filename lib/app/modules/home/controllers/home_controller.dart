@@ -102,40 +102,32 @@ class HomeController extends GetxController {
     _analyticsController.trackNavigationClick(section);
     GlobalKey? key;
 
-    switch (section) {
-      case 'about':
-        key = aboutKey;
-        break;
-      case 'mobile':
-        key = mobileKey;
-        break;
-      case 'case_study':
-        key = caseStudyKey;
-        break;
-      case 'other_cases':
-        key = otherCaseKey;
-        break;
-      case 'ai_skills':
-        key = aiSkillsKey;
-        break;
-      case 'contact':
-        key = contactKey;
-        break;
-      default:
-        // Scroll to top for home
-        scrollController.animateTo(
-          0,
-          duration: const Duration(milliseconds: 800),
-          curve: Curves.easeInOut,
-        );
-        activeSection.value = 'home';
-        return;
+    final sectionKeys = {
+      'about': aboutKey,
+      'mobile': mobileKey,
+      'case_study': caseStudyKey,
+      'other_cases': otherCaseKey,
+      'ai_skills': aiSkillsKey,
+      'contact': contactKey,
+    };
+
+    if (sectionKeys.containsKey(section)) {
+      key = sectionKeys[section];
+    } else {
+      // Scroll to top for home
+      scrollController.animateTo(
+        0,
+        duration: const Duration(milliseconds: 800),
+        curve: Curves.easeInOut,
+      );
+      activeSection.value = 'home';
+      return;
     }
 
-    if (key.currentContext != null) {
+    if (key?.currentContext != null) {
       activeSection.value = section;
       Scrollable.ensureVisible(
-        key.currentContext!,
+        key!.currentContext!,
         duration: const Duration(milliseconds: 800),
         curve: Curves.easeInOut,
       );

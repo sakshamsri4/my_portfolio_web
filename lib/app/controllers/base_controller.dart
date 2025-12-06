@@ -18,9 +18,9 @@ abstract class BaseController extends GetxController {
     try {
       logger = Get.find<LogService>();
       logger.d('$runtimeType initialized');
-    } catch (e) {
+    } on Object {
       // Fallback if logger not found (e.g. during testing)
-      print('$runtimeType initialized (Logger not found)');
+      LogService.instance.i('$runtimeType initialized (Logger not found)');
     }
     initializeController();
   }

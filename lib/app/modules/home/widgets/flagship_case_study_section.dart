@@ -10,11 +10,10 @@ class FlagshipCaseStudySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final Map<String, dynamic> data = controller.flagshipCaseStudy;
-    final List<String> role = data['role'] as List<String>;
-    final List<String> stack = data['stack'] as List<String>;
-    final List<Map<String, String>> links =
-        data['links'] as List<Map<String, String>>;
+    final data = controller.flagshipCaseStudy;
+    final role = data['role'] as List<String>;
+    final stack = data['stack'] as List<String>;
+    final links = data['links'] as List<Map<String, String>>;
 
     return Container(
       padding: const EdgeInsets.all(28),
