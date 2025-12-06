@@ -13,14 +13,13 @@ class ServiceLocator {
   /// Initialize all services and dependencies
   static Future<void> init() async {
     // Register LogService
-    Get
-      ..put<LogService>(LogService(), permanent: true)
+    Get.put<LogService>(LogService(), permanent: true);
 
-      // Register and initialize Analytics service
-      ..put<AnalyticsService>(
-        AnalyticsService(),
-        permanent: true,
-      );
+    // Register and initialize Analytics service
+    Get.put<AnalyticsService>(
+      AnalyticsService(),
+      permanent: true,
+    );
     await Get.find<AnalyticsService>().initialize();
 
     // Register repositories

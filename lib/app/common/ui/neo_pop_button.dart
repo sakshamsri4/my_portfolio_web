@@ -221,15 +221,13 @@ class _NeoPOPButtonState extends State<NeoPOPButton> {
                                   color: onMainColor,
                                   fontSize: fontSize,
                                   fontWeight: FontWeight.w700,
-                                  letterSpacing:
-                                      widget.isPrimary ? 0.5 : 0.2,
+                                  letterSpacing: widget.isPrimary ? 0.5 : 0.2,
                                 ) ??
                                 TextStyle(
                                   color: onMainColor,
                                   fontSize: fontSize,
                                   fontWeight: FontWeight.w700,
-                                  letterSpacing:
-                                      widget.isPrimary ? 0.5 : 0.2,
+                                  letterSpacing: widget.isPrimary ? 0.5 : 0.2,
                                 ),
                           ),
                         ],
